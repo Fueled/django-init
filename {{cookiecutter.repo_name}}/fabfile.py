@@ -20,5 +20,5 @@ def configure():
     pass
 
 
-def docs(address='127.0.0.1', port='8001'):
+def serve_doc(address='127.0.0.1', port='8001'):
     local('mkdocs serve --dev-addr=%s:%s' % address, port)

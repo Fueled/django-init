@@ -5,9 +5,14 @@
 
 Features
 --------
+
 * Django 1.6
-* Postgres 9.3
-* Vagrant Development Box
+* PostresSQL 9.3
+* Foundation 4
+* SASS, CoffeeScript, Live-Reloading Server
+* Vagrant box, Ansible
+* Heroku - Sendgrid, Newrelic
+* Amazon EC2, RDS, ElasticCache, SQS, SES
 
 Getting started
 ---------------

@@ -6,26 +6,22 @@ Project base for backend projects used at Fueled
 Features
 --------
 
-### Frameworks
 * Django 1.6
+* PostresSQL 9.3
 * Foundation 4
-
-### Development
-* Vagrantbox
-* sass, coffee, livereloading
-
-### Deployment
-* Heroku
-* EC2
+* SASS, CoffeeScript, Live-Reloading Server
+* Vagrant box, Ansible
+* Heroku - Sendgrid, Newrelic
+* Amazon EC2, RDS, ElasticCache, SQS, SES
 
 Getting Started
 ----------------
 
-You need to install `cookiecutter` in order to scafold a new project from this template. You can do that by running following command in your terminal.
+You need to have `cookiecutter` installed in order to scafold a new project from this template. If you have `pip` installed, you simply do this by running:
 
     sudo pip install cookiecutter==0.7.0
 
-After the installation is successful, you can create a new project by running:
+After the installation is successful, you can create a new django project by running:
 
     cookiecutter https://github.com/Fueled/cookiecutter-django.git
 
