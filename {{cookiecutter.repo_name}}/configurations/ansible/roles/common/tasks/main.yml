@@ -1,0 +1,26 @@
+{% raw %}---
+# roles/common/tasks/main.yml
+- name: set locale
+  template: src=locale.j2 dest=/etc/default/locale
+
+- name: set timezone
+  file: src=/usr/share/zoneinfo/{{ common_timezone }}
+        dest=/etc/localtime
+        force=yes
+        state=link
+
+- name: update apt cache
+  apt: update_cache=yes
+
+- name: ensure a default bashrc file
+  file: src=bashrc dest=/home/{{ user }}/.bashrc
+
+- name: install apt_get install apt_packages
+  apt: pkg={{ item }} state=present
+  with_items: base_ubuntu.common.apt_packages
+
+- name: easy_install pip
+  easy_install: name=pip
+
+- name: ensure there is a group www-data
+  group: name=www-data state=present system=yes{% endraw %}

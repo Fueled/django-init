@@ -1,0 +1,27 @@
+---
+# roles/common/defaults/main.yml
+common_timezone: {{cookiecutter.timezone}}
+
+common_locale_all: en_US.UTF-8
+common_locale_lang: en_US.UTF-8
+
+base_ubuntu:
+  common:
+    apt_packages:
+      - build-essential
+      - git
+      - htop
+      - python-dev
+      - python-setuptools
+      - sysstat
+      - vim
+      - fail2ban
+      - libjpeg-dev
+      - libtiff4-dev
+      - zlib1g-dev
+      - libfreetype6-dev
+      - liblcms2-dev
+      - postgresql-client
+      - libpq-dev
+      - libmemcached-dev
+      - python-memcache

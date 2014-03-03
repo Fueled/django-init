@@ -1,0 +1,23 @@
+# Latest Stable Release of Django
+django==1.6.2
+
+# Configuration
+django-configurations==0.8
+django-secure==1.0
+dj-database-url==0.2.2
+
+# Models
+South==0.8.4
+django-model-utils==2.0.2
+
+# images
+Pillow==2.3.0
+
+# For the persistance stores
+psycopg2==2.5.2
+
+# Unicode slugification
+unicode-slugify==0.1.1
+django-autoslug==1.7.2
+
+# Your custom common requirements goes here

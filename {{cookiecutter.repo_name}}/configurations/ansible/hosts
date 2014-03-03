@@ -1,0 +1,7 @@
+[vagrant]
+192.168.1.1
+
+[vagrant:vars]
+vm=1
+user=vagrant
+project_path=/home/vagrant/project
