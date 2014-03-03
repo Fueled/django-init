@@ -4,4 +4,6 @@
     , "site_name": "My Project"
     , "site_description": "add a short project description here"
     , "timezone": "America/New_York"
+    , "django_admin_email": "ops@fueled.com"
+    , "version": "0.1.0"
 }
