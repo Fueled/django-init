@@ -21,4 +21,4 @@ Getting started
     sudo pip install fabric
 
 3. From inside the project repo, run `fab init`, it will ask your system password.
-4. Go grab a coffee!! 
+4. Go grab a cup of coffee, till your hot development machine is baking!! 

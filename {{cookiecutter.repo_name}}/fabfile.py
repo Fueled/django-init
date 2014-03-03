@@ -17,3 +17,8 @@ def init(vagrant=True):
 
 
 def configure():
+    pass
+
+
+def docs(address='127.0.0.1', port='8001'):
+    local('mkdocs serve --dev-addr=%s:%s' % address, port)

@@ -57,6 +57,8 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# mkdocs build dir
+_docs_html
 
 # npm
 node_modules/
