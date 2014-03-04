@@ -1,0 +1,4 @@
+# Put the requirements specific to heroku
+-r production.txt
+gunicorn==18.0
+django-heroku-memcacheify

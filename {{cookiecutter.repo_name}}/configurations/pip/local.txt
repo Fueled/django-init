@@ -1,2 +1,0 @@
-# documentation
-mkdocs>=0.5
