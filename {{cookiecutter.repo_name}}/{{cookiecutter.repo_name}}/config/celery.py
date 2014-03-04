@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+'''
+Celery Worker Configuration to autodiscover tasks in all the django apps.
+
+see: http://celery.readthedocs.org/en/latest/django/first-steps-with-django.html
+'''
 from __future__ import absolute_import
 
 import os
@@ -6,11 +11,11 @@ import os
 from celery import Celery
 from django.conf import settings
 
-settings_module = 'config.settings'
-configuration_module = 'Local'
+_SETTINGS_MODULE = 'config.settings'
+_CONFIGURATION_MODULE = 'Development'
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
-os.environ.setdefault('DJANGO_CONFIGURATION', configuration_module)
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', _SETTINGS_MODULE)
+os.environ.setdefault('DJANGO_CONFIGURATION', _CONFIGURATION_MODULE)
 
 from configurations import importer
 importer.install()
@@ -19,5 +24,5 @@ app = Celery('{{ cookiecutter.repo_name }}')
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.
-app.config_from_object('%s:%s' % settings_module, configuration_module)
+app.config_from_object('%s:%s' % (_SETTINGS_MODULE, _CONFIGURATION_MODULE))
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)

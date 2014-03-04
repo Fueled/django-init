@@ -1,15 +1,19 @@
+
+'''Fabric file for managing this project.'''
 from fabric.api import local, env
 
+
 def init(vagrant=True):
-    "Prepare a local machine for development."
-    os = local('uname -s', capture=True)
-    if os == 'Darwin': #OSX
+    '''Prepare a local machine for development.'''
+
+    distro = local('uname -s', capture=True)
+
+    if distro == 'Darwin': #OSX
         env.installer = 'brew cask install'
-    elif os == 'Linux':
-        env.installer = 'apt-get install'
+    elif distro == 'Linux':
+        env.installer = 'sudo apt-get install'
     else:
-        print "Error: Your operating system (%s) is not supported yet" % os
-        exit
+        print "Error: Your operating system (%s) is not supported yet" % distro
     if vagrant:
         local('%(installer)s virtualbox vagrant' % env)
         local('vagrant plugin install vagrant-vbguest')
