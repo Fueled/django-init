@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""
+'''
 Django settings for {{cookiecutter.site_name}} project.
 
 see: https://docs.djangoproject.com/en/dev/ref/settings/
-"""
+'''
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -25,8 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Common Configurations
 # ==============================================================================
 class Common(Configuration):
+    '''Common Configuration, overide them in it's sub-classes.'''
 
-    ########## APP CONFIGURATION
+    # APP CONFIGURATION
+    # -----------------
     DJANGO_APPS = (
         # Default Django apps:
         'django.contrib.auth',
@@ -44,18 +46,20 @@ class Common(Configuration):
     )
     THIRD_PARTY_APPS = (
         'south',  # Database migration helpers:
+        'django-extensions',  # collection of custom extensions & helpers
     )
 
     LOCAL_APPS = (
         # Your stuff: custom apps go here
-        'core',
+        'pages',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
     INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
-    ########## MIDDLEWARE CONFIGURATION
+    ######### MIDDLEWARE CONFIGURATION
+    # Note: Order in which they are added are important
     MIDDLEWARE_CLASSES = (
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
@@ -67,6 +71,7 @@ class Common(Configuration):
     ########## END MIDDLEWARE CONFIGURATION
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
+    # Defaults to false, which is safe, enable them only in development.
     DEBUG = values.BooleanValue(False)
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
@@ -76,19 +81,13 @@ class Common(Configuration):
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
     # Note: This key only used for development and testing.
     #       In production, this is changed to a values.SecretValue() setting
-    SECRET_KEY = "CHANGEME!!!"
+    SECRET_KEY = "CHANGEME_TO_SOME_S3CRET_VALUE!!!"
     ########## END SECRET CONFIGURATION
 
-    ########## FIXTURE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
     FIXTURE_DIRS = (
         join(BASE_DIR, 'fixtures'),
     )
-    ########## END FIXTURE CONFIGURATION
-
-    ########## EMAIL CONFIGURATION
-    EMAIL_BACKEND = values.Value('django.core.mail.backends.smtp.EmailBackend')
-    ########## END EMAIL CONFIGURATION
 
     ########## MANAGER CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
@@ -100,41 +99,27 @@ class Common(Configuration):
     MANAGERS = ADMINS
     ########## END MANAGER CONFIGURATION
 
+    ########## EMAIL CONFIGURATION
+    EMAIL_BACKEND = values.Value('django.core.mail.backends.smtp.EmailBackend')
+    ########## END EMAIL CONFIGURATION
+
     ########## DATABASE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
     DATABASES = values.DatabaseURLValue('postgres://dev:password@localhost/{{cookiecutter.repo_name}}')
     ########## END DATABASE CONFIGURATION
 
-
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-            'LOCATION': ''
-        }
-    }
-
-    ########## GENERAL CONFIGURATION
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
+    # GENERAL CONFIGURATION
+    # ----------------------
+    # Do not change them, unless you know what you are doing.
     TIME_ZONE = '{{ cookiecutter.timezone }}'
-
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
     LANGUAGE_CODE = 'en-us'
-
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
     SITE_ID = 1
-
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
     USE_I18N = True
-
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
     USE_L10N = True
-
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
     USE_TZ = True
-    ########## END GENERAL CONFIGURATION
+    #----- END GENERAL CONFIGURATION
 
     ########## TEMPLATE CONFIGURATION
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
     TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.auth.context_processors.auth',
         "allauth.account.context_processors.account",
@@ -187,7 +172,7 @@ class Common(Configuration):
     ########## END MEDIA CONFIGURATION
 
     ########## URL Configuration
-    ROOT_URLCONF = 'core.urls'
+    ROOT_URLCONF = 'config.urls'
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
     WSGI_APPLICATION = 'config.wsgi.application'
@@ -235,10 +220,6 @@ class Common(Configuration):
     ########## END LOGGING CONFIGURATION
 
 
-    ########## Your common stuff: Below this line define 3rd party libary settings
-
-
-
 # Development Configurations
 # ==============================================================================
 class Development(Common):
@@ -264,6 +245,15 @@ class Development(Common):
         'SHOW_TEMPLATE_CONTEXT': True,
     }
     ########## end django-debug-toolbar
+
+    ########## CACHES
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': ''
+        }
+    }
+    ######### END OF CACHES
 
     ########## Your local stuff: Below this line define 3rd party libary settings
 
@@ -325,8 +315,8 @@ class Production(Common):
     # AWS cache settings, don't change unless you know what you're doing:
     AWS_EXPIREY = 60 * 60 * 24 * 7
     AWS_HEADERS = {
-        'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (AWS_EXPIREY,
-            AWS_EXPIREY)
+        'Cache-Control': 'max-age=%d, s-maxage=%d, must-revalidate' % (
+            AWS_EXPIREY, AWS_EXPIREY)
     }
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
@@ -379,6 +369,14 @@ class Heroku(Production):
     EMAIL_USE_TLS = True
     SERVER_EMAIL = EMAIL_HOST_USER
     ########## END EMAIL
+
+    try:
+        # see: https://github.com/rdegges/django-heroku-memcacheify#install
+        # Avoids installing of
+        from memcacheify import memcacheify
+    except ImportError:
+        pass
+    CACHES = memcacheify()
 
 
 # EC2 Configurations
