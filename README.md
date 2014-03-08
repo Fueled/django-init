@@ -9,6 +9,7 @@ Features
 * Django 1.6
 * PostresSQL 9.3
 * Foundation 4
+* Project documentation with [mkdocs][mkdocs]
 * SASS, CoffeeScript, Live-Reloading Server
 * Vagrant box, Ansible
 * Heroku - Sendgrid, Newrelic
@@ -26,3 +27,5 @@ After the installation is successful, you can create a new django project by run
     cookiecutter https://github.com/Fueled/cookiecutter-django.git
 
 After cloning the repo, it will ask a bunch of questions and will a create a new folder with the value of `repo_name` you provided, containing the project base code and documentation to start working with your new project further.
+
+[mkdocs]: http://www.mkdocs.org/
