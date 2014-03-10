@@ -17,25 +17,16 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$',
-        TemplateView.as_view(template_name='pages/home.html'),
-        name="home"),
-    url(r'^about/$',
-        TemplateView.as_view(template_name='pages/about.html'),
-        name="about"),
+    url(r'^', include("pages.urls", namespace="pages")),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
     # User management
-    url(r'^users/', include("users.urls", namespace="users")),
-    url(r'^accounts/', include('allauth.urls')),
-
-    # Uncomment the next line to enable avatars
-    url(r'^avatar/', include('avatar.urls')),
+    # url(r'^users/', include("users.urls", namespace="users")),
 
     # REST API
-    url(r'^api/', include('api.urls')),
+    # url(r'^api/', include('api.urls')),
 
     # Your stuff: custom urls go here
 
