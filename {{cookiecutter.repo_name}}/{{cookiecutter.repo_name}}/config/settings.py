@@ -122,8 +122,6 @@ class Common(Configuration):
     ########## TEMPLATE CONFIGURATION
     TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.auth.context_processors.auth',
-        "allauth.account.context_processors.account",
-        "allauth.socialaccount.context_processors.socialaccount",
         'django.core.context_processors.debug',
         'django.core.context_processors.i18n',
         'django.core.context_processors.media',
@@ -374,9 +372,9 @@ class Heroku(Production):
         # see: https://github.com/rdegges/django-heroku-memcacheify#install
         # Avoids installing of
         from memcacheify import memcacheify
+        CACHES = memcacheify()
     except ImportError:
         pass
-    CACHES = memcacheify()
 
 
 # EC2 Configurations
@@ -384,8 +382,8 @@ class Heroku(Production):
 # ==============================================================================
 class Amazon(Production):
 
-    AWS_ACCESS_KEY_ID = Production.AWS_ACCESS_KEY_ID
-    AWS_SECRET_ACCESS_KEY = Production.AWS_SECRET_ACCESS_KEY
+    AWS_ACCESS_KEY_ID = "Production.AWS_ACCESS_KEY_ID"
+    AWS_SECRET_ACCESS_KEY = "Production.AWS_SECRET_ACCESS_KEY"
 
     ########## CELERY
     import urllib
