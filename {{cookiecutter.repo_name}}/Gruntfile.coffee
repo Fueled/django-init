@@ -28,7 +28,7 @@ module.exports = (grunt) ->
     # see: https://github.com/gruntjs/grunt-contrib-watch
     watch:
       gruntfile:
-        files: ["Gruntfile.js"]
+        files: ["Gruntfile.coffee"]
 
       coffee:
         files: ["<%= paths.coffee %>{,*/}*.{coffee,litcoffee,coffee.md}"]
