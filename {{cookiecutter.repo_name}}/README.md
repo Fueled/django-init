@@ -14,8 +14,16 @@ Features
 * Heroku - Sendgrid, Newrelic
 * Amazon EC2, RDS, ElasticCache, SQS, SES
 
-Getting started
----------------
+
+## Getting up and running
+
+The steps below will get you up and running with a local development environment. We assume you have the following installed:
+
+* pip
+* virtualenv
+* PostgreSQL
+
+First make sure to create and activate a virtualenv, then open a terminal at the project root and install the requirements for local development:
 
 1. Clone this repo to your local development machine.
 
@@ -27,3 +35,34 @@ Getting started
 
 3. From inside the project repo, run `fab init`, it will ask your system password.
 4. Go grab a cup of coffee, till your hot development machine is baking!! 
+
+
+## Deploying Project
+
+### Heroku
+ 
+Run these commands to deploy the project to Heroku:
+
+```
+heroku create --buildpack https://github.com/heroku/heroku-buildpack-python
+heroku addons:add heroku-postgresql:dev
+heroku addons:add pgbackups:auto-month
+heroku addons:add sendgrid:starter
+heroku addons:add memcachier:dev
+heroku pg:promote HEROKU_POSTGRESQL_COLOR
+heroku config:set DJANGO_CONFIGURATION=Production
+heroku config:set DJANGO_SECRET_KEY=RANDOM_SECRET_KEY
+heroku config:set DJANGO_AWS_ACCESS_KEY_ID=YOUR_ID
+heroku config:set DJANGO_AWS_SECRET_ACCESS_KEY=YOUR_KEY
+heroku config:set DJANGO_AWS_STORAGE_BUCKET_NAME=YOUR_BUCKET_NAME
+git push heroku master
+heroku run python {{cookiecutter.repo_name}}/manage.py syncdb
+heroku run python {{cookiecutter.repo_name}}/manage.py migrate
+heroku run python {{cookiecutter.repo_name}}/manage.py createsuperuser
+heroku open
+```
+
+
+### AWS
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, rem, ipsum. Perferendis, voluptatum reiciendis molestias fugit voluptatibus temporibus vitae fuga expedita laboriosam totam minus ea voluptatem a eligendi incidunt veritatis.
