@@ -4,6 +4,5 @@
 
 # Your custom production only requirements goes here
 django-storages==1.1.8
-Collectfast==0.1.13
-gevent==1.0
-boto==2.25.0
+Collectfast==0.2.0
+boto==2.27.0

@@ -1,4 +1,6 @@
 # Put the requirements specific to heroku
 -r production.txt
+pylibmc==1.3.0
+gevent==1.0s
 gunicorn==18.0
 django-heroku-memcacheify
