@@ -38,6 +38,7 @@ This is a list of Python libraries or Django apps that have been tried and teste
 * python-requests: http://docs.python-requests.org/en/latest/
 * python-dateutil: http://labix.org/python-dateutil
 * python-user-agents: https://github.com/selwin/python-user-agents/
+* django-versatileimagefield: https://github.com/WGBH/django-versatileimagefield
 
 
 ## Configuring Django for Local Development
