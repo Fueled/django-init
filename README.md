@@ -1,9 +1,10 @@
 cookiecutter-django
 ====================
 
-Project base for backend projects used at Fueled
+Project base for backend projects
 
 ## Features
+
 * Django 1.6
 * PostresSQL 9.3
 * Foundation 4
@@ -15,37 +16,20 @@ Project base for backend projects used at Fueled
 
 [mkdocs]: http://www.mkdocs.org/
 
-# Django/Python Devlopment 
-Just a bunch of things about devloping, all in one place.
+TODO:
 
-
-## Using boilerplate-web
-
-TODO for this Repository:
 * focus should be on re-usable apps: https://docs.djangoproject.com/en/1.6/intro/reusable-apps/
 * add in mobile-password-reset as a re-usable app
 * siteconfig as a re-usable app with a base SiteProfile class? Create an initial site object?
 * how to handle having a base settings file for projects?
 
+## Setup
 
-## Approved Libraries
-This is a list of Python libraries or Django apps that have been tried and tested to be used for projects.
-* django-storages for S3: http://django-storages.readthedocs.org/en/latest/
-* django-south (if using django <= 1.6): http://south.aeracode.org/
-* django-grapelli: https://github.com/sehmaschine/django-grappelli
-* django-rest-framework (if making api): http://www.django-rest-framework.org/
-* python-social-auth: https://github.com/omab/python-social-auth
-* python-requests: http://docs.python-requests.org/en/latest/
-* python-dateutil: http://labix.org/python-dateutil
-* python-user-agents: https://github.com/selwin/python-user-agents/
-* django-versatileimagefield: https://github.com/WGBH/django-versatileimagefield
-
-
-## Configuring Django for Local Development
+### Local Development
 
 You need to have `cookiecutter` installed in order to scafold a new project from this template. If you have `pip` installed, you simply do this by running:
 
-    sudo pip install cookiecutter==0.7.0
+    pip install --upgrade cookiecutter
 
 After the installation is successful, you can create a new django project by running:
 
@@ -61,9 +45,9 @@ After cloning the repo, it will ask a bunch of questions and will a create a new
 * set the privilege of that user as public, you can easily do it via pgadmin3.
 
 
-## Workflow for deploying project
+### Production
 
-# Heroku
+#### Heroku
  
 Run these commands to deploy the project to Heroku:
 
@@ -86,15 +70,18 @@ heroku run python {{cookiecutter.repo_name}}/manage.py createsuperuser
 heroku open
 ```
 
-# AWS
+#### AWS
 
-### General Notes
+##### General Notes
+
 * Micro EC2 instances always run the latest Ubuntu LTS release, currently 12.04.
 * Use S3 for storing all media and static files. Use Django storages.
 * One RDS instance for all DBs.
 
-### Preparing an Instance for a Client
+##### Preparing an Instance for a Client
+
 Do these steps when handing over complete control of an instance to a client:
+
 * TODO: Make a script called clean_instance.sh that remove logs, gets rid of repo files, private directory, etc... fill me in
 * If deployment is still needed, instead of 'git pull' start using the fabric script. 
 
@@ -110,5 +97,15 @@ Do these steps when handing over complete control of an instance to a client:
 * If there is an unusual/new/innovative way of doing a new feature, create a branch off of dev and develop it there. After the feature is completed, ask another dev or a lead dev to review this added feature.
 
 
-## Configuring Django Admin Image Resizer
-TODO: pje-fueled should fill this in.
+## Approved Libraries
+This is a list of Python libraries or Django apps that have been tried and tested to be used for projects.
+
+* [django-storages](http://django-storages.readthedocs.org/en/latest/) - for S3 as storage backend.
+* [django-south](http://south.aeracode.org/)  (if using django <= 1.6): 
+* [django-grapelli](https://github.com/sehmaschine/django-grappelli)
+* [django-rest-framework](http://www.django-rest-framework.org/) - for making REST API 
+* [python-social-auth](https://github.com/omab/python-social-auth)
+* [python-requests](http://docs.python-requests.org/en/latest/)
+* [python-dateutil](http://labix.org/python-dateutil)
+* [python-user-agents](https://github.com/selwin/python-user-agents/)
+* [django-versatileimagefield](https://github.com/WGBH/django-versatileimagefield)
