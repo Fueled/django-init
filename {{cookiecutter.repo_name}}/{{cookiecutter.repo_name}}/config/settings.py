@@ -9,14 +9,6 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 import os
 from os.path import join
 
-# See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
-try:
-    from S3 import CallingFormat
-    AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
-except ImportError:
-    # TODO: Fix this where even if in Dev this class is called.
-    pass
-
 from configurations import Configuration, values
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -45,8 +37,8 @@ class Common(Configuration):
         'django.contrib.admin',
     )
     THIRD_PARTY_APPS = (
-        'south',  # Database migration helpers:
-        'django-extensions',  # collection of custom extensions & helpers
+        'south',  # Database migration helpers
+        'django_extensions',  # http://django-extensions.readthedocs.org/
     )
 
     LOCAL_APPS = (
@@ -57,8 +49,7 @@ class Common(Configuration):
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
     INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
-
-    ######### MIDDLEWARE CONFIGURATION
+    # MIDDLEWARE CONFIGURATION
     # Note: Order in which they are added are important
     MIDDLEWARE_CLASSES = (
         'django.contrib.sessions.middleware.SessionMiddleware',
@@ -68,7 +59,7 @@ class Common(Configuration):
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     )
-    ########## END MIDDLEWARE CONFIGURATION
+    # END MIDDLEWARE CONFIGURATION
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
     # Defaults to false, which is safe, enable them only in development.
@@ -77,19 +68,19 @@ class Common(Configuration):
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
     TEMPLATE_DEBUG = DEBUG
 
-    ########## SECRET CONFIGURATION
+    # SECRET CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
     # Note: This key only used for development and testing.
     #       In production, this is changed to a values.SecretValue() setting
     SECRET_KEY = "CHANGEME_TO_SOME_S3CRET_VALUE!!!"
-    ########## END SECRET CONFIGURATION
+    # END SECRET CONFIGURATION
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
     FIXTURE_DIRS = (
         join(BASE_DIR, 'fixtures'),
     )
 
-    ########## MANAGER CONFIGURATION
+    # MANAGER CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
     ADMINS = (
         ('{{ cookiecutter.site_name }} admin', '{{ cookiecutter.django_admin_email }}'),
@@ -97,19 +88,18 @@ class Common(Configuration):
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
     MANAGERS = ADMINS
-    ########## END MANAGER CONFIGURATION
+    # END MANAGER CONFIGURATION
 
-    ########## EMAIL CONFIGURATION
+    # EMAIL CONFIGURATION
     EMAIL_BACKEND = values.Value('django.core.mail.backends.smtp.EmailBackend')
-    ########## END EMAIL CONFIGURATION
+    # END EMAIL CONFIGURATION
 
-    ########## DATABASE CONFIGURATION
+    # DATABASE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-    DATABASES = values.DatabaseURLValue('postgres://dev:password@localhost/{{cookiecutter.repo_name}}')
-    ########## END DATABASE CONFIGURATION
+    DATABASES = values.DatabaseURLValue('postgres://{{cookiecutter.repo_name}}@localhost/{{cookiecutter.repo_name}}')
+    # END DATABASE CONFIGURATION
 
     # GENERAL CONFIGURATION
-    # ----------------------
     # Do not change them, unless you know what you are doing.
     TIME_ZONE = '{{ cookiecutter.timezone }}'
     LANGUAGE_CODE = 'en-us'
@@ -117,9 +107,9 @@ class Common(Configuration):
     USE_I18N = True
     USE_L10N = True
     USE_TZ = True
-    #----- END GENERAL CONFIGURATION
+    # END GENERAL CONFIGURATION
 
-    ########## TEMPLATE CONFIGURATION
+    # TEMPLATE CONFIGURATION
     TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.auth.context_processors.auth',
         'django.core.context_processors.debug',
@@ -142,7 +132,7 @@ class Common(Configuration):
         'django.template.loaders.app_directories.Loader',
     )
 
-    ########## STATIC FILE CONFIGURATION
+    # STATIC FILE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
     STATIC_ROOT = join(os.path.dirname(BASE_DIR), 'staticfiles')
 
@@ -159,33 +149,33 @@ class Common(Configuration):
         'django.contrib.staticfiles.finders.FileSystemFinder',
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     )
-    ########## END STATIC FILE CONFIGURATION
+    # END STATIC FILE CONFIGURATION
 
-    ########## MEDIA CONFIGURATION
+    # MEDIA CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
     MEDIA_ROOT = join(BASE_DIR, 'media')
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
     MEDIA_URL = '/media/'
-    ########## END MEDIA CONFIGURATION
+    # END MEDIA CONFIGURATION
 
-    ########## URL Configuration
+    # URL Configuration
     ROOT_URLCONF = 'config.urls'
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
     WSGI_APPLICATION = 'config.wsgi.application'
-    ########## End URL Configuration
+    # End URL Configuration
 
-    ########## AUTHENTICATION CONFIGURATION
+    # AUTHENTICATION CONFIGURATION
     AUTHENTICATION_BACKENDS = (
         "django.contrib.auth.backends.ModelBackend",
     )
 
-    ########## SLUGLIFIER
+    # SLUGLIFIER
     AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
-    ########## END SLUGLIFIER
+    # END SLUGLIFIER
 
-    ########## LOGGING CONFIGURATION
+    # LOGGING CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
     # A sample logging configuration. The only tangible logging
     # performed by this configuration is to send an email to
@@ -215,24 +205,24 @@ class Common(Configuration):
             },
         }
     }
-    ########## END LOGGING CONFIGURATION
+    # END LOGGING CONFIGURATION
 
 
 # Development Configurations
 # ==============================================================================
 class Development(Common):
 
-    ########## INSTALLED_APPS
+    # INSTALLED_APPS
     INSTALLED_APPS = Common.INSTALLED_APPS
-    ########## END INSTALLED_APPS
+    # END INSTALLED_APPS
 
-    ########## Mail settings
+    # Mail settings
     EMAIL_HOST = "localhost"
     EMAIL_PORT = 1025
     EMAIL_BACKEND = values.Value('django.core.mail.backends.console.EmailBackend')
-    ########## End mail settings
+    # End mail settings
 
-    ########## django-debug-toolbar
+    # django-debug-toolbar
     MIDDLEWARE_CLASSES = Common.MIDDLEWARE_CLASSES + ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     INSTALLED_APPS += ('debug_toolbar',)
 
@@ -242,33 +232,33 @@ class Development(Common):
         'INTERCEPT_REDIRECTS': False,
         'SHOW_TEMPLATE_CONTEXT': True,
     }
-    ########## end django-debug-toolbar
+    # end django-debug-toolbar
 
-    ########## CACHES
+    # CACHES
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             'LOCATION': ''
         }
     }
-    ######### END OF CACHES
+    # END OF CACHES
 
-    ########## Your local stuff: Below this line define 3rd party libary settings
+    # Your local stuff: Below this line define 3rd party libary settings
 
 
 # Production Configurations
 # ==============================================================================
 class Production(Common):
 
-    ########## INSTALLED_APPS
+    # INSTALLED_APPS
     INSTALLED_APPS = Common.INSTALLED_APPS
-    ########## END INSTALLED_APPS
+    # END INSTALLED_APPS
 
-    ########## SECRET KEY
+    # SECRET KEY
     SECRET_KEY = values.SecretValue()
-    ########## END SECRET KEY
+    # END SECRET KEY
 
-    ########## django-secure
+    # django-secure
     INSTALLED_APPS += ("djangosecure", )
 
     # set this to 60 seconds and then to 518400 when you can prove it works
@@ -280,26 +270,28 @@ class Production(Common):
     SESSION_COOKIE_SECURE = values.BooleanValue(False)
     SESSION_COOKIE_HTTPONLY = values.BooleanValue(True)
     SECURE_SSL_REDIRECT = values.BooleanValue(True)
-    ########## end django-secure
+    # end django-secure
 
-    ########## SITE CONFIGURATION
+    # SITE CONFIGURATION
     # Hosts/domain names that are valid for this site
     # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
     ALLOWED_HOSTS = ["*"]
-    ########## END SITE CONFIGURATION
+    # END SITE CONFIGURATION
 
     INSTALLED_APPS += ("gunicorn", )
 
-    ########## STORAGE CONFIGURATION
+    # STORAGE CONFIGURATION
     # See: http://django-storages.readthedocs.org/en/latest/index.html
     INSTALLED_APPS += (
         'storages',
     )
 
     # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
+    from S3 import CallingFormat
+    AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
+
     STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-    # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
     AWS_ACCESS_KEY_ID = values.SecretValue()
     AWS_SECRET_ACCESS_KEY = values.SecretValue()
     AWS_STORAGE_BUCKET_NAME = values.SecretValue()
@@ -319,11 +311,10 @@ class Production(Common):
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
     STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
-    ########## END STORAGE CONFIGURATION
+    # END STORAGE CONFIGURATION
 
-    ########## EMAIL
-    DEFAULT_FROM_EMAIL = values.Value(
-            '{{cookiecutter.site_name}} <{{cookiecutter.admin_email}}>')
+    # EMAIL
+    DEFAULT_FROM_EMAIL = values.Value('{{cookiecutter.site_name}} <{{cookiecutter.admin_email}}>')
     EMAIL_HOST = values.Value('email-smtp.us-east-1.amazonaws.com')
     EMAIL_HOST_PASSWORD = values.SecretValue()
     EMAIL_HOST_USER = values.SecretValue()
@@ -331,10 +322,9 @@ class Production(Common):
     EMAIL_SUBJECT_PREFIX = values.Value('[{{ cookiecutter.site_name }}] ', environ_name="EMAIL_SUBJECT_PREFIX")
     EMAIL_USE_TLS = True
     SERVER_EMAIL = DEFAULT_FROM_EMAIL
-    ########## END EMAIL
+    # END EMAIL
 
-    ########## TEMPLATE CONFIGURATION
-
+    # TEMPLATE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
     TEMPLATE_LOADERS = (
         ('django.template.loaders.cached.Loader', (
@@ -342,21 +332,21 @@ class Production(Common):
             'django.template.loaders.app_directories.Loader',
         )),
     )
-    ########## END TEMPLATE CONFIGURATION
+    # END TEMPLATE CONFIGURATION
 
-    ########## CACHING
+    # CACHING
     # Only do this here because thanks to django-pylibmc-sasl and pylibmc memcacheify is painful to install on windows.
     CACHES = values.CacheURLValue(default="memcached://127.0.0.1:11211")
-    ########## END CACHING
+    # END CACHING
 
-    ########## Your production stuff: Below this line define 3rd party libary settings
+    # Your production stuff: Below this line define 3rd party libary settings
 
 
 # Heroku Configurations
 # ==============================================================================
 class Heroku(Production):
 
-    ########## EMAIL
+    # EMAIL
     DEFAULT_FROM_EMAIL = values.Value(
             '{{ cookiecutter.site_name }} <{{ cookiecutter.django_admin_email }}>')
     EMAIL_HOST = values.Value('smtp.sendgrid.com')
@@ -366,11 +356,11 @@ class Heroku(Production):
     EMAIL_SUBJECT_PREFIX = values.Value('[{{ cookiecutter.project_name }}] ', environ_name="EMAIL_SUBJECT_PREFIX")
     EMAIL_USE_TLS = True
     SERVER_EMAIL = EMAIL_HOST_USER
-    ########## END EMAIL
+    # END EMAIL
 
     try:
         # see: https://github.com/rdegges/django-heroku-memcacheify#install
-        # Avoids installing of
+        # Avoids installing of pylibmc on development enviroment
         from memcacheify import memcacheify
         CACHES = memcacheify()
     except ImportError:
@@ -385,13 +375,9 @@ class Amazon(Production):
     AWS_ACCESS_KEY_ID = "Production.AWS_ACCESS_KEY_ID"
     AWS_SECRET_ACCESS_KEY = "Production.AWS_SECRET_ACCESS_KEY"
 
-    ########## CELERY
+    # CELERY
     import urllib
     BROKER_URL = values.Value('sqs://{AWS_ACCESS_KEY_ID}:{AWS_SECRET_ACCESS_KEY}@'.format(
-            AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID,
-            AWS_SECRET_ACCESS_KEY = urllib.quote_plus(AWS_SECRET_ACCESS_KEY))
+            AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID,
+            AWS_SECRET_ACCESS_KEY=urllib.quote_plus(AWS_SECRET_ACCESS_KEY))
     )
-
-    ########## CACHING
-    CACHES = values.CacheURLValue(default="memcached://fueled.ggdkvc.cfg.use1.cache.amazonaws.com:11211")
-    ########## END CACHING
