@@ -1,4 +1,3 @@
-
 '''Fabric file for managing this project.'''
 from fabric.api import local, env
 
@@ -8,7 +7,7 @@ def init(vagrant=True):
 
     distro = local('uname -s', capture=True)
 
-    if distro == 'Darwin': #OSX
+    if distro == 'Darwin':  # OSX
         env.installer = 'brew cask install'
     elif distro == 'Linux':
         env.installer = 'sudo apt-get install'
