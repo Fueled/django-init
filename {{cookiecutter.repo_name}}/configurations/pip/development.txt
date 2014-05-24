@@ -1,6 +1,7 @@
 # documentation
-mkdocs==0.5
-django-debug-toolbar==1.1
+-r common.txt
+mkdocs==0.9
+django-debug-toolbar==1.2.1
 
 # A better python shell
-ipython==1.2.1
+ipython==2.1.0
