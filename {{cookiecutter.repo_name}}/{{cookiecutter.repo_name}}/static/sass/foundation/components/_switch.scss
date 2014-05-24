@@ -136,7 +136,7 @@ $switch-label-outline: 1px dotted #888 !default;
 
   // Right Label alignment and position changes, including fixes for while inside a custom form
   input:last-of-type + label,
-  input:last-of-type + span + label {#{$opposite-direction}: -50%; #{$default-float}: auto; text-align: $opposite-direction; }
+  input:last-of-type + span + label { #{$opposite-direction}: -50%; #{$default-float}: auto; text-align: $opposite-direction; }
   input:last-of-type:checked + label,
   input:last-of-type:checked + span + label { #{$opposite-direction}: 0%; #{$default-float}: auto; }
 
