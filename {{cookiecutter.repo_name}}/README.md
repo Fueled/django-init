@@ -1,7 +1,7 @@
-{{cookiecutter.repo_name}}
+{{ cookiecutter.site_name }}
 ==============================
 
-{{cookiecutter.description}}
+{{ cookiecutter.site_description }}
 
 Features
 --------
