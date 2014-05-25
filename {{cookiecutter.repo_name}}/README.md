@@ -50,7 +50,7 @@ heroku addons:add pgbackups:auto-month
 heroku addons:add sendgrid:starter
 heroku addons:add memcachier:dev
 heroku pg:promote HEROKU_POSTGRESQL_COLOR
-heroku config:set DJANGO_CONFIGURATION=Production
+heroku config:set DJANGO_CONFIGURATION=Heroku
 heroku config:set DJANGO_SECRET_KEY=RANDOM_SECRET_KEY
 heroku config:set DJANGO_AWS_ACCESS_KEY_ID=YOUR_ID
 heroku config:set DJANGO_AWS_SECRET_ACCESS_KEY=YOUR_KEY
