@@ -232,7 +232,7 @@ class Development(Common):
     INTERNAL_IPS = ('127.0.0.1',)
 
     DEBUG_TOOLBAR_CONFIG = {
-        'INTERCEPT_REDIRECTS': False,
+        'DISABLE_PANELS': ['debug_toolbar.panels.redirects.RedirectsPanel', ],
         'SHOW_TEMPLATE_CONTEXT': True,
     }
     # end django-debug-toolbar
@@ -290,8 +290,11 @@ class Production(Common):
     )
 
     # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
-    from S3 import CallingFormat
-    AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
+    try:
+        from S3 import CallingFormat
+        AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
+    except ImportError:
+        pass
 
     STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
@@ -317,7 +320,7 @@ class Production(Common):
     # END STORAGE CONFIGURATION
 
     # EMAIL
-    DEFAULT_FROM_EMAIL = values.Value('{{cookiecutter.site_name}} <{{cookiecutter.admin_email}}>')
+    DEFAULT_FROM_EMAIL = values.Value('{{cookiecutter.site_name}} <{{cookiecutter.django_admin_email}}>')
     EMAIL_HOST = values.Value('email-smtp.us-east-1.amazonaws.com')
     EMAIL_HOST_PASSWORD = values.SecretValue()
     EMAIL_HOST_USER = values.SecretValue()
@@ -350,8 +353,7 @@ class Production(Common):
 class Heroku(Production):
 
     # EMAIL
-    DEFAULT_FROM_EMAIL = values.Value(
-            '{{ cookiecutter.site_name }} <{{ cookiecutter.django_admin_email }}>')
+    DEFAULT_FROM_EMAIL = values.Value('{{ cookiecutter.site_name }} <{{ cookiecutter.django_admin_email }}>')
     EMAIL_HOST = values.Value('smtp.sendgrid.com')
     EMAIL_HOST_PASSWORD = values.SecretValue(environ_prefix="", environ_name="SENDGRID_PASSWORD")
     EMAIL_HOST_USER = values.SecretValue(environ_prefix="", environ_name="SENDGRID_USERNAME")
