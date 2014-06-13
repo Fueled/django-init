@@ -11,8 +11,7 @@ Features
 * Foundation 4
 * SASS, CoffeeScript, Live-Reloading Server
 * Vagrant box, Ansible
-* Heroku - Sendgrid, Newrelic
-* Amazon EC2, RDS, ElasticCache, SQS, SES
+* Heroku - Sendgrid
 
 
 ## Getting up and running

@@ -1,3 +1,0 @@
-# Test dependencies go here.
--r common.txt
-coverage==3.7.1

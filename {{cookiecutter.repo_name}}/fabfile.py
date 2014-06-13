@@ -28,7 +28,7 @@ def serve_doc(address='127.0.0.1', port='8001'):
 
 
 def manage(cmd):
-    local('python {{ coookiecutter.repo_name}}/manage.py {}'.format(cmd))
+    local('python {{ cookiecutter.repo_name}}/manage.py {}'.format(cmd))
 
 
 def shell():
