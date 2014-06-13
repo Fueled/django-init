@@ -8,10 +8,10 @@ Features
 
 * Django 1.6
 * PostresSQL 9.3
-* Foundation 4
+* Foundation 5
 * SASS, CoffeeScript, Live-Reloading Server
 * Vagrant box, Ansible
-* Heroku - Sendgrid
+* Heroku/Sendgrid/S3
 
 
 ## Getting up and running

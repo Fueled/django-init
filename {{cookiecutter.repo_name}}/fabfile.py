@@ -3,7 +3,13 @@
 
 See: http://www.fabfile.org/
 '''
-from fabric.api import local, env
+from os.path import join, abspath, dirname
+
+from fabric.api import local, env, lcd
+
+ROOT = abspath(join(dirname(__file__)))
+
+env.project = '{{ cookiecutter.repo_name }}'
 
 
 def init(vagrant=True):
@@ -28,13 +34,13 @@ def configure():
 
 
 def serve_doc(address='127.0.0.1', port='8001'):
-    '''Run mkdocs development server.
-    '''
-    local('mkdocs serve --dev-addr=%s:%s' % (address, port))
+    with lcd(ROOT):
+        local('mkdocs serve --dev-addr=%s:%s' % (address, port))
 
 
 def manage(cmd):
-    local('python {{ cookiecutter.repo_name}}/manage.py {}'.format(cmd))
+    with lcd(ROOT):
+        local('python {}/manage.py {}'.format(env.project, cmd))
 
 
 def shell():
@@ -43,3 +49,15 @@ def shell():
 
 def serve():
     manage('runserver_plus')
+
+
+def syncdb():
+    '''Synchronize database and generate changesets'''
+    manage('syncdb --noinput')
+    manage('migrate --noinput')
+
+
+def makemigration(app):
+    '''Generate a south migration for an application'''
+    manage('schemamigration %s --auto' % app)
+    manage('migrate %s --noinput' % app)
