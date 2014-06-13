@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ''' Production Configurations
 
-Add sensiable default for running app in production.
+Adds sensiable default for running app in production.
 '''
 from __future__ import unicode_literals, absolute_import
 from configurations import values
@@ -82,7 +82,7 @@ class Production(Common):
     EMAIL_PORT = values.IntegerValue(587, environ_prefix="", environ_name="EMAIL_PORT")
     EMAIL_SUBJECT_PREFIX = values.Value('[{{ cookiecutter.project_name }}] ', environ_name="EMAIL_SUBJECT_PREFIX")
     EMAIL_USE_TLS = True
-    SERVER_EMAIL = EMAIL_HOST_USER
+    SERVER_EMAIL = DEFAULT_FROM_EMAIL
     # END EMAIL
 
     try:

@@ -1,4 +1,8 @@
-'''Fabric file for managing this project.'''
+# -*- coding: utf-8 -*-
+'''Fabric file for managing this project.
+
+See: http://www.fabfile.org/
+'''
 from fabric.api import local, env
 
 
@@ -24,6 +28,8 @@ def configure():
 
 
 def serve_doc(address='127.0.0.1', port='8001'):
+    '''Run mkdocs development server.
+    '''
     local('mkdocs serve --dev-addr=%s:%s' % (address, port))
 
 
@@ -36,4 +42,4 @@ def shell():
 
 
 def serve():
-    manage('runserver')
+    manage('runserver_plus')

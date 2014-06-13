@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
-Celery Worker Configuration to autodiscover tasks in all the django apps.
+'''Celery Worker Configuration to autodiscover tasks in all the django apps.
 
 see: http://celery.readthedocs.org/en/latest/django/first-steps-with-django.html
 '''
