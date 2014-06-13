@@ -1,9 +1,23 @@
 {% raw %}{% extends "base.html" %}
 
 {% block title %}Page Not found{% endblock %}
-
 {% block page_title %}Page Not found{% endblock page_title %}
+{% block page_classes %}{{ block.super }} page_not_found {% endblock page_classes %}
 
 {% block content %}
-<p>This is not the page you were looking for.</p>
-{% endblock content %}{% endraw %}
+<h1>Not Found</h1>
+<p>The requested URL {{ request_path }} was not found on this server.</p>
+
+<style>
+    #goog-wm ul{list-style: none; padding: 0; margin: 0;}
+</style>
+
+<script>
+  var GOOG_FIXURL_LANG = 'en';
+  var GOOG_FIXURL_SITE = window.location.protocol + '//' + window.location.host;
+</script>
+<script src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js">
+</script>
+
+{% endblock content %}
+{% endraw %}
