@@ -7,14 +7,14 @@ Project base for backend projects
 
 * Django 1.6
 * PostresSQL 9.3
-* Foundation 4
-* Project documentation with [mkdocs][mkdocs]
+* Foundation 5
 * SASS, CoffeeScript, Live-Reloading Server
 * Vagrant box, Ansible
-* Heroku - Sendgrid, Newrelic
-* Amazon EC2, RDS, ElasticCache, SQS, SES
+* Heroku/Sendgrid/S3
+* [12factor][12factor] based project configuration
 
 [mkdocs]: http://www.mkdocs.org/
+[12factor]: http://12factor.net
 
 TODO:
 
@@ -57,14 +57,14 @@ heroku addons:add heroku-postgresql:dev
 heroku addons:add pgbackups:auto-month
 heroku addons:add sendgrid:starter
 heroku addons:add memcachier:dev
-heroku pg:promote HEROKU_POSTGRESQL_COLOR
-heroku config:set DJANGO_CONFIGURATION=Production
-heroku config:set DJANGO_SECRET_KEY=RANDOM_SECRET_KEY
-heroku config:set DJANGO_AWS_ACCESS_KEY_ID=YOUR_ID
-heroku config:set DJANGO_AWS_SECRET_ACCESS_KEY=YOUR_KEY
-heroku config:set DJANGO_AWS_STORAGE_BUCKET_NAME=YOUR_BUCKET_NAME
+heroku pg:promote DATABASE_URL
+heroku pg:promote DJANGO_CONFIGURATION=Production
+heroku config:set DJANGO_SECRET_KEY=`openssl rand -base64 32`
+heroku config:set DJANGO_AWS_ACCESS_KEY_ID=PUT_YOUR_ID_HERE
+heroku config:set DJANGO_AWS_SECRET_ACCESS_KEY=PUT_YOUR_SECRET_KEY_HERE
+heroku config:set DJANGO_AWS_STORAGE_BUCKET_NAME=PUT_BUCKET_NAME_HERE
 git push heroku master
-heroku run python {{cookiecutter.repo_name}}/manage.py syncdb
+heroku run python {{cookiecutter.repo_name}}/manage.py syncdb --noinput
 heroku run python {{cookiecutter.repo_name}}/manage.py migrate
 heroku run python {{cookiecutter.repo_name}}/manage.py createsuperuser
 heroku open
@@ -92,9 +92,9 @@ Do these steps when handing over complete control of an instance to a client:
 
 
 ## GIT Branches
-* There is a master and dev branch for each project.
-* All developers should work off of the dev branch.
-* If there is an unusual/new/innovative way of doing a new feature, create a branch off of dev and develop it there. After the feature is completed, ask another dev or a lead dev to review this added feature.
+* There is a `master` and `dev` branch for each project.
+* All developers should work off of the `dev` branch.
+* If there is an unusual/new/innovative way of doing a new feature, create a branch off of `dev` and develop it there. After the feature is completed, ask another dev or a lead dev to review this added feature.
 
 
 ## Approved Libraries
@@ -109,3 +109,4 @@ This is a list of Python libraries or Django apps that have been tried and teste
 * [python-dateutil](http://labix.org/python-dateutil)
 * [python-user-agents](https://github.com/selwin/python-user-agents/)
 * [django-versatileimagefield](https://github.com/WGBH/django-versatileimagefield)
+* [django-extensions](http://django-extensions.readthedocs.org/)

@@ -12,6 +12,7 @@ Features
 * SASS, CoffeeScript, Live-Reloading Server
 * Vagrant box, Ansible
 * Heroku/Sendgrid/S3
+* Project configuration based on [http://12factor.net](http://12factor.net)
 
 
 ## Getting up and running
@@ -48,14 +49,14 @@ heroku addons:add heroku-postgresql:dev
 heroku addons:add pgbackups:auto-month
 heroku addons:add sendgrid:starter
 heroku addons:add memcachier:dev
-heroku pg:promote HEROKU_POSTGRESQL_COLOR
-heroku config:set DJANGO_CONFIGURATION=Heroku
-heroku config:set DJANGO_SECRET_KEY=RANDOM_SECRET_KEY
+heroku pg:promote DATABASE_URL
+heroku pg:promote DJANGO_CONFIGURATION=Production
+heroku config:set DJANGO_SECRET_KEY=`openssl rand -base64 32`
 heroku config:set DJANGO_AWS_ACCESS_KEY_ID=YOUR_ID
 heroku config:set DJANGO_AWS_SECRET_ACCESS_KEY=YOUR_KEY
 heroku config:set DJANGO_AWS_STORAGE_BUCKET_NAME=YOUR_BUCKET_NAME
 git push heroku master
-heroku run python {{cookiecutter.repo_name}}/manage.py syncdb
+heroku run python {{cookiecutter.repo_name}}/manage.py syncdb --noinput
 heroku run python {{cookiecutter.repo_name}}/manage.py migrate
 heroku run python {{cookiecutter.repo_name}}/manage.py createsuperuser
 heroku open
