@@ -3,7 +3,7 @@
     , "repo_url": "git@github.com:Fueled/repo_name.git"
     , "site_name": "My Project"
     , "site_description": "add a short project description here"
-    , "timezone": "America/New_York"
+    , "timezone": "UTC"
     , "django_admin_email": "noreply@example.com"
     , "version": "0.1.0"
 }
