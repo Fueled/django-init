@@ -1,0 +1,20 @@
+---
+- name: install supervisor server
+  pip: name=gunicorn state=present
+
+- name: ensure gunicorn configuration directory exists
+  file: path={{ gunicorn_conf_path }}
+        owner=root
+        group=root
+        mode=755
+        state=directory
+
+- name: copy gunicorn configuration
+  template: src=gunicorn.conf.py.j2
+            dest={{ gunicorn_conf_path }}/gunicorn.conf.py
+            mode=644
+  notify: restart gunicorn
+
+- name: copy supervisor gunicorn configuration
+  template: src=supervisor_gunicorn.conf.j2 dest=/etc/supervisor/conf.d/gunicorn.conf
+  notify: restart gunicorn

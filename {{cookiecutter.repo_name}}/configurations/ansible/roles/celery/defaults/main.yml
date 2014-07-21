@@ -1,0 +1,3 @@
+---
+# django app containing celery configuration
+celery_app: config

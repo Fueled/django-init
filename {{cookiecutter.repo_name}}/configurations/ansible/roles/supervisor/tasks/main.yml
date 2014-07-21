@@ -1,0 +1,16 @@
+---
+- name: install supervisor server
+  apt: pkg=supervisor state=installed update-cache=yes
+
+- name: make sure the supervisor conf dir exists
+  file: path=/etc/supervisor state=directory mode=0755 owner=root group=root
+
+- name: install the supervisor init script
+  template: src=etc_init.d_supervisor.j2 dest=/etc/init.d/supervisor owner=root group=root mode=0755
+  notify:
+    - enable supervisor
+    - restart supervisor
+
+- name: copy base gunicorn configuration.
+  template: src=gunicorn.conf.j2 dest=/etc/supervisor/conf.d/gunicorn.conf
+  notify: restart supervisor

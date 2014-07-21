@@ -1,0 +1,42 @@
+upstream app_server {
+    server     127.0.0.1:8000;
+}
+
+# Serve static files and redirect any other request to django wsgi server
+server {
+    listen       80;
+
+    server_name  {{server_name}};
+    root         /var/www/;
+    access_log   /var/log/nginx/fueled.access.log;
+    error_log    /var/log/nginx/fueled.error.log;
+    client_max_body_size    10M;
+
+    gzip  on;
+    gzip_min_length  1100;
+    gzip_buffers     4 8k;
+    gzip_types       application/atom+xml application/javascript application/x-javascript application/json application/rss+xml application/vnd.ms-fontobject application/x-font-ttf application/xhtml+xml application/xml font/opentype image/svg+xml image/x-icon text/css text/plain text/x-component text/xml;
+
+    expires    30d;
+    # expires    max;
+    # expires    modified +24h;
+    # expires    @24h;
+    # expires    0;
+    # expires    -1;
+    # expires    epoch;
+    # add_header Cache-Control private;
+
+
+    # Check if a file exists at /var/www/ for the incoming request.
+    # If it doesn't proxy to Django wsgi server.
+    try_files $uri @app_server;
+
+    # Setup named location for Django requests and handle proxy details
+    location @app_server {
+            proxy_pass         http://127.0.0.1:8000;
+            proxy_redirect     off;
+            proxy_set_header   Host             $host;
+            proxy_set_header   X-Real-IP        $remote_addr;
+            proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+    }
+}

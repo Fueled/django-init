@@ -2,3 +2,4 @@
 project_name: {{ cookiecutter.repo_name }}
 project_repo_url: {{ cookiecutter.repo_url }}
 project_repo_remote: origin
+server_name: {{ cookiecutter.repo_name }}

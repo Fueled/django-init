@@ -1,0 +1,37 @@
+---
+# - name: ensure a ssh folder
+#   file: path=/home/{{ user }}/.ssh owner={{ user }} state=directory mode=755
+
+# - name: ensure a valid ssh key
+#   copy: src=id_rsa dest=/home/{{ user }}/.ssh/id_rsa owner={{ user }} mode=0400
+
+# - name: add known_hosts file
+#   copy: src=known_hosts dest=/home/{{ user }}/.ssh/known_hosts owner={{ user }} mode=0644
+
+- name: get the latest code
+  git: repo={{ project_repo_url }} dest={{ project_path }}
+  sudo: false
+
+- name: update manage.py
+  template: src=manage.py.j2 dest={{ project_path }}/{{ project_name }}/manage.py
+  sudo: false
+
+- name: update wsgi.py
+  template: src=wsgi.py.j2 dest={{ project_path }}/{{ project_name }}/wsgi.py
+  sudo: false
+
+- name: install django python dependencies
+  pip: requirements={{ project_path }}/{{ django_requirements_file }}
+  sudo: true
+
+- name: sync database
+  django_manage: command=syncdb app_path={{ project_path }}/{{ project_name }}
+  sudo: false
+
+- name: migrate database
+  django_manage: command=migrate app_path={{ project_path }}/{{ project_name }}
+  sudo: false
+
+- name: collect static
+  django_manage: command=collectstatic app_path={{ project_path }}/{{ project_name }}
+  sudo: false

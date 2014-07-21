@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+'''Celery Worker Configuration to autodiscover tasks in all the django apps.
+
+see: http://celery.readthedocs.org/en/latest/django/first-steps-with-django.html
+'''
+from __future__ import absolute_import
+
+import os
+from os.path import dirname
+import sys
+
+from celery import Celery
+from django.conf import settings
+
+settings_module = 'config.{{django_configuration|lower}}'
+configuration_module = '{{ django_configuration }}'
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
+os.environ.setdefault('DJANGO_CONFIGURATION', configuration_module)
+
+# sys.path.append(dirname(__file__))
+
+from configurations import importer
+importer.install()
+
+app = Celery('{{ project_name }}')
+
+# Using a string here means the worker will not have to
+# pickle the object when using Windows.
+app.config_from_object(settings)
+app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
