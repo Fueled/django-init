@@ -8,7 +8,7 @@
     - restart supervisor
 
 - name: update celery configuration
-  template: src=celery.py.j2 dest={{ project_path }}/{{ project_name }}/config/celery.py
+  template: src=celery.py.j2 dest={{ project_path }}/{{ project_name }}/{{ celery_app }}/celery.py
   notify:
     - restart celery
 
