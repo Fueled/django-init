@@ -1,4 +1,4 @@
----
+{%raw%}---
 - name: install NGINX Server.
   apt: pkg=nginx state=installed update-cache=yes
 
@@ -19,4 +19,4 @@
   notify: restart nginx
 
 - name: ensure nginx is running
-  service: name=nginx state=started
+  service: name=nginx state=started{%endraw%}

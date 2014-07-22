@@ -1,4 +1,4 @@
----
+{%raw%}---
 # - name: ensure a ssh folder
 #   file: path=/home/{{ user }}/.ssh owner={{ user }} state=directory mode=755
 
@@ -34,4 +34,4 @@
 
 - name: collect static
   django_manage: command=collectstatic app_path={{ project_path }}/{{ project_name }}
-  sudo: false
+  sudo: false{%endraw%}

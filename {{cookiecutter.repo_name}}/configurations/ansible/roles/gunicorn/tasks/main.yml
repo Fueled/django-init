@@ -1,4 +1,4 @@
----
+{%raw%}---
 - name: install supervisor server
   pip: name=gunicorn state=present
 
@@ -17,4 +17,4 @@
 
 - name: copy supervisor gunicorn configuration
   template: src=supervisor_gunicorn.conf.j2 dest=/etc/supervisor/conf.d/gunicorn.conf
-  notify: restart gunicorn
+  notify: restart gunicorn{%endraw%}

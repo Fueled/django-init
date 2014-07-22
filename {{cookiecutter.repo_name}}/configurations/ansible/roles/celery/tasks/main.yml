@@ -1,4 +1,4 @@
----
+{%raw%}---
 - name: ensure celery package is installed
   pip: name=celery state=present
 
@@ -16,4 +16,4 @@
   service: name=supervisor state=started
 
 - name: ensure celery worker is running
-  supervisorctl: name=celery state=started
+  supervisorctl: name=celery state=started{%endraw%}
