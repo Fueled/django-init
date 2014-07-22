@@ -1,4 +1,4 @@
-user www-data;
+{%raw%}user www-data;
 worker_processes 1;
 pid /var/run/nginx.pid;
 
@@ -92,4 +92,4 @@ http {
 #       protocol   imap;
 #       proxy      on;
 #   }
-#}
+#}{%endraw%}

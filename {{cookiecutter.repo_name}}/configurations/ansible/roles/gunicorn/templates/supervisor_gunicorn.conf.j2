@@ -1,3 +1,3 @@
-[program:gunicorn]
+{%raw%}[program:gunicorn]
 command = gunicorn -c {{ gunicorn_conf_path }}/gunicorn.conf.py wsgi:application
-directory = {{ project_path }}/{{ project_name }}
+directory = {{ project_path }}/{{ project_name }}{%endraw%}
