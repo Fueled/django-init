@@ -6,3 +6,4 @@ vm=1
 user=vagrant
 django_configuration_settings=Development
 project_path=/home/vagrant/{{ cookiecutter.repo_name }}
+django_requirements_file: configurations/pip/development.txt

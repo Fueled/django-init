@@ -1,0 +1,16 @@
+---
+gunicorn_user: www-data
+gunicorn_group: www-data
+gunicorn_port: 8000
+gunicorn_host: 127.0.0.1
+gunicorn_backlog: 2048
+gunicorn_workers: 1
+gunicorn_worker_connections: 1000
+gunicorn_debug: False
+gunicorn_spew: False
+gunicorn_timeout: 30
+gunicorn_keepalive: 2
+gunicorn_errorlog: '-'
+gunicorn_accesslog: '-'
+gunicorn_loglevel: info
+gunicorn_conf_path: /etc/gunicorn
