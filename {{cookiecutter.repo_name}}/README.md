@@ -30,17 +30,17 @@ First make sure to create and activate a virtualenv, then open a terminal at the
     git clone {{ cookiecutter.repo_url }} && cd {{ cookiecutter.repo_name }}
 
 2. Install `fab` command
-    
+
     sudo pip install fabric
 
 3. From inside the project repo, run `fab init`, it will ask your system password.
-4. Go grab a cup of coffee, till your hot development machine is baking!! 
+4. Go grab a cup of coffee, till your hot development machine is baking!!
 
 
 ## Deploying Project
 
 ### Heroku
- 
+
 Run these commands to deploy the project to Heroku:
 
 ```
@@ -66,3 +66,8 @@ heroku open
 ### AWS
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, rem, ipsum. Perferendis, voluptatum reiciendis molestias fugit voluptatibus temporibus vitae fuga expedita laboriosam totam minus ea voluptatem a eligendi incidunt veritatis.
+
+
+--------
+
+Built with ♥ at [Fueled](http://fueled.com)
