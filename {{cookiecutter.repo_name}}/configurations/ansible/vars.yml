@@ -3,3 +3,4 @@ project_name: {{ cookiecutter.repo_name }}
 project_repo_url: {{ cookiecutter.repo_url }}
 project_repo_remote: origin
 domain_name: {{ cookiecutter.domain_name }}
+repo_version: master

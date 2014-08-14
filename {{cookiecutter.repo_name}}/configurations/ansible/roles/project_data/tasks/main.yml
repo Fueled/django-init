@@ -9,7 +9,7 @@
 #   copy: src=known_hosts dest=/home/{{ user }}/.ssh/known_hosts owner={{ user }} mode=0644
 
 - name: get the latest code
-  git: repo={{ project_repo_url }} dest={{ project_path }}
+  git: repo={{ project_repo_url }} dest={{ project_path }} version={{ repo_version }}
   sudo: false
 
 - name: update manage.py
