@@ -16,7 +16,7 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('',  # noqa
     url(r'^', include("pages.urls", namespace="pages")),
 
     # Uncomment the next line to enable the admin:
@@ -34,7 +34,7 @@ urlpatterns = patterns('',
 
 if settings.DEBUG:
     urlpatterns += patterns('',
-        url(r'^400/$', 'django.views.defaults.bad_request'),
+        url(r'^400/$', 'django.views.defaults.bad_request'),  # noqa
         url(r'^403/$', 'django.views.defaults.permission_denied'),
         url(r'^404/$', 'django.views.defaults.page_not_found'),
         url(r'^500/$', 'django.views.defaults.server_error'),
