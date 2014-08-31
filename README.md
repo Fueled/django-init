@@ -16,16 +16,7 @@ Project base for backend projects
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net
 
-TODO:
-
-* focus should be on re-usable apps: https://docs.djangoproject.com/en/1.6/intro/reusable-apps/
-* add in mobile-password-reset as a re-usable app
-* siteconfig as a re-usable app with a base SiteProfile class? Create an initial site object?
-* how to handle having a base settings file for projects?
-
-## Setup
-
-### Local Development
+## Getting Started
 
 You need to have `cookiecutter` installed in order to scafold a new project from this template. If you have `pip` installed, you simply do this by running:
 
@@ -38,11 +29,11 @@ After the installation is successful, you can create a new django project by run
 After cloning the repo, it will ask a bunch of questions and will a create a new folder with the value of `repo_name` you provided, containing the project base code and documentation to start working with your new project further.
 
 
-* `cd` into the new `repo_name` folder and initialize a git repo `git init`
-* switch to the dev branch
-* go to the repo directory and run `virtualenv --no-site-packages venv`.
-* create a database in postgres named after the project, name is listed in settings file as `PROJECT_NAME`.
-* set the privilege of that user as public, you can easily do it via pgadmin3.
+- `cd` into the new `repo_name` folder and initialize a git a repo
+- switch to the dev branch
+- go to the repo directory and run `virtualenv --no-site-packages venv`.
+ create a database in postgres named after the project, name is listed in settings file as `PROJECT_NAME`.
+- set the privilege of that user as public, you can easily do it via pgadmin3.
 
 
 ### Production
