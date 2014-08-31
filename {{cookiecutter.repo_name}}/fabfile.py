@@ -7,9 +7,10 @@ from os.path import join, abspath, dirname
 
 from fabric.api import local, env, lcd
 
-ROOT = abspath(join(dirname(__file__)))
+PROJECT_ROOT = abspath(join(dirname(__file__)))
 
 env.project = '{{ cookiecutter.repo_name }}'
+env.apps_dir = join(PROJECT_ROOT, env.project)
 
 
 def init(vagrant=True):
@@ -34,12 +35,12 @@ def configure():
 
 
 def serve_doc(address='127.0.0.1', port='8001'):
-    with lcd(ROOT):
+    with lcd(PROJECT_ROOT):
         local('mkdocs serve --dev-addr=%s:%s' % (address, port))
 
 
 def manage(cmd):
-    with lcd(ROOT):
+    with lcd(PROJECT_ROOT):
         local('python {}/manage.py {}'.format(env.project, cmd))
 
 
@@ -55,6 +56,14 @@ def syncdb():
     '''Synchronize database and generate changesets'''
     manage('syncdb --noinput')
     manage('migrate --noinput')
+
+
+def startapp(appname):
+    '''fab startapp <appname>
+    '''
+    path = join(env.apps_dir, appname)
+    local('mkdir %s' % path)
+    manage('startapp %s %s' % (appname, path))
 
 
 def makemigration(app):
