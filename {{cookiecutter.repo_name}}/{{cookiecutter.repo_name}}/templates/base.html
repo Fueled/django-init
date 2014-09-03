@@ -3,7 +3,7 @@
   <head profile="http://www.w3.org/2005/10/profile">
     <meta charset="utf-8">
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
-    <title>{% block title %}{% endraw %}{{ cookiecutter.site_name }}{% raw %}{% endblock title %}</title>
+    <title>{% block title %}{% endraw %}{{ cookiecutter.project_name }}{% raw %}{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -28,7 +28,7 @@
         <nav class="top-bar" data-topbar>
             <ul class="title-area">
                 <li class="name">
-                  <h1><a href="#">{% endraw %}{{ cookiecutter.site_name }}{% raw %}</a></h1>
+                  <h1><a href="#">{% endraw %}{{ cookiecutter.project_name }}{% raw %}</a></h1>
                 </li>
                 <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
             </ul> {# .title-area #}

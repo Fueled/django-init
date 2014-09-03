@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-'''Django settings for {{cookiecutter.site_name}} project.
+'''Django settings for {{cookiecutter.project_name}} project.
 
 see: https://docs.djangoproject.com/en/dev/ref/settings/
 '''
@@ -82,7 +82,7 @@ class Common(Configuration):
     # MANAGER CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
     ADMINS = (
-        ('{{ cookiecutter.site_name }} admin', '{{ cookiecutter.django_admin_email }}'),
+        ('{{ cookiecutter.project_name }} admin', '{{ cookiecutter.django_admin_email }}'),
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers

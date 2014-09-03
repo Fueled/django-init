@@ -75,7 +75,7 @@ class Production(Common):
     # END STORAGE CONFIGURATION
 
     # Email
-    DEFAULT_FROM_EMAIL = values.Value('{{ cookiecutter.site_name }} <{{ cookiecutter.django_admin_email }}>')
+    DEFAULT_FROM_EMAIL = values.Value('{{ cookiecutter.project_name }} <{{ cookiecutter.django_admin_email }}>')
     EMAIL_HOST = values.Value('smtp.sendgrid.com')
     EMAIL_HOST_PASSWORD = values.SecretValue(environ_prefix="", environ_name="SENDGRID_PASSWORD")
     EMAIL_HOST_USER = values.SecretValue(environ_prefix="", environ_name="SENDGRID_USERNAME")

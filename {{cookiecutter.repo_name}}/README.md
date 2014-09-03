@@ -1,7 +1,7 @@
-{{ cookiecutter.site_name }}
+{{ cookiecutter.project_name }}
 ==============================
 
-{{ cookiecutter.site_description }}
+{{ cookiecutter.project_description }}
 
 Features
 --------

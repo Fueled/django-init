@@ -1,6 +1,6 @@
-# {{ cookiecutter.site_name }}
+# {{ cookiecutter.project_name }}
 
-{{ cookiecutter.site_description }}
+{{ cookiecutter.project_description }}
 
 Write your documentation using **Markdown** in `docs/` folder. Need help? Read mkdocs [documentation][mkdocs].
 
