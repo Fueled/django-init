@@ -37,15 +37,16 @@ First make sure to create and activate a virtualenv, then open a terminal at the
     sudo pip install fabric
     ```
 
-3. From inside the project repo, run `fab init`, it will ask your system password.
-4. Go grab a cup of coffee, till your hot development machine is baking!!
-
-5. Setup the required environment variables
+3. Setup the required environment variables
 
 	```
 	fab config:set,DJANGO_DATABASE_URL,[value]
 	```
-	and you're good to go !
+
+4. From inside the project repo, run `fab init`, it will ask your system password.
+
+5. Go grab a cup of coffee, till your hot development machine is baking!!
+
 
 
 ## Deploying Project
