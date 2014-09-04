@@ -28,6 +28,7 @@ def init(vagrant=True):
         local('%(installer)s virtualbox vagrant' % env)
         local('vagrant plugin install vagrant-vbguest')
     local('sudo pip install ansible')
+    config('set','DJANGO_SECRET_KEY','`openssl rand -base64 32`')
 
 
 def configure():
