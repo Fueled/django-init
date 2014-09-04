@@ -14,6 +14,7 @@ from .common import Common
 
 class Development(Common):
 
+    SECRET_KEY = values.SecretValue(environ=True, environ_name='SECRET_KEY', environ_prefix='DJANGO')
     DEBUG = values.BooleanValue(True)
     TEMPLATE_DEBUG = DEBUG
 
@@ -49,3 +50,8 @@ class Development(Common):
     # END OF CACHES
 
     # Your local stuff: Below this line define 3rd party libary settings
+
+    # DATABASE CONFIGURATION
+    # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+    DATABASES = values.DatabaseURLValue(environ=True, environ_name='DATABASE_URL', environ_prefix='DJANGO')
+    # END DATABASE CONFIGURATION

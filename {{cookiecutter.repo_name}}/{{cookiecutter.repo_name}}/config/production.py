@@ -15,7 +15,7 @@ class Production(Common):
     # END INSTALLED_APPS
 
     # SECRET KEY
-    SECRET_KEY = values.SecretValue()
+    SECRET_KEY = values.SecretValue(environ=True, environ_name='SECRET_KEY', environ_prefix='DJANGO')
     # END SECRET KEY
 
     # django-secure
@@ -53,9 +53,9 @@ class Production(Common):
 
     STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-    AWS_ACCESS_KEY_ID = values.SecretValue()
-    AWS_SECRET_ACCESS_KEY = values.SecretValue()
-    AWS_STORAGE_BUCKET_NAME = values.SecretValue()
+    AWS_ACCESS_KEY_ID = values.SecretValue(environ=True, environ_name='AWS_ACCESS_KEY_ID', environ_prefix='DJANGO')
+    AWS_SECRET_ACCESS_KEY = values.SecretValue(environ=True, environ_name='AWS_SECRET_ACCESS_KEY', environ_prefix='DJANGO')
+    AWS_STORAGE_BUCKET_NAME = values.SecretValue(environ=True, environ_name='AWS_STORAGE_BUCKET_NAME', environ_prefix='DJANGO')
     AWS_AUTO_CREATE_BUCKET = True
     AWS_QUERYSTRING_AUTH = False
 
@@ -104,3 +104,8 @@ class Production(Common):
     # END TEMPLATE CONFIGURATION
 
     # Your production stuff: Below this line define 3rd party libary settings
+
+    # DATABASE CONFIGURATION
+    # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+    DATABASES = values.DatabaseURLValue(environ=True, environ_name='DATABASE_URL', environ_prefix='DJANGO')
+    # END DATABASE CONFIGURATION

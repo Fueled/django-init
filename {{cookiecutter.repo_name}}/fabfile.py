@@ -70,3 +70,17 @@ def makemigration(app):
     '''Generate a south migration for an application'''
     manage('schemamigration %s --auto' % app)
     manage('migrate %s --noinput' % app)
+
+
+def config(action=None,key=None,value=None):
+    '''
+    Overwrites the .env file and set custom ENV variables
+    ref: https://github.com/tedtieken/django-dotenv-rw
+    example usage: fab config:set,[key],[value]
+    '''
+    command = env.project + "/dotenv.py "
+    command += env.project + "/.env "
+    command += action + " " if action else ""
+    command += key + " " if key else ""
+    command += value + " " if value else ""
+    local('python {}'.format(command))
