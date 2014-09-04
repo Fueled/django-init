@@ -42,6 +42,7 @@ First make sure to create and activate a virtualenv, then open a terminal at the
 	```
 	fab config:set,DJANGO_DATABASE_URL,[value]
 	```
+	* URL Format Ref: https://github.com/kennethreitz/dj-database-url#url-schema
 
 4. From inside the project repo, run `fab init`, it will ask your system password.
 
