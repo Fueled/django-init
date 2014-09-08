@@ -1,6 +1,7 @@
 {
     "repo_name": "repo-name"
-    , "repo_url": "git@github.com:Fueled/repo_name.git"
+    , "github_username": "Fueled"
+    , "github_reponame": ""
     , "site_name": "My Project"
     , "site_description": "add a short project description here"
     , "timezone": "UTC"

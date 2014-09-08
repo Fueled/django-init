@@ -5,3 +5,6 @@ django-debug-toolbar==1.2.1
 
 # A better python shell
 ipython==2.2.0
+
+# Testing
+flake8

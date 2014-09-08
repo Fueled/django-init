@@ -27,22 +27,22 @@ First make sure to create and activate a virtualenv, then open a terminal at the
 
 1. Clone this repo to your local development machine.
 
-	```
-    git clone {{ cookiecutter.repo_url }} && cd {{ cookiecutter.repo_name }}
+    ```
+    git clone git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}.git && cd {{ cookiecutter.github_reponame }}
     ```
 
 2. Install `fab` command
 
-	```
+    ```
     sudo pip install fabric
     ```
 
 3. Setup the required environment variables
 
-	```
-	fab config:set,DJANGO_DATABASE_URL,[value]
-	```
-	* URL Format Ref: https://github.com/kennethreitz/dj-database-url#url-schema
+    ```
+    fab config:set,DJANGO_DATABASE_URL,[value]
+    ```
+    * URL Format Ref: https://github.com/kennethreitz/dj-database-url#url-schema
 
 4. From inside the project repo, run `fab init`, it will ask your system password.
 
