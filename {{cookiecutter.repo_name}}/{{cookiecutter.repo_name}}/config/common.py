@@ -55,6 +55,8 @@ class Common(Configuration):
     # MIDDLEWARE CONFIGURATION
     # Note: Order in which they are added are important
     MIDDLEWARE_CLASSES = (
+        # Make sure djangosecure.middleware.SecurityMiddleware is the first middleware class listed
+        'djangosecure.middleware.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
