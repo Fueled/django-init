@@ -6,7 +6,7 @@
 Features
 --------
 
-* Django 1.6
+* Django 1.7
 * PostresSQL 9.3
 * Foundation 5
 * SASS, CoffeeScript, Live-Reloading Server

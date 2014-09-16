@@ -40,7 +40,6 @@ class Common(Configuration):
         'django.contrib.admin',
     )
     THIRD_PARTY_APPS = (
-        'south',  # Database migration helpers
         'django_extensions',  # http://django-extensions.readthedocs.org/
     )
 

@@ -5,7 +5,7 @@ Project base for backend projects
 
 ## Features
 
-* Django 1.6
+* Django 1.7
 * PostresSQL 9.3
 * Foundation 5
 * SASS, CoffeeScript, Live-Reloading Server
@@ -55,7 +55,6 @@ heroku config:set DJANGO_AWS_ACCESS_KEY_ID=PUT_YOUR_ID_HERE
 heroku config:set DJANGO_AWS_SECRET_ACCESS_KEY=PUT_YOUR_SECRET_KEY_HERE
 heroku config:set DJANGO_AWS_STORAGE_BUCKET_NAME=PUT_BUCKET_NAME_HERE
 git push heroku master
-heroku run python {{cookiecutter.repo_name}}/manage.py syncdb --noinput
 heroku run python {{cookiecutter.repo_name}}/manage.py migrate
 heroku run python {{cookiecutter.repo_name}}/manage.py createsuperuser
 heroku open
