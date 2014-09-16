@@ -28,7 +28,7 @@ def init(vagrant=True):
         local('%(installer)s virtualbox vagrant' % env)
         local('vagrant plugin install vagrant-vbguest')
     local('sudo pip install ansible')
-    config('set','DJANGO_SECRET_KEY','`openssl rand -base64 32`')
+    config('set', 'DJANGO_SECRET_KEY', '`openssl rand -base64 32`')
 
 
 def configure():
@@ -53,10 +53,9 @@ def serve():
     manage('runserver_plus')
 
 
-def syncdb():
+def migrate():
     '''Synchronize database and generate changesets'''
-    manage('syncdb --noinput')
-    manage('migrate --noinput')
+    manage('migrate')
 
 
 def startapp(appname):
@@ -67,13 +66,12 @@ def startapp(appname):
     manage('startapp %s %s' % (appname, path))
 
 
-def makemigration(app):
+def makemigrations(app):
     '''Generate a south migration for an application'''
-    manage('schemamigration %s --auto' % app)
-    manage('migrate %s --noinput' % app)
+    manage('makemigrations')
 
 
-def config(action=None,key=None,value=None):
+def config(action=None, key=None, value=None):
     '''
     Overwrites the .env file and set custom ENV variables
     ref: https://github.com/tedtieken/django-dotenv-rw
