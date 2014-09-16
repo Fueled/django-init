@@ -81,6 +81,11 @@ heroku open
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, rem, ipsum. Perferendis, voluptatum reiciendis molestias fugit voluptatibus temporibus vitae fuga expedita laboriosam totam minus ea voluptatem a eligendi incidunt veritatis.
 
 
---------
+## Contributing
 
+Refer to [CONTRIBUTING.md][contributing]
+
+[contributing]: http://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_username}}/tree/master/CONTRIBUTING.md
+
+--------
 Built with ♥ at [Fueled](http://fueled.com)

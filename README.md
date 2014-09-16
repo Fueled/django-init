@@ -76,31 +76,8 @@ Do these steps when handing over complete control of an instance to a client:
 * TODO: Make a script called clean_instance.sh that remove logs, gets rid of repo files, private directory, etc... fill me in
 * If deployment is still needed, instead of 'git pull' start using the fabric script.
 
-## Coding Standards
-* PEP8 should be used for all projects. http://www.python.org/dev/peps/pep-0008/
-* The Google python style guide. Pay particular attention to the comments section: http://google-styleguide.googlecode.com/svn/trunk/pyguide.html
-* Read over Two Scoops of Django
 
 
-## GIT Branches
-* There is a `master` and `dev` branch for each project.
-* All developers should work off of the `dev` branch.
-* If there is an unusual/new/innovative way of doing a new feature, create a branch off of `dev` and develop it there. After the feature is completed, ask another dev or a lead dev to review this added feature.
-
-
-## Approved Libraries
-This is a list of Python libraries or Django apps that have been tried and tested to be used for projects.
-
-* [django-storages](http://django-storages.readthedocs.org/en/latest/) - for S3 as storage backend.
-* [django-south](http://south.aeracode.org/)  (if using django <= 1.6):
-* [django-grapelli](https://github.com/sehmaschine/django-grappelli)
-* [django-rest-framework](http://www.django-rest-framework.org/) - for making REST API
-* [python-social-auth](https://github.com/omab/python-social-auth)
-* [python-requests](http://docs.python-requests.org/en/latest/)
-* [python-dateutil](http://labix.org/python-dateutil)
-* [python-user-agents](https://github.com/selwin/python-user-agents/)
-* [django-versatileimagefield](https://github.com/WGBH/django-versatileimagefield)
-* [django-extensions](http://django-extensions.readthedocs.org/)
 
 --------
 
