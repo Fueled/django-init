@@ -7,7 +7,7 @@ mkdocs==0.9
 # Debugging
 # -------------------------------------
 django-debug-toolbar==1.2.1
-ipython==2.2.0
+ipython==2.3.0
 ipdb==0.8
 
 # Testing

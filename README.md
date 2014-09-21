@@ -12,6 +12,7 @@ Project template for django based projects.
 * Vagrantbox, Ansible
 * Heroku/Sendgrid/S3
 * [12factor][12factor] based project configuration
+* Django Rest Framework
 
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net

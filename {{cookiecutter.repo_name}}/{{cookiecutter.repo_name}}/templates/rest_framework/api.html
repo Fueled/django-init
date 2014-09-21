@@ -1,0 +1,5 @@
+{% raw %}{% extends "rest_framework/base.html" %}
+
+{# Override this template in your own templates directory to customize #}
+{% block title %}{% endraw %}{{ cookiecutter.project_name }}{% raw %} API{% endblock %}
+{% block branding %}<a class='brand' rel="nofollow" href='/api/'>{% endraw %}{{ cookiecutter.project_name }}{% raw %} API <span class="version">{% endraw %}{{ cookiecutter.version }}{% raw %}</span></a>{% endblock %}{% endraw %}

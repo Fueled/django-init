@@ -48,6 +48,7 @@ class Common(Configuration):
     LOCAL_APPS = (
         # Your stuff: custom apps go here
         'pages',
+        'api',
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -231,6 +232,29 @@ class Common(Configuration):
     DATABASES = values.DatabaseURLValue(environ=True, environ_name='DATABASE_URL',
                                         environ_prefix='')
     # END DATABASE CONFIGURATION
+
+    # Django Rest Framework
+    REST_FRAMEWORK = {
+        'PAGINATE_BY': 30,
+        'PAGINATE_BY_PARAM': 'per_page',
+        'MAX_PAGINATE_BY': 100,
+        # Use hyperlinked styles by default.
+        # Only used if the `serializer_class` attribute is not set on a view.
+        'DEFAULT_MODEL_SERIALIZER_CLASS': 'rest_framework.serializers.HyperlinkedModelSerializer',
+
+        # Use Django's standard `django.contrib.auth` permissions,
+        # or allow read-only access for unauthenticated users.
+        'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.IsAuthenticated',
+        ],
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.BasicAuthentication',
+            # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+            # 'rest_framework.authentication.SessionAuthentication',
+        ),
+    }
+    # End DRF
+
 {% if cookiecutter.celery == 'y' %}
     # CELERY CONFIGURATION
     from celery import crontab  # noqa

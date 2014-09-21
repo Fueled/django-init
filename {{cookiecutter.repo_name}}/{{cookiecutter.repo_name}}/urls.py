@@ -10,10 +10,8 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
-
-# Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-admin.autodiscover()
+
 
 urlpatterns = patterns('',  # noqa
     url(r'^', include("pages.urls", namespace="pages")),
@@ -24,8 +22,9 @@ urlpatterns = patterns('',  # noqa
     # User management
     # url(r'^users/', include("users.urls", namespace="users")),
 
-    # REST API
-    # url(r'^api/', include('api.urls')),
+    # These URLS provide the login/logout functions for the browseable API.
+    url(r'^api/auth-n/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/', include('api.urls')),
 
     # Your stuff: custom urls go here
 
