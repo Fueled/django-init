@@ -13,6 +13,7 @@ dj-database-url==0.3.0
 
 # Models
 django-model-utils==2.2
+django-uuid-upload-path==1.0.0
 
 # images
 Pillow==2.5.3
