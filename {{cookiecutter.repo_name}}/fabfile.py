@@ -13,8 +13,9 @@ here = os.getcwd()
 
 env.project_name = '{{ cookiecutter.repo_name }}'
 env.apps_dir = join(here, env.project_name)
+env.virtualenv_dir = join(here, 'venv')
 env.dotenv_path = join(env.apps_dir, '.env')
-env.requirements_file = join(here, 'configuration/pip/development.txt')
+env.requirements_file = join(here, 'configurations/pip/development.txt')
 env.shell = "/bin/bash -l -i -c"
 
 
@@ -22,18 +23,21 @@ def init(vagrant=False):
     '''Prepare a local machine for development.'''
 
     install_deps()
+    local('createdb %(project_name)s' % env)  # create postgres database
     config('set', 'DJANGO_SECRET_KEY', '`openssl rand -base64 32`')
-    local('createdb %(project_name)s' % env)
     config('set', 'DATABASE_URL', 'postgres://localhost/%(project_name)s' % env)
+    manage('migrate')
 
 
-def install_deps():
+def install_deps(file=env.requirements_file):
     '''Install project dependencies.'''
     verify_virtualenv()
     # activate virtualenv and install
     with virtualenv():
         local('pip install -r %s' % file)
-    local('npm install')
+
+    with cd(here):
+        local('npm install')
 
 
 def serve_doc(address='127.0.0.1', port='8001'):
@@ -76,13 +80,15 @@ def config(action=None, key=None, value=None):
     see: https://github.com/theskumar/python-dotenv
     e.g: fab config:set,[key],[value]
     '''
-    local('touch %(dotenv_path)s' % env)
     command = 'dotenv'
-    command += ' -f %s' % env.dotenv_path
-    command += action if action else " "
-    command += key if key else " "
+    command += ' -f %s ' % env.dotenv_path
+    command += action + " " if action else " "
+    command += key + " " if key else " "
     command += value if value else ""
-    local(command)
+    local('touch %(dotenv_path)s' % env)
+
+    with virtualenv():
+        local(command)
 
 
 # Helpers
