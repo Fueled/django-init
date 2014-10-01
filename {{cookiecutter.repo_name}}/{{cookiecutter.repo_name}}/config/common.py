@@ -12,9 +12,10 @@ from configurations import Configuration, values
 
 BASE_DIR = dirname(dirname(__file__))
 
+# read and load variables in environement from .env file
+# see:
 import dotenv
-
-dotenv.load_dotenv(os.path.join(BASE_DIR, ".env"))
+dotenv.load_dotenv(join(BASE_DIR, ".env"))
 
 
 # Common Configurations

@@ -10,6 +10,7 @@ django-configurations==0.8
 django-secure==1.0
 django-cache-url==0.8.0
 dj-database-url==0.3.0
+python-dotenv==0.1.0
 
 # Models
 django-model-utils==2.2
