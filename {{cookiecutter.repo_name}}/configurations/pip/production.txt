@@ -1,8 +1,9 @@
 # Pro-tip: Try not to put anything here. There should be no dependency in
 #   production that isn't in development.
-# -r common.txt
+-r common.txt
 
 # Your custom production only requirements goes here
+# -------------------------------------
 django-storages==1.1.8
 Collectfast==0.2.1
 boto==2.32.1

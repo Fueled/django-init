@@ -1,11 +1,13 @@
-# Latest Stable Release of Django
+# Latest Stable release of Django
 Django==1.7
 
 # Extensions
+# -------------------------------------
 django-extensions==1.4.0
 Werkzeug==0.9.6
 
 # Configuration
+# -------------------------------------
 django-configurations==0.8
 django-secure==1.0
 django-cache-url==0.8.0
@@ -13,17 +15,27 @@ dj-database-url==0.3.0
 python-dotenv==0.1.0
 
 # Models
+# -------------------------------------
 django-model-utils==2.2
 django-uuid-upload-path==1.0.0
 
-# images
+# Images
+# -------------------------------------
 Pillow==2.5.3
 
 # For the persistance stores
+# -------------------------------------
 psycopg2==2.5.4
 
 # Unicode slugification
+# -------------------------------------
 unicode-slugify==0.1.1
 django-autoslug==1.7.2
 
+# Django Rest Framework
+# -------------------------------------
+djangorestframework==2.3.14
+Markdown==2.4.1
+
 # Your custom common requirements goes here
+# -------------------------------------
