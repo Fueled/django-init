@@ -220,3 +220,16 @@ class Common(Configuration):
         }
     }
     # END LOGGING CONFIGURATION
+
+    ########## CELERY CONFIGURATION
+    from celery import crontab # SPECIAL RELATIVE IMPORT FIX
+    BROKER_URL = 'redis://localhost:6379/0'
+    BROKER_TRANSPORT_OPTIONS = {'polling_interval': 0.3}
+    CELERY_TIMEZONE = TIME_ZONE
+    CELERY_TASK_SERIALIZER = 'pickle'
+    CELERY_ACCEPT_CONTENT = ['pickle']
+    #========Periodic Tasks
+    CELERYBEAT_SCHEDULE = {
+    }
+    #========End Periodic Tasks
+    ########## END CELERY CONFIGURATION

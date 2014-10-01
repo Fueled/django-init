@@ -9,6 +9,8 @@ import os
 
 from celery import Celery
 from django.conf import settings
+# SPECIAL RELATIVE IMPORT FIX FOR CELERY SETTINGS
+from celery.schedules import crontab as crontab
 
 _SETTINGS_MODULE = 'config.development'
 _CONFIGURATION_MODULE = 'Development'
