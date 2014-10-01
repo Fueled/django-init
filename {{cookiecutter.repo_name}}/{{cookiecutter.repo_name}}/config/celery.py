@@ -10,7 +10,7 @@ import os
 from celery import Celery
 from django.conf import settings
 
-_SETTINGS_MODULE = 'config'
+_SETTINGS_MODULE = 'config.development'
 _CONFIGURATION_MODULE = 'Development'
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', _SETTINGS_MODULE)
