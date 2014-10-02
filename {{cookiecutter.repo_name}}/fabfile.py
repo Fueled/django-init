@@ -23,9 +23,9 @@ def init(vagrant=False):
     '''Prepare a local machine for development.'''
 
     install_deps()
-    local('createdb %(project_name)s' % env)  # create postgres database
     config('set', 'DJANGO_SECRET_KEY', '`openssl rand -base64 32`')
     config('set', 'DATABASE_URL', 'postgres://localhost/%(project_name)s' % env)
+    local('createdb %(project_name)s' % env)  # create postgres database
     manage('migrate')
 
 
