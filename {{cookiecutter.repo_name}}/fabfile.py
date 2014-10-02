@@ -95,7 +95,7 @@ def config(action=None, key=None, value=None):
 # ------------------------------------------------------------------------------
 def manage(cmd, venv=True):
     with virtualenv():
-        local('python {project}/manage.py %s' % (env.project_name, cmd))
+        local('python %s/manage.py %s' % (env.project_name, cmd))
 
 
 @_contextmanager
