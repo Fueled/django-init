@@ -34,9 +34,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "./", "/home/vagrant/{{ cookiecutter.repo_name }}/"
 
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "configurations/ansible/site.yml"
+    ansible.playbook = "provisioner/site.yml"
     ansible.host_key_checking = "False"
-    ansible.inventory_path = "configurations/ansible/hosts"
+    ansible.inventory_path = "provisioner/hosts"
     ansible.verbose = "v"
     ansible.limit = "vagrant"
   end

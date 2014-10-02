@@ -15,7 +15,7 @@ env.project_name = '{{ cookiecutter.repo_name }}'
 env.apps_dir = join(here, env.project_name)
 env.virtualenv_dir = join(here, 'venv')
 env.dotenv_path = join(env.apps_dir, '.env')
-env.requirements_file = join(here, 'configurations/pip/development.txt')
+env.requirements_file = join(here, 'requirements/development.txt')
 env.shell = "/bin/bash -l -i -c"
 
 

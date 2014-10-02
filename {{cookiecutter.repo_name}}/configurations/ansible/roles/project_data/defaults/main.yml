@@ -1,6 +1,0 @@
----
-pg_hstore: False
-pg_db: dropbox_notify
-pg_user: dev
-pg_password: password
-django_requirements_file: configurations/pip/production.txt
