@@ -222,8 +222,9 @@ class Common(Configuration):
     }
     # END LOGGING CONFIGURATION
 
+    {% if cookiecutter.celery == 'y' %}
     ########## CELERY CONFIGURATION
-    from celery import crontab # SPECIAL RELATIVE IMPORT FIX
+    from celery import crontab  # noqa
     BROKER_URL = 'redis://localhost:6379/0'
     BROKER_TRANSPORT_OPTIONS = {'polling_interval': 0.3}
     CELERY_TIMEZONE = TIME_ZONE
@@ -234,3 +235,5 @@ class Common(Configuration):
     }
     #========End Periodic Tasks
     ########## END CELERY CONFIGURATION
+    {% endif %}
+

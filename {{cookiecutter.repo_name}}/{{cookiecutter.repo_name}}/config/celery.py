@@ -12,6 +12,9 @@ from django.conf import settings
 # SPECIAL RELATIVE IMPORT FIX FOR CELERY SETTINGS
 from celery.schedules import crontab as crontab  # noqa
 
+import dotenv
+dotenv.load_dotenv(os.path.join(settings.BASE_DIR, ".env"))
+
 _SETTINGS_MODULE = 'config.development'
 _CONFIGURATION_MODULE = 'Development'
 
