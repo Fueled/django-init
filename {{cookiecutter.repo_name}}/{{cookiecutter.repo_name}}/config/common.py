@@ -13,14 +13,15 @@ from configurations import Configuration, values
 BASE_DIR = dirname(dirname(__file__))
 
 # read and load variables in environement from .env file
-# see:
+# see: http://github.com/theskumar/python-dotenv
 import dotenv
 dotenv.load_dotenv(join(BASE_DIR, ".env"))
 
 
 # Common Configurations
-# ==============================================================================
+# ========================================================================
 class Common(Configuration):
+
     '''Common Configuration, overide them in it's sub-classes.'''
 
     # APP CONFIGURATION
@@ -55,7 +56,8 @@ class Common(Configuration):
     # MIDDLEWARE CONFIGURATION
     # Note: Order in which they are added are important
     MIDDLEWARE_CLASSES = (
-        # Make sure djangosecure.middleware.SecurityMiddleware is the first middleware class listed
+        # Make sure djangosecure.middleware.SecurityMiddleware is the first
+        # middleware class listed
         'djangosecure.middleware.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
@@ -75,12 +77,12 @@ class Common(Configuration):
 
     # SECRET CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-    # Note: This key only used for development and testing.
-    #       In production, this is changed to a values.SecretValue() setting
-    SECRET_KEY = values.SecretValue(environ=True, environ_name='SECRET_KEY', environ_prefix='DJANGO')
+    SECRET_KEY = values.SecretValue(environ=True, environ_name='SECRET_KEY',
+                                    environ_prefix='DJANGO')
     # END SECRET CONFIGURATION
 
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
+    # See:
+    # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
     FIXTURE_DIRS = (
         join(BASE_DIR, 'fixtures'),
     )
@@ -88,7 +90,8 @@ class Common(Configuration):
     # MANAGER CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
     ADMINS = (
-        ('{{ cookiecutter.project_name }} admin', '{{ cookiecutter.django_admin_email }}'),
+        ('{{ cookiecutter.project_name }} admin',
+         '{{ cookiecutter.django_admin_email }}'),
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -153,7 +156,8 @@ class Common(Configuration):
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
     STATIC_URL = '/static/'
 
-    # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+    # See:
+    # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
     STATICFILES_DIRS = (
         join(BASE_DIR, 'static'),
     )
@@ -224,11 +228,12 @@ class Common(Configuration):
 
     # DATABASE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-    DATABASES = values.DatabaseURLValue(environ=True, environ_name='DATABASE_URL', environ_prefix='')
+    DATABASES = values.DatabaseURLValue(environ=True, environ_name='DATABASE_URL',
+                                        environ_prefix='')
     # END DATABASE CONFIGURATION
 
     {% if cookiecutter.celery == 'y' %}
-    ########## CELERY CONFIGURATION
+    # CELERY CONFIGURATION
     from celery import crontab  # noqa
     BROKER_URL = 'redis://localhost:6379/0'
     BROKER_TRANSPORT_OPTIONS = {'polling_interval': 0.3}
@@ -239,5 +244,5 @@ class Common(Configuration):
     CELERYBEAT_SCHEDULE = {
     }
     #========End Periodic Tasks
-    ########## END CELERY CONFIGURATION
+    # END CELERY CONFIGURATION
     {% endif %}

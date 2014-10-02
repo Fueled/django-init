@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ''' Production Configurations
 
-Adds sensiable default for running app in production.
+Adds sensible default for running app in production.
 '''
 from __future__ import unicode_literals, absolute_import
 from configurations import values
@@ -17,10 +17,6 @@ class Production(Common):
     # INSTALLED_APPS
     INSTALLED_APPS = Common.INSTALLED_APPS
     # END INSTALLED_APPS
-
-    # SECRET KEY
-    SECRET_KEY = values.SecretValue(environ=True, environ_name='SECRET_KEY', environ_prefix='DJANGO')
-    # END SECRET KEY
 
     # django-secure
     INSTALLED_APPS += ("djangosecure", )
@@ -48,7 +44,8 @@ class Production(Common):
     # See: http://django-storages.readthedocs.org/en/latest/index.html
     INSTALLED_APPS += ('storages', )
 
-    # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html#settings
+    # See:
+    # http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html
     try:
         from S3 import CallingFormat
         AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
@@ -57,9 +54,12 @@ class Production(Common):
 
     STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-    AWS_ACCESS_KEY_ID = values.SecretValue(environ=True, environ_name='AWS_ACCESS_KEY_ID', environ_prefix='DJANGO')
-    AWS_SECRET_ACCESS_KEY = values.SecretValue(environ=True, environ_name='AWS_SECRET_ACCESS_KEY', environ_prefix='DJANGO')
-    AWS_STORAGE_BUCKET_NAME = values.SecretValue(environ=True, environ_name='AWS_STORAGE_BUCKET_NAME', environ_prefix='DJANGO')
+    AWS_ACCESS_KEY_ID = values.SecretValue(
+        environ=True, environ_name='AWS_ACCESS_KEY_ID', environ_prefix='DJANGO')
+    AWS_SECRET_ACCESS_KEY = values.SecretValue(
+        environ=True, environ_name='AWS_SECRET_ACCESS_KEY', environ_prefix='DJANGO')
+    AWS_STORAGE_BUCKET_NAME = values.SecretValue(
+        environ=True, environ_name='AWS_STORAGE_BUCKET_NAME', environ_prefix='DJANGO')
     AWS_AUTO_CREATE_BUCKET = True
     AWS_QUERYSTRING_AUTH = False
 
@@ -79,7 +79,8 @@ class Production(Common):
     # END STORAGE CONFIGURATION
 
     # Email
-    DEFAULT_FROM_EMAIL = values.Value('{{ cookiecutter.project_name }} <{{ cookiecutter.django_admin_email }}>')
+    DEFAULT_FROM_EMAIL = values.Value(
+        '{{ cookiecutter.project_name }} <{{ cookiecutter.django_admin_email }}>')
     EMAIL_HOST = values.Value('smtp.sendgrid.com')
     EMAIL_HOST_PASSWORD = values.SecretValue(environ_prefix="", environ_name="SENDGRID_PASSWORD")
     EMAIL_HOST_USER = values.SecretValue(environ_prefix="", environ_name="SENDGRID_USERNAME")
