@@ -25,5 +25,5 @@ deploy:
   on:
     repo: {{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}
   run:
-    - "python {{ cookiecutter.repo_name }}/manage.py migrate
-    - "python {{ cookiecutter.repo_name }}/manage.py collectstatic
+    - "python {{ cookiecutter.repo_name }}/manage.py migrate"
+    - "python {{ cookiecutter.repo_name }}/manage.py collectstatic"
