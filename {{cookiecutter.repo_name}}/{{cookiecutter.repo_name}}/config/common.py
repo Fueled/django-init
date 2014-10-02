@@ -222,6 +222,11 @@ class Common(Configuration):
     }
     # END LOGGING CONFIGURATION
 
+    # DATABASE CONFIGURATION
+    # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+    DATABASES = values.DatabaseURLValue(environ=True, environ_name='DATABASE_URL', environ_prefix='')
+    # END DATABASE CONFIGURATION
+
     {% if cookiecutter.celery == 'y' %}
     ########## CELERY CONFIGURATION
     from celery import crontab  # noqa
@@ -236,4 +241,3 @@ class Common(Configuration):
     #========End Periodic Tasks
     ########## END CELERY CONFIGURATION
     {% endif %}
-
