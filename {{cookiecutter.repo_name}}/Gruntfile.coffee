@@ -91,7 +91,7 @@ module.exports = (grunt) ->
         bg: true
 
       runDjango:
-        cmd: "fab serve"
+        cmd: "fab webserver"
 
       runDocsServer:
         cmd: "fab serve_doc"

@@ -49,15 +49,25 @@ def shell():
     manage('shell_plus')
 
 
-def serve(host='127.0.0.1:8000'):
+def webserver(host='127.0.0.1:8000'):
     '''Start an enhanced runserver'''
     install_deps()
     migrate()
     manage('runserver_plus %s' % host)
 
 
+def serve():
+    '''Start webserver and documentation server with live-reload'''
+    local('grunt serve')
+
+
+def makemigrations(app):
+    '''Create new database migration for an app.'''
+    manage('makemigrations')
+
+
 def migrate():
-    '''Synchronize database and generate changesets'''
+    '''Apply database migrations.'''
     manage('migrate')
 
 
@@ -69,16 +79,11 @@ def createapp(appname):
     manage('startapp %s %s' % (appname, path))
 
 
-def makemigrations(app):
-    '''Generate a south migration for an application'''
-    manage('makemigrations')
-
-
 def config(action=None, key=None, value=None):
     '''Manage project configuration via .env
 
     see: https://github.com/theskumar/python-dotenv
-    e.g: fab config:set,[key],[value]
+    Usages: fab config:set,[key],[value]
     '''
     command = 'dotenv'
     command += ' -f %s ' % env.dotenv_path
