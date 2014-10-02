@@ -73,7 +73,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, rem, ipsum. 
 
 Refer to [CONTRIBUTING.md][contributing]
 
-[contributing]: http://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_username}}/tree/master/CONTRIBUTING.md
+[contributing]: http://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_reponame}}/tree/master/CONTRIBUTING.md
 
 --------
 Built with ♥ at [Fueled](http://fueled.com)
