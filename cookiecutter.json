@@ -2,12 +2,11 @@
     "repo_name": "repo-name"
     , "github_username": "Fueled"
     , "github_reponame": ""
-    , "site_name": "My Project"
-    , "site_description": "add a short project description here"
+    , "project_name": "My Project"
+    , "project_description": "add a short project description here"
     , "timezone": "UTC"
     , "django_admin_email": "noreply@example.com"
     , "version": "0.1.0"
     , "domain_name": "subdomain.domain.com"
     , "celery (y/n)": "n"
-
 }
