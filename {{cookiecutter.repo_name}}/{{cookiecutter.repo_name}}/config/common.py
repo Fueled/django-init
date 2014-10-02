@@ -231,8 +231,7 @@ class Common(Configuration):
     DATABASES = values.DatabaseURLValue(environ=True, environ_name='DATABASE_URL',
                                         environ_prefix='')
     # END DATABASE CONFIGURATION
-
-    {% if cookiecutter.celery == 'y' %}
+{% if cookiecutter.celery == 'y' %}
     # CELERY CONFIGURATION
     from celery import crontab  # noqa
     BROKER_URL = 'redis://localhost:6379/0'
@@ -240,9 +239,8 @@ class Common(Configuration):
     CELERY_TIMEZONE = TIME_ZONE
     CELERY_TASK_SERIALIZER = 'pickle'
     CELERY_ACCEPT_CONTENT = ['pickle']
-    #========Periodic Tasks
+    # Periodic Tasks
     CELERYBEAT_SCHEDULE = {
     }
-    #========End Periodic Tasks
-    # END CELERY CONFIGURATION
-    {% endif %}
+    # End Periodic Tasks
+    # END CELERY CONFIGURATION {% endif %}

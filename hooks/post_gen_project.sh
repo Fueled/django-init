@@ -1,9 +1,14 @@
 #!/bin/bash
 echo "You have successfully created your app!!"
-git init
-git add .
+
+# fix newline at eof
+find . ! -path "*/venv/*" -type f -name "*.py" -exec bash -c "tail -n1 {} | read -r _ || echo >> {}" \;
+
+# initialize git repo and create first commit
+git init && git add .
 git commit -am "chore(setup): create base django project."
 
+# setup the project for local development
 fab init
 
 OUT=$?
