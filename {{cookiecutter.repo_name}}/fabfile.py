@@ -45,6 +45,13 @@ def serve_doc(address='127.0.0.1', port='8001'):
         local('mkdocs serve --dev-addr=%s:%s' % (address, port))
 
 
+def deploy_docs():
+    with lcd(here):
+        local('mkdocs build')
+        local('ghp-import -m "Documentaion updated." -p _docs_html')
+        local('rm -rf _docs_html')
+
+
 def shell():
     manage('shell_plus')
 
