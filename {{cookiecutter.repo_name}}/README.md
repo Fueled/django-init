@@ -3,39 +3,24 @@
 
 {{ cookiecutter.project_description }}
 
-Features
---------
-
-* Django 1.7
-* PostresSQL 9.3
-* Foundation 5
-* SASS, CoffeeScript, Live-Reloading Server
-* Vagrant box, Ansible
-* Heroku/Sendgrid/S3
-* Project configuration based on [http://12factor.net](http://12factor.net)
-
-
 ## Getting up and running
 
-The steps below will get you up and running with a local development environment. We assume you have the following installed:
+Minimum requirements: **pip, fabric & postgres**, setup is tested on Mac OSX only.
 
-* pip
-* virtualenv
-* PostgreSQL
+In your terminal, type or copy-paste the following:
+    
+    git clone git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}.git; cd {{ cookiecutter.github_reponame }}; fab init
 
-1. Clone this repo to your local development machine.
+Go grab a cup of coffee, we bake your hot development machine.
 
-    ```
-    git clone git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}.git && cd {{ cookiecutter.github_reponame }}
-    ```
+Useful commands:
 
-2. Install `fab` command
+- `fab serve` - start [django server](http://localhost:8000/), [documentation server](http://localhost:8001/) and static file compiler
+- `fab webserver` - run only webserver 
+- `fab deploy_docs` - deploy docs to server
+- `fab test` - run the test locally with ipdb
 
-    sudo pip install fabric
-
-3. From inside the project repo, run `fab init`
-
-5. Go grab a cup of coffee, till your hot development machine is baking!!
+**NOTE:** Checkout `fabfile.py` for all the options available and what/how they do it.
 
 
 ## Deploying Project
@@ -64,12 +49,14 @@ heroku run python {{ cookiecutter.repo_name }}/manage.py createsuperuser
 heroku open
 ```
 
-### AWS
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, rem, ipsum. Perferendis, voluptatum reiciendis molestias fugit voluptatibus temporibus vitae fuga expedita laboriosam totam minus ea voluptatem a eligendi incidunt veritatis.
-
 
 ## Contributing
+
+Golden Rule:
+
+> Anything in **master** is always **deployable**.
+
+Avoid working on `master` branch, create a new branch with meaningful name, send pull request asap. Be vocal!
 
 Refer to [CONTRIBUTING.md][contributing]
 

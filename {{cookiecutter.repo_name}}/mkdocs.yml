@@ -4,10 +4,17 @@ site_description: {{ cookiecutter.project_description }}
 
 pages:
 - ['index.md', 'Home']
-- ['deploy.md', 'Deploy']
+- ['api/overview.md', 'API', 'Overview & Usages']
+- ['api/endpoints.md', 'API', 'REST Endpoints']
+- ['api/errors.md', 'API', 'Errors']
+- ['api/changelog.md', 'API', 'Changelog']
+- ['backend/server_config.md', 'Backend', 'Server Configurations']
+- ['backend/db.md', 'Backend', 'Database Diagrams']
+- ['backend/coding_rules.md', 'Backend', 'Coding Rules']
+
 
 theme: 'mkdocs'
-theme_center_lead: true
+theme_center_lead: false
 
 # directory to output HTML build
 site_dir: _docs_html
