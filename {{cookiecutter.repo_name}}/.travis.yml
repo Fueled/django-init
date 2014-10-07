@@ -2,7 +2,11 @@ language: python
 python:
 - '2.7'
 install: pip install -q -r requirements/development.txt
-before_script: flake8
+before_script:
+- export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.repo_name }}
+- export DJANGO_SECRET=`openssl rand -base64 32`
+- flake8
+- psql -c "CREATE DATABASE {{ cookiecutter.repo_name }};" -U postgres
 script: python {{ cookiecutter.repo_name }}/manage.py test
 notifications:
   hipchat:
@@ -26,4 +30,4 @@ deploy:
     repo: {{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}
   run:
     - "python {{ cookiecutter.repo_name }}/manage.py migrate"
-    - "python {{ cookiecutter.repo_name }}/manage.py collectstatic"
+    - "python {{ cookiecutter.repo_name }}/manage.py collectstatic --noinput"
