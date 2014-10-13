@@ -47,6 +47,7 @@ class Common(Configuration):
 
     LOCAL_APPS = (
         # Your stuff: custom apps go here
+        'base',
         'pages',
         'api',
     )
