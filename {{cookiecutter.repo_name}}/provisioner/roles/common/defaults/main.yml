@@ -25,3 +25,5 @@ base_ubuntu:
       - libpq-dev
       - libmemcached-dev
       - python-memcache
+      - libxml2-dev
+      - libxslt-dev
