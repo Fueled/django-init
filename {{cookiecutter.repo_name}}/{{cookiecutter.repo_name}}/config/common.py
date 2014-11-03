@@ -26,7 +26,8 @@ class Common(Configuration):
 
     # APP CONFIGURATION
     # -----------------
-    DJANGO_APPS = (
+    # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+    INSTALLED_APPS = (
         # Default Django apps:
         'django.contrib.auth',
         'django.contrib.contenttypes',
@@ -40,19 +41,12 @@ class Common(Configuration):
 
         # Admin
         'django.contrib.admin',
-    )
-    THIRD_PARTY_APPS = (
         'django_extensions',  # http://django-extensions.readthedocs.org/
-    )
 
-    LOCAL_APPS = (
         # Your stuff: custom apps go here
-        'pages',
-        'api',
+        '{{ cookiecutter.repo_name }}.pages',
     )
 
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-    INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
     # MIDDLEWARE CONFIGURATION
     # Note: Order in which they are added are important
@@ -180,7 +174,7 @@ class Common(Configuration):
     # END MEDIA CONFIGURATION
 
     # URL Configuration
-    ROOT_URLCONF = 'urls'
+    ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
     WSGI_APPLICATION = 'wsgi.application'
