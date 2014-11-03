@@ -103,6 +103,14 @@ def manage(cmd, venv=True):
         local('python %s/manage.py %s' % (env.project_name, cmd))
 
 
+def test(options='--ipdb'):
+    '''Run tests locally.'''
+    with virtualenv():
+        local('flake8 .')
+        local("coverage run --source=onydo --omit='%s' -m py.test %s" % (env.coverage_omit, options))
+        local("coverage report")
+
+
 @_contextmanager
 def virtualenv():
     '''Activates virtualenv context for other commands to run inside it

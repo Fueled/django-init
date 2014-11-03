@@ -14,7 +14,7 @@ from django.contrib import admin
 
 
 urlpatterns = patterns('',  # noqa
-    url(r'^', include("pages.urls", namespace="pages")),
+    url(r'^', include("{{ cookiecutter.repo_name }}.pages.urls", namespace="pages")),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
@@ -24,7 +24,7 @@ urlpatterns = patterns('',  # noqa
 
     # These URLS provide the login/logout functions for the browseable API.
     url(r'^api/auth-n/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/', include('api.urls')),
+    url(r'^api/', include('{{ cookiecutter.repo_name }}.routers.urls')),
 
     # Your stuff: custom urls go here
 
