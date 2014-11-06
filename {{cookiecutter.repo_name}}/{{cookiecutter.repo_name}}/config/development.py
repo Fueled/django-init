@@ -6,6 +6,7 @@ Adds sensible defaults for developement of project
 - Outputs outgoing emails to console
 - Enables Django Debug Toolbar
 - Uses local caches
+- override SITE_ID to use 'local'
 '''
 from __future__ import unicode_literals, absolute_import
 from configurations import values
@@ -49,4 +50,5 @@ class Development(Common):
     }
     # END OF CACHES
 
+    SITE_ID = 'local'
     # Your local stuff: Below this line define 3rd party libary settings

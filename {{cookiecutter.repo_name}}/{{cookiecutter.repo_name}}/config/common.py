@@ -31,7 +31,7 @@ class Common(Configuration):
         'django.contrib.auth',
         'django.contrib.contenttypes',
         'django.contrib.sessions',
-        'django.contrib.sites',
+        'django_sites',  # http://niwibe.github.io/django-sites/
         'django.contrib.messages',
         'django.contrib.staticfiles',
 
@@ -102,8 +102,6 @@ class Common(Configuration):
     # EMAIL CONFIGURATION
     EMAIL_BACKEND = values.Value('django.core.mail.backends.smtp.EmailBackend')
     # END EMAIL CONFIGURATION
-
-    SITE_ID = 1
 
     # Local time zone for this installation. Choices can be found here:
     # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -268,3 +266,17 @@ class Common(Configuration):
     }
     # End Periodic Tasks
     # END CELERY CONFIGURATION {% endif %}
+
+    # DJANGO_SITES
+    # see: http://django-sites.readthedocs.org
+    SITES = {
+        "local": {"domain": "localhost:8000", "scheme": "http", "name": "localhost"},
+        "remote": {
+            "domain": values.Value(environ=True, environ_name='SITE_DOMAIN'),
+            "scheme": values.Value("https", environ=True, environ_name='SITE_SCHEME'),
+            "name": values.Value(environ=True, environ_name='SITE_NAME'),
+        },
+    }
+
+    SITE_ID = "remote"
+    # End django_sites

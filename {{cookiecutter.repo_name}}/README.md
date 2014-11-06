@@ -58,6 +58,9 @@ heroku config:set DJANGO_SECRET_KEY=`openssl rand -base64 32`
 heroku config:set DJANGO_AWS_ACCESS_KEY_ID=YOUR_ID
 heroku config:set DJANGO_AWS_SECRET_ACCESS_KEY=YOUR_KEY
 heroku config:set DJANGO_AWS_STORAGE_BUCKET_NAME=YOUR_BUCKET_NAME
+heroku config:set DJANGO_SITE_DOMAIN=DJANGO_SITE_DOMAIN_HERE
+heroku config:set DJANGO_SITE_SCHEME=DJANGO_SITE_SCHEME_HERE
+heroku config:set DJANGO_SITE_NAME=DJANGO_SITE_NAME_HERE
 git push heroku master
 heroku run python {{ cookiecutter.repo_name }}/manage.py migrate
 heroku run python {{ cookiecutter.repo_name }}/manage.py createsuperuser
