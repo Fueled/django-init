@@ -2,11 +2,11 @@
 
 # documentation
 # -------------------------------------
-mkdocs==0.9
+mkdocs==0.10
 
 # Debugging
 # -------------------------------------
-django-debug-toolbar==1.2.1
+django-debug-toolbar==1.2.2
 ipython==2.3.0
 ipdb==0.8
 

@@ -1,16 +1,16 @@
 # Latest Stable release of Django
-Django==1.7
+Django==1.7.1
 
 # Extensions
 # -------------------------------------
-django-extensions==1.4.0
+django-extensions==1.4.5
 Werkzeug==0.9.6
-pytz==2014.4
+pytz==2014.9
 
 # Configuration
 # -------------------------------------
 django-configurations==0.8
-django-secure==1.0
+django-secure==1.0.1
 django-cache-url==0.8.0
 dj-database-url==0.3.0
 python-dotenv==0.1.0
@@ -22,7 +22,7 @@ django-uuid-upload-path==1.0.0
 
 # Images
 # -------------------------------------
-Pillow==2.6.0
+Pillow==2.6.1
 
 # For the persistance stores
 # -------------------------------------
@@ -35,12 +35,9 @@ django-autoslug==1.7.2
 
 # Django Rest Framework
 # -------------------------------------
-djangorestframework==2.4.3
+djangorestframework==2.4.4
 Markdown==2.5.1
 
 {% if cookiecutter.celery == 'y' %}
-celery==3.1.15
+celery==3.1.16 # Updated from 3.1.15
 {% endif %}
-
-# Your custom common requirements goes here
-# -------------------------------------
