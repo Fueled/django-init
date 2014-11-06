@@ -70,7 +70,7 @@ def serve():
 
 def makemigrations(app):
     '''Create new database migration for an app.'''
-    manage('makemigrations')
+    manage('makemigrations %s' % app)
 
 
 def migrate():
@@ -107,7 +107,7 @@ def config(action=None, key=None, value=None):
 # ------------------------------------------------------------------------------
 def manage(cmd, venv=True):
     with virtualenv():
-        local('python %s/manage.py %s' % (env.project_name, cmd))
+        local('python manage.py %s' % cmd)
 
 
 def test(options='--ipdb'):

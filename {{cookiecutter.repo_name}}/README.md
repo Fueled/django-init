@@ -47,8 +47,8 @@ heroku config:set DJANGO_SITE_DOMAIN=DJANGO_SITE_DOMAIN_HERE
 heroku config:set DJANGO_SITE_SCHEME=DJANGO_SITE_SCHEME_HERE
 heroku config:set DJANGO_SITE_NAME=DJANGO_SITE_NAME_HERE
 git push heroku master
-heroku run python {{ cookiecutter.repo_name }}/manage.py migrate
-heroku run python {{ cookiecutter.repo_name }}/manage.py createsuperuser
+heroku run python manage.py migrate
+heroku run python manage.py createsuperuser
 heroku open
 ```
 
