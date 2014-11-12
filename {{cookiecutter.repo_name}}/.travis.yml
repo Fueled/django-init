@@ -13,13 +13,9 @@ script:
 - coverage report
 
 notifications:
-  hipchat:
-    rooms:
-      # travis encrypt api_token@room_name --add notifications.hipchat.rooms
-      secure: <add_room_key_here>
-    template:
-    - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
-    format: html
+  email:
+    on_success: change  # [always|never|change]
+    on_failure: always  # [always|never|change]
 deploy:
   provider: heroku
   buildpack: python
