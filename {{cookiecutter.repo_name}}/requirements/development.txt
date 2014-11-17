@@ -3,6 +3,7 @@
 # documentation
 # -------------------------------------
 mkdocs==0.10
+pygraphviz==1.2
 ghp-import==0.4.1
 
 # Debugging

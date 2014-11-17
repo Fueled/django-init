@@ -1,7 +1,13 @@
+<style>
+    /* make the main container full-size for better viewing */
+    .col-md-3 {display: none;}
+    .col-md-9 {width: 100%;}
+</style>
+
 This project usages `postgres` as the primary persistent database.
 
-Below is the internal relational database representation of {{ cookiecutter.project_name }} backend. ([view original][database_diagram])
+Below is the internal representationf of all the models used in this project. ([View enlarged][database_diagram])
 
 ![database diagram][database_diagram]
 
-[database_diagram]: (img/{{ cookiecutter.repo_name }}_dbschema.svg)
+[database_diagram]: img/graph_model.svg
