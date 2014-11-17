@@ -57,9 +57,6 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
-# mkdocs build dir
-_docs_html
-
 # npm
 node_modules/
 
@@ -74,3 +71,7 @@ celerybeat-schedule
 
 # python-dotenv
 .env
+
+# {{ cookiecutter.project_name }}
+_docs_html/
+media/
