@@ -3,6 +3,7 @@
 
 see: https://docs.djangoproject.com/en/dev/ref/settings/
 '''
+from __future__ import print_function, unicode_literals
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -16,6 +17,11 @@ BASE_DIR = dirname(dirname(__file__))
 # see: http://github.com/theskumar/python-dotenv
 import dotenv
 dotenv.load_dotenv(join(BASE_DIR, ".env"))
+
+if "test" in sys.argv:
+    print("\033[1;91mNo django tests.\033[0m")
+    print("Try: \033[1;33mpy.test\033[0m")
+    sys.exit(0)
 
 
 # Common Configurations
