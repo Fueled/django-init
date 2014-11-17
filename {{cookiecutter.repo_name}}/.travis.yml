@@ -19,6 +19,7 @@ notifications:
 deploy:
   provider: heroku
   buildpack: python
+  strategy: api
   api_key:
     # travis encrypt $(heroku auth:token) --add deploy.api_key
     secure: <add_heroku_auth_token_here>
@@ -30,4 +31,3 @@ deploy:
     repo: {{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}
   run:
     - "python {{ cookiecutter.repo_name }}/manage.py migrate"
-    - "python {{ cookiecutter.repo_name }}/manage.py collectstatic --noinput"
