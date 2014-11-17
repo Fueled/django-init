@@ -1,6 +1,7 @@
 # see: https://github.com/tomchristie/mkdocs/blob/master/mkdocs.yml
 site_name: {{ cookiecutter.project_name }}
 site_description: {{ cookiecutter.project_description }}
+repo_url: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}
 
 pages:
 - ['index.md', 'Home']
@@ -15,6 +16,8 @@ pages:
 
 theme: 'mkdocs'
 theme_center_lead: false
+
+copyright: Copyright &copy; 2014, <a href=http://fueled.com>Fueled</a>.
 
 # directory to output HTML build
 site_dir: _docs_html
