@@ -18,6 +18,8 @@ BASE_DIR = dirname(dirname(__file__))
 import dotenv
 dotenv.load_dotenv(join(BASE_DIR, ".env"))
 
+import sys
+
 if "test" in sys.argv:
     print("\033[1;91mNo django tests.\033[0m")
     print("Try: \033[1;33mpy.test\033[0m")
