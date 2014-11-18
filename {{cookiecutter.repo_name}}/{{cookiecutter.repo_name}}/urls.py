@@ -11,6 +11,7 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from routers import router
 
 
 urlpatterns = patterns('',  # noqa
@@ -24,7 +25,7 @@ urlpatterns = patterns('',  # noqa
 
     # These URLS provide the login/logout functions for the browseable API.
     url(r'^api/auth-n/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/', include('{{ cookiecutter.repo_name }}.routers.urls')),
+    url(r'^api/', include(router.urls)),
 
     # Your stuff: custom urls go here
 
