@@ -52,6 +52,7 @@ class Common(Configuration):
         'django_extensions',  # http://django-extensions.readthedocs.org/
 
         # Your stuff: custom apps go here
+        'rest_framework',
         '{{ cookiecutter.repo_name }}.pages',
     )
 
