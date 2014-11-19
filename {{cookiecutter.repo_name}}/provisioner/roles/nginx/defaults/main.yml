@@ -1,0 +1,4 @@
+ngnix_listen: 80
+nginx_user: 'www-data'
+nginx_worker_processes: 1
+nginx_worker_connections: 1024

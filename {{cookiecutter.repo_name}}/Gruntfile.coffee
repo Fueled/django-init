@@ -94,7 +94,7 @@ module.exports = (grunt) ->
         cmd: "fab webserver"
 
       runDocsServer:
-        cmd: "fab serve_doc"
+        cmd: "fab serve_docs"
 
   grunt.registerTask "serve", [
     "bgShell:runDjango"

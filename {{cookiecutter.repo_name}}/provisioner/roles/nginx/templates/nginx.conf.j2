@@ -1,5 +1,7 @@
-{%raw%}user www-data;
-worker_processes 1;
+{%raw%}user {{ nginx_user }};
+worker_processes {{ nginx_worker_processes }};
+worker_connections {{ nginx_worker_connections }};
+
 pid /var/run/nginx.pid;
 
 events {
@@ -9,14 +11,16 @@ events {
 
 http {
 
-    ##
     # Basic Settings
-    ##
+    # --------------------------------------
 
     sendfile on;
     tcp_nopush on;
     tcp_nodelay on;
-    keepalive_timeout 65;
+    client_body_timeout 12;
+    client_header_timeout 12;
+    keepalive_timeout 15;
+    send_timeout 10;
     types_hash_max_size 2048;
     # server_tokens off;
 
@@ -26,16 +30,16 @@ http {
     include /etc/nginx/mime.types;
     default_type application/octet-stream;
 
-    ##
+
     # Logging Settings
-    ##
+    # --------------------------------------
 
     access_log /var/log/nginx/access.log;
     error_log /var/log/nginx/error.log;
 
-    ##
+
     # Gzip Settings
-    ##
+    # --------------------------------------
 
     gzip on;
     gzip_disable "msie6";
@@ -47,26 +51,23 @@ http {
     # gzip_http_version 1.1;
     # gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 
-    ##
+
     # nginx-naxsi config
-    ##
+    # --------------------------------------
     # Uncomment it if you installed nginx-naxsi
-    ##
 
     #include /etc/nginx/naxsi_core.rules;
 
-    ##
+
     # nginx-passenger config
-    ##
+    # --------------------------------------
     # Uncomment it if you installed nginx-passenger
-    ##
 
     #passenger_root /usr;
     #passenger_ruby /usr/bin/ruby;
 
-    ##
     # Virtual Host Configs
-    ##
+    # --------------------------------------
 
     include /etc/nginx/conf.d/*.conf;
     include /etc/nginx/sites-enabled/*;

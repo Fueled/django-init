@@ -10,7 +10,3 @@
   notify:
     - enable supervisor
     - restart supervisor
-
-- name: copy base gunicorn configuration.
-  template: src=gunicorn.conf.j2 dest=/etc/supervisor/conf.d/gunicorn.conf
-  notify: restart supervisor
