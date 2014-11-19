@@ -3,20 +3,44 @@
 
 See: http://www.fabfile.org/
 '''
-from __future__ import unicode_literals, absolute_import, with_statement
-import os
-from os.path import join, isdir
-from fabric.api import local, env, lcd, cd, prefix
-from contextlib import contextmanager as _contextmanager
+from __future__ import absolute_import, unicode_literals, with_statement
 
-here = os.getcwd()
+# Standard Library
+import os
+from contextlib import contextmanager as _contextmanager
+from os.path import isdir, join
+
+# Third Party Stuff
+from fabric.api import cd, env, lcd, local, prefix, run, require
+
+ROOT_DIR = os.getcwd()
+
+# ==========================================================================
+#  Settings
+# ==========================================================================
 
 env.project_name = '{{ cookiecutter.repo_name }}'
-env.apps_dir = join(here, env.project_name)
-env.virtualenv_dir = join(here, 'venv')
-env.dotenv_path = join(env.apps_dir, '.env')
-env.requirements_file = join(here, 'requirements/development.txt')
+env.apps_dir = join(ROOT_DIR, env.project_name)
+env.docs_dir = join(ROOT_DIR, 'docs')
+env.virtualenv_dir = join(ROOT_DIR, 'venv')
+env.dotenv_path = join(ROOT_DIR, '.env')
+env.requirements_file = join(ROOT_DIR, 'requirements/development.txt')
 env.shell = "/bin/bash -l -i -c"
+env.use_ssh_config = True
+env.config_setter = local
+
+env.coverage_omit = '*tests*,*commands*,*migrations*,*admin*,*config*,*wsgi*'
+
+
+#  Enviroments
+# ---------------------------------------------------------
+def prod():
+    env.host_group = 'production'
+    env.remote = 'origin'
+    env.branch = 'prod'
+    env.hosts = ['prod.{{ cookiecutter.repo_name }}.fueled.com']
+    env.dotenv_path = '/home/ubuntu/{{ cookiecutter.github_reponame }}/.env'
+    env.config_setter = run
 
 
 def init(vagrant=False):
@@ -36,17 +60,18 @@ def install_deps(file=env.requirements_file):
     with virtualenv():
         local('pip install -r %s' % file)
 
-    with cd(here):
+    with cd(ROOT_DIR):
         local('npm install')
 
 
-def serve_doc(address='127.0.0.1', port='8001'):
-    with lcd(here):
+def serve_docs(address='127.0.0.1', port='8001'):
+    '''Start a local server to view documentation changes.'''
+    with lcd(ROOT_DIR):
         local('mkdocs serve --dev-addr=%s:%s' % (address, port))
 
 
 def deploy_docs():
-    with lcd(here):
+    with lcd(ROOT_DIR):
         local('mkdocs build')
         local('ghp-import -m "Documentaion updated." -p _docs_html')
         local('rm -rf _docs_html')
@@ -56,19 +81,27 @@ def shell():
     manage('shell_plus')
 
 
+def test(options='--ipdb'):
+    '''Run tests locally.'''
+    with virtualenv():
+        local('flake8 .')
+        local("coverage run --source=onydo --omit='%s' -m py.test %s" % (env.coverage_omit, options))
+        local("coverage report")
+
+
 def webserver(host='127.0.0.1:8000'):
-    '''Start an enhanced runserver'''
+    '''Start an enhanced local app server'''
     install_deps()
     migrate()
     manage('runserver_plus %s' % host)
 
 
 def serve():
-    '''Start webserver and documentation server with live-reload'''
+    '''Start local webserver and documentation server with live-reload'''
     local('grunt serve')
 
 
-def makemigrations(app):
+def makemigrations(app=''):
     '''Create new database migration for an app.'''
     manage('makemigrations %s' % app)
 
@@ -87,42 +120,45 @@ def createapp(appname):
 
 
 def config(action=None, key=None, value=None):
-    '''Manage project configuration via .env
+    '''Manage project configuration using .env
+
+    Usages: fab config:set,[key],[value]
 
     see: https://github.com/theskumar/python-dotenv
-    Usages: fab config:set,[key],[value]
     '''
     command = 'dotenv'
-    command += ' -f %s ' % env.dotenv_path
+    command += ' -f %(dotenv_path)s ' % env
     command += action + " " if action else " "
     command += key + " " if key else " "
     command += value if value else ""
-    local('touch %(dotenv_path)s' % env)
+    env.config_setter('touch %(dotenv_path)s' % env)
 
     with virtualenv():
-        local(command)
+        env.config_setter(command)
+
+
+def configure():
+    '''Setup a host using ansible scripts
+
+    Usages: fab [prod|qa|dev] configure
+    '''
+    require('host_group')
+    with lcd('provisioner'):
+        local('ansible-playbook -v -i hosts site.yml --limit=%(host_group)s' % env)
 
 
 # Helpers
-# ------------------------------------------------------------------------------
+# ---------------------------------------------------------
 def manage(cmd, venv=True):
     with virtualenv():
         local('python manage.py %s' % cmd)
-
-
-def test(options='--ipdb'):
-    '''Run tests locally.'''
-    with virtualenv():
-        local('flake8 .')
-        local("coverage run --source=onydo --omit='%s' -m py.test %s" % (env.coverage_omit, options))
-        local("coverage report")
 
 
 @_contextmanager
 def virtualenv():
     '''Activates virtualenv context for other commands to run inside it
     '''
-    with cd(here):
+    with cd(ROOT_DIR):
         with prefix('source %(virtualenv_dir)s/bin/activate' % env):
             yield
 

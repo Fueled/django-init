@@ -1,3 +1,0 @@
-{%raw%}---
-- name: install django python dependencies
-  pip: requirements={{ project_path }}/{{ django_requirements_file }}{%endraw%}
