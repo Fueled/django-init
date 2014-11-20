@@ -37,7 +37,7 @@ django-autoslug==1.7.2
 # Django Rest Framework
 # -------------------------------------
 djangorestframework==2.4.4
-Markdown==2.5.1
+Markdown>=2.3.1,<2.5   # to fix conflict with mkdocs
 
 {% if cookiecutter.celery == 'y' %}
 celery==3.1.16
