@@ -66,11 +66,15 @@ def install_deps(file=env.requirements_file):
 
 def serve_docs(address='127.0.0.1', port='8001'):
     '''Start a local server to view documentation changes.'''
+    create_graph_models()
+
     with lcd(ROOT_DIR):
         local('mkdocs serve --dev-addr=%s:%s' % (address, port))
 
 
 def deploy_docs():
+    create_graph_models()
+
     with lcd(ROOT_DIR):
         local('mkdocs build')
         local('ghp-import -m "Documentaion updated." -p _docs_html')
