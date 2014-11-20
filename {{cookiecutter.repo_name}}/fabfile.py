@@ -65,25 +65,14 @@ def install_deps(file=env.requirements_file):
 
 
 def serve_docs(address='127.0.0.1', port='8001'):
-<<<<<<< HEAD
     '''Start a local server to view documentation changes.'''
     with lcd(ROOT_DIR):
-=======
-    with lcd(here):
-        create_graph_models()
->>>>>>> feat(docs): generate model graph as part of doc build process
         local('mkdocs serve --dev-addr=%s:%s' % (address, port))
 
 
 def deploy_docs():
-<<<<<<< HEAD
     with lcd(ROOT_DIR):
         local('mkdocs build')
-=======
-    with lcd(here):
-        create_graph_models()
-        local('mkdocs build --clean')
->>>>>>> feat(docs): generate model graph as part of doc build process
         local('ghp-import -m "Documentaion updated." -p _docs_html')
         local('rm -rf _docs_html')
 
@@ -165,23 +154,12 @@ def manage(cmd, venv=True):
         local('python manage.py %s' % cmd)
 
 
-<<<<<<< HEAD
-=======
 def create_graph_models():
     '''Generates graph of all the models in this project.'''
     graph_model_output = join(env.docs_dir, 'img/graph_model.svg')
     manage("graph_models -a -g -o %s" % graph_model_output)
 
 
-def test(options='--ipdb'):
-    '''Run tests locally.'''
-    with virtualenv():
-        local('flake8 .')
-        local("coverage run --source=onydo --omit='%s' -m py.test %s" % (env.coverage_omit, options))
-        local("coverage report")
-
-
->>>>>>> feat(docs): generate model graph as part of doc build process
 @_contextmanager
 def virtualenv():
     '''Activates virtualenv context for other commands to run inside it
