@@ -5,28 +5,35 @@ see: http://celery.readthedocs.org/en/latest/django/first-steps-with-django.html
 '''
 from __future__ import absolute_import
 
+# Standard Library
 import os
+from os.path import dirname, join
 
+# Third Party Stuff
 from celery import Celery
+from configurations import importer
 from django.conf import settings
+
 # SPECIAL RELATIVE IMPORT FIX FOR CELERY SETTINGS
 from celery.schedules import crontab as crontab  # noqa
 
-import dotenv
-dotenv.load_dotenv(os.path.join(settings.BASE_DIR, ".env"))
 
-_SETTINGS_MODULE = 'config.development'
-_CONFIGURATION_MODULE = 'Development'
+ROOT_DIR = dirname(dirname(__file__))
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', _SETTINGS_MODULE)
-os.environ.setdefault('DJANGO_CONFIGURATION', _CONFIGURATION_MODULE)
+try:
+    import dotenv
+    dotenv.load_dotenv(join(ROOT_DIR, ".env"))
+except ImportError:
+    pass
 
-from configurations import importer
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
+os.environ.setdefault('DJANGO_CONFIGURATION', 'Development')
+
 importer.install()
 
-app = Celery('{{ cookiecutter.repo_name }}')
+app = Celery('{{ cookiecutter.repo_name }}-celery-app')
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.
-app.config_from_object('%s:%s' % (_SETTINGS_MODULE, _CONFIGURATION_MODULE))
+app.config_from_object('%s:%s' % ('settings', os.environ.get('DJANGO_CONFIGURATION')))
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)

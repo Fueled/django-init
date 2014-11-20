@@ -6,24 +6,17 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 from __future__ import print_function, unicode_literals
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
 from os.path import join, dirname
 
 from configurations import Configuration, values
 
-BASE_DIR = dirname(dirname(__file__))
+ROOT_DIR = dirname(dirname(__file__))
+APP_DIR = join(ROOT_DIR, '{{ cookiecutter.repo_name }}')
 
 # read and load variables in environement from .env file
 # see: http://github.com/theskumar/python-dotenv
 import dotenv
-dotenv.load_dotenv(join(BASE_DIR, ".env"))
-
-import sys
-
-if "test" in sys.argv:
-    print("\033[1;91mNo django tests.\033[0m")
-    print("Try: \033[1;33mpy.test\033[0m")
-    sys.exit(0)
+dotenv.load_dotenv(join(ROOT_DIR, ".env"))
 
 
 # Common Configurations
@@ -56,7 +49,6 @@ class Common(Configuration):
         '{{ cookiecutter.repo_name }}.pages',
     )
 
-
     # MIDDLEWARE CONFIGURATION
     # Note: Order in which they are added are important
     MIDDLEWARE_CLASSES = (
@@ -88,14 +80,13 @@ class Common(Configuration):
     # See:
     # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
     FIXTURE_DIRS = (
-        join(BASE_DIR, 'fixtures'),
+        join(APP_DIR, 'fixtures'),
     )
 
     # MANAGER CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
     ADMINS = (
-        ('{{ cookiecutter.project_name }} admin',
-         '{{ cookiecutter.django_admin_email }}'),
+        ('{{ cookiecutter.project_name }} admin', '{{ cookiecutter.django_admin_email }}'),
     )
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -142,7 +133,7 @@ class Common(Configuration):
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
     TEMPLATE_DIRS = (
-        join(BASE_DIR, 'templates'),
+        join(APP_DIR, 'templates'),
     )
 
     # List of callables that know how to import templates from various sources.
@@ -153,7 +144,7 @@ class Common(Configuration):
 
     # STATIC FILE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-    STATIC_ROOT = join(os.path.dirname(BASE_DIR), 'staticfiles')
+    STATIC_ROOT = join(ROOT_DIR, '.staticfiles')
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
     STATIC_URL = '/static/'
@@ -161,7 +152,7 @@ class Common(Configuration):
     # See:
     # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
     STATICFILES_DIRS = (
-        join(BASE_DIR, 'static'),
+        join(APP_DIR, 'static'),
     )
 
     # List of finder classes that know how to find static files in
@@ -174,7 +165,7 @@ class Common(Configuration):
 
     # MEDIA CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-    MEDIA_ROOT = join(BASE_DIR, 'media')
+    MEDIA_ROOT = join(ROOT_DIR, '.media')
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
     MEDIA_URL = '/media/'
@@ -255,10 +246,9 @@ class Common(Configuration):
         ),
     }
     # End DRF
-
 {% if cookiecutter.celery == 'y' %}
     # CELERY CONFIGURATION
-    from celery import crontab  # noqa
+    from settings.celery import crontab  # noqa
     BROKER_URL = 'redis://localhost:6379/0'
     BROKER_TRANSPORT_OPTIONS = {'polling_interval': 0.3}
     CELERY_TIMEZONE = TIME_ZONE
@@ -268,8 +258,8 @@ class Common(Configuration):
     CELERYBEAT_SCHEDULE = {
     }
     # End Periodic Tasks
-    # END CELERY CONFIGURATION {% endif %}
-
+    # END CELERY CONFIGURATION
+{% endif %}
     # DJANGO_SITES
     # see: http://django-sites.readthedocs.org
     SITES = {
