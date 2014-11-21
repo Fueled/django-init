@@ -3,7 +3,7 @@ Django==1.7.1
 
 # Extensions
 # -------------------------------------
-django-extensions==1.4.5
+django-extensions==1.4.6
 Werkzeug==0.9.6
 pytz==2014.9
 
