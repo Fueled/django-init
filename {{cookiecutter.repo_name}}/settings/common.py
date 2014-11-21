@@ -152,7 +152,7 @@ class Common(Configuration):
     # See:
     # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
     STATICFILES_DIRS = (
-        join(APP_DIR, 'static'),
+        # join(APP_DIR, 'static'),
     )
 
     # List of finder classes that know how to find static files in

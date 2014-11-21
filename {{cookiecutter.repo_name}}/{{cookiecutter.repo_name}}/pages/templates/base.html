@@ -14,6 +14,7 @@
     <![endif]-->
 
     {% block css %}
+    <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/foundation.css" rel="stylesheet">
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
     {% endblock css %}
   </head>
@@ -75,12 +76,12 @@
     {# Placed at the end of the document so the pages load faster #}
     {% block js %}
       <!-- Latest JQuery -->
-      <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.5/js/vendor/fastclick.min.js"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.5/js/vendor/jquery.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/vendor/jquery.js"></script>
 
       {# see: http://cdnjs.com/libraries/foundation/ #}
-      <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.5/js/foundation.min.js"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.5/js/foundation/foundation.alert.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/foundation.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/foundation/foundation.alert.js"></script>
 
       <!-- Your stuff: Third-party javascript libraries go here -->
 

@@ -11,15 +11,13 @@ module.exports = (grunt) ->
   pathsConfig = (appName) ->
     @app = appName or appConfig.name
     app: @app
-    templates: @app + "/templates"
-    css: @app + "/static/css"
-    sass: @app + "/static/sass"
-    coffee: @app + "/static/coffee"
-    fonts: @app + "/static/fonts"
-    images: @app + "/static/images"
-    js: @app + "/static/js"
+    css: @app + "/pages/static/css"
+    sass: @app + "/pages/static/sass"
+    coffee: @app + "/pages/static/coffee"
+    fonts: @app + "/pages/static/fonts"
+    images: @app + "/pages/static/images"
+    js: @app + "/pages/static/js"
     docs: "docs/"
-    manageScript: @app + "/manage.py"
 
   grunt.initConfig
     paths: pathsConfig()
