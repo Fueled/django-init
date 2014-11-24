@@ -9,3 +9,4 @@ if "test" in sys.argv:
 
 from .development import Development  # noqa
 from .production import Production  # noqa
+from .testing import Testing  # noqa
