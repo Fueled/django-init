@@ -15,19 +15,21 @@ from routers import router
 
 
 urlpatterns = patterns('',  # noqa
-    url(r'^', include("{{ cookiecutter.repo_name }}.pages.urls", namespace="pages")),
 
-    # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
-
-    # User management
-    # url(r'^users/', include("users.urls", namespace="users")),
-
-    # These URLS provide the login/logout functions for the browseable API.
-    url(r'^api/auth-n/', include('rest_framework.urls', namespace='rest_framework')),
+    # Rest API
     url(r'^api/', include(router.urls)),
 
+    # Browsable API
+    url(r'^api/auth-n/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # Django Admin
+    url(r'^admin/', include(admin.site.urls)),
+
+    # pages/ landing pages
+    url(r'^', include("{{ cookiecutter.repo_name }}.pages.urls", namespace="pages")),
+
     # Your stuff: custom urls go here
+
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
