@@ -89,7 +89,12 @@ def test(options='--ipdb'):
     '''Run tests locally.'''
     with virtualenv():
         local('flake8 .')
-        local("coverage run --source=onydo --omit='%s' -m py.test %s" % (env.coverage_omit, options))
+        params = {
+            'source': env.project_name,
+            'omit': env.coverage_omit,
+            'options': options,
+        }
+        local("coverage run --source=%(source)s --omit='%(omit)s' -m py.test %(options)s" % params)
         local("coverage report")
 
 
