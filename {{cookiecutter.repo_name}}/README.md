@@ -1,6 +1,8 @@
 {{ cookiecutter.project_name }}
 ==============================
 
+![version {{ cookiecutter.version }}](http://img.shields.io/badge/Version-{{ cookiecutter.version }}-blue.svg)
+
 {{ cookiecutter.project_description }}
 
 ## Getting up and running
