@@ -36,18 +36,15 @@ class Common(Configuration):
         'django_sites',  # http://niwibe.github.io/django-sites/
         'django.contrib.messages',
         'django.contrib.staticfiles',
-
-        # Useful template tags:
-        # 'django.contrib.humanize',
-
-        # Admin
         'django.contrib.admin',
-        'django_extensions',  # http://django-extensions.readthedocs.org/
+        # 'django.contrib.humanize',  # Useful template tags:
 
-        # Your stuff: custom apps go here
-        'rest_framework',
-        'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
+        '{{ cookiecutter.repo_name }}.base',
         '{{ cookiecutter.repo_name }}.pages',
+
+        'django_extensions',  # http://django-extensions.readthedocs.org/
+        'rest_framework',  # http://www.django-rest-framework.org/
+        'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
     )
 
     # MIDDLEWARE CONFIGURATION
@@ -230,7 +227,7 @@ class Common(Configuration):
     REST_FRAMEWORK = {
         'PAGINATE_BY': 30,
         'PAGINATE_BY_PARAM': 'per_page',
-        'MAX_PAGINATE_BY': 100,
+        'MAX_PAGINATE_BY': 1000,
         # Use hyperlinked styles by default.
         # Only used if the `serializer_class` attribute is not set on a view.
         'DEFAULT_MODEL_SERIALIZER_CLASS': 'rest_framework.serializers.HyperlinkedModelSerializer',
@@ -242,9 +239,12 @@ class Common(Configuration):
         ],
         'DEFAULT_AUTHENTICATION_CLASSES': (
             'rest_framework.authentication.BasicAuthentication',
-            # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-            # 'rest_framework.authentication.SessionAuthentication',
+
+            # Mainly used for api debug.
+            'rest_framework.authentication.SessionAuthentication',
         ),
+        "DATETIME_FORMAT": "%Y-%m-%dT%H:%M:%S%z",
+        "EXCEPTION_HANDLER": "{{ cookiecutter.repo_name }}.base.exceptions.exception_handler",
     }
     # End DRF
 {% if cookiecutter.celery == 'y' %}
