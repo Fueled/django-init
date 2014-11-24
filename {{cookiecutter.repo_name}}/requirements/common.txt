@@ -20,6 +20,7 @@ python-dotenv==0.1.0
 # -------------------------------------
 django-model-utils==2.2
 django-uuid-upload-path==1.0.0
+django-versatileimagefield==0.1.4a
 
 # Images
 # -------------------------------------

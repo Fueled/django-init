@@ -46,6 +46,7 @@ class Common(Configuration):
 
         # Your stuff: custom apps go here
         'rest_framework',
+        'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
         '{{ cookiecutter.repo_name }}.pages',
     )
 
