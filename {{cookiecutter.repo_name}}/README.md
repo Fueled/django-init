@@ -29,30 +29,7 @@ Useful commands:
 
 The deployment are managed via travis, but for the first time you'll need to set the configuration values on each of the server.
 
-### Heroku
-
-Run these commands to deploy a new project to Heroku:
-
-```
-heroku create --buildpack https://github.com/heroku/heroku-buildpack-python
-heroku addons:add heroku-postgresql:dev
-heroku addons:add pgbackups:auto-month
-heroku addons:add sendgrid:starter
-heroku addons:add memcachier:dev
-heroku pg:promote DATABASE_URL
-heroku config:set DJANGO_CONFIGURATION=Production
-heroku config:set DJANGO_SECRET_KEY=`openssl rand -base64 32`
-heroku config:set DJANGO_AWS_ACCESS_KEY_ID=YOUR_ID
-heroku config:set DJANGO_AWS_SECRET_ACCESS_KEY=YOUR_KEY
-heroku config:set DJANGO_AWS_STORAGE_BUCKET_NAME=YOUR_BUCKET_NAME
-heroku config:set DJANGO_SITE_DOMAIN=DJANGO_SITE_DOMAIN_HERE
-heroku config:set DJANGO_SITE_SCHEME=DJANGO_SITE_SCHEME_HERE
-heroku config:set DJANGO_SITE_NAME=DJANGO_SITE_NAME_HERE
-git push heroku master
-heroku run python manage.py migrate
-heroku run python manage.py createsuperuser
-heroku open
-```
+Check out detailed server setup instruction [here](docs/backend/server_config.md).
 
 
 ## Contributing
