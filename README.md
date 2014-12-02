@@ -20,6 +20,8 @@ Project template for django based projects.
 
 ## Getting Started
 
+__NOTE:__ Before starting with the installation, make sure you have Graphiz installed on your development machine. You also have to export the Graphiz path into your .bash_profile. More info here: http://fromacoder.com/install-pygraphviz-on-mountain-lion/
+
 You need to have `cookiecutter` installed in order to scafold a new project from this template. If you have `pip` installed, you simply do this by running:
 
     pip install --upgrade cookiecutter
