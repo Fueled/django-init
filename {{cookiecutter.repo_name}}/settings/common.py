@@ -6,6 +6,7 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 from __future__ import print_function, unicode_literals
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
 from os.path import join, dirname
 
 from configurations import Configuration, values
@@ -266,9 +267,9 @@ class Common(Configuration):
     SITES = {
         "local": {"domain": "localhost:8000", "scheme": "http", "name": "localhost"},
         "remote": {
-            "domain": values.Value(environ=True, environ_name='SITE_DOMAIN'),
-            "scheme": values.Value("https", environ=True, environ_name='SITE_SCHEME'),
-            "name": values.Value(environ=True, environ_name='SITE_NAME'),
+            "domain": os.environ.get('SITE_DOMAIN'),
+            "scheme": os.environ.get('SITE_SCHEME', 'https'),
+            "name": os.environ.get('SITE_NAME'),
         },
     }
 

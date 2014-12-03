@@ -18,9 +18,9 @@ DJANGO_SECRET_KEY=`openssl rand -base64 32` \
 DJANGO_AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_ID_HERE \
 DJANGO_AWS_SECRET_ACCESS_KEY=YOUR_KEY \
 DJANGO_AWS_STORAGE_BUCKET_NAME=YOUR_BUCKET_NAME \
-DJANGO_SITE_DOMAIN=DJANGO_SITE_DOMAIN_HERE \
-DJANGO_SITE_SCHEME=DJANGO_SITE_SCHEME_HERE  \
-DJANGO_SITE_NAME=DJANGO_SITE_NAME_HERE --app=<heroku-app-name>
+SITE_DOMAIN=DJANGO_SITE_DOMAIN_HERE \
+SITE_SCHEME=DJANGO_SITE_SCHEME_HERE  \
+SITE_NAME=DJANGO_SITE_NAME_HERE --app=<heroku-app-name>
 git push heroku master --app=<heroku-app-name>
 heroku run python manage.py migrate --app=<heroku-app-name>
 heroku run python manage.py createsuperuser --app=<heroku-app-name>
