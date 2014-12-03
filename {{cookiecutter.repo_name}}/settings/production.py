@@ -47,8 +47,8 @@ class Production(Common):
     # See:
     # http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html
     try:
-        from S3 import CallingFormat
-        AWS_CALLING_FORMAT = CallingFormat.SUBDOMAIN
+        from boto.s3.connection import OrdinaryCallingFormat
+        AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
     except ImportError:
         pass
 
