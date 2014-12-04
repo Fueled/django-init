@@ -12,9 +12,8 @@ Project template for django based projects.
 * Ansible script for deploying to EC2/Ubuntu
 * Heroku/Sendgrid/S3
 * [12factor][12factor] based project configuration
-* Django Rest Framework
+* Django Rest Framework 3.0+
 * `django_sites` instead of `django.contrib.sites`
-
 
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net
