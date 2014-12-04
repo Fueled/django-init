@@ -5,14 +5,16 @@ Project template for django based projects.
 
 ## Features
 
-* Django 1.7
+* Django 1.7+
 * PostresSQL 9.3
-* Foundation 5.4.1
+* Foundation 5.4.7
 * SASS, CoffeeScript, Live-Reloading Server
-* Vagrantbox, Ansible
+* Ansible script for deploying to EC2/Ubuntu
 * Heroku/Sendgrid/S3
 * [12factor][12factor] based project configuration
 * Django Rest Framework
+* `django_sites` instead of `django.contrib.sites`
+
 
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net
