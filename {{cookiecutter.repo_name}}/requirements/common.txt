@@ -3,9 +3,9 @@ Django==1.7.1
 
 # Extensions
 # -------------------------------------
-django-extensions==1.4.6
+django-extensions==1.4.8
 Werkzeug==0.9.6
-pytz==2014.9
+pytz==2014.10
 
 # Configuration
 # -------------------------------------
@@ -20,7 +20,7 @@ python-dotenv==0.1.0
 # -------------------------------------
 django-model-utils==2.2
 django-uuid-upload-path==1.0.0
-django-versatileimagefield==0.1.4a
+django-versatileimagefield==0.1.5
 
 # Images
 # -------------------------------------
@@ -41,5 +41,5 @@ djangorestframework==2.4.4
 Markdown>=2.3.1,<2.5   # to fix conflict with mkdocs
 
 {% if cookiecutter.celery == 'y' %}
-celery==3.1.16
+celery==3.1.17
 {% endif %}
