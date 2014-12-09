@@ -7,11 +7,14 @@ from __future__ import absolute_import, unicode_literals, with_statement
 
 # Standard Library
 import os
+from functools import partial
 from contextlib import contextmanager as _contextmanager
 from os.path import isdir, join
 
 # Third Party Stuff
-from fabric.api import cd, env, lcd, local, prefix, run, require
+from fabric.api import cd, env, lcd, local as fabric_local, prefix, run, require
+local = partial(fabric_local, shell='/bin/bash')
+
 
 ROOT_DIR = os.getcwd()
 
