@@ -7,7 +7,15 @@
 
 ## Getting up and running
 
-Minimum requirements: **pip, fabric & postgres**, setup is tested on Mac OSX only.
+Minimum requirements: **pip, sass, graphviz, fabric & [postgres][install-postgres]**, setup is tested on Mac OSX only.
+
+```
+brew install postgres graphviz
+gem install sass
+sudo pip install fabric
+```
+
+[install-postgres]: http://www.gotealeaf.com/blog/how-to-install-postgresql-on-a-mac
 
 In your terminal, type or copy-paste the following:
     

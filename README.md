@@ -20,7 +20,14 @@ Project template for django based projects.
 
 ## Getting Started
 
-__NOTE:__ Before starting with the installation, make sure you have Graphiz installed on your development machine. You also have to export the Graphiz path into your .bash_profile. More info here: http://fromacoder.com/install-pygraphviz-on-mountain-lion/
+Following are system level dependecies, and must be present on your machine before you run cookiecutter command. Primarily for `pre_gen_project.sh` to complete successfully.
+
+- **postgres** - can be installed with `brew install postgres`
+- **sass** - can be installed with `gem install sass`
+- **graphviz** - can be installed with `brew install graphviz`
+- **fabric** - can be install with `sudo pip install fabric`
+
+You should able to install these fairly easily if your developement machine is other than a Mac OS X.
 
 You need to have `cookiecutter` installed in order to scafold a new project from this template. If you have `pip` installed, you simply do this by running:
 
