@@ -1,0 +1,18 @@
+language: python
+python:
+- '2.7'
+
+addons:
+  postgresql: "9.3"
+
+install:
+  - gem install sass
+  - pip install -r requirements-dev.txt --allow-all-external --download-cache $HOME/.pip-cache
+
+script:
+  - python runtests.py
+
+notifications:
+  email:
+    on_success: change  # [always|never|change]
+    on_failure: always  # [always|never|change]
