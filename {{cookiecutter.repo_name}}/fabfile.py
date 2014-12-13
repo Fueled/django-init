@@ -76,8 +76,7 @@ def deploy_docs():
     create_graph_models()
 
     with lcd(ROOT_DIR):
-        local('mkdocs build')
-        local('ghp-import -m "Documentaion updated." -p _docs_html')
+        local('mkdocs gh-deploy')
         local('rm -rf _docs_html')
 
 
