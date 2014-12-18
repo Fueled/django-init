@@ -12,7 +12,6 @@ pytz==2014.10
 django-configurations==0.8
 django-sites==0.8
 django-secure==1.0.1
-django-cache-url==0.8.0
 dj-database-url==0.3.0
 python-dotenv==0.1.0
 

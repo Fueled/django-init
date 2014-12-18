@@ -11,7 +11,7 @@ heroku create <heroku-app-name> --buildpack https://github.com/heroku/heroku-bui
 heroku addons:add heroku-postgresql:dev --app=<heroku-app-name>
 heroku addons:add pgbackups:auto-month --app=<heroku-app-name>
 heroku addons:add sendgrid:starter --app=<heroku-app-name>
-heroku addons:add memcachier:dev --app=<heroku-app-name>
+heroku addons:add redistogo --app=<heroku-app-name>
 heroku pg:promote DATABASE_URL --app=<heroku-app-name>
 heroku config:set DJANGO_CONFIGURATION=Production \
 DJANGO_SECRET_KEY=`openssl rand -base64 32` \

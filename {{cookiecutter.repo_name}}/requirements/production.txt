@@ -7,7 +7,7 @@
 django-storages==1.1.8
 Collectfast==0.2.1
 boto==2.34.0
-pylibmc==1.3.0
 gevent==1.0.1
 gunicorn==19.1.1
-django-heroku-memcacheify
+hiredis==0.1.5
+django-redis-cache==0.13.0

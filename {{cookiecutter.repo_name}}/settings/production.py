@@ -3,8 +3,15 @@
 
 Adds sensible default for running app in production.
 '''
-from __future__ import unicode_literals, absolute_import
+from __future__ import absolute_import, unicode_literals
+
+# Standard Library
+import os
+import urlparse
+
+# Third Party Stuff
 from configurations import values
+
 from .common import Common
 
 
@@ -90,13 +97,24 @@ class Production(Common):
     SERVER_EMAIL = DEFAULT_FROM_EMAIL
     # END EMAIL
 
-    try:
-        # see: https://github.com/rdegges/django-heroku-memcacheify#install
-        # Avoids installing of pylibmc on development enviroment
-        from memcacheify import memcacheify
-        CACHES = memcacheify()
-    except ImportError:
-        CACHES = values.CacheURLValue(default="memcached://127.0.0.1:11211")
+    redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6959'))
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'redis_cache.RedisCache',
+            'LOCATION': '%s:%s' % (redis_url.hostname, redis_url.port),
+            'OPTIONS': {
+                'DB': 0,
+                'PASSWORD': redis_url.password,
+                'PARSER_CLASS': 'redis.connection.HiredisParser',
+                'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
+                'CONNECTION_POOL_CLASS_KWARGS': {
+                    'max_connections': 50,
+                    'timeout': 20,
+                }
+            }
+        }
+    }
 
     # TEMPLATE CONFIGURATION
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
