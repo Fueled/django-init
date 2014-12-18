@@ -24,7 +24,7 @@ DELETE  | Used for deleting resources.
 
 ## Pagination
 
-Requests that return multiple items will be paginated to 30 items by default. You can specify further pages with the `?page` parameter. For some resources, you can also set a custom page size up to 100 with the `?per_page` parameter.
+Requests that return multiple items will be paginated to 30 items by default. You can specify further pages with the `?page` parameter. For some resources, you can also set a custom page size up to 1000 with the `?per_page` parameter.
 
 Note that page numbering is 1-based and that omitting the `?page` parameter will return the first page.
 
