@@ -17,10 +17,13 @@ Before you submit a pull request, check that it meets these guidelines:
 
 
 ## Coding conventions
-Generally we recommend two ways to stay up-to-date on {{ cookiecutter.repo_name }} coding standards.
 
-1. Read and pay attention to current code in the repository
-
-2. Install a plugin for [EditorConfig][editorconfig] and let it handle some of the detailed settings for you.
+- Read and pay attention to current code in the repository
+- For the Python part, we follow pep8 in most cases. We use [flake8][flake8] to check for linting errors. Once you're ready to commit changes, check your code with `flake8`.
+- Install a plugin for [EditorConfig][editorconfig] and let it handle some of the formating issues for you.
+- For the Django part, we follow standard [Django coding style][django-coding style].
+- And always remember the Zen.
 
 [editorconfig]: http://editorconfig.org/
+[flake8]: http://flake8.readthedocs.org/en/latest/
+[django-coding style]: https://docs.djangoproject.com/en/1.7/internals/contributing/writing-code/coding-style/
