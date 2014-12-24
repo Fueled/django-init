@@ -15,21 +15,32 @@ from .common import Common
 
 class Development(Common):
 
-    SECRET_KEY = values.SecretValue(environ=True, environ_name='SECRET_KEY', environ_prefix='DJANGO')
     DEBUG = values.BooleanValue(True)
     TEMPLATE_DEBUG = DEBUG
 
-    # INSTALLED_APPS
     INSTALLED_APPS = Common.INSTALLED_APPS
-    # END INSTALLED_APPS
 
-    # Mail settings
+    # EMAIL
+    # --------------------------------------------------------------------------
     EMAIL_HOST = "localhost"
     EMAIL_PORT = 1025
     EMAIL_BACKEND = values.Value('django.core.mail.backends.console.EmailBackend')
-    # End mail settings
+
+    # CACHES
+    # --------------------------------------------------------------------------
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': ''
+        }
+    }
+
+    # DJANGO_SITES
+    # --------------------------------------------------------------------------
+    SITE_ID = 'local'
 
     # django-debug-toolbar
+    # --------------------------------------------------------------------------
     MIDDLEWARE_CLASSES = Common.MIDDLEWARE_CLASSES + ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     INSTALLED_APPS += ('debug_toolbar',)
 
@@ -39,16 +50,3 @@ class Development(Common):
         'DISABLE_PANELS': ['debug_toolbar.panels.redirects.RedirectsPanel', ],
         'SHOW_TEMPLATE_CONTEXT': True,
     }
-    # end django-debug-toolbar
-
-    # CACHES
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-            'LOCATION': ''
-        }
-    }
-    # END OF CACHES
-
-    SITE_ID = 'local'
-    # Your local stuff: Below this line define 3rd party libary settings

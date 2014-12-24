@@ -17,15 +17,29 @@ from .common import Common
 
 class Production(Common):
 
+    INSTALLED_APPS = Common.INSTALLED_APPS
+
+    # SITE CONFIGURATION
+    # Hosts/domain names that are valid for this site.
+    # "*" matches anything, ".example.com" matches example.com and all subdomains
+    # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
+    ALLOWED_HOSTS = ["*"]
+
+    INSTALLED_APPS += ("gunicorn", )
+
+    # If your Django app is behind a proxy that sets a header to specify secure
+    # connections, AND that proxy ensures that user-submitted headers with the
+    # same name are ignored (so that people can't spoof it), set this value to
+    # a tuple of (header_name, header_value). For any requests that come in with
+    # that header/value, request.is_secure() will return True.
+    # WARNING! Only set this if you fully understand what you're doing. Otherwise,
+    # you may be opening yourself up to a security risk.
     # This ensures that Django will be able to detect a secure connection
     # properly on Heroku.
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-    # INSTALLED_APPS
-    INSTALLED_APPS = Common.INSTALLED_APPS
-    # END INSTALLED_APPS
-
     # django-secure
+    # --------------------------------------------------------------------------
     INSTALLED_APPS += ("djangosecure", )
 
     # set this to 60 seconds and then to 518400 when you can prove it works
@@ -37,22 +51,13 @@ class Production(Common):
     SESSION_COOKIE_SECURE = values.BooleanValue(False)
     SESSION_COOKIE_HTTPONLY = values.BooleanValue(True)
     SECURE_SSL_REDIRECT = values.BooleanValue(True)
-    # end django-secure
-
-    # SITE CONFIGURATION
-    # Hosts/domain names that are valid for this site
-    # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-    ALLOWED_HOSTS = ["*"]
-    # END SITE CONFIGURATION
-
-    INSTALLED_APPS += ("gunicorn", )
 
     # STORAGE CONFIGURATION
+    # --------------------------------------------------------------------------
     # See: http://django-storages.readthedocs.org/en/latest/index.html
     INSTALLED_APPS += ('storages', )
 
-    # See:
-    # http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html
+    # See: http://django-storages.readthedocs.org/en/latest/backends/amazon-S3.html
     try:
         from boto.s3.connection import OrdinaryCallingFormat
         AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
@@ -61,12 +66,9 @@ class Production(Common):
 
     STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-    AWS_ACCESS_KEY_ID = values.SecretValue(
-        environ=True, environ_name='AWS_ACCESS_KEY_ID', environ_prefix='DJANGO')
-    AWS_SECRET_ACCESS_KEY = values.SecretValue(
-        environ=True, environ_name='AWS_SECRET_ACCESS_KEY', environ_prefix='DJANGO')
-    AWS_STORAGE_BUCKET_NAME = values.SecretValue(
-        environ=True, environ_name='AWS_STORAGE_BUCKET_NAME', environ_prefix='DJANGO')
+    AWS_ACCESS_KEY_ID = values.SecretValue(environ=True, environ_name='AWS_ACCESS_KEY_ID', environ_prefix='DJANGO')
+    AWS_SECRET_ACCESS_KEY = values.SecretValue(environ=True, environ_name='AWS_SECRET_ACCESS_KEY', environ_prefix='DJANGO')
+    AWS_STORAGE_BUCKET_NAME = values.SecretValue(environ=True, environ_name='AWS_STORAGE_BUCKET_NAME', environ_prefix='DJANGO')
     AWS_AUTO_CREATE_BUCKET = True
     AWS_QUERYSTRING_AUTH = False
 
@@ -83,9 +85,9 @@ class Production(Common):
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
     STATIC_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
-    # END STORAGE CONFIGURATION
 
-    # Email
+    # EMAIL
+    # --------------------------------------------------------------------------
     DEFAULT_FROM_EMAIL = values.Value(
         '{{ cookiecutter.project_name }} <{{ cookiecutter.django_admin_email }}>')
     EMAIL_HOST = values.Value('smtp.sendgrid.com')
@@ -97,6 +99,8 @@ class Production(Common):
     SERVER_EMAIL = DEFAULT_FROM_EMAIL
     # END EMAIL
 
+    # CACHING
+    # --------------------------------------------------------------------------
     redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6959'))
 
     CACHES = {
@@ -117,6 +121,7 @@ class Production(Common):
     }
 
     # TEMPLATE CONFIGURATION
+    # --------------------------------------------------------------------------
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
     TEMPLATE_LOADERS = (
         ('django.template.loaders.cached.Loader', (
@@ -124,6 +129,5 @@ class Production(Common):
             'django.template.loaders.app_directories.Loader',
         )),
     )
-    # END TEMPLATE CONFIGURATION
 
     # Your production stuff: Below this line define 3rd party libary settings

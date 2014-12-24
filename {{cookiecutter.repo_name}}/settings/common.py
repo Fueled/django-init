@@ -23,11 +23,9 @@ dotenv.load_dotenv(join(ROOT_DIR, ".env"))
 # Common Configurations
 # ========================================================================
 class Common(Configuration):
-
     '''Common Configuration, overide them in it's sub-classes.'''
 
-    # APP CONFIGURATION
-    # -----------------
+    # List of strings representing installed apps.
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
     INSTALLED_APPS = (
         # Default Django apps:
@@ -49,7 +47,10 @@ class Common(Configuration):
     )
 
     # MIDDLEWARE CONFIGURATION
-    # Note: Order in which they are added are important
+    # --------------------------------------------------------------------------
+    # List of middleware classes to use.  Order is important; in the request phase,
+    # this middleware classes will be applied in the order given, and in the
+    # response phase the middleware will be applied in reverse order.
     MIDDLEWARE_CLASSES = (
         # Make sure djangosecure.middleware.SecurityMiddleware is the first
         # middleware class listed
@@ -61,7 +62,9 @@ class Common(Configuration):
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     )
-    # END MIDDLEWARE CONFIGURATION
+
+    # CORE
+    # --------------------------------------------------------------------------
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
     # Defaults to false, which is safe, enable them only in development.
@@ -70,37 +73,14 @@ class Common(Configuration):
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
     TEMPLATE_DEBUG = DEBUG
 
-    # SECRET CONFIGURATION
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-    SECRET_KEY = values.SecretValue(environ=True, environ_name='SECRET_KEY',
-                                    environ_prefix='DJANGO')
-    # END SECRET CONFIGURATION
-
-    # See:
-    # https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
-    FIXTURE_DIRS = (
-        join(APP_DIR, 'fixtures'),
-    )
-
-    # MANAGER CONFIGURATION
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
-    ADMINS = (
-        ('{{ cookiecutter.project_name }} admin', '{{ cookiecutter.django_admin_email }}'),
-    )
-
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
-    MANAGERS = ADMINS
-    # END MANAGER CONFIGURATION
-
-    # EMAIL CONFIGURATION
-    EMAIL_BACKEND = values.Value('django.core.mail.backends.smtp.EmailBackend')
-    # END EMAIL CONFIGURATION
-
     # Local time zone for this installation. Choices can be found here:
     # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
     # although not all choices may be available on all operating systems.
     # In a Windows environment this must be set to your system time zone.
     TIME_ZONE = '{{ cookiecutter.timezone }}'
+
+    # If you set this to False, Django will not use timezone-aware datetimes.
+    USE_TZ = True
 
     # Language code for this installation. All choices can be found here:
     # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -114,10 +94,70 @@ class Common(Configuration):
     # calendars according to the current locale.
     USE_L10N = True
 
-    # If you set this to False, Django will not use timezone-aware datetimes.
-    USE_TZ = True
+    # A secret key for this particular Django installation. Used in secret-key
+    # hashing algorithms. Set this in your settings, or Django will complain
+    # loudly.
+    # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
+    SECRET_KEY = values.SecretValue(environ=True, environ_name='SECRET_KEY',
+                                    environ_prefix='DJANGO')
+
+    # The list of directories to search for fixtures
+    # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
+    FIXTURE_DIRS = (
+        join(APP_DIR, 'fixtures'),
+    )
+
+    # The Python dotted path to the WSGI application that Django's internal servers
+    # (runserver, runfcgi) will use. If `None`, the return value of
+    # 'django.core.wsgi.get_wsgi_application' is used, thus preserving the same
+    # behavior as previous versions of Django. Otherwise this should point to an
+    # actual WSGI application object.
+    # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
+    WSGI_APPLICATION = 'wsgi.application'
+
+    # URL CONFIGURATION
+    # --------------------------------------------------------------------------
+    ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
+
+    # MANAGER CONFIGURATION
+    # --------------------------------------------------------------------------
+    # People who get code error notifications.
+    # In the format (('Full Name', 'email@example.com'), ('Full Name', 'anotheremail@example.com'))
+    ADMINS = (
+        ('{{ cookiecutter.project_name }} admin', '{{ cookiecutter.django_admin_email }}'),
+    )
+
+    # Not-necessarily-technical managers of the site. They get broken link
+    # notifications and other various emails.
+    MANAGERS = ADMINS
+
+    # EMAIL CONFIGURATION
+    # --------------------------------------------------------------------------
+    EMAIL_BACKEND = values.Value('django.core.mail.backends.smtp.EmailBackend')
+
+    # DATABASE CONFIGURATION
+    # --------------------------------------------------------------------------
+    # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+    DATABASES = values.DatabaseURLValue(environ=True, environ_name='DATABASE_URL',
+                                        environ_prefix='')
 
     # TEMPLATE CONFIGURATION
+    # --------------------------------------------------------------------------
+    # List of locations of the template source files, in search order.
+    # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
+    TEMPLATE_DIRS = (
+        join(APP_DIR, 'templates'),
+    )
+
+    # List of callables that know how to import templates from various sources.
+    TEMPLATE_LOADERS = (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )
+
+    # List of processors used by RequestContext to populate the context.
+    # Each one should be a callable that takes the request object as its
+    # only parameter and returns a dictionary to add to the context.
     TEMPLATE_CONTEXT_PROCESSORS = (
         'django.contrib.auth.context_processors.auth',
         'django.core.context_processors.debug',
@@ -130,26 +170,19 @@ class Common(Configuration):
         # Your stuff: custom template context processers go here
     )
 
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
-    TEMPLATE_DIRS = (
-        join(APP_DIR, 'templates'),
-    )
-
-    # List of callables that know how to import templates from various sources.
-    TEMPLATE_LOADERS = (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    )
-
     # STATIC FILE CONFIGURATION
+    # --------------------------------------------------------------------------
+    # Absolute path to the directory static files should be collected to.
+    # Example: "/var/www/example.com/static/"
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
     STATIC_ROOT = join(ROOT_DIR, '.staticfiles')
 
+    # URL that handles the static files served from STATIC_ROOT.
+    # Example: "http://example.com/static/", "http://static.example.com/"
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
     STATIC_URL = '/static/'
 
-    # See:
-    # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+    # A list of locations of additional static files
     STATICFILES_DIRS = (
         # join(APP_DIR, 'static'),
     )
@@ -160,33 +193,30 @@ class Common(Configuration):
         'django.contrib.staticfiles.finders.FileSystemFinder',
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     )
-    # END STATIC FILE CONFIGURATION
 
     # MEDIA CONFIGURATION
+    # --------------------------------------------------------------------------
+
+    # Absolute filesystem path to the directory that will hold user-uploaded files.
+    # Example: "/var/www/example.com/media/"
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
     MEDIA_ROOT = join(ROOT_DIR, '.media')
 
+    # URL that handles the media served from MEDIA_ROOT.
+    # Examples: "http://example.com/media/", "http://media.example.com/"
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
     MEDIA_URL = '/media/'
-    # END MEDIA CONFIGURATION
-
-    # URL Configuration
-    ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
-
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
-    WSGI_APPLICATION = 'wsgi.application'
-    # End URL Configuration
 
     # AUTHENTICATION CONFIGURATION
-    AUTHENTICATION_BACKENDS = (
-        "django.contrib.auth.backends.ModelBackend",
-    )
+    # --------------------------------------------------------------------------
+    AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 
     # SLUGLIFIER
     AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
     # END SLUGLIFIER
 
     # LOGGING CONFIGURATION
+    # --------------------------------------------------------------------------
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
     # A sample logging configuration. The only tangible logging
     # performed by this configuration is to send an email to
@@ -216,15 +246,9 @@ class Common(Configuration):
             },
         }
     }
-    # END LOGGING CONFIGURATION
-
-    # DATABASE CONFIGURATION
-    # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-    DATABASES = values.DatabaseURLValue(environ=True, environ_name='DATABASE_URL',
-                                        environ_prefix='')
-    # END DATABASE CONFIGURATION
 
     # Django Rest Framework
+    # --------------------------------------------------------------------------
     REST_FRAMEWORK = {
         'PAGINATE_BY': 30,
         'PAGINATE_BY_PARAM': 'per_page',
@@ -247,9 +271,9 @@ class Common(Configuration):
         "DATETIME_FORMAT": "%Y-%m-%dT%H:%M:%S%z",
         "EXCEPTION_HANDLER": "{{ cookiecutter.repo_name }}.base.exceptions.exception_handler",
     }
-    # End DRF
 {% if cookiecutter.celery == 'y' %}
     # CELERY CONFIGURATION
+    # --------------------------------------------------------------------------
     from settings.celery import crontab  # noqa
     BROKER_URL = 'redis://localhost:6379/0'
     BROKER_TRANSPORT_OPTIONS = {'polling_interval': 0.3}
@@ -262,7 +286,8 @@ class Common(Configuration):
     # End Periodic Tasks
     # END CELERY CONFIGURATION
 {% endif %}
-    # DJANGO_SITES
+    # DJANGO_SITES CONFIGURATION
+    # --------------------------------------------------------------------------
     # see: http://django-sites.readthedocs.org
     SITES = {
         "local": {"domain": "localhost:8000", "scheme": "http", "name": "localhost"},
@@ -274,4 +299,3 @@ class Common(Configuration):
     }
 
     SITE_ID = "remote"
-    # End django_sites
