@@ -18,10 +18,10 @@ factory_boy==2.4.1
 flake8==2.2.5
 pytest-django==2.7.0
 pytest-flakes==0.2
-pytest-pythonpath==0.3
+pytest-pythonpath==0.5
 pytest-ipdb==0.1-prerelease2
 
-coverage==3.7.1
+coverage==4.0a1
 
 # Versioning
 # -------------------------------------

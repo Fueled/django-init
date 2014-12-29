@@ -3,7 +3,7 @@ Django==1.7.1
 
 # Extensions
 # -------------------------------------
-django-extensions==1.4.8
+django-extensions==1.4.9
 Werkzeug==0.9.6
 pytz==2014.10
 
@@ -19,7 +19,7 @@ python-dotenv==0.1.0
 # -------------------------------------
 django-model-utils==2.2
 django-uuid-upload-path==1.0.0
-django-versatileimagefield==0.2
+django-versatileimagefield==0.3.1
 
 # Images
 # -------------------------------------
