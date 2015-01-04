@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 
+# Standard Library
 import sys
 
 if "test" in sys.argv:
