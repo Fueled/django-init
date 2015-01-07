@@ -12,6 +12,10 @@ heroku addons:add heroku-postgresql:dev --app=<heroku-app-name>
 heroku addons:add pgbackups:auto-month --app=<heroku-app-name>
 heroku addons:add sendgrid:starter --app=<heroku-app-name>
 heroku addons:add redistogo --app=<heroku-app-name>
+{% if cookiecutter.newrelic == 'y' %}
+heroku addons:add newrelic:stark --app=<heroku-app-name>
+heroku config:set NEW_RELIC_APP_NAME=<new-relic-app-name> --app=<heroku-app-name>
+{% endif %}
 heroku pg:promote DATABASE_URL --app=<heroku-app-name>
 heroku config:set DJANGO_CONFIGURATION=Production \
 DJANGO_SECRET_KEY=`openssl rand -base64 32` \

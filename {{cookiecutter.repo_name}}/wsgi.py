@@ -39,3 +39,9 @@ application = get_wsgi_application()
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
 # application = HelloWorldApplication(application)
+
+{% if cookiecutter.newrelic == 'y' %}
+# New Relic Middleware
+import newrelic.agent
+application = newrelic.agent.WSGIApplicationWrapper(application)
+{% endif %}
