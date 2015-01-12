@@ -25,7 +25,7 @@ Following are system level dependecies, and must be present on your machine befo
 - **postgres** - can be installed with `brew install postgres`
 - **sass** - can be installed with `gem install sass`
 - **graphviz** - can be installed with `brew install graphviz`
-- **fabric** - can be install with `sudo pip install fabric`
+- **fabric** - can be installed with `sudo pip install fabric`
 
 You should able to install these fairly easily if your developement machine is other than a Mac OS X.
 
@@ -41,10 +41,10 @@ It will ask you to some questions, after which it will create a new project in y
 
 Once the cookiecutter is finishes, you'll have:
 
-1. A postgres database created, with name same as
+1. A postgres database created, with name same as `repo_name` you provided.
 2. Installed all the npm packages required
 3. Installed all the python dependencies in virtualenv
-4. Local settings added to .env file (untracked)
+4. Local settings added to `.env` file (untracked)
 5. Initialized a git repo and created the first commit.
 
 Now the only thing you'll need to do is:
