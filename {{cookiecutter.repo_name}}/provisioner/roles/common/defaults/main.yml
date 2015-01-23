@@ -2,8 +2,10 @@
 # roles/common/defaults/main.yml
 common_timezone: {{cookiecutter.timezone}}
 
-common_locale_all: en_US.UTF-8
-common_locale_lang: en_US.UTF-8
+lang: "en_US.utf8"
+lc_all: "en_US.utf8"
+lc_ctype: "en_US.utf8"
+lc_collate: "en_US.utf8"
 
 base_ubuntu:
   common:

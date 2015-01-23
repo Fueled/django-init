@@ -1,7 +1,7 @@
 {% raw %}---
 # roles/common/tasks/main.yml
-- name: set locale
-  template: src=locale.j2 dest=/etc/default/locale
+- name: set system locale
+  command: update-locale LC_ALL={{ lc_all }} LANG={{ lang }} LC_CTYPE={{ lc_ctype }} LC_COLLATE={{ lc_collate }}
 
 - name: set timezone
   file: src=/usr/share/zoneinfo/{{ common_timezone }}
