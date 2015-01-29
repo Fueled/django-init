@@ -14,7 +14,6 @@ def generate_files():
         "timezone": "UTC",
         "django_admin_email": "noreply@example.com",
         "version": "0.1.0",
-        "domain_name": "subdomain.domain.com",
         "celery (y/n)": "n"
     }
 
