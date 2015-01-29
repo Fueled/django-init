@@ -6,7 +6,7 @@
     , "project_description": "add a short project description here"
     , "timezone": "UTC"
     , "django_admin_email": "noreply@example.com"
-    , "version": "0.1.0"
+    , "version": "0.0.0"
     , "celery": "n"
     , "newrelic" : "y"
 }
