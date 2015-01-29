@@ -19,7 +19,7 @@ python-dotenv==0.1.0
 # -------------------------------------
 django-model-utils==2.2
 django-uuid-upload-path==1.0.0
-django-versatileimagefield==0.3.1
+django-versatileimagefield==0.5.1
 
 # Images
 # -------------------------------------
@@ -36,7 +36,7 @@ django-autoslug==1.7.2
 
 # Django Rest Framework
 # -------------------------------------
-djangorestframework==3.0.3
+djangorestframework==3.0.4
 Markdown>=2.3.1,<2.5   # to fix conflict with mkdocs
 
 {% if cookiecutter.celery == 'y' %}

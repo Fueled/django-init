@@ -16,12 +16,12 @@ ipdb==0.8
 mock==1.0.1
 factory_boy==2.4.1
 flake8==2.3.0
-pytest-django==2.7.0
+pytest-django==2.8.0
 pytest-flakes==0.2
-pytest-pythonpath==0.5
+pytest-pythonpath==0.6
 pytest-ipdb==0.1-prerelease2
 
-coverage==4.0a1
+coverage==4.0a4
 
 # Versioning
 # -------------------------------------
