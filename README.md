@@ -1,6 +1,8 @@
 cookiecutter-django
 ====================
 
+[![Build Status](https://magnum.travis-ci.com/Fueled/cookiecutter-django.svg?token=ZbPpaKxeSEJQvwCqUqaJ&branch=master)](https://magnum.travis-ci.com/Fueled/cookiecutter-django)
+
 Project template for django based projects.
 
 ## Features
