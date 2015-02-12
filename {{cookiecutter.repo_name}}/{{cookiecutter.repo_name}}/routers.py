@@ -12,3 +12,7 @@ For base name use:
 from rest_framework import routers
 
 router = routers.DefaultRouter(trailing_slash=False)
+
+from {{ cookiecutter.repo_name }}.notifications.api import DeviceViewSet
+
+router.register(r"devices", DeviceViewSet, base_name="devices")

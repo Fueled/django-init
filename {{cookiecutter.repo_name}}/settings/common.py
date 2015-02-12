@@ -41,6 +41,7 @@ class Common(Configuration):
 
         '{{ cookiecutter.repo_name }}.base',
         '{{ cookiecutter.repo_name }}.pages',
+        '{{ cookiecutter.repo_name }}.notifications',
 
         'django_extensions',  # http://django-extensions.readthedocs.org/
         'rest_framework',  # http://www.django-rest-framework.org/
@@ -324,3 +325,10 @@ class Common(Configuration):
     }
 
     SITE_ID = "remote"
+
+
+    # PUSH NOTIFICATION CONFIG
+    # -------------------------------------------------------------------------
+    PUSH_NOTIFICATION_PROVIDER = '{{repo_name}}.notifications.integrations.ZeroPushIntegration'
+    DISABLE_PUSH_NOTIFICATION = values.BooleanValue(False)
+    ZEROPUSH_AUTH_TOKEN = values.Value(False, environ=True, environ_name='ZEROPUSH_AUTH_TOKEN', environ_prefix='')
