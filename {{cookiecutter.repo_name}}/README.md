@@ -1,7 +1,7 @@
 {{ cookiecutter.project_name }}
 ==============================
 
-![version {{ cookiecutter.version }}](http://img.shields.io/badge/Version-{{ cookiecutter.version }}-blue.svg)
+__Version:__ {{ cookiecutter.version }}
 
 {{ cookiecutter.project_description }}
 
@@ -39,6 +39,21 @@ The deployment are managed via travis, but for the first time you'll need to set
 
 Check out detailed server setup instruction [here](docs/backend/server_config.md).
 
+## How to release {{ cookiecutter.project_name }}
+
+Execute the following commands:
+
+```
+git checkout master
+fab test
+bumpversion release
+bumpversion --no-tag patch # 'patch' can be replaced with 'minor' or 'major'
+git push origin master
+git push origin master --tags
+git checkout qa
+git rebase master
+git push origin qa
+```
 
 ## Contributing
 

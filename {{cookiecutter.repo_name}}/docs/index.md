@@ -1,8 +1,6 @@
 # {{ cookiecutter.project_name }} Documentation
 
-<img src="http://img.shields.io/badge/Version-{{ cookiecutter.version }}-blue.svg" alt="Version {{ cookiecutter.version }}" style="margin: 0">
-
-{{ cookiecutter.project_description }}
+__Version:__ {{ cookiecutter.version }}
 
 ## API
 
