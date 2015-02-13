@@ -8,7 +8,6 @@ import pytest
 
 from .fixtures import *  # noqa
 
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 os.environ.setdefault("DJANGO_CONFIGURATION", "Development")
 

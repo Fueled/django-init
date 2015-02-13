@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-"""The various HTTP responses for use in returning proper HTTP codes."""
+import rest_framework.response
 from django import http
 
-import rest_framework.response
+"""The various HTTP responses for use in returning proper HTTP codes."""
 
 
 class Response(rest_framework.response.Response):

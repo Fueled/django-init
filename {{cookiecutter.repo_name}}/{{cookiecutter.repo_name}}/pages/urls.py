@@ -7,6 +7,7 @@ homepage, about, terms and conditions, etc. in this app.
 '''
 from __future__ import unicode_literals
 
+# Third Party Stuff
 from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
 
