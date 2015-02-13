@@ -16,6 +16,8 @@ framework.
 """
 import os
 
+from configurations.wsgi import get_wsgi_application
+
 try:
     import dotenv
     ROOT_DIR = os.path.dirname(__file__)
@@ -33,7 +35,6 @@ os.environ.setdefault("DJANGO_CONFIGURATION", "Production")
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
-from configurations.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
 # Apply WSGI middleware here.

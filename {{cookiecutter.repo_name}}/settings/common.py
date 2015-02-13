@@ -5,18 +5,19 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 '''
 from __future__ import print_function, unicode_literals
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from os.path import join, dirname
+from os.path import dirname, join
 
+import dotenv
 from configurations import Configuration, values
 
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 ROOT_DIR = dirname(dirname(__file__))
 APP_DIR = join(ROOT_DIR, '{{ cookiecutter.repo_name }}')
 
 # read and load variables in environement from .env file
 # see: http://github.com/theskumar/python-dotenv
-import dotenv
 dotenv.load_dotenv(join(ROOT_DIR, ".env"))
 
 
