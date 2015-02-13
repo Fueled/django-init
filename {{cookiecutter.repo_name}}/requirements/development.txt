@@ -8,7 +8,7 @@ pygraphviz==1.3rc2
 # Debugging
 # -------------------------------------
 django-debug-toolbar==1.2.2
-ipython==2.3.1
+ipython==3.0.0b1
 ipdb==0.8
 
 # Testing

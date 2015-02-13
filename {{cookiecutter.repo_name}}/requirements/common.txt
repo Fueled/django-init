@@ -3,8 +3,8 @@ Django==1.7.4
 
 # Extensions
 # -------------------------------------
-django-extensions==1.4.9
-Werkzeug==0.9.6
+django-extensions==1.5.0
+Werkzeug==0.10.1
 pytz==2014.10
 
 # Configuration
@@ -19,7 +19,7 @@ python-dotenv==0.1.0
 # -------------------------------------
 django-model-utils==2.2
 django-uuid-upload-path==1.0.0
-django-versatileimagefield==0.5.1
+django-versatileimagefield==0.5.2
 
 # Images
 # -------------------------------------
@@ -27,7 +27,7 @@ Pillow==2.7.0
 
 # For the persistance stores
 # -------------------------------------
-psycopg2==2.5.4
+psycopg2==2.6
 
 # Unicode slugification
 # -------------------------------------
@@ -36,7 +36,7 @@ django-autoslug==1.7.2
 
 # Django Rest Framework
 # -------------------------------------
-djangorestframework==3.0.4
+djangorestframework==3.0.5
 Markdown>=2.3.1,<2.5   # to fix conflict with mkdocs
 
 {% if cookiecutter.celery == 'y' %}
