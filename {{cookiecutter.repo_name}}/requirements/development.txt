@@ -2,6 +2,7 @@
 
 # Documentation
 # -------------------------------------
+https://github.com/r0wb0t/markdown-urlize/archive/8bf9bd75cf61ba255bd91a9e808add925d95412e.zip
 https://github.com/tomchristie/mkdocs/archive/master.zip
 pygraphviz==1.3rc2
 
