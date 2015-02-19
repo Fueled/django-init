@@ -1,4 +1,1 @@
-{% if cookiecutter.newrelic == 'y' %}
-web: newrelic-admin run-program gunicorn --pythonpath="$PWD" wsgi:application
-{% endif %}
-web: gunicorn --pythonpath="$PWD" wsgi:application
+{% if cookiecutter.newrelic == 'y' %}web: newrelic-admin run-program gunicorn --pythonpath="$PWD" wsgi:application{% else %}web: gunicorn --pythonpath="$PWD" wsgi:application{% endif %}
