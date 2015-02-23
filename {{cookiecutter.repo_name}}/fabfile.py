@@ -88,7 +88,9 @@ def shell():
 
 
 def test(options='--ipdb'):
-    '''Run tests locally.'''
+    '''Run tests locally. By Default, it runs the test using --ipdb.
+    You can skip running it using --ipdb by running - `fab test:""`
+    '''
     with virtualenv():
         local('flake8 .')
         params = {

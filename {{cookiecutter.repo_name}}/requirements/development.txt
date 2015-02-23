@@ -21,7 +21,7 @@ flake8==2.3.0
 pytest-django==2.8.0
 pytest-flakes==0.2
 pytest-pythonpath==0.6
-pytest-ipdb==0.1-prerelease2
+git+git://github.com/mverteuil/pytest-ipdb.git
 
 coverage==4.0a4
 
