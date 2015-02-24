@@ -3,22 +3,26 @@ cookiecutter-django
 
 [![Build Status](https://magnum.travis-ci.com/Fueled/cookiecutter-django.svg?token=ZbPpaKxeSEJQvwCqUqaJ&branch=master)](https://magnum.travis-ci.com/Fueled/cookiecutter-django)
 
-Project template for django based projects.
+Project template for django based projects, optimized for making REST API with deployment on Heroku and EC2 instances.
 
 ## Features
 
-* Django 1.7+
-* PostresSQL 9.3
-* Foundation 5.4.7
-* SASS, CoffeeScript, Live-Reloading Server
-* Ansible script for deploying to EC2/Ubuntu
-* Heroku/Sendgrid/S3
-* [12factor][12factor] based project configuration
-* Django Rest Framework 3.0+
-* `django_sites` instead of `django.contrib.sites`
+- Latest stable Django 1.7+
+- PostresSQL 9.3
+- Complete Heroku Support
+- Ansible script for quick deployment to EC2/Ubuntu
+- [12factor][12factor] based project configuration, reads config from `.env`
+- Django Rest Framework 3.0+
+- `django_sites` instead of `django.contrib.sites`
+- Use [mkdocs] for project documentation.
+- Use [py.test] as testing framework
+- `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
+- Only tested and stable third-party libraries are added.
+- SASS, CoffeeScript support with live-reloading server for frontend development.
 
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net
+[py.test]: http://pytest.org/
 
 ## Getting Started
 
@@ -41,7 +45,7 @@ After the installation is successful, you can create a new django project by sim
 
 It will ask you to some questions, after which it will create a new project in your current working directory. It will also create a virtualenv in the folder `venv` inside the project, and install all the python dependencies inside it.
 
-Once the cookiecutter is finishes, you'll have:
+Once the cookiecutter script finishes, you'll have:
 
 1. A postgres database created, with name same as `repo_name` you provided.
 2. Installed all the npm packages required
@@ -54,7 +58,7 @@ Now the only thing you'll need to do is:
 1. `cd` into the new `repo_name` folder
 2. Run `fab serve`
 
-Read the instructions in `README.md`, inside the project to get much detailed instructions.
+Read the instructions in `README.md` generated inside the project to get more detailed instructions.
 
 --------
 
