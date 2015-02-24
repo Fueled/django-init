@@ -4,26 +4,24 @@
 # -------------------------------------
 https://github.com/r0wb0t/markdown-urlize/archive/8bf9bd75cf61ba255bd91a9e808add925d95412e.zip
 https://github.com/tomchristie/mkdocs/archive/master.zip
-pygraphviz==1.3rc2
 isort==3.9.6
+pygraphviz==1.3rc2
 
 # Debugging
 # -------------------------------------
 django-debug-toolbar==1.2.2
-ipython==3.0.0b1
 ipdb==0.8
+ipython==3.0.0rc1
 
-# Testing
+# Testing and coverage
 # -------------------------------------
-mock==1.0.1
+coverage==4.0a5
 factory_boy==2.4.1
 flake8==2.3.0
-pytest-django==2.8.0
-pytest-flakes==0.2
-pytest-pythonpath==0.6
 git+git://github.com/mverteuil/pytest-ipdb.git
-
-coverage==4.0a4
+mock==1.0.1
+pytest-django==2.8.0
+pytest-pythonpath==0.6
 
 # Versioning
 # -------------------------------------
