@@ -8,21 +8,24 @@ Project template for django based projects, optimized for making REST API with d
 ## Features
 
 - Latest stable Django 1.7+
-- PostresSQL 9.3
-- Complete Heroku Support
-- Ansible script for quick deployment to EC2/Ubuntu
-- [12factor][12factor] based project configuration, reads config from `.env`
-- Django Rest Framework 3.0+
+- PostresSQL 9.3.
+- Support for UUID models (django 1.8 has it by default).
+- [Procfile] for deploying to Heroku.
+- Ansible script for quick deployment to EC2/Ubuntu.
+- Settings management via [django-configurations], reads settings from `.env` if present.
+- Django Rest Framework 3.0+.
 - `django_sites` instead of `django.contrib.sites`
 - Use [mkdocs] for project documentation.
-- Use [py.test] as testing framework
+- Use [py.test] as testing framework.
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Only tested and stable third-party libraries are added.
-- SASS, CoffeeScript support with live-reloading server for frontend development.
+- Grunt build for compass and livereload.
 
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net
 [py.test]: http://pytest.org/
+[Procfile]: https://devcenter.heroku.com/articles/procfile
+[django-configurations]: https://github.com/jezdez/django-configurations
 
 ## Getting Started
 
@@ -58,7 +61,7 @@ Now the only thing you'll need to do is:
 1. `cd` into the new `repo_name` folder
 2. Run `fab serve`
 
-Read the instructions in `README.md` generated inside the project to get more detailed instructions.
+Don't forget to carefully look at the generated README. Awesome, right?
 
 --------
 
