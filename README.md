@@ -59,7 +59,7 @@ Once the cookiecutter script finishes, you'll have:
 Now the only thing you'll need to do is:
 
 1. `cd` into the new `repo_name` folder just created.
-2. Activate virtualenv `source venv/bin/activate`[1]. If you plan to use virtualenvwrapper, you can install the project requirements via `pip install -r requirements/development.txt`
+2. Activate virtualenv `source venv/bin/activate`. If you plan to use virtualenvwrapper, you can install the project requirements via `pip install -r requirements/development.txt`
 3. Run `fab serve`
 
 __Summarizing__:
@@ -82,3 +82,5 @@ You can also explore the [wiki] section for details on advance setups and usuage
 --------
 
 Built with ♥ at [Fueled](http://fueled.com)
+
+[wiki]: https://github.com/Fueled/cookiecutter-django/wiki
