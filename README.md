@@ -58,10 +58,26 @@ Once the cookiecutter script finishes, you'll have:
 
 Now the only thing you'll need to do is:
 
-1. `cd` into the new `repo_name` folder
-2. Run `fab serve`
+1. `cd` into the new `repo_name` folder just created.
+2. Activate virtualenv `source venv/bin/activate`[1]. If you plan to use virtualenvwrapper, you can install the project requirements via `pip install -r requirements/development.txt`
+3. Run `fab serve`
+
+__Summarizing__:
+
+```
+brew install postgres
+gem install sass
+brew install graphviz
+sudo pip install fabric cookiecutter
+cookiecutter https://github.com/Fueled/cookiecutter-django.git
+cd <repo_name>
+source venv/bin/activate
+fab serve
+```
 
 Don't forget to carefully look at the generated README. Awesome, right?
+
+You can also explore the [wiki] section for details on advance setups and usuages.
 
 --------
 
