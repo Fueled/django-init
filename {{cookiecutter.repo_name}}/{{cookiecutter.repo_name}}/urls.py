@@ -14,7 +14,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from routers import router
 
-handler500 = "{{ cookiecutter.repo_name }}.base.api.views.api_server_error"
+handler500 = "{{ cookiecutter.repo_name }}.base.views.server_error"
 
 urlpatterns = patterns('',  # noqa
 
