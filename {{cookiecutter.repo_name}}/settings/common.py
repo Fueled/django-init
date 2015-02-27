@@ -53,9 +53,6 @@ class Common(Configuration):
     # this middleware classes will be applied in the order given, and in the
     # response phase the middleware will be applied in reverse order.
     MIDDLEWARE_CLASSES = (
-        # Make sure djangosecure.middleware.SecurityMiddleware is the first
-        # middleware class listed
-        'djangosecure.middleware.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
         'django.middleware.csrf.CsrfViewMiddleware',
