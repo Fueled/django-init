@@ -50,3 +50,7 @@ class Development(Common):
         'DISABLE_PANELS': ['debug_toolbar.panels.redirects.RedirectsPanel', ],
         'SHOW_TEMPLATE_CONTEXT': True,
     }
+
+    # PUSH NOTIFICATION CONFIG
+    # -------------------------------------------------------------------------
+    DISABLE_PUSH_NOTIFICATION = values.BooleanValue(True)

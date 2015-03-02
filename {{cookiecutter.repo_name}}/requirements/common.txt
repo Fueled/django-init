@@ -6,6 +6,7 @@ Django==1.7.5
 Werkzeug==0.10.1
 django-extensions==1.5.0
 pytz==2014.10
+requests==2.5.1
 
 # Configuration
 # -------------------------------------
