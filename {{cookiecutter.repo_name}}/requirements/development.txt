@@ -11,7 +11,7 @@ pygraphviz==1.3rc2
 # -------------------------------------
 django-debug-toolbar==1.2.2
 ipdb==0.8
-ipython==3.0.0rc1
+ipython==3.0.0
 
 # Testing and coverage
 # -------------------------------------
