@@ -12,7 +12,7 @@ import dotenv
 from configurations import Configuration, values
 
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# Build paths inside the project like this: os.path.join(ROOT_DIR, ...)
 ROOT_DIR = dirname(dirname(__file__))
 APP_DIR = join(ROOT_DIR, '{{ cookiecutter.repo_name }}')
 
@@ -26,10 +26,23 @@ dotenv.load_dotenv(join(ROOT_DIR, ".env"))
 class Common(Configuration):
     '''Common Configuration, overide them in it's sub-classes.'''
 
+    # MANAGER CONFIGURATION
+    # --------------------------------------------------------------------------
+    # People who get code error notifications.
+    # In the format (('Full Name', 'email@example.com'), ('Full Name', 'anotheremail@example.com'))
+    ADMINS = (
+        ('{{ cookiecutter.project_name }} Admin', '{{ cookiecutter.django_admin_email }}'),
+    )
+
+    # Not-necessarily-technical managers of the site. They get broken link
+    # notifications and other various emails.
+    MANAGERS = ADMINS
+
+    # INSTALLED APPS
+    # ==========================================================================
     # List of strings representing installed apps.
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
     INSTALLED_APPS = (
-        # Default Django apps:
         'django.contrib.auth',
         'django.contrib.contenttypes',
         'django.contrib.sessions',
@@ -47,6 +60,52 @@ class Common(Configuration):
         'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
     )
 
+    # INSTALLED APPS CONFIGURATION
+    # ==========================================================================
+
+    # django.contrib.auth
+    # --------------------------------------------------------------------------
+    # AUTH_USER_MODEL = 'users.User'
+    AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+
+    # rest_framework
+    # --------------------------------------------------------------------------
+    REST_FRAMEWORK = {
+        'PAGINATE_BY': 30,
+        'PAGINATE_BY_PARAM': 'per_page',
+        'MAX_PAGINATE_BY': 1000,
+        # Use hyperlinked styles by default.
+        # Only used if the `serializer_class` attribute is not set on a view.
+        'DEFAULT_MODEL_SERIALIZER_CLASS': 'rest_framework.serializers.HyperlinkedModelSerializer',
+
+        # Use Django's standard `django.contrib.auth` permissions,
+        # or allow read-only access for unauthenticated users.
+        'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.IsAuthenticated',
+        ],
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.BasicAuthentication',
+
+            # Mainly used for api debug.
+            'rest_framework.authentication.SessionAuthentication',
+        ),
+        "DATETIME_FORMAT": "%Y-%m-%dT%H:%M:%S%z",
+        "EXCEPTION_HANDLER": "{{ cookiecutter.repo_name }}.base.exceptions.exception_handler",
+    }
+
+    # django_sites
+    # --------------------------------------------------------------------------
+    # see: http://django-sites.readthedocs.org
+    SITES = {
+        "local": {"domain": "localhost:8000", "scheme": "http", "name": "localhost"},
+        "remote": {
+            "domain": os.environ.get('SITE_DOMAIN'),
+            "scheme": os.environ.get('SITE_SCHEME', 'https'),
+            "name": os.environ.get('SITE_NAME'),
+        },
+    }
+    SITE_ID = "remote"
+
     # MIDDLEWARE CONFIGURATION
     # --------------------------------------------------------------------------
     # List of middleware classes to use.  Order is important; in the request phase,
@@ -61,7 +120,7 @@ class Common(Configuration):
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     )
 
-    # CORE
+    # DJANGO CORE
     # --------------------------------------------------------------------------
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
@@ -116,18 +175,6 @@ class Common(Configuration):
     # URL CONFIGURATION
     # --------------------------------------------------------------------------
     ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
-
-    # MANAGER CONFIGURATION
-    # --------------------------------------------------------------------------
-    # People who get code error notifications.
-    # In the format (('Full Name', 'email@example.com'), ('Full Name', 'anotheremail@example.com'))
-    ADMINS = (
-        ('{{ cookiecutter.project_name }} admin', '{{ cookiecutter.django_admin_email }}'),
-    )
-
-    # Not-necessarily-technical managers of the site. They get broken link
-    # notifications and other various emails.
-    MANAGERS = ADMINS
 
     # EMAIL CONFIGURATION
     # --------------------------------------------------------------------------
@@ -205,10 +252,6 @@ class Common(Configuration):
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
     MEDIA_URL = '/media/'
 
-    # AUTHENTICATION CONFIGURATION
-    # --------------------------------------------------------------------------
-    AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
-
     # SLUGLIFIER
     AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
     # END SLUGLIFIER
@@ -269,32 +312,8 @@ class Common(Configuration):
         }
     }
 
-    # Django Rest Framework
-    # --------------------------------------------------------------------------
-    REST_FRAMEWORK = {
-        'PAGINATE_BY': 30,
-        'PAGINATE_BY_PARAM': 'per_page',
-        'MAX_PAGINATE_BY': 1000,
-        # Use hyperlinked styles by default.
-        # Only used if the `serializer_class` attribute is not set on a view.
-        'DEFAULT_MODEL_SERIALIZER_CLASS': 'rest_framework.serializers.HyperlinkedModelSerializer',
-
-        # Use Django's standard `django.contrib.auth` permissions,
-        # or allow read-only access for unauthenticated users.
-        'DEFAULT_PERMISSION_CLASSES': [
-            'rest_framework.permissions.IsAuthenticated',
-        ],
-        'DEFAULT_AUTHENTICATION_CLASSES': (
-            'rest_framework.authentication.BasicAuthentication',
-
-            # Mainly used for api debug.
-            'rest_framework.authentication.SessionAuthentication',
-        ),
-        "DATETIME_FORMAT": "%Y-%m-%dT%H:%M:%S%z",
-        "EXCEPTION_HANDLER": "{{ cookiecutter.repo_name }}.base.exceptions.exception_handler",
-    }
 {% if cookiecutter.celery == 'y' %}
-    # CELERY CONFIGURATION
+    # CELERY APP CONFIGURATION
     # --------------------------------------------------------------------------
     from settings.celery import crontab  # noqa
     BROKER_URL = 'redis://localhost:6379/0'
@@ -308,16 +327,3 @@ class Common(Configuration):
     # End Periodic Tasks
     # END CELERY CONFIGURATION
 {% endif %}
-    # DJANGO_SITES CONFIGURATION
-    # --------------------------------------------------------------------------
-    # see: http://django-sites.readthedocs.org
-    SITES = {
-        "local": {"domain": "localhost:8000", "scheme": "http", "name": "localhost"},
-        "remote": {
-            "domain": os.environ.get('SITE_DOMAIN'),
-            "scheme": os.environ.get('SITE_SCHEME', 'https'),
-            "name": os.environ.get('SITE_NAME'),
-        },
-    }
-
-    SITE_ID = "remote"

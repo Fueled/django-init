@@ -5,7 +5,7 @@
     , "project_name": "My Project"
     , "project_description": "add a short project description here"
     , "timezone": "UTC"
-    , "django_admin_email": "noreply@example.com"
+    , "django_admin_email": "backend@fueled.com"
     , "version": "0.0.0"
     , "celery": "n"
     , "newrelic" : "y"
