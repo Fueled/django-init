@@ -1,5 +1,6 @@
-# Latest Stable release of Django
-Django==1.7.5
+# Core Stuff
+# -------------------------------------
+Django==1.7.6
 
 # Extensions
 # -------------------------------------
