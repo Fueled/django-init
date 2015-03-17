@@ -80,7 +80,8 @@ class Production(Common):
 
     # see: https://github.com/antonagestam/collectfast
     AWS_PRELOAD_METADATA = True
-    INSTALLED_APPS += ("collectfast", )
+    # For Django 1.7+, 'collectfast' should come before 'django.contrib.staticfiles'
+    INSTALLED_APPS = ("collectfast", ) + INSTALLED_APPS
 
     # AWS cache settings, don't change unless you know what you're doing:
     AWS_EXPIREY = 60 * 60 * 24 * 7
