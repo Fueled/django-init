@@ -17,7 +17,7 @@ def generate_files():
         "celery (y/n)": "n"
     }
 
-    cookiecutter(input_dir='./', checkout=None, no_input=True, extra_context=ctx)
+    cookiecutter(template='./', checkout=None, no_input=True, extra_context=ctx)
 
 
 # test for jinja errors in rendering and any issue with hooks.
