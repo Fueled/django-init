@@ -71,9 +71,8 @@ class Common(Configuration):
     # rest_framework
     # --------------------------------------------------------------------------
     REST_FRAMEWORK = {
-        'PAGINATE_BY': 30,
-        'PAGINATE_BY_PARAM': 'per_page',
-        'MAX_PAGINATE_BY': 1000,
+        'DEFAULT_PAGINATION_CLASS': '{{ cookiecutter.repo_name }}.base.api.pagination.PageNumberPagination',
+        'PAGE_SIZE': 30,
         # Use hyperlinked styles by default.
         # Only used if the `serializer_class` attribute is not set on a view.
         'DEFAULT_MODEL_SERIALIZER_CLASS': 'rest_framework.serializers.HyperlinkedModelSerializer',
@@ -89,7 +88,6 @@ class Common(Configuration):
             # Mainly used for api debug.
             'rest_framework.authentication.SessionAuthentication',
         ),
-        "DATETIME_FORMAT": "%Y-%m-%dT%H:%M:%S%z",
         "EXCEPTION_HANDLER": "{{ cookiecutter.repo_name }}.base.exceptions.exception_handler",
     }
 
