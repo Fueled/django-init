@@ -73,6 +73,14 @@ class Common(Configuration):
     REST_FRAMEWORK = {
         'DEFAULT_PAGINATION_CLASS': '{{ cookiecutter.repo_name }}.base.api.pagination.PageNumberPagination',
         'PAGE_SIZE': 30,
+
+        # 'Accept' header based versioning
+        # http://www.django-rest-framework.org/api-guide/versioning/
+        'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning',
+        'DEFAULT_VERSION': '1.0',
+        'ALLOWED_VERSIONS': ['1.0', ],
+        'VERSION_PARAMETER': 'version',
+
         # Use hyperlinked styles by default.
         # Only used if the `serializer_class` attribute is not set on a view.
         'DEFAULT_MODEL_SERIALIZER_CLASS': 'rest_framework.serializers.HyperlinkedModelSerializer',

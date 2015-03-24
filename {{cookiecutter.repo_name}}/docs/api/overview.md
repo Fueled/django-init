@@ -2,6 +2,23 @@ This describes the resources that make up the official {{ cookiecutter.project_n
 
 [TOC]
 
+## Current Version
+
+By default, all requests receive the `1.0` version of the API. We encourage you to explicitly request this version via the Accept header.
+
+```
+Accept: application/json; version=1.0
+```
+
+__Important:__ The default version of the API may change in the future. If you're building an application and care about the stability of the API, be sure to request a specific version in the `Accept` header as shown in the examples below.
+
+```
+GET /bookings/ HTTP/1.1
+Host: example.com
+Accept: application/json; version=1.0
+```
+
+
 ## Schema
 
 All timestamps are returned in ISO 8601 format:
