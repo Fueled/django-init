@@ -1,12 +1,12 @@
 # Core Stuff
 # -------------------------------------
-Django==1.7.6
+Django==1.7.7
 
 # Extensions
 # -------------------------------------
 Werkzeug==0.10.1
-django-extensions==1.5.0
-pytz==2014.10
+django-extensions==1.5.2
+pytz==2015.2
 
 # Configuration
 # -------------------------------------
@@ -14,13 +14,13 @@ django-configurations==0.8
 django-sites==0.8
 django-secure==1.0.1
 dj-database-url==0.3.0
-python-dotenv==0.1.0
+python-dotenv==0.1.2
 
 # Models
 # -------------------------------------
 django-model-utils==2.2
 django-uuid-upload-path==1.0.0
-django-versatileimagefield==0.5.3
+django-versatileimagefield==0.5.4
 
 # Images
 # -------------------------------------

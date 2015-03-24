@@ -9,7 +9,7 @@ pygraphviz==1.3rc2
 
 # Debugging
 # -------------------------------------
-django-debug-toolbar==1.2.2
+django-debug-toolbar==1.3.0
 ipdb==0.8
 ipython==3.0.0
 
@@ -17,7 +17,7 @@ ipython==3.0.0
 # -------------------------------------
 coverage==4.0a5
 factory_boy==2.4.1
-flake8==2.3.0
+flake8==2.4.0
 git+git://github.com/mverteuil/pytest-ipdb.git
 mock==1.0.1
 pytest-django==2.8.0
