@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals, absolute_import
+
 from django.db import models
-from django_extensions.db.fields import TimeStampedModel
+from django_extensions.db.models import TimeStampedModel
 
 from .fields import AutoUUIDField
 
