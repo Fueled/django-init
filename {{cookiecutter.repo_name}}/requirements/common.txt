@@ -1,10 +1,10 @@
 # Core Stuff
 # -------------------------------------
-Django==1.7.7
+django>=1.7.7,<1.8
 
 # Extensions
 # -------------------------------------
-Werkzeug==0.10.1
+Werkzeug==0.10.4
 django-extensions==1.5.2
 pytz==2015.2
 
@@ -20,7 +20,7 @@ python-dotenv==0.1.2
 # -------------------------------------
 django-model-utils==2.2
 django-uuid-upload-path==1.0.0
-django-versatileimagefield==0.5.4
+django-versatileimagefield==0.6.1
 
 # Images
 # -------------------------------------
@@ -37,7 +37,7 @@ django-autoslug==1.7.2
 
 # Django Rest Framework
 # -------------------------------------
-djangorestframework==3.1.0
+djangorestframework==3.1.1
 
 {% if cookiecutter.celery == 'y' %}
 celery==3.1.17

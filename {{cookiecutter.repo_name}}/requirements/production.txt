@@ -6,11 +6,11 @@
 # -------------------------------------
 django-storages==1.1.8
 Collectfast==0.2.1
-boto==2.36.0
+boto==2.37.0
 gevent==1.0.1
 gunicorn==19.3.0
-hiredis==0.1.6
-django-redis-cache==0.13.0
+hiredis==0.2.0
+django-redis-cache==0.13.1
 
 {% if cookiecutter.newrelic == 'y' %}
 # Logging
