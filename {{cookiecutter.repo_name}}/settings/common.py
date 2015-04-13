@@ -156,6 +156,11 @@ class Common(Configuration):
         ("en", _("English")),
     )
 
+    # A tuple of directories where Django looks for translation files.
+    LOCALE_PATHS = (
+        join(APP_DIR, "locale"),
+    )
+
     # If you set this to False, Django will make some optimizations so as not
     # to load the internationalization machinery.
     USE_I18N = True

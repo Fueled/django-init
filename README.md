@@ -79,6 +79,10 @@ Don't forget to carefully look at the generated README. Awesome, right?
 
 You can also explore the [wiki] section for details on advance setups and usuages.
 
+## Change logs
+
+Refer to [CHANGELOG.md](CHANGELOG.md).
+
 --------
 
 Built with ♥ at [Fueled](http://fueled.com)
