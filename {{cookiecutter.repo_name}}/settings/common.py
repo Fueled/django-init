@@ -12,6 +12,7 @@ from os.path import dirname, join
 # Third Party Stuff
 import dotenv
 from configurations import Configuration, values
+from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(ROOT_DIR, ...)
 ROOT_DIR = dirname(dirname(__file__))
@@ -149,6 +150,11 @@ class Common(Configuration):
     # Language code for this installation. All choices can be found here:
     # http://www.i18nguy.com/unicode/language-identifiers.html
     LANGUAGE_CODE = 'en-us'
+
+    # Languages we provide translations for
+    LANGUAGES = (
+        ("en", _("English")),
+    )
 
     # If you set this to False, Django will make some optimizations so as not
     # to load the internationalization machinery.
