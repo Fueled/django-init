@@ -38,7 +38,3 @@ django-autoslug==1.7.2
 # Django Rest Framework
 # -------------------------------------
 djangorestframework==3.1.1
-
-{% if cookiecutter.celery == 'y' %}
-celery==3.1.17
-{% endif %}

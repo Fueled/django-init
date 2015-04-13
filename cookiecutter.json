@@ -7,6 +7,5 @@
     , "timezone": "UTC"
     , "django_admin_email": "backend@fueled.com"
     , "version": "0.0.0"
-    , "celery": "n"
     , "newrelic" : "y"
 }
