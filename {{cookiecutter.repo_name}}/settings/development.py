@@ -8,8 +8,11 @@ Adds sensible defaults for developement of project
 - Uses local caches
 - override SITE_ID to use 'local'
 '''
-from __future__ import unicode_literals, absolute_import
+from __future__ import absolute_import, unicode_literals
+
+# Third Party Stuff
 from configurations import values
+
 from .common import Common
 
 

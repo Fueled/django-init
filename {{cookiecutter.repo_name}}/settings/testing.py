@@ -1,4 +1,5 @@
-from __future__ import unicode_literals, absolute_import
+from __future__ import absolute_import, unicode_literals
+
 # from configurations import values
 from .development import Development
 

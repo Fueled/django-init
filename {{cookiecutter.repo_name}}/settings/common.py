@@ -5,12 +5,13 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 '''
 from __future__ import print_function, unicode_literals
 
+# Standard Library
 import os
 from os.path import dirname, join
 
+# Third Party Stuff
 import dotenv
 from configurations import Configuration, values
-
 
 # Build paths inside the project like this: os.path.join(ROOT_DIR, ...)
 ROOT_DIR = dirname(dirname(__file__))
@@ -161,8 +162,7 @@ class Common(Configuration):
     # hashing algorithms. Set this in your settings, or Django will complain
     # loudly.
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-    SECRET_KEY = values.SecretValue(environ=True, environ_name='SECRET_KEY',
-                                    environ_prefix='DJANGO')
+    SECRET_KEY = values.SecretValue()
 
     # The list of directories to search for fixtures
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
