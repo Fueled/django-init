@@ -14,5 +14,5 @@ Name: name or url
 
 Last update: YYYY/MM/DD
 Standards: HTML5, CSS3,..
-Components: Foundation, jQuery,...
+Components: jQuery,...
 Software: Software used for the development
