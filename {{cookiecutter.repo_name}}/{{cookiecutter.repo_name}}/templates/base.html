@@ -15,7 +15,6 @@
     <![endif]-->
 
     {% block css %}
-    <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/foundation.css" rel="stylesheet">
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
     {% endblock css %}
   </head>
@@ -26,63 +25,21 @@
     <![endif]-->
 
     {% block header %}
-    <header>
-        <nav class="top-bar" data-topbar>
-            <ul class="title-area">
-                <li class="name">
-                  <h1><a href="#">{% endraw %}{{ cookiecutter.project_name }}{% raw %}</a></h1>
-                </li>
-                <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
-            </ul> {# .title-area #}
-
-            <section class="top-bar-section">
-                <!-- Right Nav Section -->
-                <ul class="right">
-                  <li class="active"><a href="#">Right Button Active</a></li>
-                  <li class="has-dropdown">
-                    <a href="#">Right Button with Dropdown</a>
-                    <ul class="dropdown">
-                      <li><a href="#">First link in dropdown</a></li>
-                    </ul>
-                  </li>
-                </ul>
-
-                <!-- Left Nav Section -->
-                <ul class="left">
-                  <li><a href="#">Left Nav Button</a></li>
-                </ul>
-            </section> {# .top-bar-section #}
-        </nav> {# .top-bar #}
-    </header>
+      <h1>{{ cookiecutter.project_name }}.</h1>
     {% endblock header %}
 
-    {% if messages %}
-        {% for message in messages %}
-            <div data-alert class="alert-box {% if message.tags %}{{ message.tags }}"{% endif %}>
-            {{ message }} <a href="#" class="close">&times;</a>
-            </div>
-        {% endfor %}
-    {% endif %}
-
     {% block content %}
-        <p>Coming soon!</p>
+    <p>Coming soon!</p>
     {% endblock content %}
 
     </div> <!-- /container -->
-
-    {% block modal %}{% endblock modal %}
 
     <!-- Le javascript
     ================================================== -->
     {# Placed at the end of the document so the pages load faster #}
     {% block js %}
       <!-- Latest JQuery -->
-      <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.js"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/vendor/jquery.js"></script>
-
-      {# see: http://cdnjs.com/libraries/foundation/ #}
-      <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/foundation.min.js"></script>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/js/foundation/foundation.alert.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
       <!-- Your stuff: Third-party javascript libraries go here -->
 
