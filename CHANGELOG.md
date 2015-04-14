@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 ### Added
+- Add support for UML: [sequence diagrams](http://en.wikipedia.org/wiki/Sequence_diagram)
 - Add locale_path to settings, to help facilitate translation when required
 - Removed celery settings, as it's hardly used.
 - Add api versioning support via Accept headers (#52)
