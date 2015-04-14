@@ -1,5 +1,6 @@
 {% raw %}{% load staticfiles i18n %}<!DOCTYPE html>
-<html lang="en">
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
   <head profile="http://www.w3.org/2005/10/profile">
     <meta charset="utf-8">
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
