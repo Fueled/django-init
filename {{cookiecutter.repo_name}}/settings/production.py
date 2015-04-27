@@ -6,8 +6,9 @@ Adds sensible default for running app in production.
 from __future__ import absolute_import, unicode_literals
 
 # Standard Library
-import os
-import urlparse
+from boto.s3.connection import OrdinaryCallingFormat
+
+
 
 # Third Party Stuff
 from configurations import values

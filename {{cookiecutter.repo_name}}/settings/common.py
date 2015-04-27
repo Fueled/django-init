@@ -15,11 +15,11 @@ from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(ROOT_DIR, ...)
 ROOT_DIR = dirname(dirname(__file__))
-APP_DIR = str(ROOT_DIR, '{{ cookiecutter.repo_name }}')
+APP_DIR = join(ROOT_DIR, '{{ cookiecutter.repo_name }}')
 
 # read and load variables in environement from .env file
 # see: http://github.com/theskumar/python-dotenv
-# dotenv.load_dotenv(join(ROOT_DIR, ".env"))
+dotenv.load_dotenv(join(ROOT_DIR, ".env"))
 
 env = environ.Env()
 
