@@ -50,7 +50,7 @@ The deployment are managed via travis, but for the first time you'll need to set
 Run these commands to deploy a new project to Heroku:
 
 ```
-heroku create <heroku-app-name> --buildpack https://github.com/heroku/heroku-buildpack-python
+heroku create --ssh-git <heroku-app-name> --buildpack https://github.com/heroku/heroku-buildpack-python
 
 heroku addons:add heroku-postgresql:dev --app=<heroku-app-name>
 heroku pg:backups schedule DATABASE_URL --app=<heroku-app-name>
@@ -73,7 +73,7 @@ SITE_DOMAIN=DJANGO_SITE_DOMAIN_HERE \
 SITE_SCHEME=DJANGO_SITE_SCHEME_HERE  \
 SITE_NAME=DJANGO_SITE_NAME_HERE --app=<heroku-app-name>
 
-git push heroku master --app=<heroku-app-name>
+git push heroku master
 heroku run python manage.py migrate --app=<heroku-app-name>
 heroku run python manage.py check --deploy --app=<heroku-app-name>
 heroku run python manage.py createsuperuser --app=<heroku-app-name>
