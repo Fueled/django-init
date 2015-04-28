@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add `iSort` configuration (#42)
 
 ### Changed
+- Replace django-configuration with django-environ
 - Remove support for `Foundation`
 - Swap `django-storages` with `django-storages-redux`
 - Add test for cookiecutter renderning (#34)

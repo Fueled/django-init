@@ -2,54 +2,54 @@
 ''' Development Configurations
 
 Adds sensible defaults for developement of project
-- Enables DEBUG
-- Outputs outgoing emails to console
-- Enables Django Debug Toolbar
-- Uses local caches
+- Enable DEBUG
+- Log outgoing emails to console
+- Enable Django Debug Toolbar
+- Use local caches
 - override SITE_ID to use 'local'
 '''
 from __future__ import absolute_import, unicode_literals
 
-# Third Party Stuff
-from configurations import values
+from .common import *  # noqa
 
-from .common import Common
+# DEBUG
+# ------------------------------------------------------------------------------
+DEBUG = env.bool('DJANGO_DEBUG', default=True)
+TEMPLATE_DEBUG = DEBUG
 
+# SECRET CONFIGURATION
+# ------------------------------------------------------------------------------
+# A secret key for this particular Django installation. Used in secret-key
+# hashing algorithms. Set this in your settings, or Django will complain
+# loudly.
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
+# Note: This key only used for development and testing.
+SECRET_KEY = env("DJANGO_SECRET_KEY", default='CHANGEME!!!')
 
-class Development(Common):
+# Mail settings
+# ------------------------------------------------------------------------------
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
+                    default='django.core.mail.backends.console.EmailBackend')
 
-    DEBUG = values.BooleanValue(True)
-    TEMPLATE_DEBUG = DEBUG
-
-    INSTALLED_APPS = Common.INSTALLED_APPS
-
-    # EMAIL
-    # --------------------------------------------------------------------------
-    EMAIL_HOST = "localhost"
-    EMAIL_PORT = 1025
-    EMAIL_BACKEND = values.Value('django.core.mail.backends.console.EmailBackend')
-
-    # CACHES
-    # --------------------------------------------------------------------------
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-            'LOCATION': ''
-        }
+# CACHES
+# ------------------------------------------------------------------------------
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': ''
     }
+}
 
-    # DJANGO_SITES
-    # --------------------------------------------------------------------------
-    SITE_ID = 'local'
+# django-debug-toolbar
+# ------------------------------------------------------------------------------
+MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+INSTALLED_APPS += ('debug_toolbar', )
 
-    # django-debug-toolbar
-    # --------------------------------------------------------------------------
-    MIDDLEWARE_CLASSES = Common.MIDDLEWARE_CLASSES + ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-    INSTALLED_APPS += ('debug_toolbar',)
+INTERNAL_IPS = ('127.0.0.1', '10.0.2.2',)
 
-    INTERNAL_IPS = ('127.0.0.1',)
-
-    DEBUG_TOOLBAR_CONFIG = {
-        'DISABLE_PANELS': ['debug_toolbar.panels.redirects.RedirectsPanel', ],
-        'SHOW_TEMPLATE_CONTEXT': True,
-    }
+DEBUG_TOOLBAR_CONFIG = {
+    'DISABLE_PANELS': ['debug_toolbar.panels.redirects.RedirectsPanel', ],
+    'SHOW_TEMPLATE_CONTEXT': True,
+}

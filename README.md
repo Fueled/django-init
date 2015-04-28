@@ -12,7 +12,7 @@ Project template for django based projects, optimized for making REST API with d
 - Support for UUID models (django 1.8 has it by default).
 - [Procfile] for deploying to Heroku.
 - Ansible script for quick deployment to EC2/Ubuntu.
-- Settings management via [django-configurations], reads settings from `.env` if present.
+- [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - Django Rest Framework 3.0+.
 - `django_sites` instead of `django.contrib.sites`
 - Use [mkdocs] for project documentation.
@@ -25,7 +25,7 @@ Project template for django based projects, optimized for making REST API with d
 [12factor]: http://12factor.net
 [py.test]: http://pytest.org/
 [Procfile]: https://devcenter.heroku.com/articles/procfile
-[django-configurations]: https://github.com/jezdez/django-configurations
+[django-environ]: https://github.com/joke2k/django-environ
 
 ## Getting Started
 

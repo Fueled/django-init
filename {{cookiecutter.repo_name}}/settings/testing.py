@@ -1,18 +1,15 @@
 from __future__ import absolute_import, unicode_literals
 
-# from configurations import values
-from .development import Development
+from .development import *
 
 
-class Testing(Development):
+SKIP_SOUTH_TESTS = True
+SOUTH_TESTS_MIGRATE = False
+CELERY_ALWAYS_EAGER = True
 
-    SKIP_SOUTH_TESTS = True
-    SOUTH_TESTS_MIGRATE = False
-    CELERY_ALWAYS_EAGER = True
+MEDIA_ROOT = "/tmp"
 
-    MEDIA_ROOT = "/tmp"
+SECRET_KEY = 'top-scret!'
 
-    SECRET_KEY = 'top-scret!'
-
-    EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
-    INSTALLED_APPS = Development.INSTALLED_APPS + ("tests", )
+EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
+INSTALLED_APPS += ("tests", )

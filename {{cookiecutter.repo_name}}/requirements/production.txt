@@ -4,9 +4,9 @@
 
 # Static Files and Media Storage
 # -------------------------------------
+boto==2.38.0
 django-storages-redux==1.2.3
-Collectfast==0.2.1
-boto==2.37.0
+whitenoise==1.0.6
 
 # WSGI HTTP Server
 # -------------------------------------

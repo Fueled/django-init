@@ -1,6 +1,6 @@
 # Core Stuff
 # -------------------------------------
-django>=1.7.7,<1.8
+django==1.8
 
 # Extensions
 # -------------------------------------
@@ -10,10 +10,9 @@ pytz==2015.2
 
 # Configuration
 # -------------------------------------
-django-configurations==0.8
+django-environ==0.3.0
 django-sites==0.8
 django-secure==1.0.1
-dj-database-url==0.3.0
 python-dotenv==0.1.2
 
 # Models
