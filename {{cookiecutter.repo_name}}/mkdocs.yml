@@ -27,4 +27,4 @@ site_dir: _docs_html
 # Set it to 8001, so that it doesn't conflict with django's 8000 port
 dev_addr: '127.0.0.1:8001'
 
-markdown_extensions: [urlize]
+markdown_extensions: [urlize, smarty, sane_lists]
