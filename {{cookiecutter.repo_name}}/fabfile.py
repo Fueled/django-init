@@ -67,12 +67,12 @@ def install_deps(file=env.requirements_file):
         local('npm install')
 
 
-def serve_docs(address='127.0.0.1', port='8001'):
+def serve_docs(options=''):
     '''Start a local server to view documentation changes.'''
     create_graph_models()
 
     with lcd(ROOT_DIR):
-        local('mkdocs serve --dev-addr=%s:%s' % (address, port))
+        local('mkdocs serve {}'.format(options))
 
 
 def deploy_docs():
