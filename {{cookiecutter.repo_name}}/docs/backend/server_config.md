@@ -81,22 +81,3 @@ heroku open --app=<heroku-app-name>
 ### AWS/EC2
 
 For deploying on aws you need to configure all the addons provided and use python-dotenv to store and read enironment variables. You should using the ansible script in `provisioner` to handle the configuration and deployment on remote servers.
-
-<!-- Support for UML: Sequence diagrams 
-See: https://bramp.github.io/js-sequence-diagrams 
-Usuages: 
-Add a code block with "```" with "sequence" as language marker, then write the arrow based syntax.
-Example:
-
-```sequence
-a->b: A interacts with B
-b->a: B responds
-```
--->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//bramp.github.io/js-sequence-diagrams/raphael-min.js"></script>
-<script src="//bramp.github.io/js-sequence-diagrams/underscore-min.js"></script>
-<script src="//bramp.github.io/js-sequence-diagrams/sequence-diagram-min.js"></script>
-<script>
-    $('.sequence').sequenceDiagram({"theme": "simple"}).parent().removeClass("prettyprint").css({"background-color": "#fff", "text-align": "center"});
-</script>

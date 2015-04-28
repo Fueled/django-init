@@ -33,3 +33,7 @@ strict: true
 dev_addr: '127.0.0.1:8001'
 
 markdown_extensions: [urlize, smarty, sane_lists]
+
+extra_javascript:
+- "https://padolsey.github.io/findAndReplaceDOMText/src/findAndReplaceDOMText.js"
+- "js/github_issues_link.js"
