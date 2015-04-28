@@ -23,6 +23,11 @@ copyright: Copyright &copy; 2015, <a href=http://fueled.com>Fueled</a>.
 # directory to output HTML build
 site_dir: _docs_html
 
+# Determines if a broken link to a page within the documentation is considered
+# a warning or an error (link to a page not listed in the pages setting). Set to
+# true to halt processing when a broken link is found, false prints a warning.
+strict: true
+
 # Determines the address used when running mkdocs serve.
 # Set it to 8001, so that it doesn't conflict with django's 8000 port
 dev_addr: '127.0.0.1:8001'
