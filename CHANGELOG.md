@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add `base` app with common re-usable code
 - Add `newrelic` support (#36)
 - Add `iSort` configuration (#42)
+- Add  `django-environ` in settings 
 
 ### Changed
 - Remove support for `Foundation`

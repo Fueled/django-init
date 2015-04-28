@@ -6,12 +6,11 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 from __future__ import print_function, unicode_literals
 
 # Standard Library
-import os
-from os.path import dirname, join
+import environ
 
 # Third Party Stuff
 import dotenv
-from configurations import Configuration, values
+
 from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(ROOT_DIR, ...)
@@ -21,6 +20,8 @@ APP_DIR = join(ROOT_DIR, '{{ cookiecutter.repo_name }}')
 # read and load variables in environement from .env file
 # see: http://github.com/theskumar/python-dotenv
 dotenv.load_dotenv(join(ROOT_DIR, ".env"))
+
+env = environ.Env()
 
 
 # Common Configurations
@@ -139,7 +140,7 @@ class Common(Configuration):
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
     # Defaults to false, which is safe, enable them only in development.
-    DEBUG = values.BooleanValue(False)
+    DEBUG = env.bool("DJANGO_DEBUG", False) #Changed 
 
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
     TEMPLATE_DEBUG = DEBUG
@@ -243,7 +244,7 @@ class Common(Configuration):
     # Absolute path to the directory static files should be collected to.
     # Example: "/var/www/example.com/static/"
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-    STATIC_ROOT = join(ROOT_DIR, '.staticfiles')
+    STATIC_ROOT = str(ROOT_DIR, '.staticfiles')
 
     # URL that handles the static files served from STATIC_ROOT.
     # Example: "http://example.com/static/", "http://static.example.com/"
@@ -268,7 +269,7 @@ class Common(Configuration):
     # Absolute filesystem path to the directory that will hold user-uploaded files.
     # Example: "/var/www/example.com/media/"
     # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-    MEDIA_ROOT = join(ROOT_DIR, '.media')
+    MEDIA_ROOT = str(ROOT_DIR, '.media')
 
     # URL that handles the media served from MEDIA_ROOT.
     # Examples: "http://example.com/media/", "http://media.example.com/"
