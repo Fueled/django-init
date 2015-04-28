@@ -64,7 +64,7 @@ heroku addons:add newrelic:stark --app=<heroku-app-name>
 heroku config:set NEW_RELIC_APP_NAME=<new-relic-app-name> --app=<heroku-app-name>
 {%- endif %}
 
-heroku config:set DJANGO_CONFIGURATION=Production \
+heroku config:set DJANGO_SETTINGS_MODULE='settings.production' \
 DJANGO_SECRET_KEY=`openssl rand -base64 32` \
 DJANGO_AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_ID_HERE \
 DJANGO_AWS_SECRET_ACCESS_KEY=YOUR_KEY \
