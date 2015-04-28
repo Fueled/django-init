@@ -240,7 +240,7 @@ STATIC_URL = '/static/'
 
 # A list of locations of additional static files
 STATICFILES_DIRS = (
-    # join(APP_DIR, 'static'),
+    str(APPS_DIR.path('static')),
 )
 
 # List of finder classes that know how to find static files in
