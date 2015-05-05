@@ -7,16 +7,15 @@ Project template for django based projects, optimized for making REST API with d
 
 ## Features
 
-- Latest stable Django 1.7+
-- PostresSQL 9.3.
-- Support for UUID models (django 1.8 has it by default).
+- Latest stable Django 1.8+
+- PostresSQL everywhere.
 - [Procfile] for deploying to Heroku.
-- Ansible script for quick deployment to EC2/Ubuntu.
+- [Ansible] script for quick deployment to Ubuntu based servers.
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
-- Django Rest Framework 3.0+.
-- `django_sites` instead of `django.contrib.sites`
+- Designed to work with Django Rest Framework 3.0+.
+- Uses `django_sites` instead of `django.contrib.sites`
 - Use [mkdocs] for project documentation.
-- Use [py.test] as testing framework.
+- Uses [py.test] as test runner.
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Only tested and stable third-party libraries are added.
 - Grunt build for compass and livereload.
@@ -26,6 +25,7 @@ Project template for django based projects, optimized for making REST API with d
 [py.test]: http://pytest.org/
 [Procfile]: https://devcenter.heroku.com/articles/procfile
 [django-environ]: https://github.com/joke2k/django-environ
+[Ansible]: http://docs.ansible.com/index.html
 
 ## Getting Started
 
