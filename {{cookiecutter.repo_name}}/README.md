@@ -11,14 +11,13 @@ Minimum requirements: **pip, sass, graphviz, fabric & [postgres][install-postgre
 
 ```
 brew install postgres graphviz
-gem install sass
 sudo pip install fabric
 ```
 
 [install-postgres]: http://www.gotealeaf.com/blog/how-to-install-postgresql-on-a-mac
 
 In your terminal, type or copy-paste the following:
-    
+
     git clone git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}.git; cd {{ cookiecutter.github_reponame }}; fab init
 
 Go grab a cup of coffee, we bake your hot development machine.
@@ -26,7 +25,6 @@ Go grab a cup of coffee, we bake your hot development machine.
 Useful commands:
 
 - `fab serve` - start [django server](http://localhost:8000/), [documentation server](http://localhost:8001/) and static file compiler
-- `fab webserver` - run only webserver 
 - `fab deploy_docs` - deploy docs to server
 - `fab test` - run the test locally with ipdb
 

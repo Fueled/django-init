@@ -18,7 +18,6 @@ Project template for django based projects, optimized for making REST API with d
 - Uses [py.test] as test runner.
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Only tested and stable third-party libraries are added.
-- Grunt build for compass and livereload.
 
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net
@@ -32,7 +31,6 @@ Project template for django based projects, optimized for making REST API with d
 Following are system level dependecies, and must be present on your machine before you run cookiecutter command. Primarily for `pre_gen_project.sh` to complete successfully.
 
 - **postgres** - can be installed with `brew install postgres`
-- **sass** - can be installed with `gem install sass`
 - **graphviz** - can be installed with `brew install graphviz`
 - **fabric** - can be installed with `sudo pip install fabric`
 
@@ -50,10 +48,9 @@ It will ask you to some questions, after which it will create a new project in y
 Once the cookiecutter script finishes, you'll have:
 
 1. A postgres database created, with name same as `repo_name` you provided.
-2. Installed all the npm packages required
-3. Installed all the python dependencies in virtualenv
-4. Local settings added to `.env` file (untracked)
-5. Initialized a git repo and created the first commit.
+2. Installed all the python dependencies in virtualenv
+3. Local settings added to `.env` file (untracked)
+4. Initialized a git repo and created the first commit.
 
 Now the only thing you'll need to do is:
 
@@ -65,7 +62,6 @@ __Summarizing__:
 
 ```
 brew install postgres
-gem install sass
 brew install graphviz
 sudo pip install fabric cookiecutter
 cookiecutter https://github.com/Fueled/cookiecutter-django.git

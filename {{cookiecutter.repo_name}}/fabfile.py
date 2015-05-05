@@ -102,16 +102,11 @@ def test(options='--ipdb'):
         local("coverage report")
 
 
-def webserver(host='127.0.0.1:8000'):
+def serve(host='127.0.0.1:8000'):
     '''Start an enhanced local app server'''
     install_deps()
     migrate()
     manage('runserver_plus %s' % host)
-
-
-def serve():
-    '''Start local webserver and documentation server with live-reload'''
-    local('grunt serve')
 
 
 def makemigrations(app=''):

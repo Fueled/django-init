@@ -31,12 +31,6 @@ if echo "$yn" | grep -iq "^y"; then
         sudo pip install fabric
     fi
 
-    echo "==> Install npm, if not present."
-    if ! hash npm 2>/dev/null; then
-        echo "npm command not found... installing it..."
-        curl -L https://npmjs.org/install.sh | sh
-    fi
-
     echo "==> Initialize git repo and create first commit and tag it with v0.0.0"
     git init && git add .
     git commit -am "chore(setup): create base django project."

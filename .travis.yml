@@ -6,7 +6,6 @@ addons:
   postgresql: "9.3"
 
 install:
-  - gem install sass
   - pip install -r requirements-dev.txt --allow-all-external --download-cache $HOME/.pip-cache
 
 script:

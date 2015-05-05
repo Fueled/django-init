@@ -22,5 +22,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add test for cookiecutter renderning (#34)
 - upgrade to django-rest-framwork-3.0
 - use redis for caching instead of memcached. (#35)
+- Dropped Support for SaSS and Coffee
 
 [unreleased]: https://github.com/Fueled/cookiecutter-django/compare/v0.0.1...HEAD
