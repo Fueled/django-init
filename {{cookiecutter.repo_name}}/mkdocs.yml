@@ -17,7 +17,6 @@ pages:
 
 
 theme: 'mkdocs'
-theme_center_lead: false
 
 copyright: Copyright &copy; 2015, <a href=http://fueled.com>Fueled</a>.
 
