@@ -103,11 +103,6 @@ REST_FRAMEWORK = {
 # see: http://django-sites.readthedocs.org
 SITES = {
     "local": {"domain": "localhost:8000", "scheme": "http", "name": "localhost"},
-    "remote": {
-        "domain": env('SITE_DOMAIN'),
-        "scheme": env('SITE_SCHEME', default='https'),
-        "name": env('SITE_NAME'),
-    },
 }
 SITE_ID = 'local'
 
