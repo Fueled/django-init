@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django_sites',  # http://django-sites.readthedocs.org/
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'flat',  # Needs to be before django.contrib.admin, https://github.com/elky/django-flat-theme
     'django.contrib.admin',
     # 'django.contrib.humanize',  # Useful template tags
 
