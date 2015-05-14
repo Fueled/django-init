@@ -63,9 +63,6 @@ def install_deps(file=env.requirements_file):
     with virtualenv():
         local('pip install -r %s' % file)
 
-    with cd(ROOT_DIR):
-        local('npm install')
-
 
 def serve_docs(options=''):
     '''Start a local server to view documentation changes.'''
