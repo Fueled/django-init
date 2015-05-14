@@ -40,11 +40,11 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django_sites',  # http://niwibe.github.io/django-sites/
+    'django_sites',  # http://django-sites.readthedocs.org/
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    # 'django.contrib.humanize',  # Useful template tags:
+    # 'django.contrib.humanize',  # Useful template tags
 
     '{{ cookiecutter.repo_name }}.base',
     '{{ cookiecutter.repo_name }}.pages',
