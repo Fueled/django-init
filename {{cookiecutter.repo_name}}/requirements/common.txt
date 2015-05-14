@@ -6,8 +6,8 @@ whitenoise==1.0.6
 # Extensions
 # -------------------------------------
 Werkzeug==0.10.4
-django-extensions==1.5.2
-pytz==2015.2
+django-extensions==1.5.5
+pytz==2015.4
 
 # Configuration
 # -------------------------------------
@@ -20,7 +20,7 @@ python-dotenv==0.1.2
 # -------------------------------------
 django-model-utils==2.2
 django-uuid-upload-path==1.0.0
-django-versatileimagefield==0.6.2
+django-versatileimagefield==1.0
 
 # Images
 # -------------------------------------
@@ -37,4 +37,4 @@ django-autoslug==1.7.2
 
 # Django Rest Framework
 # -------------------------------------
-djangorestframework==3.1.1
+djangorestframework==3.1.2

@@ -5,7 +5,7 @@
 https://github.com/r0wb0t/markdown-urlize/archive/8bf9bd75cf61ba255bd91a9e808add925d95412e.zip
 https://github.com/tomchristie/mkdocs/archive/master.zip
 isort==3.9.6
-pygraphviz==1.3rc2
+pygraphviz==1.2
 
 # Debugging
 # -------------------------------------
@@ -15,8 +15,8 @@ ipython==3.1.0
 
 # Testing and coverage
 # -------------------------------------
-coverage==4.0a5
-factory_boy==2.5.1
+coverage==3.7.1
+factory_boy==2.5.2
 flake8==2.4.0
 git+git://github.com/mverteuil/pytest-ipdb.git
 mock==1.0.1
@@ -25,4 +25,4 @@ pytest-pythonpath==0.6
 
 # Versioning
 # -------------------------------------
-bumpversion==0.5.1
+bumpversion==0.5.3
