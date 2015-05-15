@@ -8,6 +8,7 @@ import sys
 from django import http
 from django.conf import settings
 from django.views.defaults import server_error as dj_server_error
+from django.shortcuts import render
 
 
 def server_error(request, *args, **kwargs):
@@ -25,3 +26,7 @@ def server_error(request, *args, **kwargs):
             }), content_type="application/json")
 
     return dj_server_error(request, *args, **kwargs)
+
+
+def root_txt_files(request, filename):
+    return render(request, filename, {}, content_type="text/plain")

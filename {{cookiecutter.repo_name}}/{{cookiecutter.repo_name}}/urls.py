@@ -18,6 +18,9 @@ handler500 = "{{ cookiecutter.repo_name }}.base.views.server_error"
 
 urlpatterns = [
 
+    url(r'^(?P<filename>(robots.txt)|(humans.txt))$',
+        "{{ cookiecutter.repo_name }}.base.views.root_txt_files", name='root-txt-files'),
+
     # Rest API
     url(r'^api/', include(router.urls)),
 

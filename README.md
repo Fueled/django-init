@@ -17,7 +17,9 @@ Project template for django based projects, optimized for making REST API with d
 - Use [mkdocs] for project documentation.
 - Uses [py.test] as test runner.
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
-- Only tested and stable third-party libraries are added.
+- Only tested and stable third-party libraries are added
+- HTML5 boilerplate
+- robots.txt and humans.txt configured
 
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net
