@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
 # Standard Library
-import json
 import sys
 
 # Third Party Stuff
 from django import http
 from django.conf import settings
-from django.views.defaults import server_error as dj_server_error
+from django.views.defaults import server_error as default_server_error
 from django.shortcuts import render
 
 
@@ -20,12 +19,14 @@ def server_error(request, *args, **kwargs):
     exc_type, exc_obj, exc_tb = sys.exc_info()
 
     if not settings.DEBUG and request.META.get('CONTENT_TYPE', None) == "application/json":
-        return http.HttpResponseServerError(json.dumps({
+        response_dict = {
             "_error_message": "Server application error",
-            "_error_type": "{0}.{1}".format(exc_type.__module__, exc_type.__name__)
-            }), content_type="application/json")
+        }
+        if exc_type:
+            response_dict['_error_type'] = "{0}.{1}".format(exc_type.__module__, exc_type.__name__)
+        return http.JsonResponse(data=response_dict, status=500)
 
-    return dj_server_error(request, *args, **kwargs)
+    return default_server_error(request, *args, **kwargs)
 
 
 def root_txt_files(request, filename):
