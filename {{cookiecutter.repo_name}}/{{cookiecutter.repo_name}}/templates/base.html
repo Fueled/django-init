@@ -10,11 +10,12 @@
 
     {# HTML5 shim, for IE6-8 support of HTML5 elements #}
     <!--[if lt IE 9]>
-      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     {% block css %}
-    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
     {% endblock css %}
   </head>
 
@@ -24,7 +25,7 @@
     <![endif]-->
 
     {% block header %}
-      <h1>{{ cookiecutter.project_name }}.</h1>
+      <h1>{% endraw %}{{ cookiecutter.project_name }}{% raw %}</h1>
     {% endblock header %}
 
     {% block content %}

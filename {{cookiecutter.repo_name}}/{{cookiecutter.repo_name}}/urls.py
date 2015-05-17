@@ -37,7 +37,7 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^400/$', 'django.views.defaults.bad_request'),  # noqa
+        url(r'^400/$', 'django.views.defaults.bad_request'),
         url(r'^403/$', 'django.views.defaults.permission_denied'),
         url(r'^404/$', 'django.views.defaults.page_not_found'),
         url(r'^500/$', 'django.views.defaults.server_error'),
