@@ -1,8 +1,4 @@
 /*
-Note: Use ../sass/project.sass, this file will be overwritten by the sass
-build of project.sass
-*/
-/*
  * What follows is the result of much research on cross-browser styling.
  * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
  * Kroc Camen, and the H5BP dev community and team.
@@ -11,11 +7,20 @@ build of project.sass
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
+/**
+* 1. apply a natural box layout model to all elements, but allowing components to change
+*    http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+*/
 
 html {
     color: #222;
     font-size: 1em;
     line-height: 1.4;
+    box-sizing: border-box;  /* 1 */
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;  /* 1 */
 }
 
 /*
@@ -92,7 +97,13 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-
+body {
+    max-width: 800px;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-right: auto;
+    margin-left: auto;
+}
 
 
 
