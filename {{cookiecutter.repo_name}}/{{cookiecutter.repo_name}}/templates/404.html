@@ -3,12 +3,11 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 {% block title %}Page Not found{% endblock %}
-{% block page_title %}Page Not found{% endblock page_title %}
-{% block page_classes %}{{ block.super }} page_not_found {% endblock page_classes %}
+{% block body_classes %}{{ block.super }} page-error page-404 {% endblock body_classes %}
 
 {% block content %}
-<h1>Not Found</h1>
-<p>The requested URL {{ request_path }} was not found on this server.</p>
+<h2>Not Found</h2>
+<p>The requested URL <code>{{ request_path }}</code> was not found on this server.</p>
 
 <style>#goog-wm ul{list-style: none; padding: 0; margin: 0;}</style>
 <script>
