@@ -1,4 +1,6 @@
 {% raw %}{% extends "base.html" %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
 {% block title %}Page Not found{% endblock %}
 {% block page_title %}Page Not found{% endblock page_title %}
@@ -8,15 +10,12 @@
 <h1>Not Found</h1>
 <p>The requested URL {{ request_path }} was not found on this server.</p>
 
-<style>
-    #goog-wm ul{list-style: none; padding: 0; margin: 0;}
-</style>
-
+<style>#goog-wm ul{list-style: none; padding: 0; margin: 0;}</style>
 <script>
-  var GOOG_FIXURL_LANG = 'en';
+  var GOOG_FIXURL_LANG = '{{ LANGUAGE_CODE }}';
   var GOOG_FIXURL_SITE = window.location.protocol + '//' + window.location.host;
 </script>
-<script src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js">
+<script src="https://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js">
 </script>
 
 {% endblock content %}
