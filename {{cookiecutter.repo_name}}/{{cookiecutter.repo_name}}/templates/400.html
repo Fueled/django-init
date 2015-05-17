@@ -1,9 +1,9 @@
 {% raw %}{% extends "base.html" %}
-
-{% block title %}Bad Request (400){% endblock %}
+{% load i18n %}
+{% block title %}{% trans 'Bad Request (400)' %}{% endblock %}
 {% block body_classes %}{{ block.super }} page-error page-400 {% endblock body_classes %}
 
 {% block content %}
-<h2>Bad Request (400)</h2>
-<p>The request cannot be fulfilled due to bad syntax.</p>
+<h2>{% trans 'Bad Request (400)' %}</h2>
+<p>{% trans 'The request cannot be fulfilled due to bad syntax.' %}</p>
 {% endblock content %}{% endraw %}

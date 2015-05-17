@@ -1,7 +1,7 @@
 {% raw %}{% load staticfiles i18n %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
-  <head profile="http://www.w3.org/2005/10/profile">
+  <head>
     <meta charset="utf-8">
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
     <title>{% block title %}{% endraw %}{{ cookiecutter.project_name }}{% raw %}{% endblock title %}</title>
@@ -47,5 +47,4 @@
       <script src="{% static 'js/project.js' %}"></script>
     {% endblock js %}
   </body>
-</html>
-{% endraw %}
+</html>{% endraw %}

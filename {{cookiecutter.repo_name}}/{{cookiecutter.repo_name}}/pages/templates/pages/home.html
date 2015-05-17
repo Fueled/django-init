@@ -1,8 +1,9 @@
 {% raw %}{% extends 'pages/base.html' %}
-{% block title %}Home • {{ block.super }}{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans 'Home' %} • {{ block.super }}{% endblock title %}
 {% block body_classes %}{{ block.super}} page-home {% endblock body_classes %}
 {% block content %}
     <p>
-        Homepage coming soon!!
+        {% trans 'Homepage comming soon!!' %}
     </p>
 {% endblock content %}{% endraw %}

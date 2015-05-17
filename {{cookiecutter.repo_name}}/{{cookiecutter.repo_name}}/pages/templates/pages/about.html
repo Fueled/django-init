@@ -1,8 +1,9 @@
 {% raw %}{% extends 'pages/base.html' %}
-{% block title %}About • {{ block.super }}{% endblock title %}
+{% load i18n %}
+{% block title %}{% trans 'About' %} • {{ block.super }}{% endblock title %}
 {% block body_classes %}{{ block.super}} page-about {% endblock body_classes %}
 {% block content %}
     <p>
-        About page comming soon!!
+        {% trans 'About page comming soon!!' %}
     </p>
 {% endblock content %}{% endraw %}

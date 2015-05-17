@@ -2,20 +2,17 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 
-{% block title %}Page Not found{% endblock %}
+{% block title %}{% trans 'Page Not found' %}{% endblock %}
 {% block body_classes %}{{ block.super }} page-error page-404 {% endblock body_classes %}
 
 {% block content %}
-<h2>Not Found</h2>
-<p>The requested URL <code>{{ request_path }}</code> was not found on this server.</p>
+    <h2>{% trans 'Not Found' %}</h2>
+    <p>{% blocktrans %}The requested URL <code>{{ request_path }}</code> was not found on this server.{% endblocktrans %}</p>
 
-<style>#goog-wm ul{list-style: none; padding: 0; margin: 0;}</style>
-<script>
-  var GOOG_FIXURL_LANG = '{{ LANGUAGE_CODE }}';
-  var GOOG_FIXURL_SITE = window.location.protocol + '//' + window.location.host;
-</script>
-<script src="https://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js">
-</script>
-
-{% endblock content %}
-{% endraw %}
+    <style>#goog-wm ul{list-style: none; padding: 0; margin: 0;}</style>
+    <script>
+      var GOOG_FIXURL_LANG = '{{ LANGUAGE_CODE }}';
+      var GOOG_FIXURL_SITE = window.location.protocol + '//' + window.location.host;
+    </script>
+    <script src="https://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
+{% endblock content %}{% endraw %}
