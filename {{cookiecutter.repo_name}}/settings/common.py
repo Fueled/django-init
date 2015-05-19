@@ -6,17 +6,11 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 from __future__ import print_function, unicode_literals
 
 # Third Party Stuff
-import dotenv
 import environ
 from django.utils.translation import ugettext_lazy as _
 
 ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 2 = /a/)
 APPS_DIR = ROOT_DIR.path('{{ cookiecutter.repo_name }}')
-
-# read and load variables in environement from .env file
-# see: http://github.com/theskumar/python-dotenv
-DOTENV_PATH = str(ROOT_DIR.path(".env"))
-dotenv.load_dotenv(DOTENV_PATH)
 
 env = environ.Env()
 

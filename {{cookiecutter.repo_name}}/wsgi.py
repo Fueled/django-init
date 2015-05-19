@@ -16,15 +16,13 @@ framework.
 """
 import os
 
+from dotenv import load_dotenv
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
 
-try:
-    import dotenv
-    ROOT_DIR = os.path.dirname(__file__)
-    dotenv.load_dotenv(os.path.join(ROOT_DIR, ".env"))
-except ImportError:
-    pass
+# Read .env file and set key/value inside it as environement variables
+# see: http://github.com/theskumar/python-dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
 # We defer to a DJANGO_SETTINGS_MODULE already in the environment. This breaks
 # if running multiple sites in the same mod_wsgi process. To fix this, use
