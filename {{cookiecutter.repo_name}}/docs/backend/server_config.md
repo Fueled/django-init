@@ -55,20 +55,11 @@ heroku create --ssh-git <heroku-app-name> --buildpack https://github.com/heroku/
 heroku addons:create heroku-postgresql:dev --app=<heroku-app-name>
 heroku pg:backups schedule DATABASE_URL --app=<heroku-app-name>
 heroku pg:promote DATABASE_URL --app=<heroku-app-name>
-
 heroku addons:create sendgrid:starter --app=<heroku-app-name>
 heroku addons:create redistogo --app=<heroku-app-name>
-<<<<<<< HEAD
-
-{% if cookiecutter.newrelic == 'y' -%}
-heroku addons:create newrelic:stark --app=<heroku-app-name>
-heroku config:set NEW_RELIC_APP_NAME=<new-relic-app-name> --app=<heroku-app-name>
-{%- endif %}
-
-=======
 heroku addons:create newrelic:stark --app=<heroku-app-name>
 heroku config:set NEW_RELIC_APP_NAME="Django tutorial" --app=<heroku-app-name>
->>>>>>> 48f904f... chore(docs/setup): update depreciated 'addons:add' command to 'addons:create'
+
 heroku config:set DJANGO_SETTINGS_MODULE='settings.production' \
 DJANGO_SECRET_KEY=`openssl rand -base64 32` \
 SITE_DOMAIN=DJANGO_SITE_DOMAIN_HERE \
