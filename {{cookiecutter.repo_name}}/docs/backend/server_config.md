@@ -66,9 +66,6 @@ heroku config:set NEW_RELIC_APP_NAME=<new-relic-app-name> --app=<heroku-app-name
 
 heroku config:set DJANGO_SETTINGS_MODULE='settings.production' \
 DJANGO_SECRET_KEY=`openssl rand -base64 32` \
-DJANGO_AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_ID_HERE \
-DJANGO_AWS_SECRET_ACCESS_KEY=YOUR_KEY \
-DJANGO_AWS_STORAGE_BUCKET_NAME=YOUR_BUCKET_NAME \
 SITE_DOMAIN=DJANGO_SITE_DOMAIN_HERE \
 SITE_SCHEME=DJANGO_SITE_SCHEME_HERE  \
 SITE_NAME=DJANGO_SITE_NAME_HERE --app=<heroku-app-name>
@@ -80,7 +77,21 @@ heroku run python manage.py createsuperuser --app=<heroku-app-name>
 heroku open --app=<heroku-app-name>
 ```
 
-**Note:** 
+The following configuration doesn't allow you to "by default" upload the media on the heroku server as heroku does
+not support persistent storage. We use S3 for storing uploaded media. If you want to enable media upload:
+
+- Create S3 bucket and get AWS access key and secret that has access to this bucket.
+- Follow the instructions below to enable S3 upload configuration on heroku.
+
+```
+heroku config:set ENABLE_MEDIA_UPLOAD_TO_S3=true \
+DJANGO_AWS_ACCESS_KEY_ID=<YOUR_AWS_ACCESS_ID_HERE> \
+DJANGO_AWS_SECRET_ACCESS_KEY=<YOUR_SECRET_KEY_HERE> \
+DJANGO_AWS_STORAGE_BUCKET_NAME=<YOUR_BUCKET_NAME_HERE>
+```
+
+
+**Note:**
 - Use `--app=<heroku-app-name>` if you have more than one heroku app configured in current project.
 - Update `travis.yml`, and add the `<heroku-app-name>` to automatically deploy to this configured heroku app.
 
