@@ -52,15 +52,15 @@ Run these commands to deploy a new project to Heroku:
 ```
 heroku create --ssh-git <heroku-app-name> --buildpack https://github.com/heroku/heroku-buildpack-python
 
-heroku addons:add heroku-postgresql:dev --app=<heroku-app-name>
+heroku addons:create heroku-postgresql:dev --app=<heroku-app-name>
 heroku pg:backups schedule DATABASE_URL --app=<heroku-app-name>
 heroku pg:promote DATABASE_URL --app=<heroku-app-name>
 
-heroku addons:add sendgrid:starter --app=<heroku-app-name>
-heroku addons:add redistogo --app=<heroku-app-name>
+heroku addons:create sendgrid:starter --app=<heroku-app-name>
+heroku addons:create redistogo --app=<heroku-app-name>
 
 {% if cookiecutter.newrelic == 'y' -%}
-heroku addons:add newrelic:stark --app=<heroku-app-name>
+heroku addons:create newrelic:stark --app=<heroku-app-name>
 heroku config:set NEW_RELIC_APP_NAME=<new-relic-app-name> --app=<heroku-app-name>
 {%- endif %}
 
