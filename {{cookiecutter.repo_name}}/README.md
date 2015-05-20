@@ -24,7 +24,7 @@ Go grab a cup of coffee, we bake your hot development machine.
 
 Useful commands:
 
-- `fab serve` - start [django server](http://localhost:8000/), [documentation server](http://localhost:8001/) and static file compiler
+- `fab serve` - start [django server](http://localhost:8000/)
 - `fab deploy_docs` - deploy docs to server
 - `fab test` - run the test locally with ipdb
 
