@@ -19,6 +19,7 @@ Project template for django based projects, optimized for making REST API with d
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Only tested and stable third-party libraries are added
 - HTML5 boilerplate
+- Optional media storage using Amazon S3
 - robots.txt and humans.txt configured
 
 [mkdocs]: http://www.mkdocs.org/

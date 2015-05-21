@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - support for SaSS and Coffee via Grunt
 
 ### Changed
+- Make S3 media upload configurational optional and dynamic
 - Replace django-configuration with django-environ
 - Swap `django-storages` with `django-storages-redux`
 - use redis for caching instead of memcached. (#35)
