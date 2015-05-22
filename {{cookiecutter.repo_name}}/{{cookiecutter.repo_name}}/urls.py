@@ -5,14 +5,15 @@ Root url routering file.
 You should put the url config in their respective app putting only a
 refernce to them here.
 '''
-from __future__ import unicode_literals
+from __future__ import absolute_import, unicode_literals
 
 # Third Party Stuff
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from routers import router
+
+from .routers import router
 
 handler500 = "{{ cookiecutter.repo_name }}.base.views.server_error"
 

@@ -8,6 +8,8 @@ URL Naming Pattern (lowercased & underscored)
 For base name use:
 <app_name>
 '''
+from __future__ import absolute_import, unicode_literals
+
 # Third Party Stuff
 from rest_framework import routers
 
