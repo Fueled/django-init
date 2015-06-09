@@ -12,7 +12,6 @@ __Version:__ {{ cookiecutter.version }}
 ## Backend
 
 - [Server Setup & Configurations](backend/server_config.md)
-- [Database Diagrams](backend/db.md)
 - [Coding Rules](backend/coding_rules.md)
 
 **NOTE:** This documentation changes frequently, checkout the [changelog](api/changelog.md) for detailed breaking changes and features added.
