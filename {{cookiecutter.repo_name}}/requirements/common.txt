@@ -25,7 +25,7 @@ django-versatileimagefield==1.0
 
 # Images
 # -------------------------------------
-Pillow==2.8.1
+Pillow==2.8.2
 
 # For the persistance stores
 # -------------------------------------
