@@ -66,15 +66,11 @@ def install_deps(file=env.requirements_file):
 
 def serve_docs(options=''):
     '''Start a local server to view documentation changes.'''
-    create_graph_models()
-
     with lcd(ROOT_DIR):
         local('mkdocs serve {}'.format(options))
 
 
 def deploy_docs():
-    create_graph_models()
-
     with lcd(ROOT_DIR):
         local('mkdocs gh-deploy')
         local('rm -rf _docs_html')
@@ -157,12 +153,6 @@ def configure():
 def manage(cmd, venv=True):
     with virtualenv():
         local('python manage.py %s' % cmd)
-
-
-def create_graph_models():
-    '''Generates graph of all the models in this project.'''
-    graph_model_output = join(env.docs_dir, 'img/graph_model.svg')
-    manage("graph_models -a -g -o %s" % graph_model_output)
 
 
 @_contextmanager

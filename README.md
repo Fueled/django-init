@@ -34,7 +34,6 @@ Project template for django based projects, optimized for making REST API with d
 Following are system level dependecies, and must be present on your machine before you run cookiecutter command. Primarily for `pre_gen_project.sh` to complete successfully.
 
 - **postgres** - can be installed with `brew install postgres`
-- **graphviz** - can be installed with `brew install graphviz`
 - **fabric** - can be installed with `sudo pip install fabric`
 
 You should able to install these fairly easily if your developement machine is other than a Mac OS X.
@@ -65,7 +64,6 @@ __Summarizing__:
 
 ```
 brew install postgres
-brew install graphviz
 sudo pip install fabric cookiecutter
 cookiecutter https://github.com/Fueled/cookiecutter-django.git
 cd <repo_name>

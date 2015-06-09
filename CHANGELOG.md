@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - celery settings, as it's hardly used.
 - support for `Foundation`
 - support for SaSS and Coffee via Grunt
+- support for `Graphviz`
 
 ### Changed
 - Make S3 media upload configurational optional and dynamic

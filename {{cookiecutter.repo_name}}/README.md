@@ -7,10 +7,10 @@ __Version:__ {{ cookiecutter.version }}
 
 ## Getting up and running
 
-Minimum requirements: **pip, sass, graphviz, fabric & [postgres][install-postgres]**, setup is tested on Mac OSX only.
+Minimum requirements: **pip, sass, fabric & [postgres][install-postgres]**, setup is tested on Mac OSX only.
 
 ```
-brew install postgres graphviz
+brew install postgres
 sudo pip install fabric
 ```
 
