@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - `base` app with common re-usable code
 - `newrelic` support (#36)
 - `iSort` configuration (#42)
-- test for cookiecutter renderning (#34)
+- test for cookiecutter rendering (#34)
 - `django-rest-framwork-3.x`
 
 ### Removed
