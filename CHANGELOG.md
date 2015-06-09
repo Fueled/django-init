@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - support for `Foundation`
 - support for SaSS and Coffee via Grunt
 - support for `Graphviz`
+- urlize in mkdocs 
 
 ### Changed
 - Make S3 media upload configurational optional and dynamic

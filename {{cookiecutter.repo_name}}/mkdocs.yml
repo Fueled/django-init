@@ -9,7 +9,6 @@ pages:
 - API:
   - 'Overview & Usages': 'api/overview.md'
   - 'REST Endpoints': 'api/endpoints.md'
-  - 'Push Notifications': 'api/push_notifications.md'
   - 'Errors': 'api/errors.md'
   - 'Changelog': 'api/changelog.md'
 - Backend:
@@ -35,7 +34,7 @@ strict: true
 # Set it to 8001, so that it doesn't conflict with django's 8000 port
 dev_addr: '127.0.0.1:8001'
 
-markdown_extensions: [urlize, smarty, sane_lists]
+markdown_extensions: [smarty, sane_lists]
 
 extra_javascript:
 - "https://padolsey.github.io/findAndReplaceDOMText/src/findAndReplaceDOMText.js"
