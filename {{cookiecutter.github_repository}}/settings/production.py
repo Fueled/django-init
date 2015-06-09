@@ -149,5 +149,4 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
     ('django.template.loaders.cached.Loader', TEMPLATES[0]['OPTIONS']['loaders']),
 ]
 
-
 # Your production stuff: Below this line define 3rd party libary settings

@@ -122,9 +122,6 @@ MIDDLEWARE_CLASSES = (
 # Defaults to false, which is safe, enable them only in development.
 DEBUG = env.bool('DJANGO_DEBUG', False)
 
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
-TEMPLATE_DEBUG = DEBUG
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -202,6 +199,7 @@ TEMPLATES = [
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',
             ],
+            # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
                 'django.core.context_processors.debug',
