@@ -57,7 +57,9 @@ heroku pg:backups schedule DATABASE_URL --app=<heroku-app-name>
 heroku pg:promote DATABASE_URL --app=<heroku-app-name>
 
 heroku addons:create sendgrid:starter --app=<heroku-app-name>
+
 heroku addons:create redistogo --app=<heroku-app-name>
+heroku addons:create redismonitor --url `heroku config:get REDISTOGO_URL --app=<heroku-app-name>` --app=<heroku-app-name>
 
 {% if cookiecutter.newrelic == 'y' -%}
 heroku addons:create newrelic:stark --app=<heroku-app-name>
