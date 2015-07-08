@@ -52,8 +52,8 @@ Run these commands to deploy a new project to Heroku:
 ```
 heroku create --ssh-git <heroku-app-name> --buildpack https://github.com/heroku/heroku-buildpack-python
 
-heroku addons:create heroku-postgresql:dev --app=<heroku-app-name>
-heroku pg:backups schedule DATABASE_URL --app=<heroku-app-name>
+heroku addons:create heroku-postgresql --app=<heroku-app-name>
+heroku pg:backups schedule DATABASE_URL --at '04:00 UTC' --app=<heroku-app-name>
 heroku pg:promote DATABASE_URL --app=<heroku-app-name>
 
 heroku addons:create sendgrid:starter --app=<heroku-app-name>
