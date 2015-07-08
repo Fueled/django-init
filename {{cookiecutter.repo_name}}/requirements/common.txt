@@ -1,7 +1,7 @@
 # Core Stuff
 # -------------------------------------
 django==1.8.2
-whitenoise==2.0
+whitenoise==2.0.2
 
 # Extensions
 # -------------------------------------
@@ -9,6 +9,7 @@ Werkzeug==0.10.4
 django-extensions==1.5.5
 django-flat-theme==0.9.5
 pytz==2015.4
+requests == 2.7.0
 
 # Configuration
 # -------------------------------------
@@ -25,11 +26,11 @@ django-versatileimagefield==1.0.2
 
 # Images
 # -------------------------------------
-Pillow==2.8.2
+Pillow==2.9.0
 
 # For the persistance stores
 # -------------------------------------
-psycopg2==2.6.1 # Updated from 2.6
+psycopg2==2.6.1
 
 # Unicode slugification
 # -------------------------------------
