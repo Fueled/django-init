@@ -9,7 +9,7 @@ django-storages-redux==1.2.3
 
 # WSGI HTTP Server
 # -------------------------------------
-gevent==1.0.1
+gevent==1.0.2
 gunicorn==19.3.0
 
 # Caching
