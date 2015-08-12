@@ -14,8 +14,9 @@ gunicorn==19.3.0
 
 # Caching
 # -------------------------------------
+django-redis==4.2.0
 hiredis==0.2.0
-django-redis-cache==1.5.4
+
 
 {% if cookiecutter.newrelic == 'y' %}
 # Logging

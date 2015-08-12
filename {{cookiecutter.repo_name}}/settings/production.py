@@ -8,9 +8,6 @@ Adds sensible default for running app in production.
 '''
 from __future__ import absolute_import, unicode_literals
 
-# Standard Library
-import urlparse
-
 from boto.s3.connection import OrdinaryCallingFormat
 from django.utils import six
 
@@ -129,15 +126,12 @@ DATABASES['default'] = env.db("DATABASE_URL")
 
 # CACHING
 # ------------------------------------------------------------------------------
-redis_url = urlparse.urlparse(env('REDISTOGO_URL', default='redis://localhost:6959'))
-
 CACHES = {
     'default': {
-        'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': '%s:%s' % (redis_url.hostname, redis_url.port),
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "{0}{1}".format(env('REDISTOGO_URL', default="redis://localhost:6379/"), 0),
         'OPTIONS': {
-            'DB': 0,
-            'PASSWORD': redis_url.password,
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
             'PARSER_CLASS': 'redis.connection.HiredisParser',
             'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
             'CONNECTION_POOL_CLASS_KWARGS': {
