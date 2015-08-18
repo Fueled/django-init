@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - `iSort` configuration (#42)
 - test for cookiecutter rendering (#34)
 - `django-rest-framwork-3.x`
+- `pytest` replacement for runtest
 
 ### Removed
 - celery settings, as it's hardly used.
@@ -24,6 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - support for SaSS and Coffee via Grunt
 - support for `Graphviz`
 - urlize in mkdocs 
+- runtest.py 
 
 ### Changed
 - Make S3 media upload configurational optional and dynamic
