@@ -45,6 +45,20 @@ Note:
 
 The deployment are managed via travis, but for the first time you'll need to set the configuration values on each of the server. Read this only, if you need to deploy for the first time.
 
+### MailGun Configuration 
+
+- By default the following MailGun Configurations are picked up as environment variable from Heroku :  
+- MAILGUN_API_KEY
+- MAILGUN_DOMAIN
+- MAILGUN_PUBLIC_KEY
+- MAILGUN_SERVER_NAME
+- MAILGUN_SMTP_LOGIN
+- MAILGUN_SMTP_PASSWORD
+- MAILGUN_SMTP_PORT
+- MAILGUN_SMTP_SERVER
+
+*- In the env variable MAILGUN_SERVER_NAME put in the MAILGUN_SERVER_NAME : e.g 0912840192843adfhaskdjhfaskdhfsa.mailgun.org 
+
 ### Heroku
 
 Run these commands to deploy a new project to Heroku:
@@ -55,9 +69,7 @@ heroku create --ssh-git <heroku-app-name> --buildpack https://github.com/heroku/
 heroku addons:create heroku-postgresql --app=<heroku-app-name>
 heroku pg:backups schedule DATABASE_URL --at '04:00 UTC' --app=<heroku-app-name>
 heroku pg:promote DATABASE_URL --app=<heroku-app-name>
-
-heroku addons:create sendgrid:starter --app=<heroku-app-name>
-
+heroku addons:create mailgun --app=<heroku-app-name>
 heroku addons:create redistogo --app=<heroku-app-name>
 heroku addons:create redismonitor --url `heroku config:get REDISTOGO_URL --app=<heroku-app-name>` --app=<heroku-app-name>
 

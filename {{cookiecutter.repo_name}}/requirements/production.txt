@@ -17,6 +17,9 @@ gunicorn==19.3.0
 django-redis==4.2.0
 hiredis==0.2.0
 
+# Emails
+# ---------------
+django-mailgun==0.2.2
 
 {% if cookiecutter.newrelic == 'y' %}
 # Logging
