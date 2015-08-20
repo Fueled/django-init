@@ -50,7 +50,7 @@ The deployment are managed via travis, but for the first time you'll need to set
 Run these commands to deploy a new project to Heroku:
 
 ```
-heroku create --ssh-git <heroku-app-name> --buildpack https://github.com/heroku/heroku-buildpack-python
+heroku create --ssh-git <heroku-app-name>
 
 heroku addons:create heroku-postgresql --app=<heroku-app-name>
 heroku pg:backups schedule DATABASE_URL --at '04:00 UTC' --app=<heroku-app-name>
