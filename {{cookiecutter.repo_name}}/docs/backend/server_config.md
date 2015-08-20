@@ -68,8 +68,8 @@ heroku config:set NEW_RELIC_APP_NAME=<new-relic-app-name> --app=<heroku-app-name
 
 heroku config:set DJANGO_SETTINGS_MODULE='settings.production' \
 DJANGO_SECRET_KEY=`openssl rand -base64 32` \
-SITE_DOMAIN=DJANGO_SITE_DOMAIN_HERE \
-SITE_SCHEME=DJANGO_SITE_SCHEME_HERE  \
+SITE_DOMAIN=<heroku-app-name>.herokuapp.com \
+SITE_SCHEME=https \
 SITE_NAME=DJANGO_SITE_NAME_HERE --app=<heroku-app-name>
 
 git push heroku master
