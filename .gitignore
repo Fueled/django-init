@@ -65,3 +65,11 @@ docs/_build/
 
 ### Project Generated Files
 djcookiecutter-test/
+
+### Vim ###
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+

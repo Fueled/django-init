@@ -77,3 +77,13 @@ celerybeat-schedule
 # {{ cookiecutter.project_name }}
 _docs_html/
 media/
+
+# Virtual env
+venv/
+
+### Vim ###
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
