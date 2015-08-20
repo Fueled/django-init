@@ -62,7 +62,7 @@ heroku addons:create redistogo --app=<heroku-app-name>
 heroku addons:create redismonitor --url `heroku config:get REDISTOGO_URL --app=<heroku-app-name>` --app=<heroku-app-name>
 
 {% if cookiecutter.newrelic == 'y' -%}
-heroku addons:create newrelic:stark --app=<heroku-app-name>
+heroku addons:create newrelic --app=<heroku-app-name>
 heroku config:set NEW_RELIC_APP_NAME=<new-relic-app-name> --app=<heroku-app-name>
 {%- endif %}
 
