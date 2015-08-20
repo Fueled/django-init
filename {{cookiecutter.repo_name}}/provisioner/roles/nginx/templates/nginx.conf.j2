@@ -1,11 +1,10 @@
 {%raw%}user {{ nginx_user }};
 worker_processes {{ nginx_worker_processes }};
-worker_connections {{ nginx_worker_connections }};
 
 pid /var/run/nginx.pid;
 
 events {
-    worker_connections 768;
+    worker_connections {{ nginx_worker_connections }};
     # multi_accept on;
 }
 
