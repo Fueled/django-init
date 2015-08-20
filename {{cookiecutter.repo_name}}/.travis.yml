@@ -11,12 +11,8 @@ before_script:
 - export DJANGO_SECRET=`openssl rand -base64 32`
 - psql -c "CREATE DATABASE {{ cookiecutter.repo_name }};" -U postgres
 
-cache:
-  directories:
-  - $HOME/.pip-cache/
-
 install:
-  - pip install -r requirements/development.txt --allow-all-external --download-cache $HOME/.pip-cache
+  - pip install -r requirements/development.txt
 
 script:
 - coverage run --source={{ cookiecutter.repo_name }} --omit='*tests*,*commands*,*migrations*,*admin*,*config*,*wsgi*' -m py.test -v --tb=native
