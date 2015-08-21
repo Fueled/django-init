@@ -66,12 +66,12 @@ def install_deps(file=env.requirements_file):
 
 def serve_docs(options=''):
     '''Start a local server to view documentation changes.'''
-    with lcd(ROOT_DIR):
+    with lcd(ROOT_DIR) and virtualenv():
         local('mkdocs serve {}'.format(options))
 
 
 def deploy_docs():
-    with lcd(ROOT_DIR):
+    with lcd(ROOT_DIR) and virtualenv():
         local('mkdocs gh-deploy')
         local('rm -rf _docs_html')
 
