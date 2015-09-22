@@ -1,13 +1,13 @@
 # Core Stuff
 # -------------------------------------
 django==1.8.4
-whitenoise==2.0.3
+whitenoise==2.0.4
 
 # Extensions
 # -------------------------------------
 Werkzeug==0.10.4
-django-extensions==1.5.5
-django-flat-theme==0.9.5
+django-extensions==1.5.7
+django-flat-theme==1.1.1
 pytz==2015.4
 
 # Configuration
@@ -38,4 +38,4 @@ django-autoslug==1.8.0
 
 # Django Rest Framework
 # -------------------------------------
-djangorestframework==3.2.2
+djangorestframework==3.2.3

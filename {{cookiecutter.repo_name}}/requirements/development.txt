@@ -4,7 +4,7 @@
 # -------------------------------------
 https://github.com/r0wb0t/markdown-urlize/archive/8bf9bd75cf61ba255bd91a9e808add925d95412e.zip
 https://github.com/tomchristie/mkdocs/archive/master.zip
-isort==4.0.0
+isort==4.2.1
 
 # Debugging
 # -------------------------------------
@@ -14,7 +14,7 @@ ipython==4.0.0
 
 # Testing and coverage
 # -------------------------------------
-coverage==3.7.1
+coverage==4.0
 factory_boy==2.5.2
 flake8==2.4.1
 git+git://github.com/mverteuil/pytest-ipdb.git
