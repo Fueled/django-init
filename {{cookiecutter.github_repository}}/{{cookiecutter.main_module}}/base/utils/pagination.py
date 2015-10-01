@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # {{ cookiecutter.project_name }} Stuff
-from {{ cookiecutter.repo_name }}.base.api.pagination import PageNumberPagination
+from {{ cookiecutter.main_module }}.base.api.pagination import PageNumberPagination
 
 
 def paginated_response(request, queryset, serializer_class):

@@ -2,7 +2,7 @@
 site_name: {{ cookiecutter.project_name }}
 site_description: {{ cookiecutter.project_description }}
 site_author: {{ cookiecutter.github_username }}
-repo_url: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}
+repo_url: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}
 
 pages:
 - Home: 'index.md'

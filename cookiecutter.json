@@ -1,11 +1,11 @@
 {
-    "repo_name": "repo_name"
-    , "github_username": "Fueled"
-    , "github_reponame": ""
-    , "project_name": "My Project"
+    "project_name": "My Awesome Project"
     , "project_description": "add a short project description here"
+    , "main_module": "Name of the project's main python module"
+    , "github_username": "Fueled"
+    , "github_repository": "my-awesome-project"
     , "timezone": "UTC"
-    , "django_admin_email": "backend@fueled.com"
+    , "django_admin_email": "noreply@example.com"
     , "version": "0.0.0"
     , "newrelic" : "y"
 }

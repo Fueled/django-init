@@ -18,7 +18,7 @@ sudo pip install fabric
 
 In your terminal, type or copy-paste the following:
 
-    git clone git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}.git; cd {{ cookiecutter.github_reponame }}; fab init
+    git clone git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}.git; cd {{ cookiecutter.github_repository }}; fab init
 
 Go grab a cup of coffee, we bake your hot development machine.
 
@@ -63,7 +63,7 @@ Avoid working on `master` branch, create a new branch with meaningful name, send
 
 Refer to [CONTRIBUTING.md][contributing]
 
-[contributing]: http://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_reponame}}/tree/master/CONTRIBUTING.md
+[contributing]: http://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_repository}}/tree/master/CONTRIBUTING.md
 
 --------
 Built with ♥ at [Fueled](http://fueled.com)

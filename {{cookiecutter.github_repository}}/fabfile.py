@@ -22,7 +22,7 @@ ROOT_DIR = os.getcwd()
 #  Settings
 # ==========================================================================
 
-env.project_name = '{{ cookiecutter.repo_name }}'
+env.project_name = '{{ cookiecutter.main_module }}'
 env.apps_dir = join(ROOT_DIR, env.project_name)
 env.docs_dir = join(ROOT_DIR, 'docs')
 env.virtualenv_dir = join(ROOT_DIR, 'venv')
@@ -41,8 +41,8 @@ def prod():
     env.host_group = 'production'
     env.remote = 'origin'
     env.branch = 'prod'
-    env.hosts = ['prod.{{ cookiecutter.repo_name }}.fueled.com']
-    env.dotenv_path = '/home/ubuntu/{{ cookiecutter.github_reponame }}/.env'
+    env.hosts = ['prod.{{ cookiecutter.main_module }}.fueled.com']
+    env.dotenv_path = '/home/ubuntu/{{ cookiecutter.github_repository }}/.env'
     env.config_setter = run
 
 

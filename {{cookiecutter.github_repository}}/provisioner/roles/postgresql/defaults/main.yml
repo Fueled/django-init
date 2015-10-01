@@ -1,5 +1,5 @@
 ---
 pg_hstore: False
-pg_db: {{ cookiecutter.repo_name }}
+pg_db: {{ cookiecutter.main_module }}
 pg_user: dev
 pg_password: password

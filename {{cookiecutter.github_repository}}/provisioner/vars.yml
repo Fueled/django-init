@@ -1,0 +1,6 @@
+---
+project_name: {{ cookiecutter.main_module }}
+project_repo_url: git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}.git
+project_repo_remote: origin
+domain_name: api.example.com
+repo_version: master

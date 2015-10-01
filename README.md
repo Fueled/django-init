@@ -49,14 +49,14 @@ It will ask you to some questions, after which it will create a new project in y
 
 Once the cookiecutter script finishes, you'll have:
 
-1. A postgres database created, with name same as `repo_name` you provided.
+1. A postgres database created, with name same as `main_module` you provided.
 2. Installed all the python dependencies in virtualenv
 3. Local settings added to `.env` file (untracked)
 4. Initialized a git repo and created the first commit.
 
 Now the only thing you'll need to do is:
 
-1. `cd` into the new `repo_name` folder just created.
+1. `cd` into the new `github_repository` folder just created.
 2. Activate virtualenv `source venv/bin/activate`. If you plan to use virtualenvwrapper, you can install the project requirements via `pip install -r requirements/development.txt`
 3. Run `fab serve`
 
@@ -66,7 +66,7 @@ __Summarizing__:
 brew install postgres
 sudo pip install fabric cookiecutter
 cookiecutter https://github.com/Fueled/cookiecutter-django.git
-cd <repo_name>
+cd <github_repository>/
 source venv/bin/activate
 fab serve
 ```

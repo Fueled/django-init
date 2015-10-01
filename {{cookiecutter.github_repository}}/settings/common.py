@@ -10,7 +10,7 @@ import environ
 from django.utils.translation import ugettext_lazy as _
 
 ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 2 = /a/)
-APPS_DIR = ROOT_DIR.path('{{ cookiecutter.repo_name }}')
+APPS_DIR = ROOT_DIR.path('{{ cookiecutter.main_module }}')
 
 env = environ.Env()
 
@@ -41,8 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # 'django.contrib.humanize',  # Useful template tags
 
-    '{{ cookiecutter.repo_name }}.base',
-    '{{ cookiecutter.repo_name }}.pages',
+    '{{ cookiecutter.main_module }}.base',
+    '{{ cookiecutter.main_module }}.pages',
 
     'django_extensions',  # http://django-extensions.readthedocs.org/
     'rest_framework',  # http://www.django-rest-framework.org/
@@ -60,7 +60,7 @@ AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 # rest_framework
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': '{{ cookiecutter.repo_name }}.base.api.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': '{{ cookiecutter.main_module }}.base.api.pagination.PageNumberPagination',
     'PAGE_SIZE': 30,
 
     # 'Accept' header based versioning
@@ -91,7 +91,7 @@ REST_FRAMEWORK = {
         # Mainly used for api debug.
         'rest_framework.authentication.SessionAuthentication',
     ),
-    "EXCEPTION_HANDLER": "{{ cookiecutter.repo_name }}.base.exceptions.exception_handler",
+    "EXCEPTION_HANDLER": "{{ cookiecutter.main_module }}.base.exceptions.exception_handler",
 }
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
@@ -172,7 +172,7 @@ WSGI_APPLICATION = 'wsgi.application'
 
 # URL CONFIGURATION
 # ------------------------------------------------------------------------------
-ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
+ROOT_URLCONF = '{{ cookiecutter.main_module }}.urls'
 
 # EMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -183,7 +183,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db("DATABASE_URL", default="postgres://localhost/{{cookiecutter.repo_name}}"),
+    'default': env.db("DATABASE_URL", default="postgres://localhost/{{ cookiecutter.main_module }}"),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 

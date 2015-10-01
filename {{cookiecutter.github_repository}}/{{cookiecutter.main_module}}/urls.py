@@ -15,12 +15,12 @@ from django.contrib import admin
 
 from .routers import router
 
-handler500 = "{{ cookiecutter.repo_name }}.base.views.server_error"
+handler500 = "{{ cookiecutter.main_module }}.base.views.server_error"
 
 urlpatterns = [
 
     url(r'^(?P<filename>(robots.txt)|(humans.txt))$',
-        "{{ cookiecutter.repo_name }}.base.views.root_txt_files", name='root-txt-files'),
+        "{{ cookiecutter.main_module }}.base.views.root_txt_files", name='root-txt-files'),
 
     # Rest API
     url(r'^api/', include(router.urls)),
@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     # pages/ landing pages
-    url(r'^', include("{{ cookiecutter.repo_name }}.pages.urls", namespace="pages")),
+    url(r'^', include("{{ cookiecutter.main_module }}.pages.urls", namespace="pages")),
 
     # Your stuff: custom urls go here
 

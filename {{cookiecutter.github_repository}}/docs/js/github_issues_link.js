@@ -1,6 +1,6 @@
 // Requires: https://padolsey.github.io/findAndReplaceDOMText/src/findAndReplaceDOMText.js
 
-var github_repo = '{{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}';
+var github_repo = '{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}';
 findAndReplaceDOMText(document.querySelector('[role="main"]'), {
   find: /#(\d+)/g,
   replace: function(portion, match){

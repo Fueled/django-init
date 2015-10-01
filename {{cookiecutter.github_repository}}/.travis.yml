@@ -7,15 +7,15 @@ addons:
 
 before_script:
 - flake8
-- export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.repo_name }}
+- export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
 - export DJANGO_SECRET=`openssl rand -base64 32`
-- psql -c "CREATE DATABASE {{ cookiecutter.repo_name }};" -U postgres
+- psql -c "CREATE DATABASE {{ cookiecutter.main_module }};" -U postgres
 
 install:
   - pip install -r requirements/development.txt
 
 script:
-- coverage run --source={{ cookiecutter.repo_name }} --omit='*tests*,*commands*,*migrations*,*admin*,*config*,*wsgi*' -m py.test -v --tb=native
+- coverage run --source={{ cookiecutter.main_module }} --omit='*tests*,*commands*,*migrations*,*admin*,*config*,*wsgi*' -m py.test -v --tb=native
 - coverage report
 
 notifications:
@@ -30,10 +30,10 @@ deploy:
     # travis encrypt $(heroku auth:token) --add deploy.api_key
     secure: <add_heroku_auth_token_here>
   app:
-    master: {{ cookiecutter.repo_name }}-dev
-    qa: {{ cookiecutter.repo_name }}-qa
-    prod: {{ cookiecutter.repo_name }}-prod
+    master: {{ cookiecutter.main_module }}-dev
+    qa: {{ cookiecutter.main_module }}-qa
+    prod: {{ cookiecutter.main_module }}-prod
   on:
-    repo: {{ cookiecutter.github_username }}/{{ cookiecutter.github_reponame }}
+    repo: {{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}
   run:
     - "python manage.py migrate"

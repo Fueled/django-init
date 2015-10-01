@@ -5,5 +5,5 @@
 vm=1
 user=vagrant
 django_configuration=Development
-project_path=/home/vagrant/{{ cookiecutter.repo_name }}
+project_path=/home/vagrant/{{ cookiecutter.main_module }}
 django_requirements_file=requirements/development.txt

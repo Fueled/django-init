@@ -15,7 +15,7 @@ indent_size = 4
 [*.py]
 # https://github.com/timothycrosley/isort/wiki/isort-Settings
 line_length=120
-known_first_party={{ cookiecutter.repo_name }}
+known_first_party={{ cookiecutter.main_module }}
 multi_line_output=3
 default_section=THIRDPARTY
 import_heading_stdlib=Standard Library

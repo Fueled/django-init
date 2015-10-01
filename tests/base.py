@@ -34,11 +34,11 @@ class DjangoCookieTestCase(unittest.TestCase):
 
     def generate_project(self, extra_context=None):
         ctx = {
-            "repo_name": "djcookiecutter_fueled",
-            "github_username": "Fueled",
-            "github_reponame": "djcoookie",
             "project_name": "My Project",
             "project_description": "add a short project description here",
+            "main_module": "djcoookie",
+            "github_username": "Fueled",
+            "github_repository": "djcoookie",
             "timezone": "UTC",
             "django_admin_email": "noreply@example.com",
             "version": "0.1.0",
@@ -49,7 +49,7 @@ class DjangoCookieTestCase(unittest.TestCase):
             ctx.update(extra_context)
 
         self.ctx = ctx
-        self.destpath = join(self.root_dir, self.ctx['repo_name'])
+        self.destpath = join(self.root_dir, self.ctx['github_repository'])
 
         cookiecutter(template='./', checkout=None, no_input=True, extra_context=ctx)
 
