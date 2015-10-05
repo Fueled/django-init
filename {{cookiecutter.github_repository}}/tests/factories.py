@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Standard Library
-import threading
-
 # Third Party Stuff
 import factory
 from django.conf import settings
@@ -14,20 +11,10 @@ class Factory(factory.DjangoModelFactory):
         model = None
         abstract = True
 
-    _SEQUENCE = 1
-    _SEQUENCE_LOCK = threading.Lock()
-
-    @classmethod
-    def _setup_next_sequence(cls):
-        with cls._SEQUENCE_LOCK:
-            cls._SEQUENCE += 1
-        return cls._SEQUENCE
-
 
 class UserFactory(Factory):
     class Meta:
         model = settings.AUTH_USER_MODEL
-        strategy = factory.CREATE_STRATEGY
 
     # modify this to USERNAME_FIELD for custom user model
     username = factory.Sequence(lambda n: "User{}".format(n))
