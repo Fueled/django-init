@@ -13,7 +13,6 @@ pages:
   - 'Changelog': 'api/changelog.md'
 - Backend:
   - 'Server Configurations': 'backend/server_config.md'
-  - 'Database Diagrams': 'backend/db.md'
   - 'Coding Rules': 'backend/coding_rules.md'
 - 'Release Notes': 'release_notes.md'
 
