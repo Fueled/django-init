@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 ### Added
+- latest template configuration via dict
 - `redistomonitor` addon on heroku setup
 - `django-flat-theme` for admin interface
 - common markdown extensions for mkdocs and various improvements

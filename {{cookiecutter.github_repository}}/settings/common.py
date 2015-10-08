@@ -188,36 +188,37 @@ DATABASES = {
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # TEMPLATE CONFIGURATION
-# ------------------------------------------------------------------------------
-# List of locations of the template source files, in search order.
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
-TEMPLATE_DIRS = (
-    str(APPS_DIR.path('templates')),
-)
-
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
-
-# List of processors used by RequestContext to populate the context.
-# Each one should be a callable that takes the request object as its
-# only parameter and returns a dictionary to add to the context.
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.core.context_processors.tz',
-    'django.contrib.messages.context_processors.messages',
-    'django.core.context_processors.request',
-    # Your stuff: custom template context processers go here
-)
+# -----------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#templates
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            str(APPS_DIR.path('templates')),
+        ],
+        'OPTIONS': {
+            'debug': DEBUG,
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.debug',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.media',
+                'django.core.context_processors.static',
+                'django.core.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
+                # Your stuff: custom template context processors go here
+            ],
+        },
+    },
+]
 
 # STATIC FILE CONFIGURATION
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Absolute path to the directory static files should be collected to.
 # Example: "/var/www/example.com/static/"
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
