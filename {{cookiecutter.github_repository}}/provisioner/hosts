@@ -4,6 +4,13 @@
 [vagrant:vars]
 vm=1
 user=vagrant
-django_configuration=Development
-project_path=/home/vagrant/{{ cookiecutter.main_module }}
+project_path=/home/vagrant/{{ cookiecutter.github_repository }}
 django_requirements_file=requirements/development.txt
+
+[production]
+{{ cookiecutter.main_module }}.com
+
+[production:vars]
+user=ubuntu
+project_path=/home/vagrant/{{ cookiecutter.github_repository }}
+django_requirements_file=requirements.txt

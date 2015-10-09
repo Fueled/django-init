@@ -99,4 +99,22 @@ DJANGO_AWS_STORAGE_BUCKET_NAME=<YOUR_BUCKET_NAME_HERE>
 
 ### AWS/EC2
 
-For deploying on aws you need to configure all the addons provided and use python-dotenv to store and read enironment variables. You should using the ansible script in `provisioner` to handle the configuration and deployment on remote servers.
+For deploying on aws you need to configure all the addons provided and use python-dotenv to store and read enironment variables.
+
+Add the following to your `~/.ssh/config` file.
+
+```
+Host {{ cookiecutter.main_module }}.com
+    hostname <server_ip_or_>
+    user ubuntu
+    ForwardAgent yes
+    identityfile <PATH_OF_SERVER_PRIVATE_KEY_HERE>
+```
+
+Add your github private key to your local ssh-agent, which will be used by ansible on remote server to fetch the code using `ForwardAgent`
+
+    ssh-add <PATH_TO_YOUR_GITHUB_PRIVATE_KEY>
+
+Now you can run the ansible script to setup the machine.
+
+    fab prod configure

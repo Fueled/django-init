@@ -6,28 +6,29 @@ See: http://www.fabfile.org/
 from __future__ import absolute_import, unicode_literals, with_statement
 
 # Standard Library
-import os
-from functools import partial
 from contextlib import contextmanager as _contextmanager
-from os.path import isdir, join
+from functools import partial
+from os.path import dirname, isdir, join
 
 # Third Party Stuff
-from fabric.api import cd, env, lcd, local as fabric_local, prefix, run, require
+from fabric.api import local as fabric_local
+from fabric.api import cd, env, lcd, prefix, require, run
+
 local = partial(fabric_local, shell='/bin/bash')
 
 
-ROOT_DIR = os.getcwd()
+HERE = dirname(__file__)
 
 # ==========================================================================
 #  Settings
 # ==========================================================================
 
 env.project_name = '{{ cookiecutter.main_module }}'
-env.apps_dir = join(ROOT_DIR, env.project_name)
-env.docs_dir = join(ROOT_DIR, 'docs')
-env.virtualenv_dir = join(ROOT_DIR, 'venv')
-env.dotenv_path = join(ROOT_DIR, '.env')
-env.requirements_file = join(ROOT_DIR, 'requirements/development.txt')
+env.apps_dir = join(HERE, env.project_name)
+env.docs_dir = join(HERE, 'docs')
+env.virtualenv_dir = join(HERE, 'venv')
+env.dotenv_path = join(HERE, '.env')
+env.requirements_file = join(HERE, 'requirements/development.txt')
 env.shell = "/bin/bash -l -i -c"
 env.use_ssh_config = True
 env.config_setter = local
@@ -66,12 +67,12 @@ def install_deps(file=env.requirements_file):
 
 def serve_docs(options=''):
     '''Start a local server to view documentation changes.'''
-    with lcd(ROOT_DIR) and virtualenv():
+    with lcd(HERE) and virtualenv():
         local('mkdocs serve {}'.format(options))
 
 
 def deploy_docs():
-    with lcd(ROOT_DIR) and virtualenv():
+    with lcd(HERE) and virtualenv():
         local('mkdocs gh-deploy')
         local('rm -rf _docs_html')
 
@@ -139,7 +140,7 @@ def config(action=None, key=None, value=None):
 
 
 def configure():
-    '''Setup a host using ansible scripts
+    '''Setup a host machine using ansible script
 
     Usages: fab [prod|qa|dev] configure
     '''
@@ -157,9 +158,9 @@ def manage(cmd, venv=True):
 
 @_contextmanager
 def virtualenv():
-    '''Activates virtualenv context for other commands to run inside it
+    '''Activates virtualenv context for other commands to run inside it.
     '''
-    with cd(ROOT_DIR):
+    with cd(HERE):
         with prefix('source %(virtualenv_dir)s/bin/activate' % env):
             yield
 
