@@ -6,16 +6,18 @@ addons:
   postgresql: "9.3"
 
 before_script:
-- flake8
 - export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
 - export DJANGO_SECRET=`openssl rand -base64 32`
 - psql -c "CREATE DATABASE {{ cookiecutter.main_module }};" -U postgres
 
 install:
+  - pip install ansible
   - pip install -r requirements/development.txt
 
 script:
+- flake8
 - coverage run --source={{ cookiecutter.main_module }} --omit='*tests*,*commands*,*migrations*,*admin*,*config*,*wsgi*' -m py.test -v --tb=native
+- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 - coverage report
 
 notifications:
