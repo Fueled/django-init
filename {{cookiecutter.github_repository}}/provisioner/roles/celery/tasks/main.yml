@@ -1,19 +1,18 @@
 {%raw%}---
 - name: ensure celery package is installed
   pip: name=celery state=present
+  tags: ['celery']
+
+- name: ensure supervisor is running
+  service: name=supervisor state=started
+  tags: ['celery']
 
 - name: copy supervisor gunicorn configuration
   template: src=supervisor_celery.conf.j2 dest=/etc/supervisor/conf.d/celery.conf
   notify:
     - restart supervisor
-
-- name: update celery configuration
-  template: src=celery.py.j2 dest={{ project_path }}/{{ project_name }}/{{ celery_app }}/celery.py
-  notify:
-    - restart celery
-
-- name: ensure supervisor is running
-  service: name=supervisor state=started
+  tags: ['celery', 'deploy']
 
 - name: ensure celery worker is running
   supervisorctl: name=celery state=started{%endraw%}
+  tags: ['celery', 'deploy']

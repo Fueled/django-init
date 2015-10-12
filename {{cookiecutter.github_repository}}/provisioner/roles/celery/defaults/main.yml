@@ -1,3 +1,2 @@
 ---
-# django app containing celery configuration
-celery_app: config
+celery_concurrency: 4

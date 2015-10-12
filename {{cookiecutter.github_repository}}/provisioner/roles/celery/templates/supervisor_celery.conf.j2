@@ -1,6 +1,6 @@
 {% raw %}[program:celery]
-command = celery worker -A {{ celery_app }} -B -l INFO
-directory = {{ project_path }}/{{ project_name }}
+command = celery worker -A {{ project_name }} -B -l INFO --concurrency={{ celery_concurrency }}
+directory = {{ project_path }}/
 user=ubuntu
 stdout_logfile=/var/log/celery.log
 stderr_logfile=/var/log/celery.log
