@@ -22,7 +22,7 @@ import_heading_stdlib=Standard Library
 import_heading_firstparty={{ cookiecutter.project_name }} Stuff
 import_heading_thirdparty=Third Party Stuff
 
-[*.yml]
+[*.{html,css,scss,json,yml}]
 indent_style = space
 indent_size = 2
 
