@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
-Root url routering file.
+'''Root url routering file.
 
 You should put the url config in their respective app putting only a
 refernce to them here.

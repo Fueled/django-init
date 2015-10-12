@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
+# Third Party Stuff
 import rest_framework.response
 from django import http
 
-"""The various HTTP responses for use in returning proper HTTP codes."""
-
 
 class Response(rest_framework.response.Response):
+    """The various HTTP responses for use in returning proper HTTP codes.
+    """
     def __init__(self, data=None, status=None, template_name=None, headers=None, exception=False,
                  content_type=None):
         super(Response, self).__init__(data, status, template_name, headers, exception,

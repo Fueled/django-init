@@ -5,14 +5,11 @@ python:
 addons:
   postgresql: "9.3"
 
-before_script:
-- pip install flake8
-
 install:
-  - pip install -r requirements-dev.txt --allow-all-external --download-cache $HOME/.pip-cache
+  - pip install -r requirements.txt
 
 script:
-  - py.test tests
+  - py.test
 
 notifications:
   email:

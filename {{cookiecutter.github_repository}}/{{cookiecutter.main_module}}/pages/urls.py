@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
-Pages App Routing.
+'''Pages App Routing.
 
 Handles the top level site pages. You would probably like to add the pages like
 homepage, about, terms and conditions, etc. in this app.
