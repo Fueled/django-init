@@ -118,3 +118,16 @@ Add your github private key to your local ssh-agent, which will be used by ansib
 Now you can run the ansible script to setup the machine.
 
     fab prod configure
+
+This will setup os dependencies, services like supervisor, nginx and fetch our code from github. Our production environment requires 
+some environment variables in `.env`. So you can write a file `prod.env` locally and upload it to server with
+
+    scp prod.env {{ cookiecutter.main_module }}.com:/home/ubuntu/{{ cookiecutter.github_repository }}/.env
+
+You can also use fab to set environment variables one by one:
+
+    fab prod config:set,<VAR_NAME>,<VAR_VALUE>
+
+Now that you have `.env` setup, you can deploy your code and start services:
+
+    fab prod deploy

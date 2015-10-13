@@ -14,5 +14,6 @@
   tags: ['celery', 'deploy']
 
 - name: ensure celery worker is running
-  supervisorctl: name=celery state=started{%endraw%}
+  supervisorctl: name=celery state=started
   tags: ['celery', 'deploy']
+{%endraw%}

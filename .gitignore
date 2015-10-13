@@ -73,3 +73,5 @@ djcookiecutter-test/
 Session.vim
 .netrwhist
 
+# Pycharm project modules
+.idea/

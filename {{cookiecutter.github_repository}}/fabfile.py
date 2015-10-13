@@ -12,7 +12,7 @@ from os.path import dirname, isdir, join
 
 # Third Party Stuff
 from fabric.api import local as fabric_local
-from fabric.api import cd, env, lcd, prefix, require, run
+from fabric.api import cd, env, lcd, prefix, require, run, sudo
 
 local = partial(fabric_local, shell='/bin/bash')
 
@@ -135,18 +135,35 @@ def config(action=None, key=None, value=None):
     command += value if value else ""
     env.config_setter('touch %(dotenv_path)s' % env)
 
-    with virtualenv():
+    if env.config_setter == local:
+        with virtualenv():
+            env.config_setter(command)
+    else:
         env.config_setter(command)
+    restart_servers()
 
 
-def configure():
-    '''Setup a host machine using ansible script
+def restart_servers():
+    sudo('supervisorctl restart all')
+
+
+def configure(tags='', skip_tags='deploy'):
+    '''Setup a host using ansible scripts
 
     Usages: fab [prod|qa|dev] configure
     '''
     require('host_group')
+    cmd = 'ansible-playbook -i hosts site.yml --limit=%(host_group)s' % env
     with lcd('provisioner'):
-        local('ansible-playbook -v -i hosts site.yml --limit=%(host_group)s' % env)
+        if tags:
+            cmd += " --tags '%s'" % tags
+        if skip_tags:
+            cmd += " --skip-tags '%s'" % skip_tags
+        local(cmd)
+
+
+def deploy():
+    configure(tags='deploy', skip_tags='')
 
 
 # Helpers

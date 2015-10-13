@@ -14,7 +14,4 @@
             dest={{ gunicorn_conf_path }}/gunicorn.conf.py
             mode=644
   notify: restart gunicorn
-
-- name: copy supervisor gunicorn configuration
-  template: src=supervisor_gunicorn.conf.j2 dest=/etc/supervisor/conf.d/gunicorn.conf
-  notify: restart gunicorn{%endraw%}
+{%endraw%}

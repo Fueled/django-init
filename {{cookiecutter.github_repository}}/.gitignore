@@ -87,3 +87,6 @@ venv/
 *.un~
 Session.vim
 .netrwhist
+
+# Pycharm project modules
+.idea/
