@@ -1,7 +1,7 @@
 cookiecutter-django
 ====================
 
-[![Build Status](https://magnum.travis-ci.com/Fueled/cookiecutter-django.svg?token=ZbPpaKxeSEJQvwCqUqaJ&branch=master)](https://magnum.travis-ci.com/Fueled/cookiecutter-django)
+[![Build Status](https://travis-ci.org/Fueled/cookiecutter-django.svg?branch=user-app)](https://travis-ci.org/Fueled/cookiecutter-django)
 
 Project template for django based projects, optimized for making REST API with deployment on Heroku and EC2 instances.
 
