@@ -38,4 +38,6 @@ deploy:
   on:
     repo: {{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}
   run:
-    - "python manage.py migrate"
+    # Run migration while answering "yes" to any question prompted.
+    # Note: collectstatic is run automatically on heroku.
+    - 'yes "yes" | python manage.py migrate'
