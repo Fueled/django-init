@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     # 'django.contrib.humanize',  # Useful template tags
 
     '{{ cookiecutter.main_module }}.base',
+    '{{ cookiecutter.main_module }}.users',
     '{{ cookiecutter.main_module }}.pages',
 
     'django_extensions',  # http://django-extensions.readthedocs.org/
@@ -54,7 +55,7 @@ INSTALLED_APPS = (
 
 # django.contrib.auth
 # ------------------------------------------------------------------------------
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User'
 AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 
 # rest_framework
