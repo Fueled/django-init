@@ -83,7 +83,7 @@ def format_exception(exc):
     return detail
 
 
-def exception_handler(exc):
+def exception_handler(exc, context=None):
     '''Returns the response that should be used for any given exception.
 
     By default we handle the REST framework `APIException`, and also
