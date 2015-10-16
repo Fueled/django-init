@@ -7,6 +7,8 @@ import uuid
 # Third Party Stuff
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
+from uuid_upload_path import upload_to
+from versatileimagefield.fields import PPOIField, VersatileImageField
 
 
 class UUIDModel(models.Model):
@@ -25,6 +27,19 @@ class TimeStampedUUIDModel(TimeStampedModel, UUIDModel):
     An abstract base class model that provides self-updating
     ``created`` and ``modified`` fields with UUID as primary_key field.
     '''
+
+    class Meta:
+        abstract = True
+
+
+class ImageMixin(models.Model):
+    '''
+    An abstract base class model that provides a VersatileImageField Image with POI
+    '''
+
+    image = VersatileImageField(upload_to=upload_to, blank=True, null=True, ppoi_field='image_poi',
+                                verbose_name="image")
+    image_poi = PPOIField(verbose_name="image's Point of Interest")  # point of interest
 
     class Meta:
         abstract = True
