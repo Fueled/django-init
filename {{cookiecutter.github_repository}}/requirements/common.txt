@@ -31,11 +31,6 @@ Pillow==3.0.0
 # -------------------------------------
 psycopg2==2.6.1
 
-# Unicode slugification
-# -------------------------------------
-unicode-slugify==0.1.3
-django-autoslug==1.9.0
-
 # Django Rest Framework
 # -------------------------------------
 djangorestframework==3.2.4
