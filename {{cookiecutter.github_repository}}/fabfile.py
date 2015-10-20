@@ -140,7 +140,7 @@ def config(action=None, key=None, value=None):
             env.config_setter(command)
     else:
         env.config_setter(command)
-    restart_servers()
+        restart_servers()
 
 
 def restart_servers():
