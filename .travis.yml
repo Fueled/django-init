@@ -1,15 +1,17 @@
 language: python
+sudo: false
 python:
 - '2.7'
+# - '3.4'  # not supported yet due to dependency on 'fabric'
 
-addons:
-  postgresql: "9.3"
+services:
+  - postgresql
 
 install:
-  - pip install -r requirements.txt
+  - pip install -U pip cookiecutter fabric
 
 script:
-  - py.test
+  - ./run_test.sh
 
 notifications:
   email:
