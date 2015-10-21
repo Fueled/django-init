@@ -7,11 +7,11 @@ __Version:__ {{ cookiecutter.version }}
 
 ## Getting up and running
 
-Minimum requirements: **pip, sass, fabric & [postgres][install-postgres]**, setup is tested on Mac OSX only.
+Minimum requirements: **pip, fabric & [postgres][install-postgres]**, setup is tested on Mac OSX only.
 
 ```
 brew install postgres
-sudo pip install fabric
+[sudo] pip install fabric
 ```
 
 [install-postgres]: http://www.gotealeaf.com/blog/how-to-install-postgresql-on-a-mac
