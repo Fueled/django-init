@@ -81,7 +81,7 @@ def shell():
     manage('shell_plus')
 
 
-def test(options='--ipdb'):
+def test(options='--pdb'):
     '''Run tests locally. By Default, it runs the test using --ipdb.
     You can skip running it using --ipdb by running - `fab test:""`
     '''

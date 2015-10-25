@@ -19,7 +19,7 @@ class UserFactory(Factory):
     # modify this to USERNAME_FIELD for custom user model
     username = factory.Sequence(lambda n: "User{}".format(n))
     email = factory.Sequence(lambda n: 'user%04d@email.com' % n)
-    password = factory.PostGeneration(lambda obj, *args, **kwargs: obj.set_password(obj.phone_number))
+    password = factory.PostGeneration(lambda obj, *args, **kwargs: obj.set_password('123123'))
 
 
 def create_user(**kwargs):

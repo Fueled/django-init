@@ -7,15 +7,6 @@ import mock
 import pytest
 
 
-class Object:
-    pass
-
-
-@pytest.fixture
-def object():
-    return Object()
-
-
 class PartialMethodCaller:
     def __init__(self, obj, **partial_params):
         self.obj = obj

@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.1.0-dev
 - Remove `pytest-pythonpath` from dependency as it's not longer needed.
+- Replace `pytest-ipdb` with `pdbpp` as suggested by `pytest-ipdb`
 
 ## 1.0.0
 ### Added
