@@ -15,12 +15,11 @@ ipython==4.0.0
 # Testing and coverage
 # -------------------------------------
 pytest-django==2.9.1
+pytest-cov==2.2.*
 factory_boy==2.5.2
 pdbpp==0.8.*
 mock==1.3.0
-
 flake8==2.4.1
-coverage==4.0
 
 # Versioning
 # -------------------------------------

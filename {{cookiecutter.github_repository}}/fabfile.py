@@ -81,19 +81,13 @@ def shell():
     manage('shell_plus')
 
 
-def test(options='--pdb'):
+def test(options='--pdb --cov'):
     '''Run tests locally. By Default, it runs the test using --ipdb.
     You can skip running it using --ipdb by running - `fab test:""`
     '''
     with virtualenv():
         local('flake8 .')
-        params = {
-            'source': env.project_name,
-            'omit': env.coverage_omit,
-            'options': options,
-        }
-        local("coverage run --source=%(source)s --omit='%(omit)s' -m py.test %(options)s" % params)
-        local("coverage report")
+        local("py.test %s" % options)
 
 
 def serve(host='127.0.0.1:8000'):

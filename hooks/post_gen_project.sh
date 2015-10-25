@@ -32,7 +32,8 @@ if echo "$yn" | grep -iq "^y"; then
     fi
 
     echo "==> Initialize git repo and create first commit and tag it with v0.0.0"
-    git init && git add .
+    git init
+    git add .
     git commit -am "chore(setup): create base django project."
     git tag v0.0.0
 

@@ -16,9 +16,8 @@ install:
 
 script:
 - flake8
-- coverage run --source={{ cookiecutter.main_module }} --omit='*tests*,*commands*,*migrations*,*admin*,*config*,*wsgi*' -m py.test -v --tb=native
+- py.test --cov -v --tb=native
 - ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
-- coverage report
 
 notifications:
   email:
