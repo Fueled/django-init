@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.0-dev]
 ### Added
+- Use `bin/post_compile` to handle database migration on Heroku.
 - Switch to stable version of mkdocs 
 - Add custom user app with email as username
 - Make use of `pytest-cov` plugin for generating coverage reports.

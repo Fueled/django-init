@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Run migration while answering "yes" to any question prompted.
+yes "yes" | python manage.py migrate
+
+# Run production checks
+python manage.py check --deploy
+
+# used by heroku after slug compilation

@@ -62,8 +62,6 @@ SITE_SCHEME=https \
 SITE_NAME=DJANGO_SITE_NAME_HERE --app=<heroku-app-name>
 
 git push heroku master
-heroku run python manage.py migrate --app=<heroku-app-name>
-heroku run python manage.py check --deploy --app=<heroku-app-name>
 heroku run python manage.py createsuperuser --app=<heroku-app-name>
 heroku open --app=<heroku-app-name>
 ```
