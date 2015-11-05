@@ -50,14 +50,12 @@ def prod():
 def init(vagrant=False):
     '''Prepare a local machine for development.'''
 
-    install_deps()
-    config('set', 'DJANGO_SECRET_KEY', '`openssl rand -base64 32`')
-    config('set', 'DATABASE_URL', 'postgres://localhost/%(project_name)s' % env)
+    install_requirements()
     local('createdb %(project_name)s' % env)  # create postgres database
     manage('migrate')
 
 
-def install_deps(file=env.requirements_file):
+def install_requirements(file=env.requirements_file):
     '''Install project dependencies.'''
     verify_virtualenv()
     # activate virtualenv and install
@@ -92,7 +90,7 @@ def test(options='--pdb --cov'):
 
 def serve(host='127.0.0.1:8000'):
     '''Start an enhanced local app server'''
-    install_deps()
+    install_requirements()
     migrate()
     manage('runserver_plus %s' % host)
 
@@ -116,17 +114,15 @@ def createapp(appname):
 
 
 def config(action=None, key=None, value=None):
-    '''Manage project configuration using .env
+    '''Read/write to .env file on local and remote machines.
 
-    Usages: fab config:set,[key],[value]
-
-    see: https://github.com/theskumar/python-dotenv
+    Usages: fab [prod] config:set,<key>,<value>
+            fab [prod] config:get,<key>
+            fab [prod] config:unset,<key>
+            fab [prod] config:list
     '''
-    command = 'dotenv'
-    command += ' -f %(dotenv_path)s ' % env
-    command += action + " " if action else " "
-    command += key + " " if key else " "
-    command += value if value else ""
+    import dotenv
+    command = dotenv.get_cli_string(env.dotenv_path, action, key, value)
     env.config_setter('touch %(dotenv_path)s' % env)
 
     if env.config_setter == local:

@@ -1,27 +1,27 @@
 # Core Stuff
 # -------------------------------------
-django==1.8.5
+django==1.8.6
 whitenoise==2.0.4
 
 # Extensions
 # -------------------------------------
 Werkzeug==0.10.4
-django-extensions==1.5.7
+django-extensions==1.5.9
 django-flat-theme==1.1.1
-pytz==2015.6
+pytz==2015.7
 
 # Configuration
 # -------------------------------------
 django-environ==0.4.0
 django-sites==0.8
 django-secure==1.0.1
-python-dotenv==0.1.5
+python-dotenv==0.3.0
 
 # Models
 # -------------------------------------
 django-model-utils==2.3.1
 django-uuid-upload-path==1.0.0
-django-versatileimagefield==1.0.5
+django-versatileimagefield==1.0.6
 
 # Images
 # -------------------------------------
@@ -33,4 +33,4 @@ psycopg2==2.6.1
 
 # Django Rest Framework
 # -------------------------------------
-djangorestframework==3.2.4
+djangorestframework==3.3.1
