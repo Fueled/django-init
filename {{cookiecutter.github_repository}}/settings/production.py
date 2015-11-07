@@ -67,6 +67,9 @@ SESSION_COOKIE_SECURE = False
 SESSION_COOKIE_HTTPONLY = True
 SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 
+# Use cache for sessions
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
 
 ENABLE_MEDIA_UPLOAD_TO_S3 = env.bool("ENABLE_MEDIA_UPLOAD_TO_S3", default=False)
 
