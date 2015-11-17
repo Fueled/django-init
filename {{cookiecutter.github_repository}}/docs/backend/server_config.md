@@ -47,7 +47,7 @@ The deployment are managed via travis, but for the first time you'll need to set
 
 ### Heroku
 
-Run these commands to deploy a new project to Heroku:
+Run these commands to deploy this project on Heroku (substitue all references of `<heroku-app-name>` with the name your heroku application.)
 
 ```
 heroku create --ssh-git <heroku-app-name>
@@ -56,7 +56,10 @@ heroku addons:create heroku-postgresql --app=<heroku-app-name>
 heroku pg:backups schedule DATABASE_URL --at '04:00 UTC' --app=<heroku-app-name>
 heroku pg:promote DATABASE_URL --app=<heroku-app-name>
 
-heroku addons:create sendgrid:starter --app=<heroku-app-name>
+heroku addons:create mailgun --app=<heroku-app-name>
+heroku config:set EMAIL_HOST="\$MAILGUN_SMTP_SERVER" \
+                  EMAIL_HOST_USER="\$MAILGUN_SMTP_LOGIN" \
+                  EMAIL_HOST_PASSWORD="\$MAILGUN_SMTP_PASSWORD" --app=<heroku-app-name>
 
 heroku addons:create redistogo --app=<heroku-app-name>
 heroku addons:create redismonitor --url `heroku config:get REDISTOGO_URL --app=<heroku-app-name>` --app=<heroku-app-name>

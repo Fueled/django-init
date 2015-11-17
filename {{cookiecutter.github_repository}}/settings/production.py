@@ -109,11 +109,11 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # EMAIL
 # ------------------------------------------------------------------------------
-DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',
                          default='{{ cookiecutter.project_name }} <{{ cookiecutter.django_admin_email }}>')
-EMAIL_HOST = env("DJANGO_EMAIL_HOST", default='smtp.sendgrid.com')
-EMAIL_HOST_PASSWORD = env("SENDGRID_PASSWORD")
-EMAIL_HOST_USER = env('SENDGRID_USERNAME')
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_SUBJECT_PREFIX = env("EMAIL_SUBJECT_PREFIX", default='[{{cookiecutter.project_name}}] ')
 EMAIL_USE_TLS = True

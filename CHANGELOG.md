@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Remove `pytest-pythonpath` from dependency as it's not longer needed.
 - Replace `pytest-ipdb` with `pdbpp` as suggested by `pytest-ipdb`
 
+### Changed
+- Default SMTP server to mailgun
+
 ## [1.0.0]
 ### Added
 - latest template configuration via dict
