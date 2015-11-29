@@ -9,7 +9,7 @@ isort==4.2.2
 # -------------------------------------
 django-debug-toolbar==1.4
 ipdb==0.8.1
-ipython==4.0.0
+ipython==4.0.1
 
 # Testing and coverage
 # -------------------------------------
