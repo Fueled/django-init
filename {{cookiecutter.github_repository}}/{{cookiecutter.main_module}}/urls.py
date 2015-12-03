@@ -11,15 +11,19 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.views import defaults as dj_default_views
+
+# {{ cookiecutter.project_name }} Stuff
+from {{ cookiecutter.main_module }}.base import views as base_views
 
 from .routers import router
 
-handler500 = "{{ cookiecutter.main_module }}.base.views.server_error"
+handler500 = base_views.server_error
 
 urlpatterns = [
 
     url(r'^(?P<filename>(robots.txt)|(humans.txt))$',
-        "{{ cookiecutter.main_module }}.base.views.root_txt_files", name='root-txt-files'),
+        base_views.root_txt_files, name='root-txt-files'),
 
     # Rest API
     url(r'^api/', include(router.urls)),
@@ -40,8 +44,8 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^400/$', 'django.views.defaults.bad_request'),
-        url(r'^403/$', 'django.views.defaults.permission_denied'),
-        url(r'^404/$', 'django.views.defaults.page_not_found'),
+        url(r'^400/$', dj_default_views.bad_request),
+        url(r'^403/$', dj_default_views.permission_denied),
+        url(r'^404/$', dj_default_views.page_not_found),
         url(r'^500/$', handler500),
     ]
