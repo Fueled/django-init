@@ -1,19 +1,5 @@
 # Server Architecture and configurations
 
-```sequence
-title: Client Server Interactions
-iOS/\nClient->Web\nServer: API Request
-Web\nServer-->Redis: Cache
-Redis-->Web\nServer: 
-Web\nServer->Postgres: Persistent Storage
-Postgres->Web\nServer: 
-Web\nServer-->Redis: Update cache
-Web\nServer-->SMTP: Enqueue emails
-Web\nServer->iOS/\nClient: API Response
-SMTP->iOS/\nClient: Email
-Note over Web\nServer: Django Framework
-```
-
 # Third Party Services
 
 Following third-party services are required in order to setup/deploy this project successfully.
