@@ -5,6 +5,9 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 '''
 from __future__ import print_function, unicode_literals
 
+# Standard Library
+from email.utils import getaddresses
+
 # Third Party Stuff
 import environ
 from django.utils.translation import ugettext_lazy as _
@@ -17,10 +20,8 @@ env = environ.Env()
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
 # People who get code error notifications.
-# In the format (('Full Name', 'email@example.com'), ('Full Name', 'anotheremail@example.com'))
-ADMINS = (
-    ('{{ cookiecutter.project_name }} Admin', '{{ cookiecutter.django_admin_email }}'),
-)
+# In the format 'Full Name <email@example.com>, Full Name <anotheremail@example.com>'
+ADMINS = getaddresses([env("DJANGO_ADMINS", default='{{ cookiecutter.django_admin_email }}')])
 
 # Not-necessarily-technical managers of the site. They get broken link
 # notifications and other various emails.
