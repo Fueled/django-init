@@ -19,7 +19,8 @@ env = environ.Env()
 # People who get code error notifications.
 # In the format (('Full Name', 'email@example.com'), ('Full Name', 'anotheremail@example.com'))
 ADMINS = (
-    ('{{ cookiecutter.project_name }} Admin', '{{ cookiecutter.django_admin_email }}'),
+    ('{{ cookiecutter.project_name }} Admin',
+     env('DJANGO_ADMIN_EMAIL', default='{{ cookiecutter.django_admin_email }}')),
 )
 
 # Not-necessarily-technical managers of the site. They get broken link

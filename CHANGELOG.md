@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.0-dev]
 ### Added
+- Allow admin email to be set via environment variable `DJANGO_ADMIN_EMAIL`
 - Use `bin/post_compile` to handle database migration on Heroku.
 - Switch to stable version of mkdocs 
 - Add custom user app with email as username
