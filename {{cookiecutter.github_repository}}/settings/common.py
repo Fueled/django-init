@@ -108,6 +108,7 @@ SITE_ID = 'local'
 # this middleware classes will be applied in the order given, and in the
 # response phase the middleware will be applied in reverse order.
 MIDDLEWARE_CLASSES = (
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -255,6 +256,16 @@ MEDIA_URL = '/media/'
 
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
+
+#  SECURITY
+# -----------------------------------------------------------------------------
+CSRF_COOKIE_HTTPONLY = False  # Allow javascripts to read CSRF token from cookies
+SESSION_COOKIE_HTTPONLY = True  # Do not allow Session cookies to be read by javascript
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------

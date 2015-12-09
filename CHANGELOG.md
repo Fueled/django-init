@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Default SMTP server to mailgun
 - Use `cache_db` as `SESSION_ENGINE` instead of simple `cache`
+- Use in-built `SecurityMiddleware` instead of django-secure
 
 ## [1.0.0]
 ### Added

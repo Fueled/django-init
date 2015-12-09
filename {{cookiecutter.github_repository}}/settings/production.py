@@ -8,16 +8,10 @@ Adds sensible default for running app in production.
 '''
 from __future__ import absolute_import, unicode_literals
 
+# Third Party Stuff
 from django.utils import six
 
 from .common import *  # noqa
-
-
-# SECRET CONFIGURATION
-# ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-# Raises ImproperlyConfigured exception if DJANO_SECRET_KEY not in os.environ
-SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SITE CONFIGURATION
 # Hosts/domain names that are valid for this site.
@@ -25,12 +19,14 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["*"]
 
+SITE_SCHEME = env('SITE_SCHEME', default='https')
+
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
 # see: http://django-sites.readthedocs.org
 SITES['remote'] = {
     "domain": env('SITE_DOMAIN'),
-    "scheme": env('SITE_SCHEME', default='https'),
+    "scheme": SITE_SCHEME,
     "name": env('SITE_NAME'),
 }
 SITE_ID = env("DJANGO_SITE_ID", default='remote')
@@ -48,24 +44,19 @@ INSTALLED_APPS += ("gunicorn", )
 # properly on Heroku.
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# django-secure
-# ------------------------------------------------------------------------------
-INSTALLED_APPS += ("djangosecure", )
+#  SECURITY
+# -----------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
+# Raises ImproperlyConfigured exception if DJANO_SECRET_KEY not in os.environ
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
-MIDDLEWARE_CLASSES = (
-    # Make sure djangosecure.middleware.SecurityMiddleware is listed first
-    'djangosecure.middleware.SecurityMiddleware',
-) + MIDDLEWARE_CLASSES
-
-# set this to 60 seconds and then to 518400 when you can prove it works
-SECURE_HSTS_SECONDS = 60
-SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool("DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True)
-SECURE_FRAME_DENY = env.bool("DJANGO_SECURE_FRAME_DENY", default=True)
-SECURE_CONTENT_TYPE_NOSNIFF = env.bool("DJANGO_SECURE_CONTENT_TYPE_NOSNIFF", default=True)
-SECURE_BROWSER_XSS_FILTER = True
-SESSION_COOKIE_SECURE = False
-SESSION_COOKIE_HTTPONLY = True
-SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
+if SITE_SCHEME == 'https':
+    # set this to 60 seconds and then to 518400 when you can prove it works
+    SECURE_HSTS_SECONDS = env.int('DJANGO_SECURE_HSTS_SECONDS', default=60)
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 # STORAGE CONFIGURATION
 # ------------------------------------------------------------------------------
