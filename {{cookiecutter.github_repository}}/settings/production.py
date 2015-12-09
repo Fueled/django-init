@@ -67,18 +67,14 @@ SESSION_COOKIE_SECURE = False
 SESSION_COOKIE_HTTPONLY = True
 SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
 
-
-ENABLE_MEDIA_UPLOAD_TO_S3 = env.bool("ENABLE_MEDIA_UPLOAD_TO_S3", default=False)
-
 # STORAGE CONFIGURATION
 # ------------------------------------------------------------------------------
+ENABLE_MEDIA_UPLOAD_TO_S3 = env.bool("ENABLE_MEDIA_UPLOAD_TO_S3", default=False)
 if ENABLE_MEDIA_UPLOAD_TO_S3:
     # Uploaded Media Files
     # ------------------------
     # See: http://django-storages.readthedocs.org/en/latest/index.html
-    INSTALLED_APPS += (
-        'storages',
-    )
+    INSTALLED_APPS += ('storages',)
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
     AWS_ACCESS_KEY_ID = env('DJANGO_AWS_ACCESS_KEY_ID')
