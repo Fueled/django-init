@@ -8,7 +8,7 @@ import pytest
 
 from .fixtures import *  # noqa
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.development")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.testing")
 
 
 def pytest_addoption(parser):
