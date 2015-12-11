@@ -1,11 +1,11 @@
 {
-    "project_name": "My Awesome Project"
-    , "project_description": "add a short project description here"
-    , "main_module": "hello_world"
+    "project_name": "Hello World"
+    , "project_description": "Add a short project description here."
+    , "main_module": "{{ cookiecutter.project_name|lower|replace(' ', '_') }}"
     , "github_username": "Fueled"
-    , "github_repository": "hello-world-web"
+    , "github_repository": "{{ cookiecutter.main_module|replace('_', '-') }}-web"
     , "timezone": "UTC"
-    , "django_admin_email": "noreply@example.com"
+    , "django_admin_email": "{{ cookiecutter.project_name }} Admin <admin@example.com>"
     , "version": "0.0.0"
     , "newrelic" : "y"
 }
