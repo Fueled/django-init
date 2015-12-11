@@ -10,6 +10,8 @@ isort==4.2.2
 django-debug-toolbar==1.4
 ipdb==0.8.1
 ipython==4.0.1
+Werkzeug==0.11.2  # for runserver_plus
+django-extensions==1.5.9  # for shell_plus and other utils
 
 # Testing and coverage
 # -------------------------------------
