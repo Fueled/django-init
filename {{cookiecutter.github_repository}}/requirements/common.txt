@@ -11,7 +11,7 @@ pytz==2015.7
 # Configuration
 # -------------------------------------
 django-environ==0.4.0
-django-sites==0.8
+django-sites==0.9
 python-dotenv==0.3.0
 
 # Models
@@ -24,4 +24,4 @@ django-versatileimagefield==1.2
 
 # Django Rest Framework
 # -------------------------------------
-djangorestframework==3.3.1
+djangorestframework==3.3.2
