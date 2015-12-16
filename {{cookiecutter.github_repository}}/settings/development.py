@@ -4,6 +4,7 @@
 Adds sensible defaults for developement of project
 - Enable DEBUG
 - Log outgoing emails to console
+- Enable Django Extensions
 - Enable Django Debug Toolbar
 - Use local caches
 - override SITE_ID to use 'local'
@@ -41,6 +42,10 @@ CACHES = {
         'LOCATION': ''
     }
 }
+
+# django-extensions (http://django-extensions.readthedocs.org/)
+# ------------------------------------------------------------------------------
+INSTALLED_APPS += ('django_extensions', )
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
