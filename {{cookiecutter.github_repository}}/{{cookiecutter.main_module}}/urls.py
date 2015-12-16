@@ -44,8 +44,8 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^400/$', dj_default_views.bad_request),
-        url(r'^403/$', dj_default_views.permission_denied),
-        url(r'^404/$', dj_default_views.page_not_found),
+        url(r'^400/$', dj_default_views.bad_request, kwargs={'exception': Exception("Bad Request!")}),
+        url(r'^403/$', dj_default_views.permission_denied, kwargs={'exception': Exception("Permission Denied!")}),
+        url(r'^404/$', dj_default_views.page_not_found, kwargs={'exception': Exception("Not Found!")}),
         url(r'^500/$', handler500),
     ]

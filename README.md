@@ -7,7 +7,7 @@ Project template for django based projects, optimized for making REST API with d
 
 ## Features
 
-- Latest stable Django 1.8+
+- Django 1.9.x
 - PostresSQL everywhere.
 - [Procfile] for deploying to Heroku.
 - [Ansible] script for quick deployment to Ubuntu based servers.
