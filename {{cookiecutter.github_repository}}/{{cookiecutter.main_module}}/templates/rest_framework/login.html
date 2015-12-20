@@ -1,2 +1,5 @@
-{% extends "rest_framework/login_base.html" %}
-{% block branding %}<h3 style="margin: 0 0 20px; color: #A30000">{{ cookiecutter.project_name }}{% raw %} API </h3>{% endraw %} {% endblock %}
+{% raw %}{% extends "rest_framework/login_base.html" %}
+
+{# Override this template in your own templates directory to customize #}
+{% block branding %}<h3 style="margin: 0 0 20px; color: #A30000">{% endraw %}
+{{ cookiecutter.project_name }}{% raw %} API </h3>{% endraw %} {% endblock %}
