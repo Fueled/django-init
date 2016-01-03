@@ -1,6 +1,6 @@
 # Core Stuff
 # -------------------------------------
-Django==1.9
+Django==1.9.1
 whitenoise==2.0.6
 
 # Extensions
@@ -19,7 +19,7 @@ psycopg2==2.6.1
 django-model-utils==2.4
 django-uuid-upload-path==1.0.0
 Pillow==3.0.0
-django-versatileimagefield==1.2
+django-versatileimagefield==1.2.2
 
 # REST APIs
 # -------------------------------------
