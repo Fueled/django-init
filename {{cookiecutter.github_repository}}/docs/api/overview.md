@@ -45,7 +45,7 @@ Requests that return multiple items will be paginated to 30 items by default. Yo
 
 Note that page numbering is 1-based and that omitting the `?page` parameter will return the first page.
 
-# Rate Limit
+## Rate Limit
 
 All the unauthorized urls have a rate limit of 10,000 requests/day/IP. After exceeding the limit, you'll get `HTTP TOO MANY REQUESTS` with status code `429`. When this happens you'll also receive `X-Throttle-Wait-Seconds: <time_in_sec>` header in response header.
 
