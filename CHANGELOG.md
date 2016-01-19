@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.0-dev]
 ### Added
+- Add `REDIS_MAX_CONNECTIONS` parameter with default reduced to 10.
 - Add custom branding for drf's api browser login page.
 - Allow admin email to be set via environment variable `DJANGO_ADMIN_EMAIL`
 - Use `bin/post_compile` to handle database migration on Heroku.

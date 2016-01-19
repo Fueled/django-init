@@ -119,7 +119,8 @@ CACHES = {
             'PARSER_CLASS': 'redis.connection.HiredisParser',
             'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
             'CONNECTION_POOL_CLASS_KWARGS': {
-                'max_connections': 50,
+                # Hobby redistogo on heroku only supports max. 10, increase as required.
+                'max_connections': env.int('REDIS_MAX_CONNECTIONS', default=10),
                 'timeout': 20,
             }
         }
