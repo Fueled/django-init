@@ -4,3 +4,4 @@ project_repo_url: git@github.com:{{ cookiecutter.github_username }}/{{ cookiecut
 project_repo_remote: origin
 domain_name: {{ cookiecutter.main_module }}.com
 repo_version: master
+py_version: 2

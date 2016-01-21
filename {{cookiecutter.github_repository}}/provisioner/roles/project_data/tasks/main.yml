@@ -4,9 +4,14 @@
   sudo: false
   tags: ['deploy', 'always']
 
+- name: manually create the initial virtualenv
+  command: virtualenv {{ project_path }}/venv -p python{{ py_version }} creates={{ project_path }}/venv
+  sudo: false
+  tags: ['configure', 'deploy']
+
 - name: install django python dependencies
-  pip: requirements={{ project_path }}/{{ django_requirements_file }}
-  sudo: true
+  pip: requirements={{ project_path }}/{{ django_requirements_file }} virtualenv={{ project_path }}/venv
+  sudo: false
   tags: ['deploy']
 
 - name: copy supervisor gunicorn configuration
@@ -15,12 +20,12 @@
   tags: ['deploy']
 
 - name: migrate database
-  django_manage: command=migrate app_path={{ project_path }}
+  django_manage: command=migrate app_path={{ project_path }} virtualenv={{ project_path }}/venv
   sudo: false
   tags: ['deploy']
 
 - name: collect static
-  django_manage: command=collectstatic app_path={{ project_path }}
+  django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ project_path }}/venv
   sudo: false
   tags: ['deploy']
 

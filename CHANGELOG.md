@@ -13,6 +13,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Make use of `pytest-cov` plugin for generating coverage reports.
 - Remove `pytest-pythonpath` from dependency as it's not longer needed.
 - Replace `pytest-ipdb` with `pdbpp` as suggested by `pytest-ipdb`
+- Use virtualenv in ansible provisioner to install project dependencies.
+- Add variable in Nginx site configuration for max body size a client can send/upload.
 
 ### Changed
 - Upgrade to Django 1.9

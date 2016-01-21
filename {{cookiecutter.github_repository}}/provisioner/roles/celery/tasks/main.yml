@@ -6,14 +6,17 @@
 - name: ensure supervisor is running
   service: name=supervisor state=started
   tags: ['celery']
+  sudo: yes
 
 - name: copy supervisor gunicorn configuration
   template: src=supervisor_celery.conf.j2 dest=/etc/supervisor/conf.d/celery.conf
   notify:
     - restart supervisor
   tags: ['celery', 'deploy']
+  sudo: yes
 
 - name: ensure celery worker is running
   supervisorctl: name=celery state=started
   tags: ['celery', 'deploy']
+  sudo: yes
 {%endraw%}

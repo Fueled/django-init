@@ -15,6 +15,9 @@
 - name: ensure a default bashrc file
   file: src=bashrc dest=/home/{{ user }}/.bashrc
 
+- name: ensure a default inputrc file
+  file: src=inputrc dest=/home/{{ user }}/.inputrc
+
 - name: install apt_get install apt_packages
   apt: pkg={{ item }} state=present
   with_items: base_ubuntu.common.apt_packages

@@ -21,6 +21,8 @@ server {
     access_log   /var/log/nginx/{{ domain_name }}.access.log;
     error_log    /var/log/nginx/{{ domain_name }}.error.log;
 
+    client_max_body_size {{ nginx_max_file_size }}M;
+
     # Uncomment following line to enforce ssl
     # ssl on;
     # Make sure following files exist
