@@ -7,6 +7,9 @@ python:
 services:
   - postgresql
 
+addons:
+  postgresql: "9.4"
+
 install:
   - pip install -U pip cookiecutter fabric
 
