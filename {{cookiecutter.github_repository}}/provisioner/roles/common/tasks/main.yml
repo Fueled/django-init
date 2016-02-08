@@ -12,11 +12,11 @@
 - name: update apt cache
   apt: update_cache=yes
 
-- name: ensure a default bashrc file
-  file: src=bashrc dest=/home/{{ user }}/.bashrc
-
-- name: ensure a default inputrc file
-  file: src=inputrc dest=/home/{{ user }}/.inputrc
+- name: ensure a default bashrc and inputrc file
+  copy: src={{ item.src }} dest=/home/{{ user }}/{{ item.dest }} owner={{ user }} group={{ user }}
+  with_items:
+    - { src: 'bashrc', dest: '.bashrc' }
+    - { src: 'inputrc', dest: '.inputrc' }
 
 - name: install apt_get install apt_packages
   apt: pkg={{ item }} state=present
