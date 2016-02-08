@@ -23,7 +23,7 @@ SITE_SCHEME = env('SITE_SCHEME', default='https')
 
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
-# see: http://django-sites.readthedocs.org
+# see: http://niwinz.github.io/django-sites/latest/
 SITES['remote'] = {
     "domain": env('SITE_DOMAIN'),
     "scheme": SITE_SCHEME,

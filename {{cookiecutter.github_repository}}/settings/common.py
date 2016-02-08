@@ -35,7 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django_sites',  # http://django-sites.readthedocs.org/
+    'django_sites',  # http://niwinz.github.io/django-sites/latest/
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
