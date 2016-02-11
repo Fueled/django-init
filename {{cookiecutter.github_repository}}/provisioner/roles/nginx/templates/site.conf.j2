@@ -1,7 +1,4 @@
-{%raw%}upstream app_server {
-    server     127.0.0.1:8000;
-}
-
+{%raw%}# {{ ansible_managed }}
 # Uncomment following line to enforce ssl
 # server {
 #     listen         80;
@@ -17,7 +14,6 @@ server {
     # listen       443;
 
     server_name  {{ domain_name }};
-    root         /var/www/;
     access_log   /var/log/nginx/{{ domain_name }}.access.log;
     error_log    /var/log/nginx/{{ domain_name }}.error.log;
 
@@ -29,12 +25,8 @@ server {
     # ssl_certificate /etc/nginx/ssl/{{ domain_name }}.chained.crt;
     # ssl_certificate_key /etc/nginx/ssl/{{ domain_name }}.key;
 
-    # Check if a file exists at /var/www/ for the incoming request.
-    # If it doesn't proxy to Django wsgi server.
-    try_files $uri @app_server;
-
     # Setup named location for Django requests and handle proxy details
-    location @app_server {
+    location / {
             proxy_pass         http://127.0.0.1:8000;
             proxy_redirect     off;
             proxy_set_header   Host             $host;

@@ -8,15 +8,15 @@
 
 - name: delete default vhost.
   action: file path=/etc/nginx/sites-enabled/default state=absent
-  notify: restart nginx
+  notify: reload nginx
 
 - name: copy site host configuration.
   template: src=site.conf.j2 dest=/etc/nginx/sites-available/{{project_name}}.conf
-  notify: restart nginx
+  notify: reload nginx
 
 - name: put host configuration in sites-enabled
   file: src=/etc/nginx/sites-available/{{project_name}}.conf dest=/etc/nginx/sites-enabled/{{project_name}} state=link
-  notify: restart nginx
+  notify: reload nginx
 
 - name: ensure nginx is running
   service: name=nginx state=started{%endraw%}
