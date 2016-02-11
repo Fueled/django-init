@@ -1,9 +1,7 @@
 {%raw%}[program:gunicorn]
-[program:gunicorn]
 command = {{ project_path }}/venv/bin/gunicorn -c {{ gunicorn_conf_path }}/gunicorn.conf.py wsgi:application
 directory = {{ project_path }}
 user=ubuntu
 stdout_logfile=/var/log/gunicorn.log
 stderr_logfile=/var/log/gunicorn.log
-
 {%endraw%}

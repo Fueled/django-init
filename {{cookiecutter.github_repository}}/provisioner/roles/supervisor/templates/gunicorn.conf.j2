@@ -1,3 +1,0 @@
-{%raw%}[program:gunicorn]
-command = {{ project_path }}/venv/bin/gunicorn -c gunicorn.conf.py wsgi:application
-directory = {{ project_path }}/{{ project_name }}{%endraw%}
