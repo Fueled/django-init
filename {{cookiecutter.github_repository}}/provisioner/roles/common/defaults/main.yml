@@ -6,6 +6,7 @@ lang: "en_US.utf8"
 lc_all: "en_US.utf8"
 lc_ctype: "en_US.utf8"
 lc_collate: "en_US.utf8"
+ubuntu_release: "trusty"
 
 base_ubuntu:
   common:
@@ -30,3 +31,4 @@ base_ubuntu:
       - liblcms2-dev
       - postgresql-client
       - libpq-dev
+      - postgis

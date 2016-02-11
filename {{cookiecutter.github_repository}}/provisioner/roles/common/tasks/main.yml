@@ -9,6 +9,13 @@
         force=yes
         state=link
 
+- name: Configure the PostgreSQL APT key
+  apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc state=present
+
+- name: Configure the PostgreSQL APT repositories
+  apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ {{ ubuntu_release }}-pgdg main 9.5"
+                  state=present
+
 - name: update apt cache
   apt: update_cache=yes
 

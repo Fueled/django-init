@@ -7,5 +7,7 @@
     , "timezone": "UTC"
     , "django_admin_email": "{{ cookiecutter.project_name }} Admin <admin@example.com>"
     , "version": "0.0.0"
+    , "python_version": "2"
     , "newrelic" : "y"
+    , "postgis": "n"
 }

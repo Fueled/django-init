@@ -106,7 +106,8 @@ SERVER_EMAIL = EMAIL_HOST_USER
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-DATABASES['default'] = env.db("DATABASE_URL")
+DATABASES['default'].update(env.db("DATABASE_URL"))  # Should not override all db settings
+{% if cookiecutter.postgis == 'y' %}DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'{% endif %}
 
 # CACHING
 # ------------------------------------------------------------------------------

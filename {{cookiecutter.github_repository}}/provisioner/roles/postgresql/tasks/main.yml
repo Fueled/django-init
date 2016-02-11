@@ -9,6 +9,12 @@
     - postgresql-contrib
     - python-psycopg2
 
+- name: install postgis packages for Ubuntu
+  apt:
+    pkg: "postgis"
+    state: installed
+  when: pg_gis
+
 - name: setup database
   sudo_user: postgres
   postgresql_db:
@@ -23,6 +29,16 @@
   sudo_user: postgres
   shell: psql {{ pg_db }} -c "CREATE EXTENSION IF NOT EXISTS hstore;"
   when: pg_hstore
+
+- name: add postgis
+  sudo_user: postgres
+  shell: psql {{ pg_db }} -c "CREATE EXTENSION IF NOT EXISTS postgis;"
+  when: pg_gis
+
+- name: add postgis topology
+  sudo_user: postgres
+  shell: psql {{ pg_db }} -c "CREATE EXTENSION IF NOT EXISTS postgis_topology;"
+  when: pg_gis
 
 - name: grant access for database to user
   sudo_user: postgres

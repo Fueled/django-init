@@ -7,7 +7,7 @@ __Version:__ {{ cookiecutter.version }}
 
 ## Getting up and running
 
-Minimum requirements: **pip, fabric & [postgres][install-postgres]**, setup is tested on Mac OSX only.
+Minimum requirements: **pip, fabric & [postgres][install-postgres]{% if cookiecutter.postgis == 'y' %} with postgis{% endif %}**, setup is tested on Mac OSX only.
 
 ```
 brew install postgres

@@ -8,7 +8,7 @@ Project template for django based projects, optimized for making REST API with d
 ## Features
 
 - Django 1.9.x
-- PostresSQL everywhere.
+- PostresSQL everywhere(support of postgis is available).
 - [Procfile] for deploying to Heroku.
 - [Ansible] script for quick deployment to Ubuntu based servers.
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.

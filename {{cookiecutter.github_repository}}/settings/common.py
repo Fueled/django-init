@@ -184,6 +184,8 @@ DATABASES = {
     'default': env.db("DATABASE_URL", default="postgres://localhost/{{ cookiecutter.main_module }}"),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
+DATABASES['default']['CONN_MAX_AGE'] = 10
+{% if cookiecutter.postgis == 'y' %}DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'{% endif %}
 
 # TEMPLATE CONFIGURATION
 # -----------------------------------------------------------------------------

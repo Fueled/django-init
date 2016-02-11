@@ -38,7 +38,8 @@ Run these commands to deploy this project on Heroku (substitue all references of
 ```
 heroku create --ssh-git <heroku-app-name>
 
-heroku addons:create heroku-postgresql --app=<heroku-app-name>
+{% if cookiecutter.postgis == 'y' %}heroku addons:create heroku-postgresql:standard-0 --app=<heroku-app-name>
+{% else %}heroku addons:create heroku-postgresql --app=<heroku-app-name>{% endif %}
 heroku pg:backups schedule DATABASE_URL --at '04:00 UTC' --app=<heroku-app-name>
 heroku pg:promote DATABASE_URL --app=<heroku-app-name>
 

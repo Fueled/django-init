@@ -10,6 +10,9 @@ before_script:
 - export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
 - export DJANGO_SECRET=`openssl rand -base64 32`
 - psql -c "CREATE DATABASE {{ cookiecutter.main_module }};" -U postgres
+{% if cookiecutter.postgis == 'y' %}
+- psql -c "CREATE EXTENSION postgis;" -U postgres -d {{ cookiecutter.main_module }}
+{% endif %}
 
 install:
   - pip install ansible

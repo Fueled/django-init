@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.0-dev]
 ### Added
+- Add Postgresql postgis support for Geo-django.
 - Add `REDIS_MAX_CONNECTIONS` parameter with default reduced to 10.
 - Add custom branding for drf's api browser login page.
 - Allow admin email to be set via environment variable `DJANGO_ADMIN_EMAIL`
@@ -17,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add variable in Nginx site configuration for max body size a client can send/upload.
 
 ### Changed
+- Use Official Postgresql apt-repo instead of Ubuntu's default.
 - Upgrade to Django 1.9
 - Use `django_extensions` only in development
 - Default SMTP server to mailgun
