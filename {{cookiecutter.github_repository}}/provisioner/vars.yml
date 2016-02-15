@@ -4,5 +4,6 @@ project_repo_url: git@github.com:{{ cookiecutter.github_username }}/{{ cookiecut
 project_repo_remote: origin
 domain_name: {{ cookiecutter.main_module }}.com
 repo_version: master
-py_version: {{ cookiecutter.python_version }}
+python3: {% if cookiecutter.python3 == 'y' %}True{% else %}False{% endif %}
+py_venv_version: {% if cookiecutter.python3 == 'y' %}3.5{% else %}2.7{% endif %}
 pg_gis: {% if cookiecutter.postgis == 'y' %}True{% else %}False{% endif %}

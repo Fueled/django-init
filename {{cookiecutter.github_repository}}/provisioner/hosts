@@ -5,12 +5,20 @@
 vm=1
 user=vagrant
 project_path=/home/vagrant/{{ cookiecutter.github_repository }}
+venv_path=/home/vagrant/venv
 django_requirements_file=requirements/development.txt
+django_settings="settings.development"
+pg_db={{ cookiecutter.main_module }}
+pg_user=vagrant
+pg_password=vagrant
+gunicorn_workers=2
 
 [production]
 {{ cookiecutter.main_module }}.com
 
 [production:vars]
 user=ubuntu
-project_path=/home/vagrant/{{ cookiecutter.github_repository }}
+project_path=/home/ubuntu/{{ cookiecutter.github_repository }}
+venv_path=/home/ubuntu/venv
 django_requirements_file=requirements.txt
+django_settings="settings.production"

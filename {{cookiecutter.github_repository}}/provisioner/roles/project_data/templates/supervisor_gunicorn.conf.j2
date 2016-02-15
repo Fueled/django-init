@@ -1,7 +1,8 @@
 {%raw%}[program:gunicorn]
-command = {{ project_path }}/venv/bin/gunicorn -c {{ gunicorn_conf_path }}/gunicorn.conf.py wsgi:application
+{% if vm %}command = {{ venv_path }}/bin/gunicorn wsgi:application
+{% else %}command = {{ venv_path }}/bin/gunicorn -c {{ gunicorn_conf_path }}/gunicorn.conf.py wsgi:application{% endif %}
 directory = {{ project_path }}
-user=ubuntu
+user={{ user }}
 stdout_logfile=/var/log/gunicorn.log
 stderr_logfile=/var/log/gunicorn.log
 {%endraw%}

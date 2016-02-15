@@ -7,7 +7,7 @@ lc_all: "en_US.utf8"
 lc_ctype: "en_US.utf8"
 lc_collate: "en_US.utf8"
 ubuntu_release: "trusty"
-
+{%raw%}
 base_ubuntu:
   common:
     apt_packages:
@@ -17,10 +17,6 @@ base_ubuntu:
       - python-dev
       - python-setuptools
       - python-virtualenv
-      - python3
-      - python3-dev
-      - python3-setuptools
-      - python3-pip
       - sysstat
       - vim
       - fail2ban
@@ -32,3 +28,8 @@ base_ubuntu:
       - postgresql-client
       - libpq-dev
       - postgis
+  python3:
+    apt_packages:
+      - python{{ py_venv_version }}
+      - python{{ py_venv_version }}-dev
+{%endraw%}

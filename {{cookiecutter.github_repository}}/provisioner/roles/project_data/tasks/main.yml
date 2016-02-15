@@ -2,15 +2,16 @@
 - name: get the latest code
   git: repo={{ project_repo_url }} dest={{ project_path }} version={{ repo_version }} accept_hostkey=true
   sudo: false
+  when: vm is undefined
   tags: ['deploy', 'always']
 
 - name: manually create the initial virtualenv
-  command: virtualenv {{ project_path }}/venv -p python{{ py_version }} creates={{ project_path }}/venv
+  command: virtualenv {{ venv_path }} -p python{{ py_venv_version }} creates={{ venv_path }}
   sudo: false
   tags: ['configure', 'deploy']
 
 - name: install django python dependencies
-  pip: requirements={{ project_path }}/{{ django_requirements_file }} virtualenv={{ project_path }}/venv
+  pip: requirements={{ project_path }}/{{ django_requirements_file }}  virtualenv={{ venv_path }}
   sudo: false
   tags: ['deploy']
 
@@ -19,13 +20,17 @@
   notify: restart gunicorn
   tags: ['deploy']
 
+- name: copy env configuration
+  template: src=env.env.j2 dest={{ project_path }}/.env force=no
+  tags: ['configure']
+
 - name: migrate database
-  django_manage: command=migrate app_path={{ project_path }} virtualenv={{ project_path }}/venv
+  django_manage: command=migrate app_path={{ project_path }} virtualenv={{ venv_path }}
   sudo: false
   tags: ['deploy']
 
 - name: collect static
-  django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ project_path }}/venv
+  django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ venv_path }}
   sudo: false
   tags: ['deploy']
 

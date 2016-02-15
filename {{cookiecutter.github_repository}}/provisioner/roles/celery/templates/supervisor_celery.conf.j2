@@ -1,7 +1,7 @@
 {% raw %}[program:celery]
-command = {{ project_path }}/venv/bin/celery worker -A {{ project_name }} -B -l INFO --concurrency={{ celery_concurrency }}
+command = {{ venv_path }}/bin/celery worker -A {{ project_name }} -B -l INFO --concurrency={{ celery_concurrency }}
 directory = {{ project_path }}/
-user=ubuntu
+user={{ user }}
 stdout_logfile=/var/log/celery.log
 stderr_logfile=/var/log/celery.log
 {% endraw %}
