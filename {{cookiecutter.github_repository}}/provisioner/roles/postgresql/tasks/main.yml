@@ -16,7 +16,7 @@
   when: pg_gis
 
 - name: setup database
-  sudo_user: postgres
+  become_user: postgres
   postgresql_db:
     db: "{{ pg_db }}"
     encoding: 'UTF-8'
@@ -26,22 +26,22 @@
     state: present
 
 - name: add hstore
-  sudo_user: postgres
+  become_user: postgres
   shell: psql {{ pg_db }} -c "CREATE EXTENSION IF NOT EXISTS hstore;"
   when: pg_hstore
 
 - name: add postgis
-  sudo_user: postgres
+  become_user: postgres
   shell: psql {{ pg_db }} -c "CREATE EXTENSION IF NOT EXISTS postgis;"
   when: pg_gis
 
 - name: add postgis topology
-  sudo_user: postgres
+  become_user: postgres
   shell: psql {{ pg_db }} -c "CREATE EXTENSION IF NOT EXISTS postgis_topology;"
   when: pg_gis
 
 - name: grant access for database to user
-  sudo_user: postgres
+  become_user: postgres
   postgresql_user:
     db: "{{ pg_db }}"
     user: "{{ pg_user }}"

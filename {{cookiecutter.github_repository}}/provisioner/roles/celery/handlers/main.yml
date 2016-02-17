@@ -1,8 +1,8 @@
 ---
 - name: restart supervisor
   shell: service supervisor restart
-  sudo: yes
+  become: yes
 
 - name: restart celery
   supervisorctl: name=celery state=restarted
-  sudo: yes
+  become: yes

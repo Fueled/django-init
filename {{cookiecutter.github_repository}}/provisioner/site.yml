@@ -3,7 +3,8 @@
   vars_files:
     - vars.yml
   gather_facts: false
-  sudo: true
+  become: true
+  become_method: sudo
 
   roles:
     - common
@@ -20,7 +21,8 @@
   vars_files:
     - vars.yml
   gather_facts: false
-  sudo: true
+  become: true
+  become_method: sudo
 
   roles:
     - common
