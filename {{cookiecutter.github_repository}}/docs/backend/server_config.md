@@ -48,8 +48,8 @@ heroku config:set EMAIL_HOST="\$MAILGUN_SMTP_SERVER" \
                   EMAIL_HOST_USER="\$MAILGUN_SMTP_LOGIN" \
                   EMAIL_HOST_PASSWORD="\$MAILGUN_SMTP_PASSWORD" --app=<heroku-app-name>
 
-heroku addons:create redistogo --app=<heroku-app-name>
-heroku addons:create redismonitor --url `heroku config:get REDISTOGO_URL --app=<heroku-app-name>` --app=<heroku-app-name>
+heroku addons:create heroku-redis:hobby-dev --app=<heroku-app-name>
+heroku addons:create redismonitor --url `heroku config:get REDIS_URL --app=<heroku-app-name>` --app=<heroku-app-name>
 
 {% if cookiecutter.newrelic == 'y' -%}
 heroku addons:create newrelic --app=<heroku-app-name>
@@ -57,7 +57,7 @@ heroku config:set NEW_RELIC_APP_NAME=<new-relic-app-name> --app=<heroku-app-name
 {%- endif %}
 
 heroku config:set DJANGO_SETTINGS_MODULE='settings.production' \
-DJANGO_SECRET_KEY=`openssl rand -base64 32` \
+DJANGO_SECRET_KEY=`openssl rand -hex 64` \
 SITE_DOMAIN=<heroku-app-name>.herokuapp.com \
 SITE_SCHEME=https \
 SITE_NAME=DJANGO_SITE_NAME_HERE --app=<heroku-app-name>

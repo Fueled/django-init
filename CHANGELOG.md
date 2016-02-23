@@ -18,6 +18,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add variable in Nginx site configuration for max body size a client can send/upload.
 
 ### Changed
+- Use `REDIS_URL` instead of `REDISTOGO_URL` for production redis connection.
+- Replace redistogo with heroku-redis as default redis provider
 - Use Official Postgresql apt-repo instead of Ubuntu's default.
 - Upgrade to Django 1.9
 - Use `django_extensions` only in development

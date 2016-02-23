@@ -114,7 +114,7 @@ DATABASES['default'].update(env.db("DATABASE_URL"))  # Should not override all d
 CACHES = {
     'default': {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "{0}{1}".format(env('REDISTOGO_URL', default="redis://localhost:6379/"), 0),
+        "LOCATION": env('REDIS_URL', default="redis://localhost:6379/"),
         'OPTIONS': {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             'PARSER_CLASS': 'redis.connection.HiredisParser',
