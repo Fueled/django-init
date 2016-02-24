@@ -79,5 +79,5 @@ class SettingsTestCase(object):
 
 
 def get_dict_from_list_where(my_list, key, value):
-    '''see: http://stackoverflow.com/a/7079297/782901'''
+    """see: http://stackoverflow.com/a/7079297/782901"""
     return next((item for item in my_list if item[key] == value), None)

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-''' Development Configurations
+"""Development Settings
 
 Adds sensible defaults for developement of project
 - Enable DEBUG
@@ -7,8 +7,7 @@ Adds sensible defaults for developement of project
 - Enable Django Extensions
 - Enable Django Debug Toolbar
 - Use local caches
-- override SITE_ID to use 'local'
-'''
+"""
 from __future__ import absolute_import, unicode_literals
 
 from .common import *  # noqa

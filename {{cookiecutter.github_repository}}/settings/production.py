@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-''' Production Configurations
+"""Production Configurations
 
 Adds sensible default for running app in production.
 - Disable DEBUG
 - Make SECRET_KEY mandatory
 - Use whitenoise to serve static files
-'''
+"""
 from __future__ import absolute_import, unicode_literals
 
 # Third Party Stuff

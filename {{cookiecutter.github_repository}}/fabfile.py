@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-'''Fabric file for managing this project.
+"""Fabric file for managing this project.
 
 See: http://www.fabfile.org/
-'''
+"""
 from __future__ import absolute_import, unicode_literals, with_statement
 
 # Standard Library
@@ -48,7 +48,7 @@ def prod():
 
 
 def init(vagrant=False):
-    '''Prepare a local machine for development.'''
+    """Prepare a local machine for development."""
 
     install_requirements()
     local('createdb %(project_name)s' % env)  # create postgres database
@@ -56,7 +56,7 @@ def init(vagrant=False):
 
 
 def install_requirements(file=env.requirements_file):
-    '''Install project dependencies.'''
+    """Install project dependencies."""
     verify_virtualenv()
     # activate virtualenv and install
     with virtualenv():
@@ -64,7 +64,7 @@ def install_requirements(file=env.requirements_file):
 
 
 def serve_docs(options=''):
-    '''Start a local server to view documentation changes.'''
+    """Start a local server to view documentation changes."""
     with lcd(HERE) and virtualenv():
         local('mkdocs serve {}'.format(options))
 
@@ -80,47 +80,47 @@ def shell():
 
 
 def test(options='--pdb --cov'):
-    '''Run tests locally. By Default, it runs the test using --ipdb.
+    """Run tests locally. By Default, it runs the test using --ipdb.
     You can skip running it using --ipdb by running - `fab test:""`
-    '''
+    """
     with virtualenv():
         local('flake8 .')
         local("py.test %s" % options)
 
 
 def serve(host='127.0.0.1:8000'):
-    '''Start an enhanced local app server'''
+    """Start an enhanced local app server"""
     install_requirements()
     migrate()
     manage('runserver_plus %s' % host)
 
 
 def makemigrations(app=''):
-    '''Create new database migration for an app.'''
+    """Create new database migration for an app."""
     manage('makemigrations %s' % app)
 
 
 def migrate():
-    '''Apply database migrations.'''
+    """Apply database migrations."""
     manage('migrate')
 
 
 def createapp(appname):
-    '''fab createapp <appname>
-    '''
+    """fab createapp <appname>
+    """
     path = join(env.apps_dir, appname)
     local('mkdir %s' % path)
     manage('startapp %s %s' % (appname, path))
 
 
 def config(action=None, key=None, value=None):
-    '''Read/write to .env file on local and remote machines.
+    """Read/write to .env file on local and remote machines.
 
     Usages: fab [prod] config:set,<key>,<value>
             fab [prod] config:get,<key>
             fab [prod] config:unset,<key>
             fab [prod] config:list
-    '''
+    """
     import dotenv
     command = dotenv.get_cli_string(env.dotenv_path, action, key, value)
     env.config_setter('touch %(dotenv_path)s' % env)
@@ -138,10 +138,10 @@ def restart_servers():
 
 
 def configure(tags='', skip_tags='deploy'):
-    '''Setup a host using ansible scripts
+    """Setup a host using ansible scripts
 
     Usages: fab [prod|qa|dev] configure
-    '''
+    """
     require('host_group')
     cmd = 'ansible-playbook -i hosts site.yml --limit=%(host_group)s' % env
     with lcd('provisioner'):
@@ -165,17 +165,17 @@ def manage(cmd, venv=True):
 
 @_contextmanager
 def virtualenv():
-    '''Activates virtualenv context for other commands to run inside it.
-    '''
+    """Activates virtualenv context for other commands to run inside it.
+    """
     with cd(HERE):
         with prefix('source %(virtualenv_dir)s/bin/activate' % env):
             yield
 
 
 def verify_virtualenv():
-    '''This modules check and install virtualenv if it not present.
+    """This modules check and install virtualenv if it not present.
     It also creates local virtualenv directory if it's not present
-    '''
+    """
     from distutils import spawn
     if not spawn.find_executable('virtualenv'):
         local('sudo pip install virtualenv')

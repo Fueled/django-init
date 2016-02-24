@@ -21,5 +21,5 @@ class UserFactory(Factory):
 
 
 def create_user(**kwargs):
-    "Create an user along with their dependencies"
+    """Create an user along with their dependencies."""
     return UserFactory.create(**kwargs)
