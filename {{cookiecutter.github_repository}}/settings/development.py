@@ -18,6 +18,8 @@ from .common import *  # noqa
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
+INTERNAL_IPS = ('127.0.0.1', )
+
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
 # A secret key for this particular Django installation. Used in secret-key
@@ -51,8 +53,6 @@ INSTALLED_APPS += ('django_extensions', )
 # ------------------------------------------------------------------------------
 MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 INSTALLED_APPS += ('debug_toolbar', )
-
-INTERNAL_IPS = ('127.0.0.1', '10.0.2.2',)
 
 DEBUG_TOOLBAR_CONFIG = {
     'DISABLE_PANELS': ['debug_toolbar.panels.redirects.RedirectsPanel', ],
