@@ -1,0 +1,11 @@
+{% raw %}{% extends "admin/base.html" %}
+
+{% block extrastyle %}{% endblock %}
+{% block extrahead %}{% endblock %}
+{% block title %}{{ title }} | {% endraw %}{{ cookiecutter.project_name }}{% raw %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{% endraw %}{{ cookiecutter.project_name }}{% raw %} administration</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}{% endraw %}
