@@ -25,6 +25,10 @@ server {
     # ssl_certificate /etc/nginx/ssl/{{ domain_name }}.chained.crt;
     # ssl_certificate_key /etc/nginx/ssl/{{ domain_name }}.key;
 
+    # Disable SSLv3(enabled by default since nginx 0.8.19) since it's less
+    # secure then TLS http://en.wikipedia.org/wiki/Secure_Sockets_Layer#SSL_3.0
+    # ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
     # Setup named location for Django requests and handle proxy details
     location / {
             proxy_pass         http://127.0.0.1:8000;
