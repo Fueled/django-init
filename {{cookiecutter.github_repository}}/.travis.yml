@@ -1,16 +1,15 @@
 language: python
 sudo: false
 python:
-- '2.7'
+- {{ '3.5' if cookiecutter.python3.lower() == 'y' else '2.7' }}
 
 addons:
   postgresql: "9.4"
 
 before_script:
 - export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
-- export DJANGO_SECRET=`openssl rand -base64 32`
 - psql -c "CREATE DATABASE {{ cookiecutter.main_module }};" -U postgres
-{% if cookiecutter.postgis == 'y' %}
+{% if cookiecutter.postgis == 'y' -%}
 - psql -c "CREATE EXTENSION postgis;" -U postgres -d {{ cookiecutter.main_module }}
 {% endif %}
 

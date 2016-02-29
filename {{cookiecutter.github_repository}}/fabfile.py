@@ -181,4 +181,4 @@ def verify_virtualenv():
         local('sudo pip install virtualenv')
 
     if not isdir(env.virtualenv_dir):
-        local('virtualenv %(virtualenv_dir)s' % env)
+        local('virtualenv %(virtualenv_dir)s -p $(which python{{ '3' if cookiecutter.python3.lower() == 'y' else '2' }})' % env)
