@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.0-dev]
 ### Added
+- Provide a basic override for `admin/base_site.html`
+- `base.utils.pagination.paginated_response` now accepts and additional `extra_context` parameter.
 - Add Postgresql postgis support for Geo-django.
 - Add `REDIS_MAX_CONNECTIONS` parameter with default reduced to 10.
 - Add custom branding for drf's api browser login page.
