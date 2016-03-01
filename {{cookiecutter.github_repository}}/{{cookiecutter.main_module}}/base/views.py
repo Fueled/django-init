@@ -7,8 +7,8 @@ import sys
 # Third Party Stuff
 from django import http
 from django.conf import settings
-from django.views.defaults import server_error as default_server_error
 from django.shortcuts import render
+from django.views.defaults import server_error as default_server_error
 
 
 def server_error(request, *args, **kwargs):

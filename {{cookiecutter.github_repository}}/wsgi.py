@@ -12,10 +12,13 @@ that later delegates to the Django one. For example, you could introduce WSGI
 middleware here, or combine a Django application with an application of another
 framework.
 """
+
+# Standard Library
 import os
 
-from dotenv import load_dotenv
+# Third Party Stuff
 from django.core.wsgi import get_wsgi_application
+from dotenv import load_dotenv
 from whitenoise.django import DjangoWhiteNoise
 
 # Read .env file and set key/value inside it as environement variables

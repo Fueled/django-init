@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 # Standard Library
 import functools
 
