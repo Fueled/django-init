@@ -1,6 +1,6 @@
 # Core Stuff
 # -------------------------------------
-Django==1.9.3
+Django==1.9.4
 whitenoise==2.0.6
 
 # Extensions
