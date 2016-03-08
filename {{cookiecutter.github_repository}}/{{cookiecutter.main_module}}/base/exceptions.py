@@ -70,15 +70,41 @@ class NotAuthenticated(exceptions.NotAuthenticated):
 
 
 def format_exception(exc):
-    if isinstance(exc.detail, (dict, list, tuple,)):
-        detail = exc.detail
+    class_name = exc.__class__.__name__
+    detail = {
+        'errors': [],
+        'error_type': class_name,
+    }
+    if isinstance(exc.detail, dict):
+        for error_key, error_values in exc.detail.items():
+            for error_msg in error_values:
+                # Special Case for model clean
+                if error_key == 'non_field_errors':
+                    detail['errors'].append(
+                        {
+                            'message': error_msg,
+                        }
+                    )
+                else:
+                    detail['errors'].append(
+                        {
+                            'field': error_key,
+                            'message': error_msg,
+                        }
+                    )
+    elif isinstance(exc.detail, list):
+        for error_msg in exc.detail:
+            detail['errors'].append(
+                {
+                    'message': error_msg,
+                }
+            )
     else:
-        class_name = exc.__class__.__name__
-        class_module = exc.__class__.__module__
-        detail = {
-            "_error_message": force_text(exc.detail),
-            "_error_type": "{0}.{1}".format(class_module, class_name)
-        }
+        detail['errors'].append(
+            {
+                'message': force_text(exc.detail),
+            }
+        )
 
     return detail
 
@@ -104,11 +130,11 @@ def exception_handler(exc, context=None):
         return Response(detail, status=exc.status_code, headers=headers)
 
     elif isinstance(exc, Http404):
-        return Response({'_error_message': str(exc)},
+        return Response({'errors': [{'message': str(exc)}, ]},
                         status=status.HTTP_404_NOT_FOUND)
 
     elif isinstance(exc, DjangoPermissionDenied):
-        return Response({"_error_message": str(exc)},
+        return Response({'errors': [{'message': str(exc)}, ]},
                         status=status.HTTP_403_FORBIDDEN)
 
     # Note: Unhandled exceptions will raise a 500 error.

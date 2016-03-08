@@ -21,10 +21,13 @@ def server_error(request, *args, **kwargs):
 
     if not settings.DEBUG and request.META.get('CONTENT_TYPE', None) == "application/json":
         response_dict = {
-            "_error_message": "Server application error",
+          'error_type': exc_type.__name__ if exc_type else 'ServerError',
+          'errors': [
+            {
+              'message': 'Server application error',
+            }
+          ]
         }
-        if exc_type:
-            response_dict['_error_type'] = "{0}.{1}".format(exc_type.__module__, exc_type.__name__)
         return http.JsonResponse(data=response_dict, status=500)
 
     return default_server_error(request, *args, **kwargs)
