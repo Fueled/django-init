@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.1.0-dev]
+## [1.1.0]
 ### Added
 - Provide a basic override for `admin/base_site.html`
 - `base.utils.pagination.paginated_response` now accepts and additional `extra_context` parameter.
@@ -52,5 +52,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Swap `django-storages` with `django-storages-redux`
 - Use redis for caching instead of memcached. (#35)
 
-[1.1.0-dev]: https://github.com/Fueled/cookiecutter-django/compare/v1.0.0...master
+[1.1.0]: https://github.com/Fueled/cookiecutter-django/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Fueled/cookiecutter-django/compare/v0.0.1...v1.0.0
