@@ -89,10 +89,12 @@ def test(options='--pdb --cov'):
 
 
 def serve(host='127.0.0.1:8000'):
-    """Start an enhanced local app server"""
+    """Run local developerment server, making sure that dependencies and
+    database migrations are upto date.
+    """
     install_requirements()
     migrate()
-    manage('runserver_plus %s' % host)
+    manage('runserver %s' % host)
 
 
 def makemigrations(app=''):
