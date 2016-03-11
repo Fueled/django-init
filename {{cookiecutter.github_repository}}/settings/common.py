@@ -43,7 +43,6 @@ INSTALLED_APPS = (
 
     '{{ cookiecutter.main_module }}.base',
     '{{ cookiecutter.main_module }}.users',
-    '{{ cookiecutter.main_module }}.pages',
 
     'rest_framework',  # http://www.django-rest-framework.org/
     'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
