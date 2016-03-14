@@ -6,6 +6,14 @@ python:
 addons:
   postgresql: "9.4"
 
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/.pip-accel
+
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
+
 before_script:
 - export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
 - psql -c "CREATE DATABASE {{ cookiecutter.main_module }};" -U postgres
@@ -13,9 +21,18 @@ before_script:
 - psql -c "CREATE EXTENSION postgis;" -U postgres -d {{ cookiecutter.main_module }}
 {% endif %}
 
+cache:
+  directories:
+  - $HOME/.cache/pip
+  - $HOME/.pip-accel
+
+before_cache:
+- rm -f $HOME/.cache/pip/log/debug.log
+
 install:
-  - pip install ansible
-  - pip install -r requirements/development.txt
+  - pip install pip-accel
+  - pip-accel install ansible
+  - pip-accel install -r requirements/development.txt
 
 script:
 - flake8
