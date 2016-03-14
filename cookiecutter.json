@@ -1,7 +1,7 @@
 {
     "project_name": "Hello World"
     , "project_description": "Add a short project description here."
-    , "main_module": "{{ cookiecutter.project_name|lower|replace(' ', '_') }}"
+    , "main_module": "{{ cookiecutter.project_name|lower|replace(' ', '_')|replace('-', '_') }}"
     , "github_username": "Fueled"
     , "github_repository": "{{ cookiecutter.main_module|replace('_', '-') }}-web"
     , "timezone": "UTC"

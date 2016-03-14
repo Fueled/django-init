@@ -1,12 +1,22 @@
 #!/bin/bash
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
 # Ensure newline at EOF
 find . ! -path "*/venv/*" -type f -name "*.py" -exec bash -c "tail -n1 {} | read -r _ || echo >> {}" \;
 
-echo "Finished."
+echo "${green}[Finished]${reset}"
 
-echo -n "==> Do you want to setup all the project dependencies, includes installing "
-echo -n "python libraries inside virtualenv at '`pwd`/venv/' folder,  "
-echo -n "creation of postgres database and initializing a git repo? (y/n)"
+echo "==> Setup project dependencies? It will:"
+echo "  - Create virtualenv at './{{ cookiecutter.github_repository }}/venv/'."
+echo "  - Install development requirements inside virtualenv."
+echo "  - Create a postgres database named '{{ cookiecutter.main_module }}'."
+echo "  - Run './manage.py migrate'."
+echo "  - Initialize git."
+echo "  - Create git tag {{ cookiecutter.version }}."
+echo -n "Would you like to perform these steps? (y/[n]) "
+echo ""
 
 # Inside CI, always assume the answer is yes! :)
 if [ $CI ]; then
@@ -35,7 +45,7 @@ if echo "$yn" | grep -iq "^y"; then
     git init
     git add .
     git commit -am "chore(setup): create base django project."
-    git tag v0.0.0
+    git tag v{{ cookiecutter.version }}
 
     echo "==> Setup the project dependencies and database for local development"
     fab init
@@ -63,12 +73,12 @@ if echo "$yn" | grep -iq "^y"; then
         echo "============================================"
         echo ""
         echo -n "HINT: Make sure you have installed all OS dependencies. "
-        echo "Check the logs above to figure it out."
+        echo "Check the logs above, they might give you some clues."
     fi
 else
     echo "==> Skipping project setup..."
-    echo -n "==> You can now 'cd' into "`PWD`" and explore the project. "
-    echo "Read 'README.md' inside it for further setup instructions!"
+    echo "==> You can now 'cd {{ cookiecutter.github_repository }}/' and explore the project. "
+    echo "    Read 'README.md' inside it for further setup instructions!"
     echo ""
-    echo " ============> HAPPY CODING <============ "
+    echo "${green} ============> HAPPY CODING <============ ${reset}"
 fi

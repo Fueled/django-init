@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "==> Generating project files..."
+echo -n "==> Generating project files at ./{{ cookiecutter.github_repository }} "
