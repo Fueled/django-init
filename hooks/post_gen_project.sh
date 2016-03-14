@@ -41,7 +41,7 @@ if echo "$yn" | grep -iq "^y"; then
         sudo pip install fabric
     fi
 
-    echo "==> Initialize git repo and create first commit and tag it with v0.0.0"
+    echo "==> Initialize git repo and create first commit and tag it with v{{ cookiecutter.version }}"
     git init
     git add .
     git commit -am "chore(setup): create base django project."
@@ -56,21 +56,20 @@ if echo "$yn" | grep -iq "^y"; then
 
     OUT=$?
     if [ $OUT -eq 0 ]; then
-        echo "============================================"
-        echo "          This is what we just did!         "
-        echo "============================================"
+        echo "${green}============================================"
+        echo "All set! Run these commands to get started:"
         echo ""
-        echo "* created a base django project code base at"
-        echo "  `pwd`"
-        echo "* installed project dependencies"
-        echo "* initialized a git repo and created the first commit"
-        echo -n "* you can now cd into `pwd` and start working after "
-        echo "activating virtualenv with 'source venv/bin/activate'."
+        echo "cd {{ cookiecutter.github_repository }}"
+        echo "./venv/bin/activate"
+        echo "py.test"
+        echo "./manage.py runserver"
+        echo ""
         echo "============================================"
+        echo "${green} ============> HAPPY CODING <============ ${reset}"
     else
-        echo "============================================"
+        echo "${red}============================================"
         echo "          Oops! Something went wrong!!      "
-        echo "============================================"
+        echo "============================================${reset}"
         echo ""
         echo -n "HINT: Make sure you have installed all OS dependencies. "
         echo "Check the logs above, they might give you some clues."
