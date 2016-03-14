@@ -45,6 +45,11 @@
 
       <!-- place project specific Javascript in this file -->
       <script src="{% static 'js/main.js' %}"></script>
+
+      {% if debug %}
+        <!--Livereloading support -->
+        <script>{% include "devrecargar/devrecargar.js" %}</script>
+      {% endif %}
     {% endblock js %}
   </body>
 </html>{% endraw %}

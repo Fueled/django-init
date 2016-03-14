@@ -7,6 +7,7 @@ Adds sensible defaults for developement of project
 - Enable Django Extensions
 - Enable Django Debug Toolbar
 - Use local caches
+- Enable livereloading
 """
 from __future__ import absolute_import, unicode_literals
 
@@ -47,6 +48,16 @@ CACHES = {
 # django-extensions (http://django-extensions.readthedocs.org/)
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ('django_extensions', )
+
+# LiveReload Support with devrecargar
+# ------------------------------------------------------------------------------
+# https://github.com/scottwoodall/django-devrecargar
+INSTALLED_APPS += ('devrecargar',)
+
+DEVRECARGAR_PATHS_TO_WATCH = [{
+    'path': str(APPS_DIR),
+    'patterns': ['*.html', '*.js', '*.css', '*.scss'],
+}]
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------

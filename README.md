@@ -21,6 +21,7 @@ Project template for django based projects, optimized for making REST API with d
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Custom User app, for easier extensibility.
 - Optional media storage using Amazon S3
+- Livereloading of browser in development via [devrecargar]
 - robots.txt and humans.txt configured
 
 ## Getting Started
@@ -64,3 +65,4 @@ Built with ♥ at [Fueled](http://fueled.com)
 [Procfile]: https://devcenter.heroku.com/articles/procfile
 [django-environ]: https://github.com/joke2k/django-environ
 [Ansible]: http://docs.ansible.com/index.html
+[devrecargar]: https://github.com/scottwoodall/django-devrecargar

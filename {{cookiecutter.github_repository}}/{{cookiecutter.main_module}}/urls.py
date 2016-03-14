@@ -46,6 +46,9 @@ urlpatterns += [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
+    # Livereloading
+    urlpatterns += [url(r'^devrecargar/', include('devrecargar.urls', namespace='devrecargar'))]
+
     urlpatterns += [
         url(r'^400/$', dj_default_views.bad_request, kwargs={'exception': Exception("Bad Request!")}),
         url(r'^403/$', dj_default_views.permission_denied, kwargs={'exception': Exception("Permission Denied!")}),

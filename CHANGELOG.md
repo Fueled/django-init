@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Removed 'pages' app
 - Project renamed to `django-init`
 
+### Added 
+- Livereload support via devrecargar
+
 ## [1.1.0]
 ### Added
 - Provide a basic override for `admin/base_site.html`

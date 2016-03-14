@@ -7,6 +7,10 @@ gunicorn==19.4.5
 mkdocs==0.15.3
 isort==4.2.2
 
+# Livereload
+# -------------------------------------
+devrecargar==0.1.4
+
 # Debugging
 # -------------------------------------
 django-debug-toolbar==1.4
