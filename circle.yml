@@ -1,0 +1,88 @@
+## Customize the test machine
+machine:
+  python:
+    version:
+      '3.4.3'
+   #services:
+  #  redis
+
+  # Add some environment variables
+ # environment:
+ #   DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+
+## Customize checkout
+#checkout:
+#  post:
+#    - git submodule update --init # use submodules
+
+## Customize dependencies
+dependencies:
+  pre:
+    - sudo service postgresql stop && sudo apt-get remove -y
+      postgresql-9.4 && sudo apt-get update; sudo apt-get install -y
+      postgresql-9.3 postgresql-contrib-9.3
+    - sudo sed -i "s/\port = 5433/port = 5432/"
+      /etc/postgresql/9.3/main/postgresql.conf
+    - sudo cp /etc/postgresql/9.4/main/pg_hba.conf
+      /etc/postgresql/9.3/main/pg_hba.conf
+    - sudo service postgresql restart
+    - sudo -u postgres createuser ubuntu -d --superuser
+    - createdb circle_test
+    - createdb ubuntu
+
+  override:
+    - pip install --upgrade pip
+    - pip install -r requirements/development.txt
+#    - bundle install: # note ':' here
+#        timeout: 180 # fail if command has no output for 3 minutes
+
+  # we automatically cache and restore many dependencies between
+  # builds. If you need to, you can add custom paths to cache:
+#  cache_directories:
+#    - "~/custom_2" # relative to the user's home directory
+
+## Customize database setup
+#database:
+#  override:
+    # replace CircleCI's generated database.yml
+#    - cp config/database.yml.ci config/database.yml
+
+## Customize test commands
+test:
+  pre:
+    - flake8
+    - export DATABASE_URL=postgres://postgres@localhost/eval
+    - export DJANGO_SECRET=`openssl rand -base64 32`
+    - psql -c "CREATE DATABASE eval;" -U postgres
+    #- psql -d eval -c "CREATE EXTENSION postgis;"
+
+  override:
+  - coverage run --source=eval --omit='*tests*,*commands*,*migrations*,*admin*,*config*,*wsgi*' -m py.test -v --tb=native
+  - coverage report
+
+## Customize deployment commands
+deployment:
+  dev:
+    branch: master
+    heroku:
+      appname: eval-dev
+  qa:
+    branch: qa
+    heroku:
+      appname: eval-qa
+  prod:
+    branch: prod
+    heroku:
+      appname: eval-prod
+
+## Custom notifications
+#notify:
+ # webhooks:
+    # A list of hashes representing hooks. Only the url field is supported.
+   # - url: https://someurl.com/hooks/circle
+
+
+
+
+
+
