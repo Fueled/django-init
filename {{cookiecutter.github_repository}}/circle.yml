@@ -1,0 +1,104 @@
+## Customize the test machine
+machine:
+  python:
+    version: {{ '3.5' if cookiecutter.python3.lower() == 'y' else '2.7.4'}} # 2.7 will cause an error with py.test
+
+  #services: # By default popular ones are running on our build machines (bound to localhost), including Postgres, MySQL, Redis and MongoDB
+  # -redis 
+  #  
+
+  # Add some environment variables
+ # environment:
+ #   DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+
+## Customize checkout
+#checkout:
+#  post:
+#    - git submodule update --init # use submodules
+
+## Customize dependencies
+dependencies:
+  pre:
+    - sudo service postgresql stop && sudo apt-get remove -y
+      postgresql-9.4 && sudo apt-get update; sudo apt-get install -y
+      postgresql-9.3 postgresql-contrib-9.3
+    - sudo sed -i "s/\port = 5433/port = 5432/"
+      /etc/postgresql/9.3/main/postgresql.conf
+    - sudo cp /etc/postgresql/9.4/main/pg_hba.conf
+      /etc/postgresql/9.3/main/pg_hba.conf
+    - sudo service postgresql restart
+    - sudo -u postgres createuser ubuntu -d --superuser
+    - createdb circle_test
+    - createdb ubuntu
+
+  override:
+    - pip install --upgrade pip
+    - pip install pip-accel
+    - pip-accel install ansible
+    - pip-accel install -r requirements/development.txt
+
+  post:
+    - rm -f $HOME/.cache/pip/log/debug.log
+#    - bundle install: # note ':' here
+#        timeout: 180 # fail if command has no output for 3 minutes
+
+  # we automatically cache and restore many dependencies between
+  # builds. If you need to, you can add custom paths to cache:
+  cache_directories:
+  - $HOME/.cache/pip
+  - $HOME/.pip-accel
+
+## Customize database setup
+#database:
+#  override:
+    # replace CircleCI's generated database.yml
+#    - cp config/database.yml.ci config/database.yml
+
+## Customize test commands
+test:
+  pre:
+    - export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
+    - export DJANGO_SECRET=`openssl rand -base64 32`
+    - psql -c "CREATE DATABASE {{ cookiecutter.main_module }};" -U postgres
+    {% if cookiecutter.postgis == 'y' -%}
+    - psql -c "CREATE EXTENSION postgis;" -U postgres -d {{ cookiecutter.main_module }}
+    {% endif %}
+
+  override:
+    - flake8
+    - py.test --cov -v --tb=native
+    - ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
+   #- coverage run --source=eval --omit='*tests*,*commands*,*migrations*,*admin*,*config*,*wsgi*' -m py.test -v --tb=native
+   #- coverage report
+
+
+## Customize deployment commands
+# To enable Heroku deployment add heroku API key under project settings deployment in circle
+deployment: 
+  dev:
+    branch: master
+    owner: {{ cookiecutter.github_username }}
+    heroku: # add key via https://circleci.com/account/heroku
+      appname: {{ cookiecutter.main_module }}-dev
+  qa:
+    branch: qa
+    owner: {{ cookiecutter.github_username }}
+    heroku:
+      appname: {{ cookiecutter.main_module }}-qa
+  prod:
+    branch: prod
+    owner: {{ cookiecutter.github_username }}
+    heroku:
+      appname: {{ cookiecutter.main_module }}-prod
+
+## Custom notifications
+#notify:
+ # webhooks:
+    # A list of hashes representing hooks. Only the url field is supported.
+   # - url: https://someurl.com/hooks/circle
+
+
+
+
+
+
