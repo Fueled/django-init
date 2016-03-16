@@ -42,7 +42,7 @@ def prod():
     env.host_group = 'production'
     env.remote = 'origin'
     env.branch = 'prod'
-    env.hosts = ['prod.{{ cookiecutter.main_module }}.fueled.com']
+    env.hosts = ['prod.{{ cookiecutter.main_module }}.com']
     env.dotenv_path = '/home/ubuntu/{{ cookiecutter.github_repository }}/.env'
     env.config_setter = run
 

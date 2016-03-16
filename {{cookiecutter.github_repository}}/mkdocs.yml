@@ -19,7 +19,7 @@ pages:
 
 theme: 'mkdocs'
 
-copyright: Copyright &copy; 2015, <a href=http://fueled.com>Fueled</a>.
+copyright: ''
 
 # directory to output HTML build
 site_dir: _docs_html

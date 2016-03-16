@@ -64,6 +64,3 @@ Avoid working on `master` branch, create a new branch with meaningful name, send
 Refer to [CONTRIBUTING.md][contributing]
 
 [contributing]: http://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_repository}}/tree/master/CONTRIBUTING.md
-
---------
-Built with ♥ at [Fueled](http://fueled.com)
