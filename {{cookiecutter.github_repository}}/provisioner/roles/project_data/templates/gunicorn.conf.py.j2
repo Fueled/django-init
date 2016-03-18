@@ -1,4 +1,4 @@
-{%raw%}# Gunicorn configuration file.
+{% raw %}# Gunicorn configuration file.
 
 #
 # Server socket
@@ -216,4 +216,5 @@ def worker_int(worker):
                 lineno, name))
             if line:
                 code.append("  %s" % (line.strip()))
-    worker.log.debug("\n".join(code)){%endraw%}
+    worker.log.debug("\n".join(code))
+{% endraw %}

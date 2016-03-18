@@ -15,10 +15,7 @@
   become: false
   tags: ['deploy']
 
-- name: copy supervisor gunicorn configuration
-  template: src=supervisor_gunicorn.conf.j2 dest=/etc/supervisor/conf.d/gunicorn.conf
-  notify: restart gunicorn
-  tags: ['deploy']
+- include: gunicorn.yml
 
 - name: copy env configuration
   template: src=env.env.j2 dest={{ project_path }}/.env force=no
@@ -38,5 +35,4 @@
   shell: supervisorctl restart all
   become: true
   tags: ['deploy']
-
 {% endraw %}

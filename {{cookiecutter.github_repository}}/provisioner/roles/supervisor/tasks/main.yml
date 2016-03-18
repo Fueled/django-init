@@ -1,11 +1,11 @@
 ---
-- name: install supervisor server
+- name: ensure supervisor is installed
   apt: pkg=supervisor state=installed update-cache=yes
 
-- name: make sure the supervisor conf dir exists
+- name: ensure supervisor config dir exists
   file: path=/etc/supervisor state=directory mode=0755 owner=root group=root
 
-- name: install the supervisor init script
+- name: add init script
   template: src=etc_init.d_supervisor.j2 dest=/etc/init.d/supervisor owner=root group=root mode=0755
   notify:
     - enable supervisor

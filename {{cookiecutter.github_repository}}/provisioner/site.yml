@@ -12,7 +12,6 @@
     - supervisor
     - postgresql
     - project_data
-    - gunicorn
     # - redis
     # - celery
 
@@ -29,6 +28,5 @@
     - nginx
     - supervisor
     - project_data
-    - gunicorn
     # - redis
     # - celery
