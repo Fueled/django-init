@@ -5,22 +5,17 @@ machine:
   environment:
     # each command runs in its own shell, so just adding an export FOO=bar command won't work
     DATABASE_URL: postgres://postgres@localhost/{{ cookiecutter.main_module }}
-    DJANGO_SECRET: openssl rand -base64 32
-    #DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
   #services: # By default popular ones are running on our build machines (bound to localhost), including Postgres, MySQL, Redis and MongoDB
   # -redis 
 
 ## Customize checkout
 #checkout:
 #  post:
-#	 - git submodule sync
-#    - git submodule update --init # use submodules
+#	   - git submodule sync
 
 ## Customize dependencies
 dependencies:
   override:
-    #- pip install --upgrade pip
-    #- pip install ansible
     - pip install pip-accel
     - pip-accel install ansible
     - pip-accel install -r requirements/development.txt
@@ -37,7 +32,6 @@ dependencies:
   cache_directories:
     - $HOME/.cache/pip
     - $HOME/.pip-accel
-#    - "~/custom_2" # relative to the user's home directory
 
 ## Customize database setup
 #database:
