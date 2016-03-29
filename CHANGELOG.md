@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Project renamed to `django-init`.
 - Make ansible generation optional.
 - Add documentation for Drone.io CI
+- Add Circle CI Support (@jasonrfarkas)
 
 ### Added 
 - Livereload support via devrecargar
