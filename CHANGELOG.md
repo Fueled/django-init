@@ -7,7 +7,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - anisble: Update supervisor init script 
 - travis: Use `pip-accel` on travis along with caching
 - Removed 'pages' app
-- Project renamed to `django-init`
+- Project renamed to `django-init`.
+- Make ansible generation optional.
 
 ### Added 
 - Livereload support via devrecargar

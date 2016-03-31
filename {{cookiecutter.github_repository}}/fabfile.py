@@ -11,8 +11,8 @@ from functools import partial
 from os.path import dirname, isdir, join
 
 # Third Party Stuff
-from fabric.api import local as fabric_local
-from fabric.api import cd, env, lcd, prefix, require, run, sudo
+from fabric.api import local as fabric_local, env
+from fabric import api as fab
 
 local = partial(fabric_local, shell='/bin/bash')
 
@@ -22,29 +22,16 @@ HERE = dirname(__file__)
 # ==========================================================================
 #  Settings
 # ==========================================================================
-
 env.project_name = '{{ cookiecutter.main_module }}'
 env.apps_dir = join(HERE, env.project_name)
 env.docs_dir = join(HERE, 'docs')
 env.virtualenv_dir = join(HERE, 'venv')
-env.dotenv_path = join(HERE, '.env')
 env.requirements_file = join(HERE, 'requirements/development.txt')
 env.shell = "/bin/bash -l -i -c"
-env.use_ssh_config = True
-env.config_setter = local
 
-env.coverage_omit = '*tests*,*commands*,*migrations*,*admin*,*config*,*wsgi*'
-
-
-#  Enviroments
-# ---------------------------------------------------------
-def prod():
-    env.host_group = 'production'
-    env.remote = 'origin'
-    env.branch = 'prod'
-    env.hosts = ['prod.{{ cookiecutter.main_module }}.com']
-    env.dotenv_path = '/home/ubuntu/{{ cookiecutter.github_repository }}/.env'
-    env.config_setter = run
+{% if cookiecutter.add_ansible.lower() == 'y' -%}env.use_ssh_config = True
+env.dotenv_path = join(HERE, '.env')
+env.config_setter = local{% endif %}
 
 
 def init(vagrant=False):
@@ -65,12 +52,12 @@ def install_requirements(file=env.requirements_file):
 
 def serve_docs(options=''):
     """Start a local server to view documentation changes."""
-    with lcd(HERE) and virtualenv():
+    with fab.lcd(HERE) and virtualenv():
         local('mkdocs serve {}'.format(options))
 
 
 def deploy_docs():
-    with lcd(HERE) and virtualenv():
+    with fab.lcd(HERE) and virtualenv():
         local('mkdocs gh-deploy')
         local('rm -rf _docs_html')
 
@@ -113,6 +100,18 @@ def createapp(appname):
     path = join(env.apps_dir, appname)
     local('mkdir %s' % path)
     manage('startapp %s %s' % (appname, path))
+{%- if cookiecutter.add_ansible.lower() == 'y' %}
+
+
+#  Enviroments & Deployments
+# ---------------------------------------------------------
+def prod():
+    env.host_group = 'production'
+    env.remote = 'origin'
+    env.branch = 'prod'
+    env.hosts = ['prod.{{ cookiecutter.main_module }}.com']
+    env.dotenv_path = '/home/ubuntu/{{ cookiecutter.github_repository }}/.env'
+    env.config_setter = fab.run
 
 
 def config(action=None, key=None, value=None):
@@ -136,7 +135,7 @@ def config(action=None, key=None, value=None):
 
 
 def restart_servers():
-    sudo('supervisorctl restart all')
+    fab.sudo('supervisorctl restart all')
 
 
 def configure(tags='', skip_tags='deploy'):
@@ -144,9 +143,9 @@ def configure(tags='', skip_tags='deploy'):
 
     Usages: fab [prod|qa|dev] configure
     """
-    require('host_group')
+    fab.require('host_group')
     cmd = 'ansible-playbook -i hosts site.yml --limit=%(host_group)s' % env
-    with lcd('provisioner'):
+    with fab.lcd('provisioner'):
         if tags:
             cmd += " --tags '%s'" % tags
         if skip_tags:
@@ -155,7 +154,7 @@ def configure(tags='', skip_tags='deploy'):
 
 
 def deploy():
-    configure(tags='deploy', skip_tags='')
+    configure(tags='deploy', skip_tags=''){% endif %}
 
 
 # Helpers
@@ -169,8 +168,8 @@ def manage(cmd, venv=True):
 def virtualenv():
     """Activates virtualenv context for other commands to run inside it.
     """
-    with cd(HERE):
-        with prefix('source %(virtualenv_dir)s/bin/activate' % env):
+    with fab.cd(HERE):
+        with fab.prefix('source %(virtualenv_dir)s/bin/activate' % env):
             yield
 
 

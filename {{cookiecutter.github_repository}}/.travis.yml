@@ -14,35 +14,28 @@ cache:
 before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
 
+install:
+  - pip install pip-accel
+  {%- if cookiecutter.add_ansible.lower() == 'y' %}- pip-accel install ansible{% endif %}
+  - pip-accel install -r requirements/development.txt
+
 before_script:
 - export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
 - psql -c "CREATE DATABASE {{ cookiecutter.main_module }};" -U postgres
-{% if cookiecutter.postgis == 'y' -%}
+{%- if cookiecutter.postgis.lower() == 'y' %}
 - psql -c "CREATE EXTENSION postgis;" -U postgres -d {{ cookiecutter.main_module }}
-{% endif %}
-
-cache:
-  directories:
-  - $HOME/.cache/pip
-  - $HOME/.pip-accel
-
-before_cache:
-- rm -f $HOME/.cache/pip/log/debug.log
-
-install:
-  - pip install pip-accel
-  - pip-accel install ansible
-  - pip-accel install -r requirements/development.txt
+{%- endif %}
 
 script:
 - flake8
 - py.test --cov -v --tb=native
-- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
+{%- if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
 notifications:
   email:
     on_success: change  # [always|never|change]
     on_failure: always  # [always|never|change]
+
 deploy:
   provider: heroku
   buildpack: python

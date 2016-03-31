@@ -85,6 +85,7 @@ DJANGO_AWS_STORAGE_BUCKET_NAME=<YOUR_BUCKET_NAME_HERE>
 - Use `--app=<heroku-app-name>` if you have more than one heroku app configured in current project.
 - Update `travis.yml`, and add the `<heroku-app-name>` to automatically deploy to this configured heroku app.
 
+{%- if cookiecutter.add_ansible.lower() == 'y' %}
 ### AWS/EC2
 
 For deploying on aws you need to configure all the addons provided and use python-dotenv to store and read enironment variables.
@@ -119,3 +120,4 @@ You can also use fab to set environment variables one by one:
 Now that you have `.env` setup, you can deploy your code and start services:
 
     fab prod deploy
+{% endif %}

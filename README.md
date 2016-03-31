@@ -12,7 +12,7 @@ Project template for django based projects, optimized for making REST API with d
 - Django 1.9.x
 - PostresSQL everywhere(support of postgis is available).
 - [Procfile] for deploying to Heroku.
-- [Ansible] script for quick deployment to Ubuntu based servers.
+- [Ansible] playbook for deployment to Ubuntu 14 LTS. (optional)
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - Designed to work with Django Rest Framework 3.0+.
 - Uses `django_sites` instead of `django.contrib.sites`
@@ -56,7 +56,7 @@ Refer to [CHANGELOG.md](CHANGELOG.md).
 
 --------
 
-Built with ♥ at [Fueled](http://fueled.com)
+Built with ♥ at [Fueled](https://fueled.com)
 
 [wiki]: https://github.com/Fueled/django-init/wiki
 [mkdocs]: http://www.mkdocs.org/

@@ -25,7 +25,9 @@ else
     read  yn
 fi
 
-
+if echo "{{ cookiecutter.add_ansible }}" | grep -iq "^n"; then
+    rm -rf provisioner Vagrantfile
+fi
 if echo "$yn" | grep -iq "^y"; then
     echo "==> Checking system dependencies. You may need to enter your sudo password."
 
@@ -47,7 +49,7 @@ if echo "$yn" | grep -iq "^y"; then
     git commit -am "chore(setup): create base django project."
     git tag v{{ cookiecutter.version }}
 
-    echo "==> Setup the project dependencies and database for local development"
+    echo "${green}==> Setup the project dependencies and database for local development${reset}"
     fab init
 
     echo "==> Bumpversion 0.1.0-dev"

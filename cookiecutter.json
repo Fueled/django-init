@@ -10,4 +10,5 @@
     , "python3": "n"
     , "newrelic" : "y"
     , "postgis": "n"
+    , "add_ansible": "y"
 }
