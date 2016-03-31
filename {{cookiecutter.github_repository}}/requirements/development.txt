@@ -1,11 +1,9 @@
 -r common.txt
 
-gunicorn==19.4.5
-
 # Documentation
 # -------------------------------------
 mkdocs==0.15.3
-isort==4.2.2
+isort==4.2.5
 
 # Livereload
 # -------------------------------------
