@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Removed 'pages' app
 - Project renamed to `django-init`.
 - Make ansible generation optional.
+- Add documentation for Drone.io CI
 
 ### Added 
 - Livereload support via devrecargar
