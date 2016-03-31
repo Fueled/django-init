@@ -20,6 +20,12 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
 INTERNAL_IPS = ('127.0.0.1', )
 
+# Staticfiles
+# ------------------------------------------------------------------------------
+# Disable Django's static file handling and allow WhiteNoise to take over. This
+# helps in minimizing dev/prod differences when serving static files.
+INSTALLED_APPS = ('whitenoise.runserver_nostatic', ) + INSTALLED_APPS
+
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
 # A secret key for this particular Django installation. Used in secret-key

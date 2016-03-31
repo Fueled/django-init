@@ -19,7 +19,6 @@ import os
 # Third Party Stuff
 from django.core.wsgi import get_wsgi_application
 from dotenv import load_dotenv
-from whitenoise.django import DjangoWhiteNoise
 
 # Read .env file and set key/value inside it as environement variables
 # see: http://github.com/theskumar/python-dotenv
@@ -35,7 +34,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.production")
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
 application = get_wsgi_application()
-application = DjangoWhiteNoise(application)
 
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication

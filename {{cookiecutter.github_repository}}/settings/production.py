@@ -89,7 +89,7 @@ if ENABLE_MEDIA_UPLOAD_TO_S3:
 
 # Static Assests
 # ------------------------
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # EMAIL
 # ------------------------------------------------------------------------------
