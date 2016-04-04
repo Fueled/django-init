@@ -1,10 +1,10 @@
 ## Customize the test machine
 machine:
   python:
-    version: {{ '3.5' if cookiecutter.python3.lower() == 'y' else '2.7.4'}} # 2.7 will cause an error with py.test
+    version: {{ '3.5.1' if cookiecutter.python3.lower() == 'y' else '2.7.11'}} # 2.7 will cause an error with py.test
   environment:
     # each command runs in its own shell, so just adding an export FOO=bar command won't work
-    DATABASE_URL: postgres://postgres@localhost/{{ cookiecutter.main_module }}
+    DATABASE_URL: "postgres://ubuntu@localhost/circle_test"
   #services: # By default popular ones are running on our build machines (bound to localhost), including Postgres, MySQL, Redis and MongoDB
   # -redis 
 
@@ -16,9 +16,8 @@ machine:
 ## Customize dependencies
 dependencies:
   override:
-    - pip install pip-accel
-    - pip-accel install ansible
-    - pip-accel install -r requirements/development.txt
+    - pip install ansible
+    - pip install -r requirements/development.txt
 
 # Normally you will not have to clear the cache permanently, but if you feel that’s what you need, 
 # you can just remove the necessary parts of the cache anywhere in your circle.yml’s dependencies section, before the cache is saved:
@@ -31,7 +30,7 @@ dependencies:
 # builds. If you need to, you can add custom paths to cache:
   cache_directories:
     - $HOME/.cache/pip
-    - $HOME/.pip-accel
+    - $HOME/.pip
 
 ## Customize database setup
 #database:
