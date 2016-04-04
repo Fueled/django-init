@@ -8,7 +8,7 @@
 
 # Drone.io and Drone
 
-## Setting up Django Init with Drone.io Continuous Integration
+## Setting up {{ cookiecutter.main_module }} with Drone.io Continuous Integration
 
 Drone.io is a hosting platform that uses the open source drone software. 
 To learn more about drone and setting up your personal server to run CI testing visit [github](https://github.com/drone/drone) and [their docs/forums](http://readme.drone.io/community/overview/). [This](http://linoxide.com/linux-how-to/setup-drone-continuous-integration-linux/) may also be helpful. 
