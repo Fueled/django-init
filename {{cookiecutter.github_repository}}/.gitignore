@@ -78,6 +78,7 @@ celerybeat-schedule
 # {{ cookiecutter.project_name }}
 _docs_html/
 media/
+provisioner/site.retry
 
 # Virtual env
 venv/
