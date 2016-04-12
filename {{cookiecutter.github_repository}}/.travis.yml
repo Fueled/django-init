@@ -16,7 +16,7 @@ before_cache:
 
 install:
   - pip install pip-accel
-  {%- if cookiecutter.add_ansible.lower() == 'y' %}- pip-accel install ansible{% endif %}
+  {% if cookiecutter.add_ansible.lower() == 'y' %}- pip-accel install ansible{% endif %}
   - pip-accel install -r requirements/development.txt
 
 before_script:
@@ -29,7 +29,7 @@ before_script:
 script:
 - flake8
 - py.test --cov -v --tb=native
-{%- if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
+{% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
 notifications:
   email:
