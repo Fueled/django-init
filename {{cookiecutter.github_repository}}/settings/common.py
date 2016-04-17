@@ -255,9 +255,6 @@ MEDIA_ROOT = str(ROOT_DIR.path('.media'))
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
 
-# SLUGLIFIER
-AUTOSLUG_SLUGIFY_FUNCTION = "slugify.slugify"
-
 #  SECURITY
 # -----------------------------------------------------------------------------
 CSRF_COOKIE_HTTPONLY = False  # Allow javascripts to read CSRF token from cookies
