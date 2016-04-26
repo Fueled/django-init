@@ -72,6 +72,9 @@ celerybeat-schedule
 # Vagrant
 .vagrant
 
+# Redis
+dump.rdb
+
 # python-dotenv
 .env
 
@@ -80,7 +83,7 @@ _docs_html/
 media/
 provisioner/site.retry
 
-# Virtual env
+# Virtualenv
 venv/
 
 ### Vim ###
@@ -90,5 +93,5 @@ venv/
 Session.vim
 .netrwhist
 
-# Pycharm project modules
+# Pycharm
 .idea/
