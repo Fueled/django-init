@@ -130,11 +130,13 @@ def exception_handler(exc, context=None):
         return Response(detail, status=exc.status_code, headers=headers)
 
     elif isinstance(exc, Http404):
-        return Response({'errors': [{'message': str(exc)}, ]},
+        return Response({'error_type': exc.__class__.__name__,
+                         'errors': [{'message': str(exc)}]},
                         status=status.HTTP_404_NOT_FOUND)
 
     elif isinstance(exc, DjangoPermissionDenied):
-        return Response({'errors': [{'message': str(exc)}, ]},
+        return Response({'error_type': exc.__class__.__name__,
+                         'errors': [{'message': str(exc)}]},
                         status=status.HTTP_403_FORBIDDEN)
 
     # Note: Unhandled exceptions will raise a 500 error.
