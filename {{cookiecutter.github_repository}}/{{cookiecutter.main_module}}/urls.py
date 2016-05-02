@@ -45,6 +45,12 @@ urlpatterns += [
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+if settings.API_DEBUG:
+    urlpatterns += [
+        # Browsable API
+        url(r'^api/auth-n/', include('rest_framework.urls', namespace='rest_framework')),
+    ]
+
 if settings.DEBUG:
     # Livereloading
     urlpatterns += [url(r'^devrecargar/', include('devrecargar.urls', namespace='devrecargar'))]

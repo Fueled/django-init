@@ -74,3 +74,6 @@ DEBUG_TOOLBAR_CONFIG = {
     'DISABLE_PANELS': ['debug_toolbar.panels.redirects.RedirectsPanel', ],
     'SHOW_TEMPLATE_CONTEXT': True,
 }
+
+# This will expose all browsable api urls. For dev the default value is true
+API_DEBUG = env.bool('API_DEBUG', default=True)

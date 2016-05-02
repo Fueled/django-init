@@ -140,3 +140,8 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 ]
 
 # Your production stuff: Below this line define 3rd party libary settings
+
+if not API_DEBUG:
+    # blocking browsable api for rest framework and allowing just json renderer
+    if 'rest_framework.renderers.BrowsableAPIRenderer' in REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES']:
+        REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'].remove('rest_framework.renderers.BrowsableAPIRenderer')
