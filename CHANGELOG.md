@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Make ansible generation optional.
 - Add documentation for Drone.io CI
 - Add Circle CI Support (@jasonrfarkas)
+- Fix `Http404` and `PermissionDenied` error handling format.
 
 ### Added 
 - Livereload support via devrecargar
