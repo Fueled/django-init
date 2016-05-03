@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add documentation for Drone.io CI
 - Add Circle CI Support (@jasonrfarkas)
 - Fix `Http404` and `PermissionDenied` error handling format.
+- Add configurable support for `adding/removing DRF Browsable apis`
 
 ### Added 
 - Livereload support via devrecargar
