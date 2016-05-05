@@ -12,6 +12,7 @@
     - supervisor
     - postgresql
     - project_data
+    - letsencrypt
     # - redis
     # - celery
 
@@ -28,5 +29,6 @@
     - nginx
     - supervisor
     - project_data
+    - letsencrypt
     # - redis
     # - celery
