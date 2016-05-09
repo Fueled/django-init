@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.2.0-dev]
 ### Changed
+- Use `setup.cfg` instead of `.coveragerc`
 - Upgrade whitenoise to 3.0
 - anisble: Update supervisor init script 
 - travis: Use `pip-accel` on travis along with caching

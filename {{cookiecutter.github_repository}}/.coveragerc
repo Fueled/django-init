@@ -1,3 +1,0 @@
-[run]
-source = {{ cookiecutter.main_module }}/
-omit = '*tests*,*commands*,*migrations*,*admin*,*wsgi*'
