@@ -41,7 +41,7 @@ urlpatterns += [
     url(r'^api/auth-n/', include('rest_framework.urls', namespace='rest_framework')),
 
     # Django Admin
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^{}/'.format(settings.DJANGO_ADMIN_URL), include(admin.site.urls)),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
