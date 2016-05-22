@@ -177,6 +177,10 @@ WSGI_APPLICATION = 'wsgi.application'
 # ------------------------------------------------------------------------------
 ROOT_URLCONF = '{{ cookiecutter.main_module }}.urls'
 
+
+# Use this to change base url path django admin
+DJANGO_ADMIN_URL = env.str('DJANGO_ADMIN_URL', default='admin')
+
 # EMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
