@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.2.0-dev]
 ### Changed
+- Update SERVER_EMAIL settings to default to DEFAULT_FROM_EMAIL
 - Use `setup.cfg` instead of `.bumpversion`
 - Use `setup.cfg` instead of `.coveragerc`
 - Upgrade whitenoise to 3.0

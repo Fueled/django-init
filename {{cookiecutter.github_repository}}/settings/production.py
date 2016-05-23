@@ -101,7 +101,7 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_SUBJECT_PREFIX = env("EMAIL_SUBJECT_PREFIX", default='[{{cookiecutter.project_name}}] ')
 EMAIL_USE_TLS = True
-SERVER_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
