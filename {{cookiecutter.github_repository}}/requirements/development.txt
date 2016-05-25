@@ -21,7 +21,7 @@ django-extensions==1.6.7  # for shell_plus and other utils
 pytest-django==2.9.1
 pytest-pythonpath==0.7
 pytest-cov==2.2.1
-factory_boy==2.7.0
+django-dynamic-fixture==1.9.0
 mock==2.0.0
 flake8==2.5.4
 

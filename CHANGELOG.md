@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.2.0-dev]
 ### Changed
+- Remove factoryboy, use [django-dynamic-fixtures] for factories.
 - Update SERVER_EMAIL settings to default to DEFAULT_FROM_EMAIL
 - Use `setup.cfg` instead of `.bumpversion`
 - Use `setup.cfg` instead of `.coveragerc`
@@ -17,6 +18,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add Circle CI Support (@jasonrfarkas)
 - Fix `Http404` and `PermissionDenied` error handling format.
 - Add configurable support for `adding/removing DRF Browsable apis`
+
+[django-dynamic-fixtures]: https://github.com/paulocheque/django-dynamic-fixture
 
 ### Added 
 - Livereload support via devrecargar
