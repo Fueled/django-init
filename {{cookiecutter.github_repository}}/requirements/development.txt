@@ -12,9 +12,9 @@ devrecargar==0.1.4
 # Debugging
 # -------------------------------------
 django-debug-toolbar==1.4
-ipdb==0.9.3
+ipdb==0.10.0
 ipython==4.2.0
-django-extensions==1.6.6  # for shell_plus and other utils
+django-extensions==1.6.7  # for shell_plus and other utils
 
 # Testing and coverage
 # -------------------------------------
