@@ -2,6 +2,7 @@
 project_name: {{ cookiecutter.main_module }}
 project_repo_url: git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}.git
 project_repo_remote: origin
+vm: 0  # Deafult value for vm (virtual Machine)
 domain_name: {{ cookiecutter.main_module }}.com
 repo_version: master
 python3: {{ 'True' if cookiecutter.python3.lower() == 'y' else 'False' }}
