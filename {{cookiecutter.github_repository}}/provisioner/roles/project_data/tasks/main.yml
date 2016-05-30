@@ -3,7 +3,7 @@
   git: repo={{ project_repo_url }} dest={{ project_path }} version={{ repo_version }} accept_hostkey=true
   become: false
   when: vm is undefined
-  tags: ['deploy', 'always']
+  tags: [always]
 
 - name: manually create the initial virtualenv
   command: virtualenv {{ venv_path }} -p python{{ py_venv_version }} creates={{ venv_path }}
