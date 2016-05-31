@@ -19,6 +19,7 @@
 
 - name: copy env configuration
   template: src=env.env.j2 dest={{ project_path }}/.env force=no
+  become: false
   tags: ['configure']
 
 - name: migrate database
