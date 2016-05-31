@@ -2,7 +2,7 @@
 - name: get the latest code
   git: repo={{ project_repo_url }} dest={{ project_path }} version={{ repo_version }} accept_hostkey=true
   become: false
-  when: vm is undefined
+  when: not vm
   tags: [always]
 
 - name: manually create the initial virtualenv
@@ -35,5 +35,4 @@
 - name: reload server
   shell: supervisorctl restart all
   become: true
-  tags: ['deploy']
-{% endraw %}
+  tags: ['deploy']{% endraw %}

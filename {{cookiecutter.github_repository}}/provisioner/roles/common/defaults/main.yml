@@ -28,6 +28,8 @@ base_ubuntu:
       - postgresql-client
       - libpq-dev
       - postgis
+      - ca-certificates
+
   python3:
     apt_packages:
       - python{{ py_venv_version }}

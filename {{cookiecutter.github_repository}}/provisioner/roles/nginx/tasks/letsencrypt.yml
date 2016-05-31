@@ -1,0 +1,47 @@
+{%raw%}---
+- name: apt-get install letsencrypt dependencies packages
+  apt: pkg={{ item }} state=present
+  with_items:
+    - augeas-lenses
+    - dialog
+    - libaugeas0
+    - libffi-dev
+
+- name: install certbot auto
+  get_url:
+    url: https://dl.eff.org/certbot-auto
+    dest: /usr/local/bin
+
+- name: make certbot executable
+  file:
+    path: /usr/local/bin/certbot-auto
+    mode: a+x
+    state: file
+
+- name: create certbot folder
+  sudo: yes
+  file: path={{ letsencrypt_challange_root }} state=directory owner={{ user }} group={{ nginx_user }} mode="u=rwx,g=rwxs,o=r"
+
+- name: reload nginx
+  service: name=nginx state=reloaded
+
+- name: upgrade ca-certificates
+  apt: pkg=ca-certificates update_cache=yes state=latest
+
+- name: stop nginx if running
+  service: name=nginx state=stopped
+
+- name: request cert
+  shell: certbot-auto certonly --standalone -w {{ letsencrypt_challange_root }} -d {{ domain_name }} --email {{ letsencrypt_email }} --agree-tos
+  args:
+    creates: '{{ letsencrypt_ssl_cert_dir }}'
+
+- name: start nginx
+  service: name=nginx state=started
+
+- name: remove any cert diretory if exist
+  file: path={{ ssl_cert_dir }}/{{ domain_name }} state=absent
+
+- name: symblink certificates
+  file: src={{ letsencrypt_ssl_cert_dir }} dest={{ ssl_cert_dir }}/{{ domain_name }} owner={{ user }} group=www-data state=link
+{%endraw%}

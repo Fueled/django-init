@@ -1,5 +1,11 @@
-ngnix_listen: 80
+ngnix_listen: '443 ssl'
 nginx_user: 'www-data'
 nginx_worker_processes: 1
 nginx_worker_connections: 1024
 nginx_max_file_size: 10
+
+{% raw %}
+ssl_cert_dir: '/etc/nginx/ssl'
+letsencrypt_ssl_cert_dir: '/etc/letsencrypt/live/{{ domain_name }}'
+letsencrypt_challange_root: '/app/certbot'
+letsencrypt_email: 'webmaster@{{ domain_name }}'{% endraw %}

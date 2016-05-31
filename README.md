@@ -21,6 +21,7 @@ Project template for django based projects, optimized for making REST API with d
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Custom User app, for easier extensibility.
 - Optional media storage using Amazon S3
+- [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org)
 - Livereloading of browser in development via [devrecargar]
 - robots.txt and humans.txt configured
 

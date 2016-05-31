@@ -2,12 +2,13 @@
 192.168.33.12
 
 [vagrant:vars]
-vm=1
+vm=True
 user=vagrant
 project_path=/home/vagrant/{{ cookiecutter.github_repository }}
 venv_path=/home/vagrant/venv
 django_requirements_file=requirements/development.txt
 django_settings="settings.development"
+use_letsencrypt=False
 pg_db={{ cookiecutter.main_module }}
 pg_user=vagrant
 pg_password=vagrant
@@ -17,8 +18,11 @@ gunicorn_workers=2
 {{ cookiecutter.main_module }}.com
 
 [production:vars]
+vm=False
 user=ubuntu
 project_path=/home/ubuntu/{{ cookiecutter.github_repository }}
 venv_path=/home/ubuntu/venv
+use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
+letsencrypt_email={{ cookiecutter.letsencrypt_email }}
 django_requirements_file=requirements.txt
 django_settings="settings.production"

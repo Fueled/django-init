@@ -1,33 +1,29 @@
 {%raw%}# {{ ansible_managed }}
-# Uncomment following line to enforce ssl
-# server {
-#     listen         80;
-#     server_name    {{ domain_name }};
-#     return         301 https://$server_name$request_uri;
-# }
 
 # Serve static files and redirect any other request to django wsgi server
 server {
-    # comment out following line to enforce ssl
-    listen       80;
-    # Uncomment following line to enforce ssl
-    # listen       443;
-
+    listen       {{ ngnix_listen }};
     server_name  {{ domain_name }};
+
+    # Disable SSLv3(enabled by default since nginx 0.8.19) since it's less
+    # secure then TLS http://en.wikipedia.org/wiki/Secure_Sockets_Layer#SSL_3.0
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    ssl on;
+    ssl_certificate {{ ssl_cert_dir }}/{{ domain_name }}/fullchain.pem;
+    ssl_certificate_key {{ ssl_cert_dir }}/{{ domain_name }}/privkey.pem;
+
     access_log   /var/log/nginx/{{ domain_name }}.access.log;
     error_log    /var/log/nginx/{{ domain_name }}.error.log;
 
     client_max_body_size {{ nginx_max_file_size }}M;
 
-    # Uncomment following line to enforce ssl
-    # ssl on;
-    # Make sure following files exist
-    # ssl_certificate /etc/nginx/ssl/{{ domain_name }}.chained.crt;
-    # ssl_certificate_key /etc/nginx/ssl/{{ domain_name }}.key;
-
-    # Disable SSLv3(enabled by default since nginx 0.8.19) since it's less
-    # secure then TLS http://en.wikipedia.org/wiki/Secure_Sockets_Layer#SSL_3.0
-    # ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    {% if use_letsencrypt %}
+        location /.well-known/acme-challenge {
+                root {{ letsencrypt_challange_root }};
+                try_files $uri =404;
+        }
+    {% endif %}
 
     # Setup named location for Django requests and handle proxy details
     location / {
