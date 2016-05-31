@@ -11,8 +11,9 @@ from functools import partial
 from os.path import dirname, isdir, join
 
 # Third Party Stuff
-from fabric.api import local as fabric_local, env
 from fabric import api as fab
+from fabric.api import local as fabric_local
+from fabric.api import env
 
 local = partial(fabric_local, shell='/bin/bash')
 
@@ -39,6 +40,7 @@ def init(vagrant=False):
 
     install_requirements()
     local('createdb %(project_name)s' % env)  # create postgres database
+    pre_commit_install()
     manage('migrate')
 
 
@@ -48,6 +50,13 @@ def install_requirements(file=env.requirements_file):
     # activate virtualenv and install
     with virtualenv():
         local('pip install -r %s' % file)
+
+
+def pre_commit_install():
+    verify_virtualenv()
+    # activate virtualenv and install pre-commit
+    with virtualenv():
+        local('pre-commit install')
 
 
 def serve_docs(options=''):
