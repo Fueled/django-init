@@ -1,3 +1,6 @@
+{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+{%- raw %}{% load compress %}{% endraw %}
+{%- endif %}
 {% raw %}{% load staticfiles i18n %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
@@ -14,8 +17,14 @@
     <![endif]-->
 
     {% block css %}
-    <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
-    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/normalize.css' %}" rel="stylesheet">{% endraw %}
+    {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+    {% raw %}{% compress css %}
+    <link href="{% static 'css/main.scss' %}"  type="text/x-scss" rel="stylesheet">
+    {% endcompress %}{% endraw %}
+    {%- else %}
+    {% raw %}<link href="{% static 'css/main.css' %}" rel="stylesheet">{% endraw %}
+    {%- endif %}{% raw %}
     {% endblock css %}
   </head>
 
@@ -43,8 +52,14 @@
 
       <!-- Your stuff: Third-party javascript libraries go here -->
 
-      <!-- place project specific Javascript in this file -->
-      <script src="{% static 'js/main.js' %}"></script>
+      <!-- place project specific Javascript in this file -->{% endraw %}
+      {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+      {% raw %}{% compress js %}{% endraw %}
+      {%- endif %}{% raw %}
+      <script src="{% static 'js/main.js' %}"></script>{% endraw %}
+      {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+      {% raw %}{% endcompress %}{% endraw %}
+      {%- endif %}{% raw %}
 
       {% if debug %}
         <!--Livereloading support -->

@@ -10,18 +10,19 @@ Project template for django based projects, optimized for making REST API with d
 ## Features
 
 - Django 1.9.x
-- PostresSQL everywhere(support of postgis is available).
-- [Procfile] for deploying to Heroku.
-- [Ansible] playbook for deployment to Ubuntu 14 LTS. (optional)
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
+- PostresSQL everywhere (support of postgis is available)
+- [Procfile] for deploying to Heroku
+- [Ansible] playbook for deployment to Ubuntu 14 LTS (optional)
 - Designed to work with Django Rest Framework 3.0+.
 - Uses `django_sites` instead of `django.contrib.sites`
 - Use [mkdocs] for project documentation.
 - Uses [py.test] as test runner.
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
-- Custom User app, for easier extensibility.
-- Optional media storage using Amazon S3
+- Custom `User` app, for easier extensibility.
+- Media storage using Amazon S3 (optional)
 - [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org)
+- SASS with autoprefixing support using django-compressor (optional)
 - Livereloading of browser in development via [devrecargar]
 - robots.txt and humans.txt configured
 

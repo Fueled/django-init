@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.2.0-dev]
+
+## Added
+- Add `letsencrypt` support.
+- Add `SASS` and `Django Compressor` support.
+- Add documentation for Drone.io CI
+- Add Circle CI Support (@jasonrfarkas)
+
 ### Changed
 - Remove factoryboy, use [django-dynamic-fixtures] for factories.
 - Update SERVER_EMAIL settings to default to DEFAULT_FROM_EMAIL
@@ -14,11 +21,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Removed 'pages' app
 - Project renamed to `django-init`.
 - Make ansible generation optional.
-- Add documentation for Drone.io CI
-- Add Circle CI Support (@jasonrfarkas)
 - Fix `Http404` and `PermissionDenied` error handling format.
 - Add configurable support for `adding/removing DRF Browsable apis`
-- Add `letsencrypt` support.
+
 
 [django-dynamic-fixtures]: https://github.com/paulocheque/django-dynamic-fixture
 

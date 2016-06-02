@@ -61,6 +61,11 @@ DJANGO_SECRET_KEY=`openssl rand -hex 64` \
 SITE_DOMAIN=<heroku-app-name>.herokuapp.com \
 SITE_SCHEME=https \
 SITE_NAME=DJANGO_SITE_NAME_HERE --app=<heroku-app-name>
+{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+
+heroku buildpacks:set heroku/python --app=<heroku-app-name>
+heroku buildpacks:add --index 1 heroku/nodejs --app=<heroku-app-name>
+{%- endif %}
 
 git push heroku master
 heroku run python manage.py createsuperuser --app=<heroku-app-name>

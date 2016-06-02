@@ -15,6 +15,12 @@
   become: false
   tags: ['deploy']
 
+- name: Install packages based on package.json.
+  npm: path={{ project_path }} global=no
+  become: true
+  when: sass_with_django_compressor
+  tags: ['deploy']
+
 - include: gunicorn.yml
 
 - name: copy env configuration
@@ -22,13 +28,21 @@
   become: false
   tags: ['configure']
 
-- name: migrate database
-  django_manage: command=migrate app_path={{ project_path }} virtualenv={{ venv_path }}
+- name: collect static
+  django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
 
-- name: collect static
-  django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ venv_path }}
+- name: Run django-compressor offline
+  django_manage: command=compress app_path={{ project_path }} virtualenv={{ venv_path }}
+  become: false
+  tags: ['deploy']
+  when: sass_with_django_compressor
+  environment:
+    PATH: "$PATH:{{ project_path }}/node_modules/.bin:/usr/bin/"
+
+- name: Run database migrations
+  django_manage: command=migrate app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
 

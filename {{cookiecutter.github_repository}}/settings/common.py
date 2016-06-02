@@ -46,6 +46,10 @@ INSTALLED_APPS = (
 
     'rest_framework',  # http://www.django-rest-framework.org/
     'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
+{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+
+    'compressor',
+{%- endif %}
 )
 
 # INSTALLED APPS CONFIGURATION
@@ -249,7 +253,24 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+    'compressor.finders.CompressorFinder',
+{%- endif %}
 )
+{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+
+# Django Compressor Configuration
+COMPRESS_CSS_FILTERS = [
+    'django_compressor_autoprefixer.AutoprefixerFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+COMPRESS_ENABLED = True
+{%- endif %}
 
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------

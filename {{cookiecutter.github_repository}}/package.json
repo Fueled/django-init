@@ -1,0 +1,12 @@
+{
+  "name": "django-compressor-helpers",
+  "version": "0.1.0",
+  "description": "Installs commandline tools needed by django-compressor for post-processing of css/js.",
+  "engines": {
+    "node": "5.11.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^6.1.1",
+    "postcss-cli": "^2.3.2"
+  }
+}

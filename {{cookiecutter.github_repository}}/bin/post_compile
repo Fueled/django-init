@@ -5,5 +5,10 @@ yes "yes" | python manage.py migrate
 
 # Run production checks
 python manage.py check --deploy
+{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+
+# Offline compression of staticfiles via django-compressor
+python manage.py compress
+{%- endif %}
 
 # used by heroku after slug compilation

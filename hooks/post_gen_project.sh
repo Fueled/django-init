@@ -28,6 +28,13 @@ fi
 if echo "{{ cookiecutter.add_ansible }}" | grep -iq "^n"; then
     rm -rf provisioner Vagrantfile
 fi
+
+if echo "{{ cookiecutter.add_sass_with_django_compressor }}" | grep -iq "^n"; then
+    rm -rf package.json
+else
+    mv {{ cookiecutter.main_module }}/static/css/main.css {{ cookiecutter.main_module }}/static/css/main.scss
+fi
+
 if echo "$yn" | grep -iq "^y"; then
     echo "==> Checking system dependencies. You may need to enter your sudo password."
 
