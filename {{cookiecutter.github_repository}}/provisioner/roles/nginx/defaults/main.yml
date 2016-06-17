@@ -6,6 +6,8 @@ nginx_max_file_size: 10
 
 {% raw %}
 ssl_cert_dir: '/etc/nginx/ssl'
+ssl_forward_secrecy_key_path: /etc/nginx/dhparam.pem
+ssl_forward_secrecy_key_length: 2048
 letsencrypt_ssl_cert_dir: '/etc/letsencrypt/live/{{ domain_name }}'
 letsencrypt_challange_root: '/app/certbot'
 letsencrypt_email: 'webmaster@{{ domain_name }}'{% endraw %}
