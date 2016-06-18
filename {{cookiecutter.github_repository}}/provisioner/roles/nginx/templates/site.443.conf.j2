@@ -10,8 +10,9 @@ server {
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
     ssl on;
-    ssl_certificate {{ ssl_cert_dir }}/{{ domain_name }}/fullchain.pem;
+    ssl_certificate     {{ ssl_cert_dir }}/{{ domain_name }}/fullchain.pem;
     ssl_certificate_key {{ ssl_cert_dir }}/{{ domain_name }}/privkey.pem;
+    ssl_dhparam         {{ ssl_forward_secrecy_key_path }};
 
     access_log   /var/log/nginx/{{ domain_name }}.access.log;
     error_log    /var/log/nginx/{{ domain_name }}.error.log;

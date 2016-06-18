@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.2.0-dev]
 
 ## Added
+- Add `ssl_params` support in nginx
 - Add `letsencrypt` support.
 - Add `SASS` and `Django Compressor` support.
 - Add documentation for Drone.io CI
