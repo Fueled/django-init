@@ -115,6 +115,7 @@ SITE_ID = 'local'
 # this middleware classes will be applied in the order given, and in the
 # response phase the middleware will be applied in reverse order.
 MIDDLEWARE_CLASSES = (
+    'log_request_id.middleware.RequestIDMiddleware',  # For generating/adding Request id for all the logs
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -294,6 +295,9 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
 
+# django-log-request-id - Sending request id in response
+REQUEST_ID_RESPONSE_HEADER = "REQUEST_ID"
+
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
@@ -301,17 +305,22 @@ X_FRAME_OPTIONS = 'DENY'
 # HTTP 500 error. Depending on DEBUG, all other log records are either sent to
 # the console (DEBUG=True) or discarded by mean of the NullHandler (DEBUG=False).
 # See http://docs.djangoproject.com/en/dev/topics/logging
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
+        },
+        'request_id': {
+            '()': 'log_request_id.filters.RequestIDFilter'
         }
     },
     'formatters': {
         'complete': {
-            'format': '%(levelname)s:%(asctime)s:%(module)s %(message)s'
+            # with this formatter always use request_id filter
+            'format': '%(asctime)s:[%(levelname)s]:logger=%(name)s:Request_id=%(request_id)s message="%(message)s"'
         },
         'simple': {
             'format': '%(levelname)s:%(asctime)s: %(message)s'
@@ -328,7 +337,8 @@ LOGGING = {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'simple',
+            'formatter': 'complete',
+            'filters': ['request_id'],
         },
         'mail_admins': {
             'level': 'ERROR',
@@ -339,11 +349,22 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['null'],
-            'propagate': True,
+            'propagate': False,
             'level': 'INFO',
         },
         'django.request': {
             'handlers': ['mail_admins', 'console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        '{{cookiecutter.main_module}}': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        # Catch All Logger -- Captures any other logging
+        '': {
+            'handlers': ['console'],
             'level': 'ERROR',
             'propagate': True,
         },
