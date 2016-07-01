@@ -319,8 +319,9 @@ LOGGING = {
     },
     'formatters': {
         'complete': {
-            # with this formatter always use request_id filter
-            'format': '%(asctime)s:[%(levelname)s]:logger=%(name)s:Request_id=%(request_id)s message="%(message)s"'
+            # NOTE: make sure to include 'request_id' in filters when using this
+            # formatter in any handlers.
+            'format': '%(asctime)s:[%(levelname)s]:logger=%(name)s:request_id=%(request_id)s message="%(message)s"'
         },
         'simple': {
             'format': '%(levelname)s:%(asctime)s: %(message)s'
