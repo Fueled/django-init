@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.2.0-dev]
 
 ## Added
+- Support for request-id via django-log-request-id (@vikalpj)
 - Add `ssl_params` support in nginx
 - Add `letsencrypt` support.
 - Add `SASS` and `Django Compressor` support.
@@ -12,12 +13,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add Circle CI Support (@jasonrfarkas)
 
 ### Changed
+- Improved project level logging support (@vikalpj)
 - Remove factoryboy, use [django-dynamic-fixtures] for factories.
 - Update SERVER_EMAIL settings to default to DEFAULT_FROM_EMAIL
 - Use `setup.cfg` instead of `.bumpversion`
 - Use `setup.cfg` instead of `.coveragerc`
 - Upgrade whitenoise to 3.0
-- anisble: Update supervisor init script 
+- anisble: Update supervisor init script
 - travis: Use `pip-accel` on travis along with caching
 - Removed 'pages' app
 - Project renamed to `django-init`.
@@ -28,7 +30,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [django-dynamic-fixtures]: https://github.com/paulocheque/django-dynamic-fixture
 
-### Added 
+### Added
 - Livereload support via devrecargar
 
 ## [1.1.0]
@@ -40,7 +42,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add custom branding for drf's api browser login page.
 - Allow admin email to be set via environment variable `DJANGO_ADMIN_EMAIL`
 - Use `bin/post_compile` to handle database migration on Heroku.
-- Switch to stable version of mkdocs 
+- Switch to stable version of mkdocs
 - Add custom user app with email as username
 - Make use of `pytest-cov` plugin for generating coverage reports.
 - Remove `pytest-pythonpath` from dependency as it's not longer needed.
