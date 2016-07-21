@@ -8,6 +8,9 @@ Adds sensible default for running app in production.
 """
 from __future__ import absolute_import, unicode_literals
 
+# Standard Library
+from email.utils import getaddresses
+
 # Third Party Stuff
 from django.utils import six
 
@@ -20,6 +23,16 @@ from .common import *  # noqa
 ALLOWED_HOSTS = ["*"]
 
 SITE_SCHEME = env('SITE_SCHEME', default='https')
+
+# MANAGER CONFIGURATION
+# ------------------------------------------------------------------------------
+# People who get code error notifications.
+# In the format 'Full Name <email@example.com>, Full Name <anotheremail@example.com>'
+ADMINS = getaddresses([env("DJANGO_ADMINS")])
+
+# Not-necessarily-technical managers of the site. They get broken link
+# notifications and other various emails.
+MANAGERS = ADMINS
 
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
@@ -101,7 +114,7 @@ COMPRESS_OFFLINE = True
 # EMAIL
 # ------------------------------------------------------------------------------
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',
-                         default='{{ cookiecutter.project_name }} <{{ cookiecutter.django_admin_email }}>')
+                         default='{{ cookiecutter.default_from_email }}')
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')

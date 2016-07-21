@@ -38,6 +38,12 @@ Run these commands to deploy this project on Heroku (substitue all references of
 ```
 heroku create --ssh-git <heroku-app-name>
 
+heroku buildpacks:set heroku/python --app=<heroku-app-name>
+
+{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+heroku buildpacks:add --index 1 heroku/nodejs --app=<heroku-app-name>
+{%- endif %}
+
 {% if cookiecutter.postgis == 'y' %}heroku addons:create heroku-postgresql:standard-0 --app=<heroku-app-name>
 {% else %}heroku addons:create heroku-postgresql --app=<heroku-app-name>{% endif %}
 heroku pg:backups schedule DATABASE_URL --at '04:00 UTC' --app=<heroku-app-name>
@@ -61,22 +67,18 @@ DJANGO_SECRET_KEY=`openssl rand -hex 64` \
 SITE_DOMAIN=<heroku-app-name>.herokuapp.com \
 SITE_SCHEME=https \
 SITE_NAME=DJANGO_SITE_NAME_HERE --app=<heroku-app-name>
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
-heroku buildpacks:set heroku/python --app=<heroku-app-name>
-heroku buildpacks:add --index 1 heroku/nodejs --app=<heroku-app-name>
-{%- endif %}
+heroku config:set DJANGO_ADMINS='webmaster@yourdomain.com' --app=<heroku-app-name>
 
 git push heroku master
 heroku run python manage.py createsuperuser --app=<heroku-app-name>
 heroku open --app=<heroku-app-name>
 ```
 
-The following configuration doesn't allow you to "by default" upload the media on the heroku server as heroku does
-not support persistent storage. We use S3 for storing uploaded media. If you want to enable media upload:
+The following configuration doesn't allow you to "by default" upload the media on the Heroku server as Heroku does not support persistent storage. We use S3 for storing uploaded media. If you want to enable media upload:
 
 - Create S3 bucket and get AWS access key and secret that has access to this bucket.
-- Follow the instructions below to enable S3 upload configuration on heroku.
+- Follow the instructions below to enable S3 upload configuration on Heroku.
 
 ```
 heroku config:set ENABLE_MEDIA_UPLOAD_TO_S3=true \
@@ -87,8 +89,8 @@ DJANGO_AWS_STORAGE_BUCKET_NAME=<YOUR_BUCKET_NAME_HERE>
 
 
 **Note:**
-- Use `--app=<heroku-app-name>` if you have more than one heroku app configured in current project.
-- Update `travis.yml`, and add the `<heroku-app-name>` to automatically deploy to this configured heroku app.
+- Use `--app=<heroku-app-name>` if you have more than one Heroku app configured in current project.
+- Update `travis.yml`, and add the `<heroku-app-name>` to automatically deploy to this configured Heroku app.
 
 {%- if cookiecutter.add_ansible.lower() == 'y' %}
 ### AWS/EC2
@@ -113,7 +115,7 @@ Now you can run the ansible script to setup the machine.
 
     fab prod configure
 
-This will setup os dependencies, services like supervisor, nginx and fetch our code from github. Our production environment requires 
+This will setup os dependencies, services like supervisor, nginx and fetch our code from Github. Our production environment requires 
 some environment variables in `.env`. So you can write a file `prod.env` locally and upload it to server with
 
     scp prod.env {{ cookiecutter.main_module }}.com:/home/ubuntu/{{ cookiecutter.github_repository }}/.env
