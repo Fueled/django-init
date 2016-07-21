@@ -1,9 +1,5 @@
-django-init 
+django-init | [![Build Status](https://travis-ci.org/Fueled/django-init.svg?branch=user-app)](https://travis-ci.org/Fueled/django-init)
 ============
-
-(formerly known as django-cookiecutter)
-
-[![Build Status](https://travis-ci.org/Fueled/django-init.svg?branch=user-app)](https://travis-ci.org/Fueled/django-init)
 
 Project template for django based projects, optimized for making REST API with deployment on Heroku and EC2 instances.
 
