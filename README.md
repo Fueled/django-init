@@ -52,6 +52,10 @@ You can also explore the [wiki] section for details on advance setups and usuage
 
 Refer to [CHANGELOG.md](CHANGELOG.md).
 
+## Code of Conduct
+
+Everyone interacting in the django-init project's codebases, issue trackers, chat rooms, and mailing lists is expected to follow the [PyPA Code of Conduct](https://www.pypa.io/en/latest/code-of-conduct/).
+
 --------
 
 Built with ♥ at [Fueled](https://fueled.com)
