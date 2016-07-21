@@ -15,18 +15,14 @@ def server_error(request, *args, **kwargs):
     """
     JSON aware server 500 error response.
 
-    Don't return html for a json type request.
+    As we don't want to return html response for a json request.
     """
     exc_type, exc_obj, exc_tb = sys.exc_info()
 
     if not settings.DEBUG and request.META.get('CONTENT_TYPE', None) == "application/json":
         response_dict = {
-          'error_type': exc_type.__name__ if exc_type else 'ServerError',
-          'errors': [
-            {
-              'message': 'Server application error',
-            }
-          ]
+            'error_type': exc_type.__name__ if exc_type else 'ServerError',
+            'errors': [{'message': 'Server application error', }]
         }
         return http.JsonResponse(data=response_dict, status=500)
 
