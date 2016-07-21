@@ -11,12 +11,13 @@ Adds sensible defaults for developement of project
 """
 from __future__ import absolute_import, unicode_literals
 
-from .common import *  # noqa
+from .common import *  # noqa: F405
+from .common import INSTALLED_APPS, env
 
 # DEBUG
 # ------------------------------------------------------------------------------
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
-TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa: F405
 
 INTERNAL_IPS = ('127.0.0.1', )
 
@@ -61,13 +62,13 @@ INSTALLED_APPS += ('django_extensions', )
 INSTALLED_APPS += ('devrecargar',)
 
 DEVRECARGAR_PATHS_TO_WATCH = [{
-    'path': str(APPS_DIR),
+    'path': str(APPS_DIR),  # noqa: F405
     'patterns': ['*.html', '*.js', '*.css', '*.scss'],
 }]
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
-MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)  # noqa: F405
 INSTALLED_APPS += ('debug_toolbar', )
 
 DEBUG_TOOLBAR_CONFIG = {

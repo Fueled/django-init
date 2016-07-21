@@ -5,13 +5,15 @@ Adds sensible default for running app in production.
 - Disable DEBUG
 - Make SECRET_KEY mandatory
 - Use whitenoise to serve static files
+- Disable browsable API
 """
 from __future__ import absolute_import, unicode_literals
 
 # Third Party Stuff
 from django.utils import six
 
-from .common import *  # noqa
+from .common import *  # noqa: F405
+from .common import DATABASES, INSTALLED_APPS, REST_FRAMEWORK, TEMPLATES, env
 
 # SITE CONFIGURATION
 # Hosts/domain names that are valid for this site.
@@ -24,7 +26,7 @@ SITE_SCHEME = env('SITE_SCHEME', default='https')
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
 # see: http://niwinz.github.io/django-sites/latest/
-SITES['remote'] = {
+SITES['remote'] = {  # noqa: F405
     "domain": env('SITE_DOMAIN'),
     "scheme": SITE_SCHEME,
     "name": env('SITE_NAME'),
@@ -146,9 +148,7 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
     ('django.template.loaders.cached.Loader', TEMPLATES[0]['OPTIONS']['loaders']),
 ]
 
-# Your production stuff: Below this line define 3rd party libary settings
-
-if not API_DEBUG:
+if not API_DEBUG:  # noqa: F405
     # blocking browsable api for rest framework and allowing just json renderer
     if 'rest_framework.renderers.BrowsableAPIRenderer' in REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES']:
         REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'].remove('rest_framework.renderers.BrowsableAPIRenderer')
