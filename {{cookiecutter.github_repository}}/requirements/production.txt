@@ -4,7 +4,7 @@
 
 # Static Files and Media Storage
 # -------------------------------------
-boto==2.40.0
+boto==2.42.0
 django-storages-redux==1.3.2
 
 # Caching
