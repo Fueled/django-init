@@ -5,9 +5,6 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 """
 from __future__ import print_function, unicode_literals
 
-# Standard Library
-from email.utils import getaddresses
-
 # Third Party Stuff
 import environ
 from django.utils.translation import ugettext_lazy as _
@@ -16,16 +13,6 @@ ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 2 = /a/)
 APPS_DIR = ROOT_DIR.path('{{ cookiecutter.main_module }}')
 
 env = environ.Env()
-
-# MANAGER CONFIGURATION
-# ------------------------------------------------------------------------------
-# People who get code error notifications.
-# In the format 'Full Name <email@example.com>, Full Name <anotheremail@example.com>'
-ADMINS = getaddresses([env("DJANGO_ADMINS", default='{{ cookiecutter.django_admin_email }}')])
-
-# Not-necessarily-technical managers of the site. They get broken link
-# notifications and other various emails.
-MANAGERS = ADMINS
 
 # INSTALLED APPS
 # ==========================================================================

@@ -5,7 +5,7 @@
     , "github_username": "Fueled"
     , "github_repository": "{{ cookiecutter.main_module|replace('_', '-') }}-web"
     , "timezone": "UTC"
-    , "django_admin_email": "{{ cookiecutter.project_name }} Admin <admin@example.com>"
+    , "default_from_email": "{{ cookiecutter.project_name }} <support@{{ cookiecutter.main_module }}.com>"
     , "version": "0.0.0"
     , "python3": "n"
     , "newrelic" : "y"
