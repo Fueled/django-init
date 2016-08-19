@@ -20,20 +20,20 @@ pytz==2016.6.1
 # Models
 # -------------------------------------
 psycopg2==2.6.2
-django-model-utils==2.5
+django-model-utils==2.5.1
 
 Pillow==3.3.0
-django-versatileimagefield==1.5
+django-versatileimagefield==1.6
 django-uuid-upload-path==1.0.0
 
 # REST APIs
 # -------------------------------------
-djangorestframework==3.4.0
+djangorestframework==3.4.3
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
 # Static files
 # -------------------------------------
-django-compressor==2.0
+django-compressor==2.1
 django-libsass==0.7
 django-compressor-autoprefixer==0.1.0
 {%- endif %}

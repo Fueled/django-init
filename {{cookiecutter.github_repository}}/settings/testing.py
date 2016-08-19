@@ -1,6 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
-from .development import *  # noqa: F405
+from .development import *  # noqa F405
 
 MEDIA_ROOT = "/tmp"
 
