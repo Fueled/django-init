@@ -4,7 +4,5 @@ project_repo_url: git@github.com:{{ cookiecutter.github_username }}/{{ cookiecut
 project_repo_remote: origin
 domain_name: {{ cookiecutter.main_module }}.com
 repo_version: master
-python3: {{ 'True' if cookiecutter.python3.lower() == 'y' else 'False' }}
-py_venv_version: {{ '3.5' if cookiecutter.python3.lower() == 'y' else '2.7' }}
 pg_gis: {{ 'True' if cookiecutter.postgis.lower() == 'y' else 'False' }}
 sass_with_django_compressor: {{ 'True' if cookiecutter.add_sass_with_django_compressor.lower() == 'y' else 'False' }}

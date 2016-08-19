@@ -7,7 +7,6 @@ Adds sensible default for running app in production.
 - Use whitenoise to serve static files
 - Disable browsable API
 """
-from __future__ import absolute_import, unicode_literals
 
 # Standard Library
 from email.utils import getaddresses

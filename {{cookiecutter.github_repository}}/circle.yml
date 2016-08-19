@@ -1,7 +1,7 @@
 ## Customize the test machine
 machine:
   python:
-    version: {{ '3.5.1' if cookiecutter.python3.lower() == 'y' else '2.7.11'}}  # 2.7 will cause an error with py.test
+    version: '3.5.2'
   environment:
     # each command runs in its own shell, so just adding an export FOO=bar command won't work
     DATABASE_URL: "postgres://ubuntu@localhost/circle_test"

@@ -7,7 +7,6 @@
     , "timezone": "UTC"
     , "default_from_email": "{{ cookiecutter.project_name }} <support@{{ cookiecutter.main_module }}.com>"
     , "version": "0.0.0"
-    , "python3": "n"
     , "newrelic" : "y"
     , "postgis": "n"
     , "add_ansible": "y"

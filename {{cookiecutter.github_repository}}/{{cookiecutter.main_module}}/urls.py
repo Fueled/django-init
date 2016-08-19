@@ -4,7 +4,6 @@
 You should put the url config in their respective app putting only a
 refernce to them here.
 """
-from __future__ import absolute_import, unicode_literals
 
 # Third Party Stuff
 from django.conf import settings

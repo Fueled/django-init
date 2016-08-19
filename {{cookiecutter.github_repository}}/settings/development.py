@@ -9,7 +9,6 @@ Adds sensible defaults for developement of project
 - Use local caches
 - Enable livereloading
 """
-from __future__ import absolute_import, unicode_literals
 
 from .common import *  # noqa: F405
 from .common import INSTALLED_APPS, env

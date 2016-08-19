@@ -19,7 +19,6 @@
 - name: Add Custom Python PPA
   apt_repository: repo="ppa:fkrull/deadsnakes"
                   state=present
-  when: python3
 
 - name: update apt cache
   apt: update_cache=yes
@@ -33,11 +32,6 @@
 - name: apt_get install common packages
   apt: pkg={{ item }} state=present
   with_items: base_ubuntu.common.apt_packages
-
-- name: apt-get install python3 packages
-  apt: pkg={{ item }} state=present
-  with_items: base_ubuntu.python3.apt_packages
-  when: python3
 
 - name: easy_install pip
   easy_install: name=pip

@@ -61,7 +61,7 @@ def set_settings(**new_settings):
 
 def override_settings(new_settings):
     old_settings = {}
-    for name, new_value in new_settings.items():
+    for name, new_value in list(new_settings.items()):
         old_settings[name] = getattr(settings, name, None)
         setattr(settings, name, new_value)
     return old_settings

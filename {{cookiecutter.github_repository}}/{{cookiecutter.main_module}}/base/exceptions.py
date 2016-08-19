@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 
 # Third Party Stuff
 from django.core.exceptions import PermissionDenied as DjangoPermissionDenied
@@ -76,7 +75,7 @@ def format_exception(exc):
         'error_type': class_name,
     }
     if isinstance(exc.detail, dict):
-        for error_key, error_values in exc.detail.items():
+        for error_key, error_values in list(exc.detail.items()):
             for error_msg in error_values:
                 # Special Case for model clean
                 if error_key == 'non_field_errors':
