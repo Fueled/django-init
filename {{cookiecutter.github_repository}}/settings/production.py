@@ -15,7 +15,7 @@ from email.utils import getaddresses
 # Third Party Stuff
 from django.utils import six
 
-from .common import *  # noqa: F405
+from .common import *  # noqa F405
 from .common import DATABASES, INSTALLED_APPS, REST_FRAMEWORK, TEMPLATES, env
 
 # SITE CONFIGURATION

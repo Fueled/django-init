@@ -11,7 +11,7 @@ Adds sensible defaults for developement of project
 """
 from __future__ import absolute_import, unicode_literals
 
-from .common import *  # noqa: F405
+from .common import *  # noqa F405
 from .common import INSTALLED_APPS, env
 
 # DEBUG
