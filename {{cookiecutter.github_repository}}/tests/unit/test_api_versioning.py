@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 
 
 def test_api_default_and_allowed_versions(settings):

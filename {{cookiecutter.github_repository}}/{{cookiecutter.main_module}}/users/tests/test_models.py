@@ -3,7 +3,7 @@
 # Third Party Stuff
 from django.test import TestCase
 
-from .models import User
+from {{cookiecutter.main_module}}.users.models import User
 
 
 class UserModelTestCase(TestCase):

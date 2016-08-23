@@ -3,7 +3,6 @@
 
 see: https://docs.djangoproject.com/en/dev/ref/settings/
 """
-from __future__ import print_function, unicode_literals
 
 # Third Party Stuff
 import environ

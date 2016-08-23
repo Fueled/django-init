@@ -1,7 +1,7 @@
 language: python
 sudo: false
 python:
-- {{ '3.5.1' if cookiecutter.python3.lower() == 'y' else '2.7.11' }}
+- '3.5.2'
 
 addons:
   postgresql: "9.4"

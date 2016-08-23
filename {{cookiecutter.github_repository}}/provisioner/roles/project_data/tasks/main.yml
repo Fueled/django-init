@@ -6,7 +6,7 @@
   tags: [always]
 
 - name: manually create the initial virtualenv
-  command: virtualenv {{ venv_path }} -p python{{ py_venv_version }} creates={{ venv_path }}
+  command: virtualenv {{ venv_path }} -p python3 creates={{ venv_path }}
   become: false
   tags: ['configure', 'deploy']
 
