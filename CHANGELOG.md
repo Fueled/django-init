@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add Circle CI Support (@jasonrfarkas)
 
 ### Changed
+- Dropped support for Python2 (@akarambir).
 - Improved project level logging support (@vikalpj)
 - Remove factoryboy, use [django-dynamic-fixtures] for factories.
 - Update SERVER_EMAIL settings to default to DEFAULT_FROM_EMAIL
@@ -26,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Make ansible generation optional.
 - Fix `Http404` and `PermissionDenied` error handling format.
 - Add configurable support for `adding/removing DRF Browsable apis`
+
 
 
 [django-dynamic-fixtures]: https://github.com/paulocheque/django-dynamic-fixture
