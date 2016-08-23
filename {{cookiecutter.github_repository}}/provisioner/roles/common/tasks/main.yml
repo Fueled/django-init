@@ -1,5 +1,23 @@
 {% raw %}---
 # roles/common/tasks/main.yml
+
+# Disable ipv6 when running in VM(vagrant)
+- name: Disable ipv6 for all interfaces
+  sysctl: name="net.ipv6.conf.all.disable_ipv6" value=1 state=present
+  when: vm
+
+- name: Disable ipv6 for default interface
+  sysctl: name="net.ipv6.conf.default.disable_ipv6" value=1 state=present
+  when: vm
+
+- name: Disable ipv6 for local interface
+  sysctl: name="net.ipv6.conf.lo.disable_ipv6" value=1 state=present
+  when: vm
+
+# Ansible requires aptitude and python2 for various tasks
+- name: Install Aptitude and Python-minimal for ansible
+  raw: apt-get install -qq python-apt aptitude
+
 - name: set system locale
   command: update-locale LC_ALL={{ lc_all }} LANG={{ lang }} LC_CTYPE={{ lc_ctype }} LC_COLLATE={{ lc_collate }}
 
@@ -8,17 +26,6 @@
         dest=/etc/localtime
         force=yes
         state=link
-
-- name: Configure the PostgreSQL APT key
-  apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc state=present
-
-- name: Configure the PostgreSQL APT repositories
-  apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ {{ ubuntu_release }}-pgdg main 9.5"
-                  state=present
-
-- name: Add Custom Python PPA
-  apt_repository: repo="ppa:fkrull/deadsnakes"
-                  state=present
 
 - name: update apt cache
   apt: update_cache=yes

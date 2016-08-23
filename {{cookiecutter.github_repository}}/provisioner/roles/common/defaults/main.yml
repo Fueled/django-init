@@ -15,15 +15,15 @@ base_ubuntu:
       - git
       - htop
       - python-dev
-      - python3
       - python3-dev
       - python-setuptools
       - python-virtualenv
+      - python-pip
       - sysstat
       - vim
       - fail2ban
       - libjpeg-dev
-      - libtiff4-dev
+      - libtiff5-dev
       - zlib1g-dev
       - libfreetype6-dev
       - liblcms2-dev

@@ -5,8 +5,5 @@
 - name: ensure supervisor config dir exists
   file: path=/etc/supervisor state=directory mode=0755 owner=root group=root
 
-- name: add init script
-  template: src=etc_init.d_supervisor.j2 dest=/etc/init.d/supervisor owner=root group=root mode=0755
-  notify:
-    - enable supervisor
-    - restart supervisor
+- name: ensure supervisor is running
+  service: name=supervisor state=started
