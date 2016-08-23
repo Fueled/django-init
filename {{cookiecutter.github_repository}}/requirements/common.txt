@@ -1,6 +1,6 @@
 # Core Stuff
 # -------------------------------------
-Django==1.9.8
+Django==1.10.0
 gunicorn==19.6.0
 
 # Configuration
@@ -20,7 +20,6 @@ pytz==2016.6.1
 # Models
 # -------------------------------------
 psycopg2==2.6.2
-django-model-utils==2.5.1
 
 Pillow==3.3.0
 django-versatileimagefield==1.6

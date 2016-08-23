@@ -344,6 +344,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
+        'django.server': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
         '{{cookiecutter.main_module}}': {
             'handlers': ['console'],
             'level': 'INFO',
