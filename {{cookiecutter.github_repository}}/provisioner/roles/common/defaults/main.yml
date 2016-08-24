@@ -2,11 +2,11 @@
 # roles/common/defaults/main.yml
 common_timezone: {{cookiecutter.timezone}}
 
-lang: "en_US.utf8"
+lc_lang: "en_US.UTF-8"
 lc_all: "en_US.utf8"
 lc_ctype: "en_US.utf8"
 lc_collate: "en_US.utf8"
-ubuntu_release: "trusty"
+
 {%raw%}
 base_ubuntu:
   common:
@@ -14,6 +14,7 @@ base_ubuntu:
       - build-essential
       - git
       - htop
+      - curl
       - python-dev
       - python3-dev
       - python-setuptools

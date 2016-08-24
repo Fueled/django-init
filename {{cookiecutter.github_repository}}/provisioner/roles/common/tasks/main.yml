@@ -19,7 +19,11 @@
   raw: apt-get install -qq python-apt aptitude
 
 - name: set system locale
-  command: update-locale LC_ALL={{ lc_all }} LANG={{ lang }} LC_CTYPE={{ lc_ctype }} LC_COLLATE={{ lc_collate }}
+  command: update-locale LC_ALL={{ lc_all }} LANG={{ lc_lang }} LC_CTYPE={{ lc_ctype }} LC_COLLATE={{ lc_collate }}
+
+- name: set locale file
+  become: yes
+  template: src=locale.j2 dest=/etc/default/locale
 
 - name: set timezone
   file: src=/usr/share/zoneinfo/{{ common_timezone }}
@@ -28,7 +32,9 @@
         state=link
 
 - name: update apt cache
-  apt: update_cache=yes
+  shell: apt update
+  become: yes
+  register: apt_updated
 
 - name: ensure a default bashrc and inputrc file
   copy: src={{ item.src }} dest=/home/{{ user }}/{{ item.dest }} owner={{ user }} group={{ user }}
@@ -38,10 +44,7 @@
 
 - name: apt_get install common packages
   apt: pkg={{ item }} state=present
-  with_items: base_ubuntu.common.apt_packages
-
-- name: easy_install pip
-  easy_install: name=pip
+  with_items: "{{base_ubuntu.common.apt_packages}}"
 
 - name: ensure there is a group www-data
   group: name=www-data state=present system=yes{% endraw %}

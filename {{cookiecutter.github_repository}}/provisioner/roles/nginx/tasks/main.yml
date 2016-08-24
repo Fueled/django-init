@@ -1,6 +1,11 @@
 {%raw%}---
+- name: Update apt-cache if not already ran
+  shell: apt update
+  become: yes
+  when: apt_updated is not defined
+
 - name: install NGINX Server.
-  apt: pkg=nginx state=installed update-cache=yes
+  apt: pkg=nginx state=installed
 
 - name: make sure ssl directory exists
   file: path={{ ssl_cert_dir }} state=directory
@@ -26,10 +31,11 @@
   register: nginx_key
 
 - fail: msg="Whoops! ssl certificate doesn't exist"
-  when: nginx_cert.stat.exists == false or nginx_key.stat.exists == false
+  when: not vm and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false)
 
 - name: generate ssl forward secrecy key
   command: openssl dhparam -out {{ ssl_forward_secrecy_key_path }} {{ ssl_forward_secrecy_key_length }} creates={{ ssl_forward_secrecy_key_path }}
+  when: not vm and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false)
 
 - name: copy base nginx configuration.
   template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf

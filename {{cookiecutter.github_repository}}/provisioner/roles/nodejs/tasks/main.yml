@@ -8,5 +8,9 @@
   command: bash /tmp/node_setup_6.x
   become: true
 
+- name: Update apt-cache separately
+  shell: apt update
+  become: yes
+
 - name: Install Node.js
-  apt: pkg=nodejs state=installed update_cache=yes
+  apt: pkg=nodejs state=installed

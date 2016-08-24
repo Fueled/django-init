@@ -1,6 +1,11 @@
 ---
+- name: Update apt-cache if not already ran
+  shell: apt update
+  become: yes
+  when: apt_updated is not defined
+
 - name: ensure supervisor is installed
-  apt: pkg=supervisor state=installed update-cache=yes
+  apt: pkg=supervisor state=installed
 
 - name: ensure supervisor config dir exists
   file: path=/etc/supervisor state=directory mode=0755 owner=root group=root
