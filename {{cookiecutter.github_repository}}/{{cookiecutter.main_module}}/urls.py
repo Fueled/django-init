@@ -10,7 +10,6 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views import defaults as dj_default_views
 from django.views.generic import TemplateView
 
 # {{ cookiecutter.project_name }} Stuff
@@ -51,12 +50,16 @@ if settings.API_DEBUG:
     ]
 
 if settings.DEBUG:
+    from django.views import defaults as dj_default_views
+    from django.urls import get_callable
+
     # Livereloading
     urlpatterns += [url(r'^devrecargar/', include('devrecargar.urls', namespace='devrecargar'))]
 
     urlpatterns += [
         url(r'^400/$', dj_default_views.bad_request, kwargs={'exception': Exception("Bad Request!")}),
         url(r'^403/$', dj_default_views.permission_denied, kwargs={'exception': Exception("Permission Denied!")}),
+        url(r'^403_csrf/$', get_callable(settings.CSRF_FAILURE_VIEW)),
         url(r'^404/$', dj_default_views.page_not_found, kwargs={'exception': Exception("Not Found!")}),
         url(r'^500/$', handler500),
     ]

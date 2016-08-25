@@ -218,6 +218,8 @@ TEMPLATES = [
     },
 ]
 
+CSRF_FAILURE_VIEW = "{{ cookiecutter.main_module }}.base.views.csrf_failure"
+
 # STATIC FILE CONFIGURATION
 # -----------------------------------------------------------------------------
 # Absolute path to the directory static files should be collected to.
