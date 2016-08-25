@@ -3,6 +3,9 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 {% block title %}{% trans 'Page Not found' %}{% endblock %}
+{% block head_extras %}
+<meta name="robots" content="NONE,NOARCHIVE">
+{% endblock head_extras %}
 {% block body_classes %}{{ block.super }} page-error page-404 {% endblock body_classes %}
 
 {% block content %}

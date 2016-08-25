@@ -1,6 +1,9 @@
 {% raw %}{% extends "base.html" %}
 {% load i18n %}
 {% block title %}{% trans 'Bad Request (400)' %}{% endblock %}
+{% block head_extras %}
+<meta name="robots" content="NONE,NOARCHIVE">
+{% endblock head_extras %}
 {% block body_classes %}{{ block.super }} page-error page-400 {% endblock body_classes %}
 
 {% block content %}

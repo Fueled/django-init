@@ -1,6 +1,9 @@
 {% raw %}{% extends "base.html" %}
 {% load i18n %}
 {% block title %}{% trans "Server Error" %}{% endblock %}
+{% block head_extras %}
+<meta name="robots" content="NONE,NOARCHIVE">
+{% endblock head_extras %}
 {% block body_classes %}{{ block.super }} page-error page-500 {% endblock body_classes %}
 
 {% block content %}

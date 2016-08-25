@@ -26,6 +26,7 @@
     {% raw %}<link href="{% static 'css/main.css' %}" rel="stylesheet">{% endraw %}
     {%- endif %}{% raw %}
     {% endblock css %}
+    {% block head_extras %}{% endblock %}
   </head>
 
   <body class="{% block body_classes %}{% endblock body_classes %} ">
