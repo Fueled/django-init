@@ -38,10 +38,6 @@ INSTALLED_APPS = (
 {%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
     'corsheaders',   # https://github.com/ottoyiu/django-cors-headers/
 {%- endif %}
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
-
-    'compressor',
-{%- endif %}
 {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     'raven.contrib.django.raven_compat',
 {%- endif %}
@@ -323,6 +319,9 @@ STATIC_ROOT = str(ROOT_DIR.path('.staticfiles'))
 STATIC_URL = '/static/'
 
 # A list of locations of additional static files
+{%- if cookiecutter.webpack.lower() == 'y' %}
+# Specify the static directory in fabfile also.
+{%- endif %}
 STATICFILES_DIRS = (
     str(APPS_DIR.path('static')),
 )
@@ -332,27 +331,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
-    'compressor.finders.CompressorFinder',
-{%- endif %}
 )
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
-
-# Django Compressor Configuration
-COMPRESS_FILTERS = {
-    'css': [
-        'django_compressor_autoprefixer.AutoprefixerFilter',
-        'compressor.filters.cssmin.CSSMinFilter'
-    ]
-}
-
-COMPRESS_PRECOMPILERS = (
-    ('text/x-scss', 'django_libsass.SassCompiler'),
-)
-
-COMPRESS_ENABLED = True
-COMPRESS_OFFLINE = env.bool('COMPRESS_OFFLINE', default=False)
-{%- endif %}
 
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -530,3 +509,19 @@ SITE_INFO = {
     'IS_RAVEN_INSTALLED': True if RAVEN_CONFIG.get('dsn') else False
 {%- endif %}
 }
+{%- if cookiecutter.webpack.lower() == 'y' %}
+
+# Webpack Support (https://github.com/owais/django-webpack-loader)
+# =============================================================================
+INSTALLED_APPS += ('webpack_loader', )
+WEBPACK_LOADER = {
+   'DEFAULT': {
+       'CACHE': True,
+       'BUNDLE_DIR_NAME': 'dist/assets/',  # It will add static path before and it must end with slash
+       'STATS_FILE': str(ROOT_DIR.path('webpack-stats.json')),
+       'POLL_INTERVAL': 0.1,
+       'TIMEOUT': None,
+       'IGNORE': ['.+\.hot-update.js', '.+\.map']
+   }
+}
+{%- endif %}

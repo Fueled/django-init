@@ -1,9 +1,11 @@
 {% raw %}{% extends 'pages/base.html' %}
-{% load i18n %}
-{% block title %}{% trans 'About' %} • {{ block.super }}{% endblock title %}
+{% load staticfiles i18n %}{% endraw %}
+{%- if cookiecutter.webpack.lower() == 'y' %}
+{%- raw %}{% load webpack_static from webpack_loader %}
+{% load render_bundle from webpack_loader %}{%- endraw %}
+{%- endif %}
+{% raw %}{% block title %}{% trans 'About' %} • {{ block.super }}{% endblock title %}
 {% block body_classes %}{{ block.super}} page-about {% endblock body_classes %}
 {% block content %}
-    <p>
-        {% trans 'About page coming soon!' %}
-    </p>
+    <p>{% trans 'About page coming soon!' %}</p>
 {% endblock content %}{% endraw %}

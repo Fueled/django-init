@@ -1,9 +1,12 @@
 {% raw %}{% extends 'pages/base.html' %}
-{% load i18n %}
-{% block title %}{% trans 'Home' %} • {{ block.super }}{% endblock title %}
+{% load staticfiles i18n %}{% endraw %}
+{%- if cookiecutter.webpack.lower() == 'y' %}
+{%- raw %}{% load webpack_static from webpack_loader %}
+{% load render_bundle from webpack_loader %}{%- endraw %}
+{%- endif %}
+{% raw %}{% block title %}{% trans 'Home' %} • {{ block.super }}{% endblock title %}
 {% block body_classes %}{{ block.super}} page-home {% endblock body_classes %}
+
 {% block content %}
-    <p>
-        {% trans 'Homepage coming soon!' %}
-    </p>
+    <div id="app">{% trans 'Homepage comming soon!!' %}</div>
 {% endblock content %}{% endraw %}

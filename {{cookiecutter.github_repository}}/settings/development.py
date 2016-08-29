@@ -17,6 +17,8 @@ from .common import INSTALLED_APPS, env
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa: F405
 
+WEBPACK_LOADER['DEFAULT']['CACHE'] = False  # noqa: F405
+
 INTERNAL_IPS = ('127.0.0.1', '192.168.33.12', )
 
 ALLOWED_HOSTS = ['*']
@@ -64,16 +66,6 @@ CACHES = {
 # django-extensions (http://django-extensions.readthedocs.org/)
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ('django_extensions', )
-
-# LiveReload Support with devrecargar
-# ------------------------------------------------------------------------------
-# https://github.com/scottwoodall/django-devrecargar
-INSTALLED_APPS += ('devrecargar',)
-
-DEVRECARGAR_PATHS_TO_WATCH = [{
-    'path': str(APPS_DIR),  # noqa: F405
-    'patterns': ['*.html', '*.js', '*.css', '*.scss'],
-}]
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------

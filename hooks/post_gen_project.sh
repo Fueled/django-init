@@ -33,10 +33,13 @@ if echo "{{ cookiecutter.add_ansible }}" | grep -iq "^n"; then
     rm -rf provisioner Vagrantfile ansible.cfg
 fi
 
-if echo "{{ cookiecutter.add_sass_with_django_compressor }}" | grep -iq "^n"; then
-    rm -rf package.json
-else
-    mv {{ cookiecutter.main_module }}/static/css/main.css {{ cookiecutter.main_module }}/static/css/main.scss
+if echo "{{ cookiecutter.webpack }}" | grep -iq "^n"; then
+    rm -f package.json
+    rm -f {{cookiecutter.main_module}}/static/server.js
+    rm -f {{cookiecutter.main_module}}/static/webpack.base.config.js
+    rm -f {{cookiecutter.main_module}}/static/webpack.dev.config.js
+    rm -f {{cookiecutter.main_module}}/static/webpack.prod.config.js
+    rm -f webpack-stats.json
 fi
 
 if echo "{{ cookiecutter.add_celery }}" | grep -iq "^n"; then

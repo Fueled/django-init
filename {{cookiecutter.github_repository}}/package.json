@@ -1,12 +1,31 @@
 {
-  "name": "django-compressor-helpers",
+  "name": "webpack",
   "version": "0.1.0",
-  "description": "Installs commandline tools needed by django-compressor for post-processing of css/js.",
+  "description": "Installs commandline tools needed by django-webpack-loader.",
   "engines": {
     "node": "6.4.0"
   },
   "dependencies": {
     "autoprefixer": "^7.1.6",
-    "postcss-cli": "^4.1.1"
+    "babel": "^6.5.2",
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "core-js": "^2.4.1",
+    "css-loader": "^0.23.1",
+    "eslint": "^3.2.2",
+    "eslint-loader": "^1.5.0",
+    "extract-text-webpack-plugin": "1.0.1",
+    "file-loader": "^0.9.0",
+    "normalize.css": "^4.2.0",
+    "node-sass": "^3.4.2",
+    "null-loader": "^0.1.1",
+    "postcss-cli": "^4.1.1",
+    "postcss-loader": "^0.9.1",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.1",
+    "webpack-bundle-tracker": "0.0.93",
+    "webpack-dev-server": "^1.14.1"
   }
 }

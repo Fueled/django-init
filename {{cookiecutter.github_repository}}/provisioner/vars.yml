@@ -4,4 +4,4 @@ project_repo_url: git@github.com:{{ cookiecutter.github_username }}/{{ cookiecut
 project_repo_remote: origin
 repo_version: master
 pg_gis: {{ 'True' if cookiecutter.postgis.lower() == 'y' else 'False' }}
-sass_with_django_compressor: {{ 'True' if cookiecutter.add_sass_with_django_compressor.lower() == 'y' else 'False' }}
+webpack_enabled: {{ 'True' if cookiecutter.webpack.lower() == 'y' else 'False' }}

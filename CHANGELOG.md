@@ -53,6 +53,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+## Added
+- Add Webpack Support
 - Support for request-id via django-log-request-id (@vikalpj)
 - Add `ssl_params` support in nginx
 - Add `letsencrypt` support.

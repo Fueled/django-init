@@ -19,12 +19,6 @@
   become: false
   tags: ['deploy']
 
-- name: Install packages based on package.json.
-  npm: path={{ project_path }} global=no
-  become: true
-  when: sass_with_django_compressor
-  tags: ['deploy']
-
 - name: copy env configuration
   template: src=env.env.j2 dest={{ project_path }}/.env force=no
   become: false
@@ -39,26 +33,16 @@
   django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
+  when: not webpack_enabled
 
-- name: Run django-compressor offline
-  django_manage: command=compress app_path={{ project_path }} virtualenv={{ venv_path }}
-  become: false
-  tags: ['deploy']
-  when: sass_with_django_compressor
-  environment:
-    PATH: "$PATH:{{ project_path }}/node_modules/.bin:/usr/bin/"
+# Runs collectstatic with ignored webpack files
+- include: webpack.yml
+  when: webpack_enabled
 
 - name: Run database migrations
   django_manage: command=migrate app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
-
-- name: Build documentation for "/docs" url.
-  command: "{{ venv_path }}/bin/mkdocs build"
-  args:
-    chdir: "{{ project_path }}"
-  become: false
-  tags: ['deploy', 'documentation']
 
 - import_tasks: uwsgi-setup.yml
 
