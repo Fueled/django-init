@@ -46,6 +46,14 @@ INSTALLED_APPS = (
 AUTH_USER_MODEL = 'users.User'
 AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+]
+
 # For Exposing browsable api urls. By default urls won't be exposed.
 API_DEBUG = env.bool('API_DEBUG', default=False)
 
@@ -218,6 +226,8 @@ TEMPLATES = [
     },
 ]
 
+CSRF_FAILURE_VIEW = "{{ cookiecutter.main_module }}.base.views.csrf_failure"
+
 # STATIC FILE CONFIGURATION
 # -----------------------------------------------------------------------------
 # Absolute path to the directory static files should be collected to.
@@ -342,6 +352,11 @@ LOGGING = {
         'django.request': {
             'handlers': ['mail_admins', 'console'],
             'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.server': {
+            'handlers': ['console'],
+            'level': 'INFO',
             'propagate': False,
         },
         '{{cookiecutter.main_module}}': {
