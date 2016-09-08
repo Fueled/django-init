@@ -15,5 +15,5 @@ hiredis==0.2.0
 {% if cookiecutter.newrelic == 'y' %}
 # Logging
 # -------------------------------------
-newrelic==2.68.0.50
+newrelic==2.70.0.51
 {% endif %}
