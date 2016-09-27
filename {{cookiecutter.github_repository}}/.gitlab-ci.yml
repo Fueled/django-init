@@ -1,0 +1,27 @@
+services:
+    - postgres
+
+variables:
+    # Configure postgres service
+    POSTGRES_DB: {{ cookiecutter.main_module }}
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: mypassword
+
+before_script:
+    - apt-get update -qy
+    - apt-get upgrade -qy
+    - apt-get install -y python-dev python-pip libpq-dev
+    - export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
+
+lint:
+    script:
+        - pip install flake8==2.5.4
+        - flake8 .
+
+django_app:
+    script:
+        - pip install pip-accel
+        - pip-accel install ansible
+        - pip-accel install -r requirements/development.txt
+        - py.test --cov -v --tb=native
+        {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}

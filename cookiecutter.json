@@ -10,6 +10,7 @@
     , "newrelic" : "y"
     , "postgis": "n"
     , "add_ansible": "y"
+    , "add_gitlab_ci":  "y"
     , "letsencrypt": "y"
     , "letsencrypt_email": "backend+{{ cookiecutter.main_module|replace('_', '-') }}@fueled.com"
     , "add_sass_with_django_compressor": "y"

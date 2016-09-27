@@ -16,6 +16,7 @@ Project template for django based projects, optimized for making REST API with d
 - Use [mkdocs] for project documentation.
 - Uses [py.test] as test runner.
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
+- `gitlab-ci.yml` for running isolated tests.
 - Custom `User` app, for easier extensibility.
 - Media storage using Amazon S3 (optional)
 - [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org)
