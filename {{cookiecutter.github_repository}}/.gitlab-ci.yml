@@ -1,17 +1,17 @@
+image: python:3.5.2
 services:
-    - postgres
+    - postgres:9.4
 
 variables:
     # Configure postgres service
     POSTGRES_DB: {{ cookiecutter.main_module }}
     POSTGRES_USER: postgres
-    POSTGRES_PASSWORD: mypassword
+    POSTGRES_PASSWORD: postgres
 
 before_script:
     - apt-get update -qy
-    - apt-get upgrade -qy
-    - apt-get install -y python-dev python-pip libpq-dev
-    - export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
+    - apt-get install -y python3-dev libpq-dev
+    - export DATABASE_URL=postgres://postgres:postgres@postgres/{{ cookiecutter.main_module }}
 
 lint:
     script:
@@ -20,8 +20,12 @@ lint:
 
 django_app:
     script:
-        - pip install pip-accel
-        - pip-accel install ansible
-        - pip-accel install -r requirements/development.txt
+        - pip install -r requirements/development.txt
         - py.test --cov -v --tb=native
-        {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
+
+{% if cookiecutter.add_ansible.lower() == 'y' %}
+ansible:
+    script:
+        - pip install ansible
+        - ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
+{% endif %}
