@@ -28,4 +28,6 @@ ansible:
     script:
         - pip install ansible
         - ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
+    only:
+        - master
 {% endif %}
