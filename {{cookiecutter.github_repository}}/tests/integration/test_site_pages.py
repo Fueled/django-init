@@ -2,6 +2,9 @@
 
 # Third Party Stuff
 from django.core.urlresolvers import reverse
+import pytest
+
+pytestmark = pytest.mark.django_db
 
 
 def test_root_txt_files(client):
