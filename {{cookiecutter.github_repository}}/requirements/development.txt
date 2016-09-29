@@ -13,12 +13,12 @@ devrecargar==0.1.4
 # -------------------------------------
 django-debug-toolbar==1.5
 ipdb==0.10.1
-django-extensions==1.7.1  # for shell_plus and other utils
+django-extensions==1.7.4  # for shell_plus and other utils
 
 # Testing and coverage
 # -------------------------------------
-pytest-django==2.9.1
-pytest-pythonpath==0.7
+pytest-django==3.0.0 # Updated from 2.9.1
+pytest-pythonpath==0.7.1
 pytest-cov==2.3.1
 django-dynamic-fixture==1.9.0
 mock==2.0.0
