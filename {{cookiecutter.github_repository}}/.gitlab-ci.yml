@@ -8,11 +8,6 @@ variables:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: postgres
 
-before_script:
-    - apt-get update -qy
-    - apt-get install -y python3-dev libpq-dev
-    - export DATABASE_URL=postgres://postgres:postgres@postgres/{{ cookiecutter.main_module }}
-
 lint:
     script:
         - pip install flake8==2.5.4
@@ -20,6 +15,9 @@ lint:
 
 django_app:
     script:
+        - apt-get update -qy
+        - apt-get install -y python3-dev libpq-dev
+        - export DATABASE_URL=postgres://postgres:postgres@postgres/{{ cookiecutter.main_module }}
         - pip install -r requirements/development.txt
         - py.test --cov -v --tb=native
 
@@ -28,6 +26,4 @@ ansible:
     script:
         - pip install ansible
         - ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
-    only:
-        - master
 {% endif %}
