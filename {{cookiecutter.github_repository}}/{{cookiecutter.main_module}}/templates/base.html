@@ -1,7 +1,7 @@
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 {%- raw %}{% load compress %}{% endraw %}
 {%- endif %}
-{% raw %}{% load staticfiles i18n %}<!DOCTYPE html>
+{% raw %}{% load staticfiles i18n raven %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
@@ -15,6 +15,10 @@
     <!--[if lt IE 9]>
       <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    {% if settings.RAVEN_INSTALLED %}
+        <script>Raven.config('{% sentry_public_dsn %}').install()</script>
+    {% endif %}
 
     {% block css %}
     <link href="{% static 'css/normalize.css' %}" rel="stylesheet">{% endraw %}

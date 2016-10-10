@@ -5,8 +5,13 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 # Third Party Stuff
+{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+import os
+import raven
+{%- endif %}
 import environ
 from django.utils.translation import ugettext_lazy as _
+
 
 ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 2 = /a/)
 APPS_DIR = ROOT_DIR.path('{{ cookiecutter.main_module }}')
@@ -35,6 +40,9 @@ INSTALLED_APPS = (
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
     'compressor',
+{%- endif %}
+{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    'raven.contrib.django.raven_compat',
 {%- endif %}
 )
 
@@ -212,6 +220,7 @@ TEMPLATES = [
             ],
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             'context_processors': [
+                '{{cookiecutter.main_module}}.base.context_processors.all_settings',
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
@@ -372,3 +381,12 @@ LOGGING = {
         },
     }
 }
+
+{% if cookiecutter.use_sentry_for_error_reporting == "y" -%}
+RAVEN_CONFIG = {
+    'dsn': env('SENTRY_DSN', default=''),
+    'environment': env('SENTRY_ENVIRONMENT', default='production'),
+    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+}
+RAVEN_INSTALLED = RAVEN_CONFIG['dsn'] is not ''
+{%- endif %}
