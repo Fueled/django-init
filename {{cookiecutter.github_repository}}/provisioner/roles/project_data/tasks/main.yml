@@ -21,7 +21,7 @@
   when: sass_with_django_compressor
   tags: ['deploy']
 
-- include: gunicorn.yml
+- include: uwsgi.yml
 
 - name: copy env configuration
   template: src=env.env.j2 dest={{ project_path }}/.env force=no

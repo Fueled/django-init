@@ -8,7 +8,7 @@
   tags: ['celery']
   become: yes
 
-- name: copy supervisor gunicorn configuration
+- name: copy supervisor celery configuration
   template: src=supervisor_celery.conf.j2 dest=/etc/supervisor/conf.d/celery.conf
   notify:
     - restart supervisor

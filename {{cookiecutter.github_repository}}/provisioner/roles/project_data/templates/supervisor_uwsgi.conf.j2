@@ -1,0 +1,11 @@
+{% raw %}
+[program:uwsgi]
+command={{ venv_path }}/bin/uwsgi --ini {{uwsgi_conf_path}}/uwsgi.conf.py
+user={{uwsgi_user}}
+directory={{ project_path }}
+stopsignal=INT
+startretries=0
+priority=30
+redirect_stderr=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+{%endraw%}

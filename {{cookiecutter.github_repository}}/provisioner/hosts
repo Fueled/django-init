@@ -12,7 +12,6 @@ use_letsencrypt=False
 pg_db={{ cookiecutter.main_module }}
 pg_user=vagrant
 pg_password=vagrant
-gunicorn_workers=2
 
 [production]
 {{ cookiecutter.main_module }}.com

@@ -1,7 +1,0 @@
-{% raw %}[program:gunicorn]
-command={{ venv_path }}/bin/gunicorn {% if vm %}--reload{% endif %} -c {{ gunicorn_conf_path }}/gunicorn.conf.py wsgi:application
-directory={{ project_path }}
-user={{ user }}
-stdout_logfile=/var/log/gunicorn.log
-stderr_logfile=/var/log/gunicorn.log
-{% endraw %}

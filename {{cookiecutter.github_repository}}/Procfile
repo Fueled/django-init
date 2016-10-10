@@ -1,1 +1,1 @@
-web: {% if cookiecutter.newrelic == 'y' %}newrelic-admin run-program {% endif %}gunicorn wsgi:application
+web: {% if cookiecutter.newrelic == 'y' %}newrelic-admin run-program {% endif %}uwsgi uwsgi.ini
