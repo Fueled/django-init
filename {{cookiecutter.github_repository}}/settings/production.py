@@ -45,8 +45,6 @@ SITES['remote'] = {  # noqa: F405
 }
 SITE_ID = env("DJANGO_SITE_ID", default='remote')
 
-INSTALLED_APPS += ("gunicorn", )
-
 # If your Django app is behind a proxy that sets a header to specify secure
 # connections, AND that proxy ensures that user-submitted headers with the
 # same name are ignored (so that people can't spoof it), set this value to

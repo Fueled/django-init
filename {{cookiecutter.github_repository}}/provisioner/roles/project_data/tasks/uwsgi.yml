@@ -1,0 +1,19 @@
+{% raw %}---
+- name: ensure uwsgi config directory exists
+  file: path={{ uwsgi_conf_path }}
+        owner=root
+        group=root
+        mode=755
+        state=directory
+
+- name: copy uwsgi configuration
+  template: src=uwsgi.conf.py.j2
+            dest={{ uwsgi_conf_path }}/uwsgi.conf.py
+            mode=644
+  notify: restart uwsgi
+
+- name: copy supervisor config for uwsgi
+  template: src=supervisor_uwsgi.conf.j2 dest=/etc/supervisor/conf.d/uwsgi.conf
+  notify: restart supervisor
+  tags: ['deploy', 'uwsgi']
+{% endraw %}
