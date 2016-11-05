@@ -16,8 +16,10 @@ from email.utils import getaddresses
 # Third Party Stuff
 from django.utils import six
 
+
 from .common import *  # noqa F405
-from .common import DATABASES, INSTALLED_APPS, REST_FRAMEWORK, TEMPLATES, env
+from .common import (DATABASES, INSTALLED_APPS, MIDDLEWARE_CLASSES,
+                     REST_FRAMEWORK, TEMPLATES, env)
 
 # SITE CONFIGURATION
 # Hosts/domain names that are valid for this site.
@@ -46,6 +48,12 @@ SITES['remote'] = {  # noqa: F405
     "name": env('SITE_NAME'),
 }
 SITE_ID = env("DJANGO_SITE_ID", default='remote')
+{% if cookiecutter.add_django_auth_wall.lower() == 'y' %}
+# Basic Auth Protection
+# -----------------------------------------------------------------------------
+# see: https://github.com/theskumar/django-auth-wall#django-auth-wall
+MIDDLEWARE_CLASSES = ('django_auth_wall.middleware.BasicAuthMiddleware', ) + MIDDLEWARE_CLASSES
+{%- endif %}
 
 
 # If your Django app is behind a proxy that sets a header to specify secure

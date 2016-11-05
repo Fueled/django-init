@@ -3,11 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.10.x]
+
+- Add django_auth_wall to protect staging environments (@theskumar)
 - Replace gunicorn with uwsgi as wsgi handler (@vikalpj)
 
 ## [1.9.0]
 
-## Added
+### Added
 
 - Support for request-id via django-log-request-id (@vikalpj)
 - Add `ssl_params` support in nginx

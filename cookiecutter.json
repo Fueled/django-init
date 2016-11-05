@@ -14,4 +14,5 @@
     , "letsencrypt_email": "backend+{{ cookiecutter.main_module|replace('_', '-') }}@fueled.com"
     , "add_sass_with_django_compressor": "y"
     , "use_sentry_for_error_reporting": "y"
+    , "add_django_auth_wall": "y"
 }

@@ -93,6 +93,19 @@ DJANGO_AWS_STORAGE_BUCKET_NAME=<YOUR_BUCKET_NAME_HERE>
 - Update `travis.yml`, and add the `<heroku-app-name>` to automatically deploy to this configured Heroku app.
 
 {%- if cookiecutter.add_ansible.lower() == 'y' %}
+
+{% if cookiecutter.add_django_auth_wall.lower() == 'y' -%}
+### Protecting staging site with Basic Authentication
+
+The project include [django-auth-wall](https://github.com/theskumar/django-auth-wall) which can be used to protect the site with Basic authentication during development. To enable the protection, add the following two variables in system environment or in django settings.
+
+```
+AUTH_WALL_USERNAME=<your_basic_auth_username_here>
+AUTH_WALL_PASSWORD=<your_basic_auth_password_here>
+AUTH_WALL_REALM=<your_basic_auth_message(optional)>
+```
+{%- endif %}
+
 ### AWS/EC2
 
 For deploying on aws you need to configure all the addons provided and use python-dotenv to store and read enironment variables.

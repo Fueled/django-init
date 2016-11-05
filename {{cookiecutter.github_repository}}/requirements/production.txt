@@ -17,3 +17,9 @@ hiredis==0.2.0
 # -------------------------------------
 newrelic==2.72.1.53
 {% endif %}
+
+{%- if cookiecutter.add_django_auth_wall.lower() == 'y' %}
+# Basic Auth Protection
+# -------------------------------------
+django-auth-wall==0.1.3
+{%- endif %}

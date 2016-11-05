@@ -201,7 +201,7 @@ DATABASES = {
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 DATABASES['default']['CONN_MAX_AGE'] = 10
-{% if cookiecutter.postgis == 'y' %}DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'{% endif %}
+{% if cookiecutter.postgis.lower() == 'y' %}DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'{% endif %}
 
 # TEMPLATE CONFIGURATION
 # -----------------------------------------------------------------------------
