@@ -1,4 +1,0 @@
----
-dependencies:
-  - { role: supervisor }
-  - { role: nodejs, when: sass_with_django_compressor }

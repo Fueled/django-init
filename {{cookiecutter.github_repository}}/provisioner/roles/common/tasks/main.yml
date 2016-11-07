@@ -1,18 +1,18 @@
 {% raw %}---
-# roles/common/tasks/main.yml
 
+# Uncomment following if ipv6 is not available or not tunelled through ipv4 properly
 # Disable ipv6 when running in VM(vagrant)
-- name: Disable ipv6 for all interfaces
-  sysctl: name="net.ipv6.conf.all.disable_ipv6" value=1 state=present
-  when: vm
-
-- name: Disable ipv6 for default interface
-  sysctl: name="net.ipv6.conf.default.disable_ipv6" value=1 state=present
-  when: vm
-
-- name: Disable ipv6 for local interface
-  sysctl: name="net.ipv6.conf.lo.disable_ipv6" value=1 state=present
-  when: vm
+#- name: Disable ipv6 for all interfaces
+#  sysctl: name="net.ipv6.conf.all.disable_ipv6" value=1 state=present
+#  when: vm == 1
+#
+#- name: Disable ipv6 for default interface
+#  sysctl: name="net.ipv6.conf.default.disable_ipv6" value=1 state=present
+#  when: vm == 1
+#
+#- name: Disable ipv6 for local interface
+#  sysctl: name="net.ipv6.conf.lo.disable_ipv6" value=1 state=present
+#  when: vm == 1
 
 # Ansible requires aptitude and python2 for various tasks
 - name: Install Aptitude and Python-minimal for ansible
@@ -48,3 +48,6 @@
 
 - name: ensure there is a group www-data
   group: name=www-data state=present system=yes{% endraw %}
+
+- name: ensure there is a user www-data
+  user: name=www-data group=www-data system=yes

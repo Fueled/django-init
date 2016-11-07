@@ -2,8 +2,18 @@
 - name: get the latest code
   git: repo={{ project_repo_url }} dest={{ project_path }} version={{ repo_version }} accept_hostkey=true
   become: false
-  when: not vm
-  tags: [always]
+  when: vm == 0
+  tags: ['always']
+
+- name: copy django-uwsgi logrotate
+  template: src=uwsgi-django.j2
+            dest=/etc/logrotate.d/uwsgi-django
+            mode=644
+  tags: ['configure']
+
+- name: make sure log directory exists
+  file: path={{ project_log_dir }} state=directory owner={{uwsgi_user}} group={{uwsgi_group}} mode=751 recurse=yes
+  tags: ['configure']
 
 - name: manually create the initial virtualenv
   command: virtualenv {{ venv_path }} -p python3 creates={{ venv_path }}
@@ -11,7 +21,7 @@
   tags: ['configure', 'deploy']
 
 - name: install django python dependencies
-  pip: requirements={{ project_path }}/{{ django_requirements_file }}  virtualenv={{ venv_path }}
+  pip: requirements={{ project_path }}/{{ django_requirements_file }}  executable={{ venv_path }}/bin/pip
   become: false
   tags: ['deploy']
 
@@ -20,8 +30,6 @@
   become: true
   when: sass_with_django_compressor
   tags: ['deploy']
-
-- include: uwsgi.yml
 
 - name: copy env configuration
   template: src=env.env.j2 dest={{ project_path }}/.env force=no
@@ -46,7 +54,15 @@
   become: false
   tags: ['deploy']
 
-- name: reload server
-  shell: supervisorctl restart all
+- name: copy uwsgi configuration
+  template: src=django.ini.j2
+            dest={{ uwsgi_conf_path }}/django.ini
+            mode=644
+  tags: ['deploy']
+  register: uwsgiconf
+
+- name: reload uwsgi processes
+  command: uwsgi --reload {{uwsgi_project_pid}}
   become: true
-  tags: ['deploy']{% endraw %}
+  when: not uwsgiconf.changed
+  tags: ['deploy']

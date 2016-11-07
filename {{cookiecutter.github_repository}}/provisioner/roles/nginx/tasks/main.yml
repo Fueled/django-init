@@ -15,12 +15,12 @@
   register: letsencrypt_dir
 
 - include: letsencrypt.yml
-  when: not vm and use_letsencrypt and letsencrypt_dir.stat.exists == false
+  when: vm == 0 and use_letsencrypt and letsencrypt_dir.stat.exists == false
 
 # running cron job each monday
 - name: add letsencrypt renew cron
   cron: name="Renew all certificates" minute="0" hour="2" weekday="1" job="PATH=$PATH:/usr/local/bin && certbot-auto renew --webroot -w {{ letsencrypt_challange_root }}  >> /var/log/certbot.log"
-  when: not vm and use_letsencrypt
+  when: vm == 0 and use_letsencrypt
 
 - name: check ssl/nginx.crt exists
   stat: path={{ ssl_cert_dir }}/{{ domain_name }}/fullchain.pem
@@ -31,11 +31,11 @@
   register: nginx_key
 
 - fail: msg="Whoops! ssl certificate doesn't exist"
-  when: not vm and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false)
+  when: vm == 0 and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false)
 
 - name: generate ssl forward secrecy key
   command: openssl dhparam -out {{ ssl_forward_secrecy_key_path }} {{ ssl_forward_secrecy_key_length }} creates={{ ssl_forward_secrecy_key_path }}
-  when: not vm and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false)
+  when: vm == 0 and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false)
 
 - name: copy base nginx configuration.
   template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf

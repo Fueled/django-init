@@ -32,4 +32,6 @@ base_ubuntu:
       - libpq-dev
       - postgis
       - ca-certificates
+      - uwsgi-emperor
+      - uwsgi-plugin-python3
 {%endraw%}
