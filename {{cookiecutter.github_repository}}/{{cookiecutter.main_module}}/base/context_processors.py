@@ -3,5 +3,5 @@
 from django.conf import settings
 
 
-def all_settings(context):
-    return {'settings': settings}
+def site_settings(context):
+    return {'site_info': settings.SITE_INFO}

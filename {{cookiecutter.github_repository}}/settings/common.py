@@ -220,7 +220,7 @@ TEMPLATES = [
             ],
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             'context_processors': [
-                '{{cookiecutter.main_module}}.base.context_processors.all_settings',
+                '{{cookiecutter.main_module}}.base.context_processors.site_settings',
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
@@ -382,11 +382,34 @@ LOGGING = {
     }
 }
 
-{% if cookiecutter.use_sentry_for_error_reporting == "y" -%}
+def get_release():
+    import {{cookiecutter.main_module}}
+    {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    import raven
+    from raven import exceptions as raven_exceptions
+    {%- endif %}
+    release = {{cookiecutter.main_module}}.__version__
+    {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    try:
+        git_hash = raven.fetch_git_sha(os.path.dirname(os.pardir))[:7]
+        release = '{}-{}'.format(release, git_hash)
+    except raven_exceptions.InvalidGitRepository:
+        pass
+    {%- endif %}
+    return release
+
+RELEASE_VERSION = get_release()
+
+
+{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
 RAVEN_CONFIG = {
     'dsn': env('SENTRY_DSN', default=''),
     'environment': env('SENTRY_ENVIRONMENT', default='production'),
-    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+    'release': RELEASE_VERSION,
 }
-RAVEN_INSTALLED = RAVEN_CONFIG['dsn'] is not ''
 {%- endif %}
+
+SITE_INFO = {
+    'RELEASE_VERSION': RELEASE_VERSION,
+    'IS_RAVEN_INSTALLED': RAVEN_CONFIG['dsn'] is not ''
+}
