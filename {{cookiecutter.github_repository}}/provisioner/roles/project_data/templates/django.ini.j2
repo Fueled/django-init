@@ -1,8 +1,8 @@
-[uwsgi]
-chdir={{django_path}}
+{% raw %}[uwsgi]
+chdir={{project_path}}
 module=wsgi:application
 # master=True
-pidfile={{uwsgi_project_pid}}
+pidfile={{uwsgi_pid_file}}
 uid={{uwsgi_user}}
 gid={{uwsgi_group}}
 vacuum=True
@@ -23,4 +23,4 @@ autoload=true
 no-orphans=true
 chmod-socket=660
 log-date=true
-logto = {{project_log_dir}}/uwsgi.log
+logto = {{project_log_dir}}/uwsgi.log{% endraw %}

@@ -62,7 +62,8 @@
   register: uwsgiconf
 
 - name: reload uwsgi processes
-  command: uwsgi --reload {{uwsgi_project_pid}}
+  command: uwsgi --reload {{ uwsgi_pid_file }}
   become: true
   when: not uwsgiconf.changed
   tags: ['deploy']
+{% endraw %}
