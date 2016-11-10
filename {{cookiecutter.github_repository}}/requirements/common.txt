@@ -1,31 +1,31 @@
 # Core Stuff
 # -------------------------------------
-Django==1.10.0
+Django==1.10.3
 
 # WSGI HTTP Server
 # -------------------------------------
-uWSGI==2.0.12
+uWSGI==2.0.14
 
 # Configuration
 # -------------------------------------
-argon2-cffi==16.1.0
+argon2-cffi==16.2.0
 django-environ==0.4.0
 django-sites==0.9
 python-dotenv==0.6.0
 
 # Staticfiles
 # -------------------------------------
-whitenoise==3.2.1
+whitenoise==3.2.2
 
 # Extensions
 # -------------------------------------
-pytz==2016.6.1
+pytz==2016.7
 
 # Models
 # -------------------------------------
 psycopg2==2.6.2
 
-Pillow==3.3.1
+Pillow==3.4.2
 django-versatileimagefield==1.6
 django-uuid-upload-path==1.0.0
 
@@ -43,10 +43,9 @@ django-compressor-autoprefixer==0.1.0
 
 # LOGGING
 # -------------------------------------
-django-log-request-id==1.3.1
+django-log-request-id==1.3.2
 
 {% if cookiecutter.use_sentry_for_error_reporting == "y" -%}
 # Raven is the Sentry client
 # --------------------------
 raven==5.27.1
-{%- endif %}

@@ -4,16 +4,16 @@
 
 # Static Files and Media Storage
 # -------------------------------------
-boto==2.42.0
+boto==2.43.0
 django-storages-redux==1.3.2
 
 # Caching
 # -------------------------------------
-django-redis==4.4.4
+django-redis==4.6.0
 hiredis==0.2.0
 
 {% if cookiecutter.newrelic == 'y' %}
 # Logging
 # -------------------------------------
-newrelic==2.70.0.51
+newrelic==2.72.1.53
 {% endif %}
