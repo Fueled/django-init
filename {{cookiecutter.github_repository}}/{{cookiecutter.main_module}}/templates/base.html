@@ -1,7 +1,10 @@
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 {%- raw %}{% load compress %}{% endraw %}
 {%- endif %}
-{% raw %}{% load staticfiles i18n raven %}<!DOCTYPE html>
+{%- if cookiecutter.use_sentry_for_error_reporting.lower() == 'y' %}
+{%- raw %}{% load raven %}{% endraw %}
+{%- endif %}
+{% raw %}{% load staticfiles i18n %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
@@ -11,10 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="version" content="{{ site_info.RELEASE_VERSION }}">
     <meta name="description" content="{% block meta_description %}{% endblock meta_description %}">
-
-    {% if site_info.IS_RAVEN_INSTALLED %}
+    {% endraw %}{%- if cookiecutter.use_sentry_for_error_reporting.lower() == 'y' %}
+    {% raw %}{% if site_info.IS_RAVEN_INSTALLED %}
         <script>Raven.config('{% sentry_public_dsn %}').install()</script>
-    {% endif %}
+    {% endif %}{% endraw %}
+    {%- endif %}{% raw %}
 
     {% block css %}
     <link href="{% static 'css/normalize.css' %}" rel="stylesheet">{% endraw %}
