@@ -9,6 +9,8 @@ Adds sensible default for running app in production.
 """
 
 # Standard Library
+import raven
+import os
 from email.utils import getaddresses
 
 # Third Party Stuff
@@ -44,6 +46,7 @@ SITES['remote'] = {  # noqa: F405
     "name": env('SITE_NAME'),
 }
 SITE_ID = env("DJANGO_SITE_ID", default='remote')
+
 
 # If your Django app is behind a proxy that sets a header to specify secure
 # connections, AND that proxy ensures that user-submitted headers with the

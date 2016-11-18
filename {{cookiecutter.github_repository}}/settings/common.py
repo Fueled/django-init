@@ -5,8 +5,13 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 # Third Party Stuff
+{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+import os
+import raven
+{%- endif %}
 import environ
 from django.utils.translation import ugettext_lazy as _
+
 
 ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 2 = /a/)
 APPS_DIR = ROOT_DIR.path('{{ cookiecutter.main_module }}')
@@ -35,6 +40,9 @@ INSTALLED_APPS = (
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
     'compressor',
+{%- endif %}
+{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    'raven.contrib.django.raven_compat',
 {%- endif %}
 )
 
@@ -212,6 +220,7 @@ TEMPLATES = [
             ],
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             'context_processors': [
+                '{{cookiecutter.main_module}}.base.context_processors.site_settings',
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
@@ -371,4 +380,36 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+def get_release():
+    import {{cookiecutter.main_module}}
+    {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    import raven
+    from raven import exceptions as raven_exceptions
+    {%- endif %}
+    release = {{cookiecutter.main_module}}.__version__
+    {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    try:
+        git_hash = raven.fetch_git_sha(os.path.dirname(os.pardir))[:7]
+        release = '{}-{}'.format(release, git_hash)
+    except raven_exceptions.InvalidGitRepository:
+        pass
+    {%- endif %}
+    return release
+
+RELEASE_VERSION = get_release()
+
+
+{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+RAVEN_CONFIG = {
+    'dsn': env('SENTRY_DSN', default=''),
+    'environment': env('SENTRY_ENVIRONMENT', default='production'),
+    'release': RELEASE_VERSION,
+}
+{%- endif %}
+
+SITE_INFO = {
+    'RELEASE_VERSION': RELEASE_VERSION,
+    'IS_RAVEN_INSTALLED': RAVEN_CONFIG['dsn'] is not ''
 }
