@@ -1,2 +1,13 @@
-{% raw %}LC_ALL={{ common_locale_all }}
-LANG={{ common_locale_lang }}{% endraw %}
+{% raw %}LANG="{{ lc_lang }}"
+{% if lc_all is defined %}
+LC_ALL="{{ lc_all }}"
+{% endif %}
+{% if lc_language is defined %}
+LANGUAGE="{{ lc_language }}"
+{% endif %}
+{% if lc_numeric is defined %}
+LC_NUMERIC="{{ lc_numeric }}"
+{% endif %}
+{% if lc_time is defined %}
+LC_TIME="{{ lc_time }}"
+{% endif %}{% endraw %}

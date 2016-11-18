@@ -19,14 +19,19 @@
     state: file
 
 - name: create certbot folder
-  sudo: yes
+  become: yes
   file: path={{ letsencrypt_challange_root }} state=directory owner={{ user }} group={{ nginx_user }} mode="u=rwx,g=rwxs,o=r"
 
 - name: reload nginx
   service: name=nginx state=reloaded
 
+- name: Update apt-cache if not already ran
+  shell: apt update
+  become: yes
+  when: apt_updated is not defined
+
 - name: upgrade ca-certificates
-  apt: pkg=ca-certificates update_cache=yes state=latest
+  apt: pkg=ca-certificates state=latest
 
 - name: stop nginx if running
   service: name=nginx state=stopped

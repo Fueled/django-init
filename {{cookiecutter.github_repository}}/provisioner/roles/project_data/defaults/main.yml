@@ -14,5 +14,8 @@ uwsgi_debug: False
 uwsgi_timeout: 30
 uwsgi_keepalive: 2
 uwsgi_loglevel: info
-uwsgi_conf_path: /etc/uwsgi
+uwsgi_conf_path: /etc/uwsgi-emperor/vassals
 uwsgi_socket: /tmp/django-uwsgi.sock
+uwsgi_pid_file: /tmp/django-wsgi.pid
+
+project_log_dir: /var/log/django

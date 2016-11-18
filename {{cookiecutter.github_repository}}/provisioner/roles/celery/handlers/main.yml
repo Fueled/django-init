@@ -1,8 +1,0 @@
----
-- name: restart supervisor
-  shell: service supervisor restart
-  become: yes
-
-- name: restart celery
-  supervisorctl: name=celery state=restarted
-  become: yes

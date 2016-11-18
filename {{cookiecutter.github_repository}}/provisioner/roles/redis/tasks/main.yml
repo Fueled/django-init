@@ -1,3 +1,8 @@
 ---
+- name: Update apt-cache if not already ran
+  shell: apt update
+  become: yes
+  when: apt_updated is not defined
+
 - name: install redis server
-  apt: pkg=redis-server state=installed update-cache=yes
+  apt: pkg=redis-server state=installed

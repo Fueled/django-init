@@ -135,7 +135,9 @@ def config(action=None, key=None, value=None):
 
 
 def restart_servers():
-    fab.sudo('supervisorctl restart all')
+    services = ['uwsgi-emperor.service', ]
+    for service in services:
+        fab.sudo('systemctl restart {0}'.format(service))
 
 
 def configure(tags='', skip_tags='deploy'):

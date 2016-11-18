@@ -1,3 +1,0 @@
----
-- name: restart uwsgi
-  supervisorctl: name=uwsgi state=restarted

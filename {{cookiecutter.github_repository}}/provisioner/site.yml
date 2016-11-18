@@ -9,7 +9,6 @@
   roles:
     - common
     - nginx
-    - supervisor
     - postgresql
     - project_data
     # - redis
@@ -26,7 +25,6 @@
   roles:
     - common
     - nginx
-    - supervisor
     - project_data
     # - redis
     # - celery

@@ -1,9 +1,8 @@
-{% raw %}
-[uwsgi]
+{% raw %}[uwsgi]
 chdir={{project_path}}
 module=wsgi:application
-master=True
-pidfile=/tmp/uwsgi.pid
+# master=True
+pidfile={{uwsgi_pid_file}}
 uid={{uwsgi_user}}
 gid={{uwsgi_group}}
 vacuum=True
@@ -12,9 +11,9 @@ buffer-size=8192
 home={{venv_path}}
 socket={{uwsgi_socket}}
 workers={{uwsgi_workers}}
-#daemonize=/var/log/uwsgi/fueled.log
+# daemonize=/var/log/uwsgi/fueled.log
 log-x-forwarded-for=true
-#plugins=python
+plugins=python3
 
 # for newrelic support
 enable-threads=true
@@ -24,4 +23,4 @@ autoload=true
 no-orphans=true
 chmod-socket=660
 log-date=true
-{%endraw%}
+logto = {{project_log_dir}}/uwsgi.log{% endraw %}

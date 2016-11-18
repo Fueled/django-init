@@ -1,9 +1,13 @@
 {% raw %}---
+- name: Update apt-cache if not already ran
+  shell: apt update
+  become: yes
+  when: apt_updated is not defined
+
 - name: install postgres packages for Ubuntu
   apt:
     pkg: "{{ item }}"
     state: installed
-    update-cache: yes
   with_items:
     - postgresql
     - postgresql-contrib

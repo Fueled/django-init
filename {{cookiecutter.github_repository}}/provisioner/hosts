@@ -2,7 +2,7 @@
 192.168.33.12
 
 [vagrant:vars]
-vm=True
+vm=1
 user=vagrant
 project_path=/home/vagrant/{{ cookiecutter.github_repository }}
 venv_path=/home/vagrant/venv
@@ -17,7 +17,7 @@ pg_password=vagrant
 {{ cookiecutter.main_module }}.com
 
 [production:vars]
-vm=False
+vm=0
 user=ubuntu
 project_path=/home/ubuntu/{{ cookiecutter.github_repository }}
 venv_path=/home/ubuntu/venv

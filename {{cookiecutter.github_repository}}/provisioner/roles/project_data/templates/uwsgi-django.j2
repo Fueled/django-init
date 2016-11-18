@@ -1,0 +1,9 @@
+{% raw %}"/var/log/{{project_log_dir}}/uwsgi.log" {
+  copytruncate
+  daily
+  rotate 5
+  compress
+  delaycompress
+  missingok
+  notifempty
+}{% endraw %}

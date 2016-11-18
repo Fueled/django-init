@@ -2,11 +2,11 @@
 # roles/common/defaults/main.yml
 common_timezone: {{cookiecutter.timezone}}
 
-lang: "en_US.utf8"
+lc_lang: "en_US.UTF-8"
 lc_all: "en_US.utf8"
 lc_ctype: "en_US.utf8"
 lc_collate: "en_US.utf8"
-ubuntu_release: "trusty"
+
 {%raw%}
 base_ubuntu:
   common:
@@ -14,16 +14,17 @@ base_ubuntu:
       - build-essential
       - git
       - htop
+      - curl
       - python-dev
-      - python3
       - python3-dev
       - python-setuptools
       - python-virtualenv
+      - python-pip
       - sysstat
       - vim
       - fail2ban
       - libjpeg-dev
-      - libtiff4-dev
+      - libtiff5-dev
       - zlib1g-dev
       - libfreetype6-dev
       - liblcms2-dev
@@ -31,4 +32,6 @@ base_ubuntu:
       - libpq-dev
       - postgis
       - ca-certificates
+      - uwsgi-emperor
+      - uwsgi-plugin-python3
 {%endraw%}
