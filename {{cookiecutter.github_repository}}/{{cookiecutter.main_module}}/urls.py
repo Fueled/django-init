@@ -53,6 +53,12 @@ if settings.DEBUG:
     from django.views import defaults as dj_default_views
     from django.urls import get_callable
 
+    # debug toolbar
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
+
     # Livereloading
     urlpatterns += [url(r'^devrecargar/', include('devrecargar.urls', namespace='devrecargar'))]
 
