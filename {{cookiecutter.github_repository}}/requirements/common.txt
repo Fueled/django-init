@@ -1,6 +1,7 @@
 # Core Stuff
 # -------------------------------------
 Django==1.10.3
+django-flat-responsive==1.0.0
 
 # WSGI HTTP Server
 # -------------------------------------
