@@ -15,7 +15,7 @@ hiredis==0.2.0
 {% if cookiecutter.newrelic == 'y' %}
 # Logging
 # -------------------------------------
-newrelic==2.72.1.53
+newrelic==2.74.0.54
 {% endif %}
 
 {%- if cookiecutter.add_django_auth_wall.lower() == 'y' %}

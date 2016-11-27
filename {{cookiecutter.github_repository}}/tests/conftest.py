@@ -47,9 +47,3 @@ def client():
             return PartialMethodCaller(obj=self, content_type='application/json;charset="utf-8"')
 
     return _Client()
-
-
-@pytest.fixture
-def outbox():
-    from django.core import mail
-    return mail.outbox
