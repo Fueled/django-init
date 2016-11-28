@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'django_sites',  # http://niwinz.github.io/django-sites/latest/
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'flat_responsive',
     'django.contrib.admin',
     # 'django.contrib.humanize',  # Useful template tags
 
