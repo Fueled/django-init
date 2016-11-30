@@ -19,7 +19,7 @@
 
 # running cron job each monday
 - name: add letsencrypt renew cron
-  cron: name="Renew all certificates" minute="0" hour="2" weekday="1" job="PATH=$PATH:/usr/local/bin && certbot-auto renew --non-interactive --webroot -w {{ letsencrypt_challange_root }}  >> /var/log/certbot.log"
+  cron: name="Renew all certificates" minute="0" hour="2" weekday="1" job="PATH=$PATH:/usr/local/bin && certbot-auto renew --non-interactive --webroot -w {{ letsencrypt_challange_root }}  >> /var/log/certbot.log && service nginx reload"
   when: vm == 0 and use_letsencrypt
 
 - name: check ssl/nginx.crt exists
