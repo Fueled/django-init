@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Add django_auth_wall to protect staging environments (@theskumar)
 - Replace gunicorn with uwsgi as wsgi handler (@vikalpj)
 
+### Fixes
+- Fix letsencrtypt, make certbot-auto run in non-interactive mode.
+
 ## [1.9.0]
 
 ### Added
