@@ -35,7 +35,7 @@
 
 - name: generate ssl forward secrecy key
   command: openssl dhparam -out {{ ssl_forward_secrecy_key_path }} {{ ssl_forward_secrecy_key_length }} creates={{ ssl_forward_secrecy_key_path }}
-  when: vm == 0 and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false)
+  when: vm == 0
 
 - name: copy base nginx configuration.
   template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
