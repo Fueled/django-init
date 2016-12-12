@@ -15,6 +15,9 @@
 #  when: vm == 1
 
 # Ansible requires aptitude and python2 for various tasks
+- name: Set hostname
+  action: shell hostnamectl set-hostname {{ domain_name }}
+
 - name: Install Aptitude and Python-minimal for ansible
   raw: apt-get install -qq python-apt aptitude
 
