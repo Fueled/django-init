@@ -1,7 +1,7 @@
 # Core Stuff
 # -------------------------------------
-Django==1.10.3
-django-flat-responsive==1.0.0
+Django==1.10.4
+django-flat-responsive==1.1.0
 
 # WSGI HTTP Server
 # -------------------------------------
@@ -20,14 +20,14 @@ whitenoise==3.2.2
 
 # Extensions
 # -------------------------------------
-pytz==2016.7
+pytz==2016.10
 
 # Models
 # -------------------------------------
 psycopg2==2.6.2
 
 Pillow==3.4.2
-django-versatileimagefield==1.6.1
+django-versatileimagefield==1.6.2
 django-uuid-upload-path==1.0.0
 
 # REST APIs
