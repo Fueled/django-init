@@ -1,0 +1,3 @@
+---
+- name: restart celery
+  systemd: state=restarted daemon_reload=yes name=celery
