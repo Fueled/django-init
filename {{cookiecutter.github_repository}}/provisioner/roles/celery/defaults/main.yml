@@ -1,2 +1,10 @@
----
+{%raw%}---
+celery_user: www-data
+celery_group: www-data
 celery_concurrency: 4
+celery_log_file: "/var/log/celery.log"
+celery_log_level: "INFO"
+celery_pid_file: /tmp/celery.pid
+celery_log_dir: /var/log/celery
+{%endraw%}
+

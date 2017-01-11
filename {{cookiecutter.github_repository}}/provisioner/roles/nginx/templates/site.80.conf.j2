@@ -12,7 +12,7 @@ server {
 
     {% if vm and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false) %}
     location / {
-        uwsgi_pass unix:///tmp/django-{{ domain_name }}-uwsgi.sock;
+        uwsgi_pass unix:///tmp/django-uwsgi.sock;
         include /etc/nginx/uwsgi_params;
 
         # set correct scheme

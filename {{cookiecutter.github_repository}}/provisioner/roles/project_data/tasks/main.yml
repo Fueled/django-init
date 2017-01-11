@@ -6,7 +6,7 @@
   tags: ['always']
 
 - name: copy django-uwsgi logrotate
-  template: src=uwsgi-django.j2
+  template: src=django.logrotate.j2
             dest=/etc/logrotate.d/uwsgi-django
             mode=644
   tags: ['configure']
@@ -53,9 +53,10 @@
   django_manage: command=migrate app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
+#  notify: reload celery  ## Uncomment this when project is using celery
 
 - name: copy uwsgi configuration
-  template: src=django.ini.j2
+  template: src=django.uwsgi.ini.j2
             dest={{ uwsgi_conf_path }}/django.ini
             mode=644
   tags: ['deploy']

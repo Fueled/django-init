@@ -1,17 +1,23 @@
-{%raw%}---
+{% raw %}---
+- name: copy celery.log logrotate
+  template: src=celery.log.j2
+            dest=/etc/logrotate.d/celery
+            mode=644
+  tags: ['configure', 'celery']
+
+- name: make sure log directory exists
+  file: path={{ celery_log_dir }} state=directory owner={{celery_user}} group={{celery_group}} mode=751 recurse=yes
+  tags: ['configure', 'celery']
+
 - name: ensure celery package is installed
-  pip: name=celery state=present
+  pip: name=celery state=present executable={{ venv_path }}/bin/pip
   tags: ['celery']
 
-- name: copy supervisor celery configuration
-  template: src=supervisor_celery.conf.j2 dest=/etc/supervisor/conf.d/celery.conf
-  notify:
-    - restart supervisor
-  tags: ['celery', 'deploy']
-  become: yes
+- name: copy celery service
+  template: src=celery.service.j2 dest=/etc/systemd/system/celery.service
+  tags: ['celery']
 
 - name: ensure celery worker is running
-  supervisorctl: name=celery state=started
-  tags: ['celery', 'deploy']
-  become: yes
-{%endraw%}
+  systemd: state=restarted daemon_reload=yes enabled=yes name=celery
+  tags: ['celery']
+{% endraw %}
