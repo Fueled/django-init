@@ -53,6 +53,7 @@
   django_manage: command=migrate app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
+#  notify: reload celery  ## Uncomment this when project is using celery
 
 - name: copy uwsgi configuration
   template: src=django.uwsgi.ini.j2
