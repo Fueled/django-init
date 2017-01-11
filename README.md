@@ -1,7 +1,7 @@
 django-init | [![Build Status](https://travis-ci.org/Fueled/django-init.svg?branch=user-app)](https://travis-ci.org/Fueled/django-init)
 ============
 
-Project template for django based projects, optimized for making REST API with deployment on Heroku and EC2 instances.
+Project template for django based projects, optimized for making REST API with deployment on Heroku and EC2 instances via Ansible.
 
 ## Features
 
@@ -10,7 +10,7 @@ Project template for django based projects, optimized for making REST API with d
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - PostresSQL everywhere (support of postgis is available)
 - [Procfile] for deploying to Heroku
-- [Ansible] playbook for deployment to Ubuntu 14 LTS (optional)
+- [Ansible] playbook for deployment to Ubuntu 16 LTS (optional)
 - Designed to work with Django Rest Framework 3.0+.
 - Uses `django_sites` instead of `django.contrib.sites`
 - Use [mkdocs] for project documentation.
