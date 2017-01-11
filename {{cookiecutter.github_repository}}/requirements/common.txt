@@ -1,7 +1,7 @@
 # Core Stuff
 # -------------------------------------
-Django==1.10.4
-django-flat-responsive==1.1.0
+Django==1.10.5
+django-flat-responsive==1.2.0
 
 # WSGI HTTP Server
 # -------------------------------------
@@ -16,7 +16,7 @@ python-dotenv==0.6.1
 
 # Staticfiles
 # -------------------------------------
-whitenoise==3.2.2
+whitenoise==3.2.3
 
 # Extensions
 # -------------------------------------
@@ -26,7 +26,7 @@ pytz==2016.10
 # -------------------------------------
 psycopg2==2.6.2
 
-Pillow==3.4.2
+Pillow==4.0.0
 django-versatileimagefield==1.6.2
 django-uuid-upload-path==1.0.0
 
