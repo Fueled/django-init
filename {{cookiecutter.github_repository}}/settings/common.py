@@ -7,7 +7,6 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 # Third Party Stuff
 {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
 import os
-import raven
 {%- endif %}
 import environ
 from django.utils.translation import ugettext_lazy as _
