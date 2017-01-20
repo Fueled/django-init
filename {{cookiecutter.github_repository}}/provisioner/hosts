@@ -13,10 +13,10 @@ pg_db={{ cookiecutter.main_module }}
 pg_user=vagrant
 pg_password=vagrant
 
-[production]
-{{ cookiecutter.main_module }}.com
+[localhost]
+127.0.0.1
 
-[production:vars]
+[localhost:vars]
 vm=0
 user=ubuntu
 project_path=/home/ubuntu/{{ cookiecutter.github_repository }}

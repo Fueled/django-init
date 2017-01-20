@@ -11,7 +11,8 @@ from functools import partial
 from os.path import dirname, isdir, join
 
 # Third Party Stuff
-from fabric.api import local as fabric_local, env
+from fabric.api import local as fabric_local, env, run, hosts
+from fabric.contrib.files import exists
 from fabric import api as fab
 
 local = partial(fabric_local, shell='/bin/bash')
@@ -32,6 +33,7 @@ env.shell = "/bin/bash -l -i -c"
 {% if cookiecutter.add_ansible.lower() == 'y' -%}env.use_ssh_config = True
 env.dotenv_path = join(HERE, '.env')
 env.config_setter = local{% endif %}
+env.project_repo_url = 'git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}.git'
 
 
 def init(vagrant=False):
@@ -114,6 +116,14 @@ def prod():
     env.config_setter = fab.run
 
 
+def _get_latest_source():
+    if exists(join('{{ cookiecutter.github_repository }}'.format(project_name=env.project_name), '.git')):
+        run('cd {{ cookiecutter.github_repository }} && git pull')
+    else:
+        run('git clone {repo_url}'.format(repo_url=env.project_repo_url))
+        run('cd {{ cookiecutter.github_repository }} && git checkout {repo_version}'.format(repo_version=env.branch))
+
+
 def config(action=None, key=None, value=None):
     """Read/write to .env file on local and remote machines.
 
@@ -145,14 +155,18 @@ def configure(tags='', skip_tags='deploy'):
 
     Usages: fab [prod|qa|dev] configure
     """
-    fab.require('host_group')
-    cmd = 'ansible-playbook -i hosts site.yml --limit=%(host_group)s' % env
-    with fab.lcd('provisioner'):
-        if tags:
-            cmd += " --tags '%s'" % tags
-        if skip_tags:
-            cmd += " --skip-tags '%s'" % skip_tags
-        local(cmd)
+    if not tags:
+        run('sudo apt-add-repository -y ppa:ansible/ansible && \
+             sudo apt-get update && \
+             sudo apt-get -y install ansible git')
+    _get_latest_source()
+    cmd = 'ansible-playbook -i hosts site.yml --limit=localhost -vvv -c local'
+    if tags:
+        cmd += " --tags '{tags}'".format(tags=tags)
+    if skip_tags:
+        cmd += " --skip-tags '{skip_tags}'".format(skip_tags=skip_tags)
+
+    run('cd /home/ubuntu/{{ cookiecutter.github_repository }}/provisioner && {cmd}'.format(cmd=cmd))
 
 
 def deploy():
