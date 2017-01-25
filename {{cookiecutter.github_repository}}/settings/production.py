@@ -9,8 +9,6 @@ Adds sensible default for running app in production.
 """
 
 # Standard Library
-import raven
-import os
 from email.utils import getaddresses
 
 # Third Party Stuff
