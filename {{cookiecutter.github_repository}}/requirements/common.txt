@@ -12,7 +12,7 @@ uWSGI==2.0.14
 argon2-cffi==16.3.0
 django-environ==0.4.1
 django-sites==0.9
-python-dotenv==0.6.1
+python-dotenv==0.6.2
 
 # Staticfiles
 # -------------------------------------
