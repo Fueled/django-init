@@ -11,8 +11,8 @@ from functools import partial
 from os.path import dirname, isdir, join
 
 # Third Party Stuff
-from fabric.api import local as fabric_local, env, run, hosts
-from fabric.contrib.files import exists
+from fabric.api import local as fabric_local, env
+from fabric.contrib.files import exists as fab_exists
 from fabric import api as fab
 
 local = partial(fabric_local, shell='/bin/bash')
@@ -32,8 +32,10 @@ env.shell = "/bin/bash -l -i -c"
 
 {% if cookiecutter.add_ansible.lower() == 'y' -%}env.use_ssh_config = True
 env.dotenv_path = join(HERE, '.env')
+env.github_repo = '{{ cookiecutter.github_repository }}'
+env.project_dir = '/home/ubuntu/{repo}'.format(repo=env.github_repo)
+env.project_repo_url = 'git@github.com:{{ cookiecutter.github_username }}/{repo}.git'.format(repo=env.github_repo)
 env.config_setter = local{% endif %}
-env.project_repo_url = 'git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}.git'
 
 
 def init(vagrant=False):
@@ -112,16 +114,33 @@ def prod():
     env.remote = 'origin'
     env.branch = 'prod'
     env.hosts = ['prod.{{ cookiecutter.main_module }}.com']
-    env.dotenv_path = '/home/ubuntu/{{ cookiecutter.github_repository }}/.env'
+    env.dotenv_path = '{project_dir}/.env'.format(project_dir=env.project_dir)
+    env.config_setter = fab.run
+
+
+def dev():
+    env.host_group = 'dev'
+    env.remote = 'origin'
+    env.branch = 'master'
+    env.hosts = ['dev.{{ cookiecutter.main_module }}.com']
+    env.dotenv_path = '{project_dir}/.env'.format(project_dir=env.project_dir)
     env.config_setter = fab.run
 
 
 def _get_latest_source():
-    if exists(join('{{ cookiecutter.github_repository }}'.format(project_name=env.project_name), '.git')):
-        run('cd {{ cookiecutter.github_repository }} && git pull')
+    if fab_exists(join('{{ cookiecutter.github_repository }}'.format(project_name=env.project_name), '.git')):
+        fab.run('cd {project_dir} && git fetch | git rebase {remote}/{branch}'.format(project_dir=env.project_dir,
+                                                                                      remote=env.remote,
+                                                                                      branch=env.branch))
     else:
-        run('git clone {repo_url}'.format(repo_url=env.project_repo_url))
-        run('cd {{ cookiecutter.github_repository }} && git checkout {repo_version}'.format(repo_version=env.branch))
+        fab.run('git clone {repo_url}'.format(repo_url=env.project_repo_url))
+        fab.run('cd {project_dir} && git checkout {repo_branch}'.format(project_dir=env.project_dir,
+                                                                        repo_branch=env.branch))
+
+
+def _install_packages():
+    fab.run('dpkg -l | grep -qw ansible || (sudo apt-add-repository -y ppa:ansible/ansible && \
+             sudo apt-get update && sudo apt-get -y install ansible git)')
 
 
 def config(action=None, key=None, value=None):
@@ -155,18 +174,15 @@ def configure(tags='', skip_tags='deploy'):
 
     Usages: fab [prod|qa|dev] configure
     """
-    if not tags:
-        run('sudo apt-add-repository -y ppa:ansible/ansible && \
-             sudo apt-get update && \
-             sudo apt-get -y install ansible git')
+    _install_packages()
     _get_latest_source()
-    cmd = 'ansible-playbook -i hosts site.yml --limit=localhost -vvv -c local'
+    cmd = 'ansible-playbook -i hosts site.yml --limit={host_group} -vvv -c local'.format(host_group=env.host_group)
     if tags:
         cmd += " --tags '{tags}'".format(tags=tags)
     if skip_tags:
         cmd += " --skip-tags '{skip_tags}'".format(skip_tags=skip_tags)
 
-    run('cd /home/ubuntu/{{ cookiecutter.github_repository }}/provisioner && {cmd}'.format(cmd=cmd))
+    fab.run('cd {project_dir}/provisioner && {cmd}'.format(project_dir=env.project_dir, cmd=cmd))
 
 
 def deploy():

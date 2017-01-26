@@ -1,5 +1,5 @@
 [vagrant]
-192.168.33.12
+192.168.2.250
 
 [vagrant:vars]
 vm=1
@@ -13,10 +13,10 @@ pg_db={{ cookiecutter.main_module }}
 pg_user=vagrant
 pg_password=vagrant
 
-[localhost]
-127.0.0.1
+[production]
+prod.{{ cookiecutter.main_module }}.com
 
-[localhost:vars]
+[production:vars]
 vm=0
 user=ubuntu
 project_path=/home/ubuntu/{{ cookiecutter.github_repository }}
@@ -25,3 +25,20 @@ use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False
 letsencrypt_email={{ cookiecutter.letsencrypt_email }}
 django_requirements_file=requirements.txt
 django_settings="settings.production"
+domain_name="{{ cookiecutter.main_module }}.com"
+repo_version=prod
+
+[dev]
+dev.{{ cookiecutter.main_module }}.com
+
+[dev:vars]
+vm=0
+user=ubuntu
+project_path=/home/ubuntu/{{ cookiecutter.github_repository }}
+venv_path=/home/ubuntu/venv
+use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
+letsencrypt_email={{ cookiecutter.letsencrypt_email }}
+django_requirements_file=requirements.txt
+django_settings="settings.production"
+domain_name="{{ cookiecutter.main_module }}.com"
+repo_version=master
