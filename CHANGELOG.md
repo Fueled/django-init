@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixes
 - Fix letsencrtypt, make certbot-auto run in non-interactive mode.
+- Fix `py.test` to load values from .env
 
 ## [1.9.0]
 
