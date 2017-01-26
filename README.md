@@ -47,7 +47,7 @@ then only thing you'll need to do is:
 
 Don't forget to carefully look at the generated README. Awesome, right?
 
-You can also explore the [wiki] section for details on advance setups and usuages.
+You can also explore the [wiki] section for details on advance setup and usages.
 
 ## Changelogs
 
