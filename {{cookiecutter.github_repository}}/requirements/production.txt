@@ -4,8 +4,8 @@
 
 # Static Files and Media Storage
 # -------------------------------------
-boto==2.45.0
-django-storages-redux==1.3.2
+django-storages==1.5.2
+boto3==1.4.4
 
 # Caching
 # -------------------------------------
