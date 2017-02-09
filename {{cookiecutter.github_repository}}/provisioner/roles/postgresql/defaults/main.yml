@@ -2,5 +2,5 @@
 pg_hstore: False
 pg_gis: False
 pg_db: '{% raw %}{{ project_name }}-{{ environment }}{% endraw %}'
-pg_user: dev
-pg_password: password
+pg_user: '{% raw %}{{ pg_user }}{% endraw %}'
+pg_password: '{% raw %}{{ pg_password }}{% endraw %}'
