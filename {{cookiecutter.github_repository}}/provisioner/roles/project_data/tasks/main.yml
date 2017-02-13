@@ -1,4 +1,8 @@
 {% raw %}---
+- name: make sure project directory is owned by uwsgi group
+  file: path={{ project_path }} state=directory owner={{user}} group={{uwsgi_group}} recurse=yes
+  tags: ['configure']
+
 - name: get the latest code
   git: repo={{ project_repo_url }} dest={{ project_path }} version={{ repo_version }} accept_hostkey=true
   become: false
