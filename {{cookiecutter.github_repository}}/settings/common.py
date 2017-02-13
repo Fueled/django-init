@@ -383,6 +383,7 @@ LOGGING = {
     }
 }
 
+
 def get_release():
     import {{cookiecutter.main_module}}
     {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
@@ -398,6 +399,7 @@ def get_release():
         pass
     {%- endif %}
     return release
+
 
 RELEASE_VERSION = get_release()
 

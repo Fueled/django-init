@@ -45,6 +45,7 @@ class DjangoCompressorWhiteNoise(DjangoWhiteNoise):
         return is_immutable
 {%- endif %}
 
+
 # Read .env file and set key/value inside it as environement variables
 # see: http://github.com/theskumar/python-dotenv
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
