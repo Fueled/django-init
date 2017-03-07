@@ -5,7 +5,7 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 # Third Party Stuff
-{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+{%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
 import os
 {%- endif %}
 import environ
@@ -41,7 +41,7 @@ INSTALLED_APPS = (
 
     'compressor',
 {%- endif %}
-{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+{%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     'raven.contrib.django.raven_compat',
 {%- endif %}
 )
@@ -101,7 +101,7 @@ REST_FRAMEWORK = {
         # Mainly used for api debug.
         'rest_framework.authentication.SessionAuthentication',
     ),
-    "EXCEPTION_HANDLER": "{{ cookiecutter.main_module }}.base.exceptions.exception_handler",
+    'EXCEPTION_HANDLER': '{{ cookiecutter.main_module }}.base.exceptions.exception_handler',
 }
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
@@ -240,12 +240,12 @@ CSRF_FAILURE_VIEW = '{{ cookiecutter.main_module }}.base.views.csrf_failure'
 # STATIC FILE CONFIGURATION
 # -----------------------------------------------------------------------------
 # Absolute path to the directory static files should be collected to.
-# Example: "/var/www/example.com/static/"
+# Example: '/var/www/example.com/static/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 STATIC_ROOT = str(ROOT_DIR.path('.staticfiles'))
 
 # URL that handles the static files served from STATIC_ROOT.
-# Example: "http://example.com/static/", "http://static.example.com/"
+# Example: 'http://example.com/static/', 'http://static.example.com/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 
@@ -283,12 +283,12 @@ COMPRESS_OFFLINE = env.bool('COMPRESS_OFFLINE', default=False)
 # ------------------------------------------------------------------------------
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/var/www/example.com/media/"
+# Example: '/var/www/example.com/media/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
 MEDIA_ROOT = str(ROOT_DIR.path('.media'))
 
 # URL that handles the media served from MEDIA_ROOT.
-# Examples: "http://example.com/media/", "http://media.example.com/"
+# Examples: 'http://example.com/media/', 'http://media.example.com/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
 
@@ -386,12 +386,12 @@ LOGGING = {
 
 def get_release():
     import {{cookiecutter.main_module}}
-    {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     import raven
     from raven import exceptions as raven_exceptions
     {%- endif %}
     release = {{cookiecutter.main_module}}.__version__
-    {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     try:
         git_hash = raven.fetch_git_sha(os.path.dirname(os.pardir))[:7]
         release = '{}-{}'.format(release, git_hash)
@@ -404,7 +404,7 @@ def get_release():
 RELEASE_VERSION = get_release()
 
 
-{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+{%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
 RAVEN_CONFIG = {
     'dsn': env('SENTRY_DSN', default=''),
     'environment': env('SENTRY_ENVIRONMENT', default='production'),
