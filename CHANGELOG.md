@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.10.x]
 
+- Add .env.sample file (@theskumar)
 - Add django-flat-responsive to give django-admin a responsive touch (@theskumar)
 - Add django_auth_wall to protect staging environments (@theskumar)
 - Replace gunicorn with uwsgi as wsgi handler (@vikalpj)
