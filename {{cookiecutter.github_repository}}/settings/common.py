@@ -5,7 +5,7 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 # Third Party Stuff
-{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+{%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
 import os
 {%- endif %}
 import environ
@@ -41,7 +41,7 @@ INSTALLED_APPS = (
 
     'compressor',
 {%- endif %}
-{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+{%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     'raven.contrib.django.raven_compat',
 {%- endif %}
 )
@@ -52,7 +52,7 @@ INSTALLED_APPS = (
 # django.contrib.auth
 # ------------------------------------------------------------------------------
 AUTH_USER_MODEL = 'users.User'
-AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.Argon2PasswordHasher',
@@ -101,13 +101,13 @@ REST_FRAMEWORK = {
         # Mainly used for api debug.
         'rest_framework.authentication.SessionAuthentication',
     ),
-    "EXCEPTION_HANDLER": "{{ cookiecutter.main_module }}.base.exceptions.exception_handler",
+    'EXCEPTION_HANDLER': '{{ cookiecutter.main_module }}.base.exceptions.exception_handler',
 }
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
 # see: http://django-sites.readthedocs.org
 SITES = {
-    "local": {"domain": "localhost:8000", "scheme": "http", "name": "localhost"},
+    'local': {'domain': 'localhost:8000', 'scheme': 'http', 'name': 'localhost'},
 }
 SITE_ID = 'local'
 
@@ -150,12 +150,12 @@ LANGUAGE_CODE = 'en-us'
 
 # Languages we provide translations for
 LANGUAGES = (
-    ("en", _("English")),
+    ('en', _('English')),
 )
 
 # A tuple of directories where Django looks for translation files.
 LOCALE_PATHS = (
-    str(APPS_DIR.path("locale")),
+    str(APPS_DIR.path('locale')),
 )
 
 # If you set this to False, Django will make some optimizations so as not
@@ -197,7 +197,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db("DATABASE_URL", default="postgres://localhost/{{ cookiecutter.main_module }}"),
+    'default': env.db('DATABASE_URL', default='postgres://localhost/{{ cookiecutter.main_module }}'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 DATABASES['default']['CONN_MAX_AGE'] = 10
@@ -235,17 +235,17 @@ TEMPLATES = [
     },
 ]
 
-CSRF_FAILURE_VIEW = "{{ cookiecutter.main_module }}.base.views.csrf_failure"
+CSRF_FAILURE_VIEW = '{{ cookiecutter.main_module }}.base.views.csrf_failure'
 
 # STATIC FILE CONFIGURATION
 # -----------------------------------------------------------------------------
 # Absolute path to the directory static files should be collected to.
-# Example: "/var/www/example.com/static/"
+# Example: '/var/www/example.com/static/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 STATIC_ROOT = str(ROOT_DIR.path('.staticfiles'))
 
 # URL that handles the static files served from STATIC_ROOT.
-# Example: "http://example.com/static/", "http://static.example.com/"
+# Example: 'http://example.com/static/', 'http://static.example.com/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 
@@ -283,12 +283,12 @@ COMPRESS_OFFLINE = env.bool('COMPRESS_OFFLINE', default=False)
 # ------------------------------------------------------------------------------
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-# Example: "/var/www/example.com/media/"
+# Example: '/var/www/example.com/media/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
 MEDIA_ROOT = str(ROOT_DIR.path('.media'))
 
 # URL that handles the media served from MEDIA_ROOT.
-# Examples: "http://example.com/media/", "http://media.example.com/"
+# Examples: 'http://example.com/media/', 'http://media.example.com/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
 
@@ -302,7 +302,7 @@ SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
 
 # django-log-request-id - Sending request id in response
-REQUEST_ID_RESPONSE_HEADER = "REQUEST_ID"
+REQUEST_ID_RESPONSE_HEADER = 'REQUEST_ID'
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -386,12 +386,12 @@ LOGGING = {
 
 def get_release():
     import {{cookiecutter.main_module}}
-    {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     import raven
     from raven import exceptions as raven_exceptions
     {%- endif %}
     release = {{cookiecutter.main_module}}.__version__
-    {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     try:
         git_hash = raven.fetch_git_sha(os.path.dirname(os.pardir))[:7]
         release = '{}-{}'.format(release, git_hash)
@@ -404,7 +404,7 @@ def get_release():
 RELEASE_VERSION = get_release()
 
 
-{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+{%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
 RAVEN_CONFIG = {
     'dsn': env('SENTRY_DSN', default=''),
     'environment': env('SENTRY_ENVIRONMENT', default='production'),

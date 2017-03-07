@@ -42,7 +42,7 @@ def set_settings(**new_settings):
     def decorator(testcase):
         if type(testcase) is type:
             namespace = {
-                "OVERRIDE_SETTINGS": new_settings, "ORIGINAL_SETTINGS": {}}
+                'OVERRIDE_SETTINGS': new_settings, 'ORIGINAL_SETTINGS': {}}
             wrapper = type(testcase.__name__, (SettingsTestCase, testcase),
                            namespace)
         else:

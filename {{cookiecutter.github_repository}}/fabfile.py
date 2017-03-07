@@ -27,7 +27,7 @@ env.apps_dir = join(HERE, env.project_name)
 env.docs_dir = join(HERE, 'docs')
 env.virtualenv_dir = join(HERE, 'venv')
 env.requirements_file = join(HERE, 'requirements/development.txt')
-env.shell = "/bin/bash -l -i -c"
+env.shell = '/bin/bash -l -i -c'
 
 {% if cookiecutter.add_ansible.lower() == 'y' -%}env.use_ssh_config = True
 env.dotenv_path = join(HERE, '.env')
@@ -72,7 +72,7 @@ def test(options='--pdb --cov'):
     """
     with virtualenv():
         local('flake8 .')
-        local("py.test %s" % options)
+        local('py.test %s' % options)
 
 
 def serve(host='127.0.0.1:8000'):

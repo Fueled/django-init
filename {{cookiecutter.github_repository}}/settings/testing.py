@@ -6,12 +6,12 @@ load_dotenv(find_dotenv())
 
 from .development import *  # noqa F405
 
-MEDIA_ROOT = "/tmp"
+MEDIA_ROOT = '/tmp'
 
 SECRET_KEY = 'top-scret!'
 
-EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
-INSTALLED_APPS += ("tests", )  # noqa: F405
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+INSTALLED_APPS += ('tests', )  # noqa: F405
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
 # Do this here, so that test are run without `postcss` as a requirement.
