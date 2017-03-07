@@ -20,7 +20,7 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa: F405
 
 INTERNAL_IPS = ('127.0.0.1', '192.168.33.12', )
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 # Staticfiles
 # ------------------------------------------------------------------------------

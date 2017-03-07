@@ -12,12 +12,14 @@ def build_url(path, scheme="http", domain="localhost"):
 
 
 def is_absolute_url(path):
-    """Test wether or not `path` is absolute url."""
+    """Test wether or not `path` is absolute url.
+    """
     return path.startswith("http")
 
 
 def get_absolute_url(path):
-    """Return a path as an absolute url."""
+    """Return a path as an absolute url.
+    """
     if is_absolute_url(path):
         return path
     site = sites.get_current()
@@ -25,5 +27,6 @@ def get_absolute_url(path):
 
 
 def reverse(viewname, *args, **kwargs):
-    """Same behavior as django's reverse but uses django_sites to compute absolute url."""
+    """Same behavior as django's reverse but uses django_sites to compute absolute url.
+    """
     return get_absolute_url(django_reverse(viewname, *args, **kwargs))

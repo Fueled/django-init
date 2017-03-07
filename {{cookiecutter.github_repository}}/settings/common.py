@@ -52,7 +52,7 @@ INSTALLED_APPS = (
 # django.contrib.auth
 # ------------------------------------------------------------------------------
 AUTH_USER_MODEL = 'users.User'
-AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.Argon2PasswordHasher',
@@ -107,7 +107,7 @@ REST_FRAMEWORK = {
 # ------------------------------------------------------------------------------
 # see: http://django-sites.readthedocs.org
 SITES = {
-    "local": {"domain": "localhost:8000", "scheme": "http", "name": "localhost"},
+    'local': {'domain': 'localhost:8000', 'scheme': 'http', 'name': 'localhost'},
 }
 SITE_ID = 'local'
 
@@ -150,12 +150,12 @@ LANGUAGE_CODE = 'en-us'
 
 # Languages we provide translations for
 LANGUAGES = (
-    ("en", _("English")),
+    ('en', _('English')),
 )
 
 # A tuple of directories where Django looks for translation files.
 LOCALE_PATHS = (
-    str(APPS_DIR.path("locale")),
+    str(APPS_DIR.path('locale')),
 )
 
 # If you set this to False, Django will make some optimizations so as not
@@ -197,7 +197,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db("DATABASE_URL", default="postgres://localhost/{{ cookiecutter.main_module }}"),
+    'default': env.db('DATABASE_URL', default='postgres://localhost/{{ cookiecutter.main_module }}'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 DATABASES['default']['CONN_MAX_AGE'] = 10
@@ -235,7 +235,7 @@ TEMPLATES = [
     },
 ]
 
-CSRF_FAILURE_VIEW = "{{ cookiecutter.main_module }}.base.views.csrf_failure"
+CSRF_FAILURE_VIEW = '{{ cookiecutter.main_module }}.base.views.csrf_failure'
 
 # STATIC FILE CONFIGURATION
 # -----------------------------------------------------------------------------
@@ -302,7 +302,7 @@ SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
 
 # django-log-request-id - Sending request id in response
-REQUEST_ID_RESPONSE_HEADER = "REQUEST_ID"
+REQUEST_ID_RESPONSE_HEADER = 'REQUEST_ID'
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------

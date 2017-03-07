@@ -14,7 +14,7 @@ from .models import User
 class MyUserCreationForm(DjangoUserCreationForm):
     class Meta:
         model = User
-        fields = ("email",)
+        fields = ('email',)
 
 
 class MyUserChangeForm(DjangoUserChangeForm):

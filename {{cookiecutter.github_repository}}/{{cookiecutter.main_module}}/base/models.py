@@ -10,8 +10,7 @@ from versatileimagefield.fields import PPOIField, VersatileImageField
 
 
 class UUIDModel(models.Model):
-    """
-    An abstract base class model that makes primary key `id` as UUID
+    """ An abstract base class model that makes primary key `id` as UUID
     instead of default auto incremented number.
     """
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
@@ -21,8 +20,7 @@ class UUIDModel(models.Model):
 
 
 class TimeStampedUUIDModel(UUIDModel):
-    """
-    An abstract base class model that provides self-updating
+    """An abstract base class model that provides self-updating
     ``created`` and ``modified`` fields with UUID as primary_key field.
     """
     created = models.DateTimeField(auto_now_add=True, editable=False)
@@ -33,8 +31,7 @@ class TimeStampedUUIDModel(UUIDModel):
 
 
 class ImageMixin(models.Model):
-    """
-    An abstract base class model that provides a VersatileImageField Image with POI
+    """An abstract base class model that provides a VersatileImageField Image with POI
     """
 
     image = VersatileImageField(upload_to=upload_to, blank=True, null=True, ppoi_field='image_poi',

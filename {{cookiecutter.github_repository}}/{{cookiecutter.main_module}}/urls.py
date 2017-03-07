@@ -22,8 +22,8 @@ handler500 = base_views.server_error
 # Top Level Pages
 # ==============================================================================
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
-    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
+    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
+    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
     # Your stuff: custom urls go here
 ]
 
@@ -63,9 +63,9 @@ if settings.DEBUG:
     urlpatterns += [url(r'^devrecargar/', include('devrecargar.urls', namespace='devrecargar'))]
 
     urlpatterns += [
-        url(r'^400/$', dj_default_views.bad_request, kwargs={'exception': Exception("Bad Request!")}),
-        url(r'^403/$', dj_default_views.permission_denied, kwargs={'exception': Exception("Permission Denied!")}),
+        url(r'^400/$', dj_default_views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
+        url(r'^403/$', dj_default_views.permission_denied, kwargs={'exception': Exception('Permission Denied!')}),
         url(r'^403_csrf/$', get_callable(settings.CSRF_FAILURE_VIEW)),
-        url(r'^404/$', dj_default_views.page_not_found, kwargs={'exception': Exception("Not Found!")}),
+        url(r'^404/$', dj_default_views.page_not_found, kwargs={'exception': Exception('Not Found!')}),
         url(r'^500/$', handler500),
     ]

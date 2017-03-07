@@ -15,7 +15,7 @@ def server_error(request, *args, **kwargs):
 
     As we don't want to return html response for a json request.
     """
-    if not settings.DEBUG and request.META.get('CONTENT_TYPE', None) == "application/json":
+    if not settings.DEBUG and request.META.get('CONTENT_TYPE', None) == 'application/json':
         exc_type, exc_obj, exc_tb = sys.exc_info()
         response_dict = {
             'error_type': exc_type.__name__ if exc_type else 'ServerError',
@@ -26,7 +26,7 @@ def server_error(request, *args, **kwargs):
     return default_server_error(request, *args, **kwargs)
 
 
-def csrf_failure(request, reason="", template_name="403_csrf.html"):
+def csrf_failure(request, reason='', template_name='403_csrf.html'):
     """ Custom view used when request fails CSRF protection.
 
     Custom view is used because Django compressor complains if trying to
@@ -44,4 +44,4 @@ def csrf_failure(request, reason="", template_name="403_csrf.html"):
 
 
 def root_txt_files(request, filename):
-    return render(request, filename, {}, content_type="text/plain")
+    return render(request, filename, {}, content_type='text/plain')
