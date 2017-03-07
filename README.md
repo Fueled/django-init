@@ -49,6 +49,10 @@ Don't forget to carefully look at the generated README. Awesome, right?
 
 You can also explore the [wiki] section for details on advance setup and usages.
 
+## Release Policy
+
+`django-init` is a rolling release project. Commit and fixes are added to `master` branch on regular basis and always have latest stable django and associated libraries. You are advised to follow-up with changelogs.
+
 ## Changelogs
 
 Refer to [CHANGELOG.md](CHANGELOG.md).
