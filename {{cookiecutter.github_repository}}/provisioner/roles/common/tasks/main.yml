@@ -15,12 +15,12 @@
 #  when: vm == 1
 
 # Ansible requires aptitude and python2 for various tasks
+- name: Install Aptitude and Python-minimal for ansible
+  raw: apt-get install -qq python-apt aptitude
+
 - name: Set hostname
   action: shell hostnamectl set-hostname {{ domain_name }}
   when: vm == 0
-
-- name: Install Aptitude and Python-minimal for ansible
-  raw: apt-get install -qq python-apt aptitude
 
 - name: set system locale
   command: update-locale LC_ALL={{ lc_all }} LANG={{ lc_lang }} LC_CTYPE={{ lc_ctype }} LC_COLLATE={{ lc_collate }}
