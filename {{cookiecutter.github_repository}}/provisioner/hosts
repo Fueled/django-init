@@ -3,6 +3,7 @@
 
 [vagrant:vars]
 vm=1
+environment=vagrant
 user=vagrant
 project_path=/home/vagrant/{{ cookiecutter.github_repository }}
 venv_path=/home/vagrant/venv
@@ -12,16 +13,49 @@ use_letsencrypt=False
 pg_db={{ cookiecutter.main_module }}
 pg_user=vagrant
 pg_password=vagrant
+domain_name=vagrant.{{ cookiecutter.main_module }}.com
+
+[dev]
+dev.{{ cookiecutter.main_module }}.com
+
+[dev:vars]
+vm=0
+environment=dev
+user=ubuntu
+project_path=/home/ubuntu/{{ environment }}/{{ cookiecutter.github_repository }}
+venv_path=/home/ubuntu/{{ environment }}/{{ project_name }}-venv
+use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
+letsencrypt_email={{ cookiecutter.letsencrypt_email }}
+django_requirements_file=requirements.txt
+django_settings="settings.production"
+domain_name={{environment}}.{{ cookiecutter.main_module }}.com
+
+[qa]
+qa.{{ cookiecutter.main_module }}.com
+
+[qa:vars]
+vm=0
+environment=qa
+user=ubuntu
+project_path=/home/ubuntu/{{ environment }}/{{ cookiecutter.github_repository }}
+venv_path=/home/ubuntu/{{ environment }}/{{ project_name }}-venv
+use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
+letsencrypt_email={{ cookiecutter.letsencrypt_email }}
+django_requirements_file=requirements.txt
+django_settings="settings.production"
+domain_name={{environment}}.{{ cookiecutter.main_module }}.com
 
 [production]
 {{ cookiecutter.main_module }}.com
 
 [production:vars]
 vm=0
+environment=prod
 user=ubuntu
-project_path=/home/ubuntu/{{ cookiecutter.github_repository }}
-venv_path=/home/ubuntu/venv
+project_path=/home/ubuntu/{{ environment }}/{{ cookiecutter.github_repository }}
+venv_path=/home/ubuntu/{{ environment }}/{{ project_name }}-venv
 use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
 letsencrypt_email={{ cookiecutter.letsencrypt_email }}
 django_requirements_file=requirements.txt
 django_settings="settings.production"
+domain_name={{ cookiecutter.main_module }}.com

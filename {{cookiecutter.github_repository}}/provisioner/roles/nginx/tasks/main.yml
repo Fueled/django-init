@@ -46,20 +46,20 @@
   notify: restart nginx
 
 - name: copy site host port 80 configuration.
-  template: src=site.80.conf.j2 dest=/etc/nginx/sites-available/{{project_name}}.80.conf
+  template: src=site.80.conf.j2 dest=/etc/nginx/sites-available/{{ nginx_conf_file_name }}.80.conf
   notify: restart nginx
 
 - name: copy site host port 443 configuration.
-  template: src=site.443.conf.j2 dest=/etc/nginx/sites-available/{{project_name}}.443.conf
+  template: src=site.443.conf.j2 dest=/etc/nginx/sites-available/{{ nginx_conf_file_name }}.443.conf
   when: nginx_cert.stat.exists == true and nginx_key.stat.exists == true
   notify: restart nginx
 
 - name: put host port 80 configuration in sites-enabled
-  file: src=/etc/nginx/sites-available/{{project_name}}.80.conf dest=/etc/nginx/sites-enabled/{{project_name}}.80 state=link
+  file: src=/etc/nginx/sites-available/{{ nginx_conf_file_name }}.80.conf dest=/etc/nginx/sites-enabled/{{ nginx_conf_file_name }}.80 state=link
   notify: restart nginx
 
 - name: put host port 443 configuration in sites-enabled
-  file: src=/etc/nginx/sites-available/{{project_name}}.443.conf dest=/etc/nginx/sites-enabled/{{project_name}}.443 state=link
+  file: src=/etc/nginx/sites-available/{{ nginx_conf_file_name }}.443.conf dest=/etc/nginx/sites-enabled/{{ nginx_conf_file_name }}.443 state=link
   when: nginx_cert.stat.exists == true and nginx_key.stat.exists == true
   notify: restart nginx
 
