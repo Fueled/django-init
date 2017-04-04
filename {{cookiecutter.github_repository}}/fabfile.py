@@ -116,12 +116,30 @@ def createapp(appname):
 
 #  Enviroments & Deployments
 # ---------------------------------------------------------
+def dev():
+    env.host_group = 'dev'
+    env.remote = 'origin'
+    env.branch = 'master'
+    env.hosts = ['qa.{{ cookiecutter.main_module }}.com']
+    env.dotenv_path = '/home/ubuntu/dev/{{ cookiecutter.main_module }}/.env'
+    env.config_setter = fab.run
+
+
+def qa():
+    env.host_group = 'qa'
+    env.remote = 'origin'
+    env.branch = 'qa'
+    env.hosts = ['qa.{{ cookiecutter.main_module }}.com']
+    env.dotenv_path = '/home/ubuntu/qa/{{ cookiecutter.main_module }}/.env'
+    env.config_setter = fab.run
+
+
 def prod():
     env.host_group = 'production'
     env.remote = 'origin'
     env.branch = 'prod'
     env.hosts = ['prod.{{ cookiecutter.main_module }}.com']
-    env.dotenv_path = '/home/ubuntu/{{ cookiecutter.github_repository }}/.env'
+    env.dotenv_path = '/home/ubuntu/prod/{{ cookiecutter.main_module }}/.env'
     env.config_setter = fab.run
 
 
