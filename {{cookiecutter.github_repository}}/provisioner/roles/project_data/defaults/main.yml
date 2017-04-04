@@ -1,4 +1,4 @@
----
+{% raw %}---
 pg_hstore: False
 pg_db: '{{ project_name }}-{{ environment }}'
 pg_user: dev
@@ -18,4 +18,4 @@ uwsgi_conf_path: /etc/uwsgi-emperor/vassals
 uwsgi_socket: /tmp/django-{{ domain_name }}-uwsgi.sock
 uwsgi_pid_file: /tmp/django-{{ domain_name }}-wsgi.pid
 
-project_log_dir: /var/log/django/{{ environment }}/{{ project_name}}
+project_log_dir: /var/log/django/{{ environment }}/{{ project_name}}{% endraw %}
