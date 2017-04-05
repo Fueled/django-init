@@ -1,7 +1,7 @@
 {% raw %}---
 - name: copy celery.log logrotate
   template: src=celery.log.j2
-            dest=/etc/logrotate.d/celery
+            dest=/etc/logrotate.d/celery-{{ project_namespace }}
             mode=644
   tags: ['configure', 'celery']
 
@@ -14,10 +14,10 @@
   tags: ['celery']
 
 - name: copy celery service
-  template: src=celery.service.j2 dest=/etc/systemd/system/celery.service
+  template: src=celery.service.j2 dest=/etc/systemd/system/celery-{{ project_namespace }}.service
   tags: ['celery']
 
 - name: ensure celery worker is running
-  systemd: state=restarted daemon_reload=yes enabled=yes name=celery
+  systemd: state=restarted daemon_reload=yes enabled=yes name=celery-{{ project_namespace }}
   tags: ['celery']
 {% endraw %}

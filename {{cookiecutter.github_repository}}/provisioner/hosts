@@ -4,6 +4,7 @@
 [vagrant:vars]
 vm=1
 environment=vagrant
+project_namespace={% raw %}{{ project_name }}-{{ environment }}{% endraw %}
 user=vagrant
 project_path=/home/vagrant/{{ cookiecutter.github_repository }}
 venv_path=/home/vagrant/venv
@@ -22,6 +23,7 @@ dev.{{ cookiecutter.main_module }}.com
 vm=0
 environment=dev
 user=ubuntu
+project_namespace={% raw %}{{ project_name }}-{{ environment }}{% endraw %}
 project_path=/home/ubuntu/{% raw %}{{ environment }}{% endraw %}/{{ cookiecutter.github_repository }}
 venv_path=/home/ubuntu/{% raw %}{{ environment }}/{{ project_name }}-venv{% endraw %}
 use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
@@ -30,6 +32,7 @@ django_requirements_file=requirements.txt
 django_settings="settings.production"
 domain_name=dev.{{ cookiecutter.main_module }}.com
 
+
 [qa]
 qa.{{ cookiecutter.main_module }}.com
 
@@ -37,6 +40,7 @@ qa.{{ cookiecutter.main_module }}.com
 vm=0
 environment=qa
 user=ubuntu
+project_namespace={% raw %}{{ project_name }}-{{ environment }}{% endraw %}
 project_path=/home/ubuntu/{% raw %}{{ environment }}{% endraw %}/{{ cookiecutter.github_repository }}
 venv_path=/home/ubuntu/{% raw %}{{ environment }}/{{ project_name }}-venv{% endraw %}
 use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
@@ -52,6 +56,7 @@ domain_name=qa.{{ cookiecutter.main_module }}.com
 vm=0
 environment=prod
 user=ubuntu
+project_namespace={% raw %}{{ project_name }}-{{ environment }}{% endraw %}
 project_path=/home/ubuntu/{% raw %}{{ environment }}{% endraw %}/{{ cookiecutter.github_repository }}
 venv_path=/home/ubuntu/{% raw %}{{ environment }}/{{ project_name }}-venv{% endraw %}
 use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
