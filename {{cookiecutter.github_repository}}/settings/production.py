@@ -16,7 +16,7 @@ from django.utils import six
 
 
 from .common import *  # noqa F405
-from .common import (DATABASES, INSTALLED_APPS, {% if cookiecutter.add_django_auth_wall.lower() == 'y' %}MIDDLEWARE_CLASSES,{%- endif %}
+from .common import (DATABASES, INSTALLED_APPS, {% if cookiecutter.add_django_auth_wall.lower() == 'y' %}MIDDLEWARE,{%- endif %}
                      REST_FRAMEWORK, TEMPLATES, env)
 
 # SITE CONFIGURATION
@@ -50,7 +50,7 @@ SITE_ID = env('DJANGO_SITE_ID', default='remote')
 # Basic Auth Protection
 # -----------------------------------------------------------------------------
 # see: https://github.com/theskumar/django-auth-wall#django-auth-wall
-MIDDLEWARE_CLASSES = ('django_auth_wall.middleware.BasicAuthMiddleware', ) + MIDDLEWARE_CLASSES
+MIDDLEWARE = ['django_auth_wall.middleware.BasicAuthMiddleware', ] + MIDDLEWARE
 {%- endif %}
 
 # If your Django app is behind a proxy that sets a header to specify secure
