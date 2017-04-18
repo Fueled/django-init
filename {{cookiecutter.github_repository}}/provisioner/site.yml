@@ -11,6 +11,7 @@
     - nginx
     - postgresql
     - project_data
+    - letsencrypt
     # - redis
     # - celery
 
@@ -26,5 +27,6 @@
     - common
     - nginx
     - project_data
+    - letsencrypt
     # - redis
     # - celery
