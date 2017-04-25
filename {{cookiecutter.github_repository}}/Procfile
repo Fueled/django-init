@@ -1,4 +1,4 @@
 web: {% if cookiecutter.newrelic == 'y' %}newrelic-admin run-program {% endif %}uwsgi uwsgi.ini
 {%- if cookiecutter.add_celery == 'y' %}
-worker: celery -A dutchess worker -l info --concurrency=2 -B
+worker: celery -A {{ cookiecutter.main_module }} worker -l info --concurrency=2 -B
 {%- endif %}
