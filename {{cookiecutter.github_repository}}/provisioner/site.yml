@@ -11,8 +11,13 @@
     - nginx
     - postgresql
     - project_data
+{%- if cookiecutter.add_celery.lower() == 'y' %}
+    - redis
+    - celery
+{%- else %}
     # - redis
     # - celery
+{%- endif %}
 
 
 - hosts: production
@@ -26,5 +31,10 @@
     - common
     - nginx
     - project_data
+{%- if cookiecutter.add_celery.lower() == 'y' %}
+    - redis
+    - celery
+{%- else %}
     # - redis
     # - celery
+{%- endif %}

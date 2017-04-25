@@ -82,6 +82,17 @@ def serve(host='127.0.0.1:8000'):
     install_requirements()
     migrate()
     manage('runserver %s' % host)
+{%- if cookiecutter.add_celery.lower() == 'y' %}
+
+
+def celery():
+    """Run local celery, making sure that dependencies and
+    database migrations are upto date.
+    """
+    install_requirements()
+    migrate()
+    local('celery worker -A {{ cookiecutter.main_module }} -B -l INFO --concurrency=2')
+{%- endif %}
 
 
 def makemigrations(app=''):
