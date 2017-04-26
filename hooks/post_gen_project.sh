@@ -35,6 +35,10 @@ else
     mv {{ cookiecutter.main_module }}/static/css/main.css {{ cookiecutter.main_module }}/static/css/main.scss
 fi
 
+if echo "{{ cookiecutter.add_celery }}" | grep -iq "^n"; then
+    rm -rf {{ cookiecutter.main_module }}/celery.py
+fi
+
 if echo "$yn" | grep -iq "^y"; then
     echo "==> Checking system dependencies. You may need to enter your sudo password."
 

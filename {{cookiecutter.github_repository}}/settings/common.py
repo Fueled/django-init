@@ -304,6 +304,18 @@ X_FRAME_OPTIONS = 'DENY'
 # django-log-request-id - Sending request id in response
 REQUEST_ID_RESPONSE_HEADER = 'REQUEST_ID'
 
+{%- if cookiecutter.add_celery.lower() == 'y' %}
+
+# DJANGO CELERY CONFIGURATION
+# -----------------------------------------------------------------------------
+# see: http://celery.readthedocs.org/en/latest/userguide/tasks.html#task-states
+CELERY_BROKER_URL = "{0}/{1}".format(env('REDIS_URL', default="redis://localhost:6379"), 0)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+{%- endif %}
+
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
@@ -414,5 +426,7 @@ RAVEN_CONFIG = {
 
 SITE_INFO = {
     'RELEASE_VERSION': RELEASE_VERSION,
+{%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     'IS_RAVEN_INSTALLED': RAVEN_CONFIG['dsn'] is not ''
+{%- endif %}
 }
