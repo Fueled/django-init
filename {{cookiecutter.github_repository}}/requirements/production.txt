@@ -9,13 +9,13 @@ boto3==1.4.4
 
 # Caching
 # -------------------------------------
-django-redis==4.7.0
+django-redis==4.8.0
 hiredis==0.2.0
 
 {% if cookiecutter.newrelic == 'y' %}
 # Logging
 # -------------------------------------
-newrelic==2.82.0.62
+newrelic==2.84.0.64
 {% endif %}
 
 {%- if cookiecutter.add_django_auth_wall.lower() == 'y' %}

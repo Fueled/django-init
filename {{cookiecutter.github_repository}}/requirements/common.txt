@@ -10,7 +10,7 @@ uWSGI==2.0.15
 # Configuration
 # -------------------------------------
 argon2-cffi==16.3.0
-django-environ==0.4.1
+django-environ==0.4.3
 django-sites==0.9
 python-dotenv==0.6.4
 
@@ -26,13 +26,13 @@ pytz==2017.2
 # -------------------------------------
 psycopg2==2.7.1
 
-Pillow==4.0.0
-django-versatileimagefield==1.6.3
+Pillow==4.1.0
+django-versatileimagefield==1.7.0
 django-uuid-upload-path==1.0.0
 
 # REST APIs
 # -------------------------------------
-djangorestframework==3.5.4
+djangorestframework==3.6.2
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
 # Static files
