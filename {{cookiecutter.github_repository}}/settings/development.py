@@ -69,7 +69,7 @@ DEVRECARGAR_PATHS_TO_WATCH = [{
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
-MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)  # noqa: F405
+MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]  # noqa: F405
 INSTALLED_APPS += ('debug_toolbar', )
 
 DEBUG_TOOLBAR_CONFIG = {
