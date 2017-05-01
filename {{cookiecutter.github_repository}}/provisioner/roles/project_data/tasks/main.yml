@@ -6,7 +6,11 @@
 - name: get the latest code
   git: repo={{ project_repo_url }} dest={{ project_path }} version={{ repo_version }} accept_hostkey=true
   become: false
+  register: gitresult
   when: vm == 0
+  tags: ['always']
+
+- debug: msg="Git SHA-1 before={{ gitresult.before }} after={{ gitresult.after }}"
   tags: ['always']
 
 - name: copy django-uwsgi logrotate
