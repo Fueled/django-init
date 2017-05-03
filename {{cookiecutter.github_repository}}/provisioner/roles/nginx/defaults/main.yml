@@ -5,6 +5,7 @@ nginx_worker_connections: 1024
 nginx_max_file_size: 10
 
 {% raw %}
+nginx_conf_file_name: '{{ project_name }}-{{ environment }}'
 ssl_cert_dir: '/etc/nginx/ssl'
 ssl_forward_secrecy_key_path: /etc/nginx/dhparam.pem
 ssl_forward_secrecy_key_length: 2048

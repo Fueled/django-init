@@ -19,7 +19,42 @@
     # - celery
 {%- endif %}
 
+#= Dev
+#===================================================
+- hosts: dev
+  vars_files:
+    - vars.yml
+  gather_facts: false
+  become: true
+  become_method: sudo
 
+  roles:
+    - common
+    - nginx
+    - postgresql
+    - project_data
+    # - redis
+    # - celery
+
+#= QA
+#===================================================
+- hosts: qa
+  vars_files:
+    - vars.yml
+  gather_facts: false
+  become: true
+  become_method: sudo
+
+  roles:
+    - common
+    - nginx
+    - project_data
+    - postgresql
+    # - redis
+    # - celery
+
+#= Production
+#===================================================
 - hosts: production
   vars_files:
     - vars.yml

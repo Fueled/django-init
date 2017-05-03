@@ -28,7 +28,7 @@ server {
 
     # Setup named location for Django requests and handle proxy details
     location / {
-        uwsgi_pass unix:///tmp/django-uwsgi.sock;
+        uwsgi_pass unix:///tmp/django-{{ domain_name }}-uwsgi.sock;
         include /etc/nginx/uwsgi_params;
 
         # set correct scheme

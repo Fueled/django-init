@@ -1,4 +1,4 @@
-{% raw %}"/var/log/{{celery_log_dir}}/celery.log" {
+{% raw %}"{{celery_log_file}}" {
   copytruncate
   daily
   rotate 5

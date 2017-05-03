@@ -15,7 +15,7 @@
 
 - name: copy django-uwsgi logrotate
   template: src=django.logrotate.j2
-            dest=/etc/logrotate.d/uwsgi-django
+            dest=/etc/logrotate.d/uwsgi-{{ environment}}-{{project_name}}-django
             mode=644
   tags: ['configure']
 
@@ -23,10 +23,10 @@
   file: path={{ project_log_dir }} state=directory owner={{uwsgi_user}} group={{uwsgi_group}} mode=751 recurse=yes
   tags: ['configure']
 
-- name: manually create the initial virtualenv
+- name: ensure python virtualenv exist
   command: virtualenv {{ venv_path }} -p python3 creates={{ venv_path }}
   become: false
-  tags: ['configure', 'deploy']
+  tags: ['always']
 
 - name: install django python dependencies
   pip: requirements={{ project_path }}/{{ django_requirements_file }}  executable={{ venv_path }}/bin/pip
@@ -65,7 +65,7 @@
 
 - name: copy uwsgi configuration
   template: src=django.uwsgi.ini.j2
-            dest={{ uwsgi_conf_path }}/django.ini
+            dest={{ uwsgi_conf_path }}//django-{{project_name}}-{{ environment }}.ini
             mode=644
   tags: ['deploy']
   register: uwsgiconf

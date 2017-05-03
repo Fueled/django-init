@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.10.x]
 
+- Add multiple environment support on a single machine (@theskumar)
 - Add .env.sample file (@theskumar)
 - Add django-flat-responsive to give django-admin a responsive touch (@theskumar)
 - Add django_auth_wall to protect staging environments (@theskumar)
