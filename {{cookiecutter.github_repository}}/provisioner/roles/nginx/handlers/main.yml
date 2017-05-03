@@ -1,6 +1,26 @@
 ---
 - name: restart nginx
-  service: name=nginx state=restarted
+  debug: msg="checking config first"
+  changed_when: True
+  notify:
+    - check nginx configuration
+    - restart nginx - after config check
 
 - name: reload nginx
+  debug: msg="checking config first"
+  changed_when: True
+  notify:
+    - check nginx configuration
+    - reload nginx - after config check
+
+- name: check nginx configuration
+  command: "nginx -t"
+  register: result
+  changed_when: "result.rc != 0"
+  check_mode: no
+
+- name: restart nginx - after config check
+  service: name=nginx state=restarted
+
+- name: reload nginx - after config check
   service: name=nginx state=reloaded
