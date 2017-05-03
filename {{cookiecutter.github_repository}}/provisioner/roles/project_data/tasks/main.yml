@@ -19,10 +19,10 @@
   file: path={{ project_log_dir }} state=directory owner={{uwsgi_user}} group={{uwsgi_group}} mode=751 recurse=yes
   tags: ['configure']
 
-- name: manually create the initial virtualenv
+- name: ensure python virtualenv exist
   command: virtualenv {{ venv_path }} -p python3 creates={{ venv_path }}
   become: false
-  tags: ['configure', 'deploy']
+  tags: ['always']
 
 - name: install django python dependencies
   pip: requirements={{ project_path }}/{{ django_requirements_file }}  executable={{ venv_path }}/bin/pip
