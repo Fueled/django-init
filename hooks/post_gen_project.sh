@@ -63,10 +63,6 @@ if echo "$yn" | grep -iq "^y"; then
     echo "${green}==> Setup the project dependencies and database for local development${reset}"
     fab init
 
-    echo "==> Bumpversion 0.1.0-dev"
-    source venv/bin/activate
-    bumpversion --no-tag minor
-
     OUT=$?
     if [ $OUT -eq 0 ]; then
         echo "${green}============================================"

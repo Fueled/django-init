@@ -44,8 +44,7 @@ Execute the following commands:
 ```
 git checkout master
 fab test
-bumpversion release
-bumpversion --no-tag patch # 'patch' can be replaced with 'minor' or 'major'
+bumpversion patch  # 'patch' can be replaced with 'minor' or 'major'
 git push origin master
 git push origin master --tags
 git checkout qa
