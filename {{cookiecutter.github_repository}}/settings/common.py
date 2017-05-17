@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     '{{ cookiecutter.main_module }}.users',
 
     'rest_framework',  # http://www.django-rest-framework.org/
+    'rest_framework_swagger',
     'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
