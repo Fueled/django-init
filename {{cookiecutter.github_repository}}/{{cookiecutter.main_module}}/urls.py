@@ -15,7 +15,7 @@ from django.views.generic import TemplateView
 # {{ cookiecutter.project_name }} Stuff
 from {{ cookiecutter.main_module }}.base import views as base_views
 
-from .routers import router
+from . import routers, schemas
 
 handler500 = base_views.server_error
 
@@ -33,10 +33,7 @@ urlpatterns += [
         base_views.root_txt_files, name='root-txt-files'),
 
     # Rest API
-    url(r'^api/', include(router.urls)),
-
-    # Browsable API
-    url(r'^api/auth-n/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/', include(routers.router.urls)),
 
     # Django Admin
     url(r'^{}/'.format(settings.DJANGO_ADMIN_URL), admin.site.urls),
@@ -46,6 +43,8 @@ urlpatterns += [
 if settings.API_DEBUG:
     urlpatterns += [
         # Browsable API
+        url('^schema/$', schemas.schema_view, name='schema'),
+        url(r'^api-playground/$', schemas.swagger_schema_view, name='api-playground'),
         url(r'^api/auth-n/', include('rest_framework.urls', namespace='rest_framework')),
     ]
 

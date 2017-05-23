@@ -33,6 +33,7 @@ django-uuid-upload-path==1.0.0
 # REST APIs
 # -------------------------------------
 djangorestframework==3.6.2
+django-rest-swagger==2.1.2
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
 # Static files
