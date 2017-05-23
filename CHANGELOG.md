@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.10.x]
 
+- Add default 'AUTH_PASSWORD_VALIDATORS' in settings
 - Add django-rest-swagger integration
 - Use simplified bumpversion rules, remove requirement of intermediate release tags e.g. `0.1.0-dev`.
 - Add multiple environment support on a single machine (@theskumar)
