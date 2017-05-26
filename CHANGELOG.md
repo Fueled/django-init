@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Handle nested serializer errors in our custom exception handler. (@jainmickey)
 - Remove mock dependency, replace with standard unittest.mock library
+- Add `django-cors-headers` integration (@jainmickey)
 - Add default 'AUTH_PASSWORD_VALIDATORS' in settings
 - Add django-rest-swagger integration
 - Use simplified bumpversion rules, remove requirement of intermediate release tags e.g. `0.1.0-dev`.

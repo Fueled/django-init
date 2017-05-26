@@ -36,6 +36,12 @@ ADMINS = getaddresses([env('DJANGO_ADMINS')])
 # Not-necessarily-technical managers of the site. They get broken link
 # notifications and other various emails.
 MANAGERS = ADMINS
+{%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
+
+# cors
+# --------------------------------------------------------------------------
+CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST')
+{%- endif %}
 
 # DJANGO_SITES
 # ------------------------------------------------------------------------------

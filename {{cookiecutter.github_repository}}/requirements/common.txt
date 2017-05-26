@@ -13,6 +13,9 @@ argon2-cffi==16.3.0
 django-environ==0.4.3
 django-sites==0.9
 python-dotenv==0.6.4
+{%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
+django-cors-headers==2.0.2
+{%- endif %}
 
 # Staticfiles
 # -------------------------------------
