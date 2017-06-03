@@ -19,6 +19,11 @@
     state: installed
   when: pg_gis
 
+- name: add hstore to default template
+  become_user: postgres
+  shell: psql -d template1 -c "CREATE EXTENSION IF NOT EXISTS hstore;"
+  when: pg_hstore
+
 - name: setup database
   become_user: postgres
   postgresql_db:
@@ -26,13 +31,8 @@
     encoding: 'UTF-8'
     lc_collate: 'en_US.UTF-8'
     lc_ctype: 'en_US.UTF-8'
-    template: 'template0'
+    template: 'template1'
     state: present
-
-- name: add hstore
-  become_user: postgres
-  shell: psql {{ pg_db }} -c "CREATE EXTENSION IF NOT EXISTS hstore;"
-  when: pg_hstore
 
 - name: add postgis
   become_user: postgres
