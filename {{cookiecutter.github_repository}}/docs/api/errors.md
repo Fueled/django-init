@@ -41,4 +41,36 @@ The response body will contain json in the format same as Generic Error with `fi
 }
 ```
 
+For nested errors:
+
+The response body will contain json in the format same as Validation error with `errors` as key. For example:
+
+```json
+{
+  "error_type": "ValidationError",
+  "errors": [
+    {
+      "field": "profile",
+      "message": null,
+      "errors": [
+        {
+          "field": "email",
+          "message": "User with this email address already exists."
+        },
+        {
+          "field": "custom_data",
+          "message": null,
+          "errors": [
+            {
+              "field": "age",
+              "message": "Person too young. Age should be more than 18 years."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
 __NOTE__: The copy for most of these error messages can be changed by backend developers.
