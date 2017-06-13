@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 
 # Standard Library
 import functools
 
 # Third Party Stuff
-import mock
 import pytest
+from unittest import mock
 
 
 class PartialMethodCaller:
