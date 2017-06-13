@@ -1,7 +1,7 @@
 # Core Stuff
 # -------------------------------------
-Django==1.11.1
-django-flat-responsive==1.3.0
+Django==1.11.2
+django-flat-responsive==1.4.1
 
 # WSGI HTTP Server
 # -------------------------------------
@@ -27,7 +27,7 @@ pytz==2017.2
 psycopg2==2.7.1
 
 Pillow==4.1.1
-django-versatileimagefield==1.7.0
+django-versatileimagefield==1.7.1
 django-uuid-upload-path==1.0.0
 
 # REST APIs
@@ -50,7 +50,7 @@ django-log-request-id==1.3.2
 {% if cookiecutter.use_sentry_for_error_reporting == "y" -%}
 # Raven is the Sentry client
 # --------------------------
-raven==6.0.0
+raven==6.1.0
 {%- endif %}
 {%- if cookiecutter.add_celery.lower() == "y" %}
 

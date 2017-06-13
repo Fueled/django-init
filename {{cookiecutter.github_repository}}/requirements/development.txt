@@ -3,7 +3,7 @@
 # Documentation
 # -------------------------------------
 mkdocs==0.16.3
-isort==4.2.5
+isort==4.2.15
 
 # Livereload
 # -------------------------------------
@@ -20,7 +20,7 @@ django-extensions==1.7.9  # for shell_plus and other utils
 pytest-django==3.1.2
 pytest-pythonpath==0.7.1
 pytest-cov==2.5.1
-django-dynamic-fixture==1.9.4
+django-dynamic-fixture==1.9.5
 flake8==3.3.0
 
 # Versioning
