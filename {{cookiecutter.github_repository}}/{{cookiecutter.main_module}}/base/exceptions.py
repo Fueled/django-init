@@ -68,6 +68,35 @@ class NotAuthenticated(exceptions.NotAuthenticated):
     pass
 
 
+def parse_field_errors(field, error_msg, depth=0):
+    # We only parse errors upto 10 nested serializers
+    if depth is not None:
+        assert depth >= 0, "'depth' may not be negative."
+        assert depth <= 10, "'depth' may not be greater than 10."
+
+    errors = []
+
+    if isinstance(error_msg, dict):
+        for error_msg_key, error_msg_values in list(error_msg.items()):
+            for msg in error_msg_values:
+                errors.append(
+                    {
+                        'field': field,
+                        'message': None,
+                        'errors': parse_field_errors(error_msg_key, msg, depth=depth + 1)
+                    }
+                )
+    else:
+        errors.append(
+            {
+                'field': field,
+                'message': error_msg,
+            }
+        )
+
+    return errors
+
+
 def format_exception(exc):
     class_name = exc.__class__.__name__
     detail = {
@@ -85,12 +114,7 @@ def format_exception(exc):
                         }
                     )
                 else:
-                    detail['errors'].append(
-                        {
-                            'field': error_key,
-                            'message': error_msg,
-                        }
-                    )
+                    detail['errors'] = detail['errors'] + parse_field_errors(error_key, error_msg)
     elif isinstance(exc.detail, list):
         for error_msg in exc.detail:
             detail['errors'].append(

@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.10.x]
 
+- Handle nested serializer errors in our custom exception handler. (@jainmickey)
 - Remove mock dependency, replace with standard unittest.mock library
 - Add default 'AUTH_PASSWORD_VALIDATORS' in settings
 - Add django-rest-swagger integration
