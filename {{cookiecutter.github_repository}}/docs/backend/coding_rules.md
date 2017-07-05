@@ -43,18 +43,18 @@ Example:
 ```python
 class SomeClass(models.Model):
     name = models.CharField(max_length=100, null = False, blank = False, unique=True,
-               verbose_name = _(u'name'))
+               verbose_name = _('name'))
     slug = models.SlugField(max_length=100, null = False, blank = False, unique=True,
-               verbose_name = _(u'slug'),
-               help_text = (u'Identifier of this object. Only letters, digits and underscore "_" allowed.'))
+               verbose_name = _('slug'),
+               help_text = ('Identifier of this object. Only letters, digits and underscore "_" allowed.'))
     text = models.TextField(null = False, blank = True,
-               verbose_name = _(u'text'))
+               verbose_name = _('text'))
 
     class Meta:
-        verbose_name = _(u'some class')
-        verbose_name_plural = _(u'some classes')
+        verbose_name = _('some class')
+        verbose_name_plural = _('some classes')
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 ```
