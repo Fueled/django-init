@@ -1,6 +1,6 @@
 # Core Stuff
 # -------------------------------------
-Django==1.11.2
+Django==1.11.3
 django-flat-responsive==1.4.1
 
 # WSGI HTTP Server
@@ -26,8 +26,8 @@ pytz==2017.2
 # -------------------------------------
 psycopg2==2.7.1
 
-Pillow==4.1.1
-django-versatileimagefield==1.7.1
+Pillow==4.2.0
+django-extensions==1.8.0
 django-uuid-upload-path==1.0.0
 
 # REST APIs
