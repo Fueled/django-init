@@ -120,7 +120,7 @@ def dev():
     env.host_group = 'dev'
     env.remote = 'origin'
     env.branch = 'master'
-    env.hosts = ['qa.{{ cookiecutter.main_module }}.com']
+    env.hosts = ['dev.{{ cookiecutter.main_module }}.com']
     env.dotenv_path = '/home/ubuntu/dev/{{ cookiecutter.main_module }}/.env'
     env.config_setter = fab.run
 
