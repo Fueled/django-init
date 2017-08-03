@@ -38,6 +38,9 @@ INSTALLED_APPS = (
     'rest_framework',  # http://www.django-rest-framework.org/
     'rest_framework_swagger',
     'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
+{%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
+    'corsheaders',   # https://github.com/ottoyiu/django-cors-headers/
+{%- endif %}
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
     'compressor',
@@ -125,6 +128,9 @@ SITE_ID = 'local'
 # this middleware classes will be applied in the order given, and in the
 # response phase the middleware will be applied in reverse order.
 MIDDLEWARE = [
+{%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
+    'corsheaders.middleware.CorsMiddleware',
+{%- endif %}
     'log_request_id.middleware.RequestIDMiddleware',  # For generating/adding Request id for all the logs
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
