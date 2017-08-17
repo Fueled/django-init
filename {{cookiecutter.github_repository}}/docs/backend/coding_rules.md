@@ -15,25 +15,25 @@
 
 ## Django models
 
-* All model names in singular an CamelCase.
+* All model names in singular and CamelCase.
 * All models have a `Meta` with at least:
     - `verbose_name` and `verbose_name_plural`: unicode strings, lowercase, with spaces.
     - `ordering`: return a consistent order, using pk if no other unique field or combination exists.
-* All models have `__unicode__` method, returning a human-readable, descriptive, short text.
+* All models have `__str__` method, returning a human-readable, descriptive, short text.
 * All fields have `verbose_name`. Also `help_text` if needed to fully explain the field meaning.
 * All fields have explicit `blank` and `null` parameters. Use only those combinations, unless there a documented need of other thing:
 
-    **Normal fields** (IntegerField, DateField, ForeignKey, FileField...)  
-      - (optional) `null = True`, `blank = True`  
+    **Normal fields** (IntegerField, DateField, ForeignKey, FileField...)
+      - (optional) `null = True`, `blank = True`
       - (required) `null = False`, `blank = False`
 
-    **Text fields** (CharField, TextField, URLField...)  
-      - (optional) `null = False`, `blank = True`  
+    **Text fields** (CharField, TextField, URLField...)
+      - (optional) `null = False`, `blank = True`
       - (required) `null = False`, `blank = False`
 
     **Boolean fields**:  
-      - (two values, T/F) `null = False`, `blank = True`  
-      - (three values, T/F/Null) `null = True`, `blank = True`  
+      - (two values, T/F) `null = False`, `blank = True`
+      - (three values, T/F/Null) `null = True`, `blank = True`
 
 * Don't create text fields with `null = True`, unless you need to distinguish between empty string and `None`.
 * Don't create boolean fields with `blank = False`, otherwise they could only be `True`.
