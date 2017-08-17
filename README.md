@@ -5,13 +5,13 @@ Project template for django based projects, optimized for making REST API with d
 
 ## Features
 
-- Django 1.10.x
+- Django 1.11.x
 - Python 3.5.x only
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - PostresSQL everywhere (support of postgis is available)
 - [Procfile] for deploying to Heroku
 - [Ansible] playbook for deployment to Ubuntu 16 LTS (optional)
-- Designed to work with Django Rest Framework 3.0+.
+- Designed to work with [Django Rest Framework][drf] 3.6.x.
 - Uses `django_sites` instead of `django.contrib.sites`
 - Use [mkdocs] for project documentation.
 - Uses [py.test] as test runner.
@@ -73,3 +73,4 @@ Built with ♥ at [Fueled](https://fueled.com)
 [django-environ]: https://github.com/joke2k/django-environ
 [Ansible]: http://docs.ansible.com/index.html
 [devrecargar]: https://github.com/scottwoodall/django-devrecargar
+[drf]: http://www.django-rest-framework.org/
