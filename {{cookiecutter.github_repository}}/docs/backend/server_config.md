@@ -65,6 +65,7 @@ heroku config:set NEW_RELIC_APP_NAME=<new-relic-app-name> --app=<heroku-app-name
 heroku config:set DJANGO_SETTINGS_MODULE='settings.production' \
 DJANGO_SECRET_KEY=`openssl rand -hex 64` \
 SITE_DOMAIN=<heroku-app-name>.herokuapp.com \
+ALLOWED_HOSTS=<heroku-app-name>.herokuapp.com \
 SITE_SCHEME=https \
 SITE_NAME=DJANGO_SITE_NAME_HERE --app=<heroku-app-name>
 
