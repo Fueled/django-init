@@ -1,6 +1,6 @@
 # Core Stuff
 # -------------------------------------
-Django==1.11.3
+Django==1.11.4
 django-flat-responsive==1.4.1
 
 # WSGI HTTP Server
@@ -27,10 +27,10 @@ pytz==2017.2
 
 # Models
 # -------------------------------------
-psycopg2==2.7.1
+psycopg2==2.7.3
 
-Pillow==4.2.0
-django-extensions==1.8.0
+Pillow==4.2.1
+django-extensions==1.8.1
 django-uuid-upload-path==1.0.0
 django-versatileimagefield==1.7.1  # versatile image field degrade Pillow version to 4.0.0
 
