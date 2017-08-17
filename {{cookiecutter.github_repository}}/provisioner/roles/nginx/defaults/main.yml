@@ -1,4 +1,4 @@
-ngnix_listen: '443 ssl'
+ngnix_listen: '443 http2 ssl'
 nginx_user: 'www-data'
 nginx_worker_processes: 1
 nginx_worker_connections: 1024
