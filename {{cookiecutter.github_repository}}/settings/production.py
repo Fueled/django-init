@@ -22,8 +22,8 @@ from .common import (DATABASES, INSTALLED_APPS, {% if cookiecutter.add_django_au
 # SITE CONFIGURATION
 # Hosts/domain names that are valid for this site.
 # "*" matches anything, ".example.com" matches example.com and all subdomains
-# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['*']
+# See https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 SITE_SCHEME = env('SITE_SCHEME', default='https')
 
