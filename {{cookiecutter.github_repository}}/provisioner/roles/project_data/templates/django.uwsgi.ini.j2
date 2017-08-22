@@ -24,3 +24,10 @@ no-orphans=true
 chmod-socket=660
 log-date=true
 logto = {{project_log_dir}}/uwsgi.log{% endraw %}
+
+
+# os write errors
+# https://github.com/getsentry/raven-python/issues/732#issuecomment-176854438
+ignore-sigpipe = true
+ignore-write-errors = true
+disable-write-exception = true
