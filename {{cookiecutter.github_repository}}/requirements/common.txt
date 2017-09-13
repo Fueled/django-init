@@ -1,6 +1,6 @@
 # Core Stuff
 # -------------------------------------
-Django==1.11.4
+Django==1.11.5
 django-flat-responsive==1.4.1
 
 # WSGI HTTP Server
@@ -10,9 +10,9 @@ uWSGI==2.0.15
 # Configuration
 # -------------------------------------
 argon2-cffi==16.3.0
-django-environ==0.4.3
+django-environ==0.4.4
 django-sites==0.9
-python-dotenv==0.6.4
+python-dotenv==0.7.1
 {%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
 django-cors-headers==2.0.2
 {%- endif %}
@@ -27,22 +27,22 @@ pytz==2017.2
 
 # Models
 # -------------------------------------
-psycopg2==2.7.3
+psycopg2==2.7.3.1
 
 Pillow==4.2.1
-django-extensions==1.8.1
+django-extensions==1.9.1
 django-uuid-upload-path==1.0.0
 django-versatileimagefield==1.7.1  # versatile image field degrade Pillow version to 4.0.0
 
 # REST APIs
 # -------------------------------------
-djangorestframework==3.6.3
+djangorestframework==3.6.4
 django-rest-swagger==2.1.2
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
 # Static files
 # -------------------------------------
-django-compressor==2.1.1
+django-compressor==2.2
 django-libsass==0.7
 django-compressor-autoprefixer==0.1.0
 {%- endif %}
