@@ -56,12 +56,6 @@ def serve_docs(options=''):
         local('mkdocs serve {}'.format(options))
 
 
-def deploy_docs():
-    with fab.lcd(HERE) and virtualenv():
-        local('mkdocs gh-deploy')
-        local('rm -rf _docs_html')
-
-
 def shell():
     manage('shell_plus')
 
@@ -185,7 +179,17 @@ def configure(tags='', skip_tags='deploy'):
 
 
 def deploy():
-    configure(tags='deploy', skip_tags=''){% endif %}
+    configure(tags='deploy', skip_tags='')
+
+
+def deploy_docs():
+    configure(tags='documentation', skip_tags=''){% else %}
+
+
+def deploy_docs():
+    with fab.lcd(HERE) and virtualenv():
+        local('mkdocs gh-deploy')
+        local('rm -rf _docs_html'){% endif %}
 
 
 # Helpers

@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.10.x]
 
+- Add automatic documentation build when using ansible and make it available at `/docs/` url.
 - Handle nested serializer errors in our custom exception handler. (@jainmickey)
 - Remove mock dependency, replace with standard unittest.mock library
 - Add `django-cors-headers` integration (@jainmickey)
