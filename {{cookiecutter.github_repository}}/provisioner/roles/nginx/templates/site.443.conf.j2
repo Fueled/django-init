@@ -39,6 +39,7 @@ server {
     {% endif %}
 
     location /docs {
+        # mkdocs html generated via "product_data" role
         alias {{ project_path }}/_docs_html/;
     }
 
