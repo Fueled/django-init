@@ -183,10 +183,14 @@ def deploy():
 
 
 def deploy_docs():
+    """Deploy documentation to server via ansible.
+    """
     configure(tags='documentation', skip_tags=''){% else %}
 
 
 def deploy_docs():
+    """Deploy documentation to github pages.
+    """
     with fab.lcd(HERE) and virtualenv():
         local('mkdocs gh-deploy')
         local('rm -rf _docs_html'){% endif %}
