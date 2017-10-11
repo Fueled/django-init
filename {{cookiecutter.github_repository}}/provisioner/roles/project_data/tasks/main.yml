@@ -68,7 +68,6 @@
   args:
     chdir: "{{ project_path }}"
   become: false
-  when: gitresult.changed
   tags: ['deploy', 'documentation']
 
 - name: copy uwsgi configuration
