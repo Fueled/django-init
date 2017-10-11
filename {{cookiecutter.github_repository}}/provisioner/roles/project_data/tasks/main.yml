@@ -63,6 +63,13 @@
   tags: ['deploy']
 #  notify: reload celery  ## Uncomment this when project is using celery
 
+- name: Build documentation for "/docs" url.
+  command: "{{ venv_path }}/bin/mkdocs build"
+  args:
+    chdir: "{{ project_path }}"
+  become: false
+  tags: ['deploy', 'documentation']
+
 - name: copy uwsgi configuration
   template: src=django.uwsgi.ini.j2
             dest={{ uwsgi_conf_path }}//django-{{project_name}}-{{ environment }}.ini
