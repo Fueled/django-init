@@ -2,6 +2,7 @@
 
 server {
     listen       {{ ngnix_listen }};
+    listen       [::]:{{ ngnix_listen }};
     server_name  {{ domain_name }};
 
     ssl on;
