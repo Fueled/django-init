@@ -61,7 +61,6 @@
   django_manage: command=migrate app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
-#  notify: reload celery  ## Uncomment this when project is using celery
 
 - name: Build documentation for "/docs" url.
   command: "{{ venv_path }}/bin/mkdocs build"
@@ -83,3 +82,6 @@
   when: not uwsgiconf.changed
   tags: ['deploy']
 {% endraw %}
+  {%- if cookiecutter.add_celery.lower() == 'y' %}
+    notify: reload celery  # reload celery everytime uwsgi conf changes
+  {%- endif %}
