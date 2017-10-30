@@ -33,8 +33,13 @@
     - nginx
     - postgresql
     - project_data
+{%- if cookiecutter.add_celery.lower() == 'y' %}
+    - redis
+    - celery
+{%- else %}
     # - redis
     # - celery
+{%- endif %}
 
 #= QA
 #===================================================
@@ -50,8 +55,13 @@
     - nginx
     - project_data
     - postgresql
+{%- if cookiecutter.add_celery.lower() == 'y' %}
+    - redis
+    - celery
+{%- else %}
     # - redis
     # - celery
+{%- endif %}
 
 #= Production
 #===================================================
