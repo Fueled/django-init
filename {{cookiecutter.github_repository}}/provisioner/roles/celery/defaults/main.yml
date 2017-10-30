@@ -8,4 +8,5 @@ celery_log_level: "INFO"
 celerybeat_schedule_dir: /var/run/celery
 celerybeat_schedule_file: "{{ celerybeat_schedule_dir }}/schedule-{{ project_namespace }}.db"
 celery_pid_file: /tmp/celery-{{ project_namespace }}.pid
+celerybeat_pid_file: /tmp/celerybeat-{{ project_namespace }}.pid
 {% endraw %}

@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.10.x]
 
+- Separates out celery beat process as different worker for multi-node setups. (@CuriousLearner)
 - Fixes celery beat scheduler issue & makes celery role consistent across deployments. (@CuriousLearner)
 - Add automatic documentation build when using ansible and make it available at `/docs/` url.
 - Handle nested serializer errors in our custom exception handler. (@jainmickey)

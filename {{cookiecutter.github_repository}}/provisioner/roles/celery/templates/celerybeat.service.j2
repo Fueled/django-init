@@ -1,0 +1,21 @@
+{%raw%}
+[Unit]
+Description=Celery {{ project_namespace }} Service
+After=network.target
+
+[Service]
+User={{ celery_user }}
+Group={{ celery_group }}
+Type=forking
+Restart=always
+WorkingDirectory={{ project_path }}
+ExecStart={{ venv_path }}/bin/celery beat start worker-beat-{{ project_namespace }} -A {{ project_name }}  -l {{ celery_log_level }} \
+    --logfile={{ celery_log_file }} --pidfile={{ celerybeat_pid_file }}  --schedule={{ celerybeat_schedule_file}}
+ExecStop={{ venv_path }}/bin/celery beat stop worker-beat-{{ project_namespace }} --pidfile={{ celery_pid_file }}
+ExecReload={{ venv_path }}/bin/celery beat restart worker-beat-{{ project_namespace }} -A {{ project_name }} -l {{ celery_log_level }} \
+    --logfile={{ celery_log_file }} --pidfile={{ celerybeat_pid_file }}  --schedule={{ celerybeat_schedule_file}}
+
+[Install]
+WantedBy=multi-user.target
+Alias=celerybeat-{{ project_namespace }}.service
+{%endraw%}
