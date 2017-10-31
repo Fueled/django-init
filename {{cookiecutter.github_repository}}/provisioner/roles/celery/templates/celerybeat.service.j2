@@ -11,7 +11,7 @@ Restart=always
 WorkingDirectory={{ project_path }}
 ExecStart={{ venv_path }}/bin/celery beat start worker-beat-{{ project_namespace }} -A {{ project_name }}  -l {{ celery_log_level }} \
     --logfile={{ celerybeat_log_file }} --pidfile={{ celerybeat_pid_file }}  --schedule={{ celerybeat_schedule_file}}
-ExecStop={{ venv_path }}/bin/celery beat stop worker-beat-{{ project_namespace }} --pidfile={{ celery_pid_file }}
+ExecStop={{ venv_path }}/bin/celery beat stop worker-beat-{{ project_namespace }} --pidfile={{ celerybeat_pid_file }}
 ExecReload={{ venv_path }}/bin/celery beat restart worker-beat-{{ project_namespace }} -A {{ project_name }} -l {{ celery_log_level }} \
     --logfile={{ celerybeat_log_file }} --pidfile={{ celerybeat_pid_file }}  --schedule={{ celerybeat_schedule_file}}
 
