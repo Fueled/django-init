@@ -4,6 +4,7 @@ celery_group: www-data
 celery_concurrency: 4
 celery_log_dir: /var/log/celery/{{ project_namespace }}
 celery_log_file: "{{ celery_log_dir }}/celery.log"
+celerybeat_log_file: "{{ celery_log_dir }}/celerybeat.log"
 celery_log_level: "INFO"
 celerybeat_schedule_dir: /var/run/celery
 celerybeat_schedule_file: "{{ celerybeat_schedule_dir }}/schedule-{{ project_namespace }}.db"
