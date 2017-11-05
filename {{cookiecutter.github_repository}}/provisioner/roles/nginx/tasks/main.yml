@@ -1,11 +1,11 @@
 {%raw%}---
-- name: Update apt-cache if not already ran
-  shell: apt update
-  become: yes
-  when: apt_updated is not defined
+- name: Add official Nginx repo
+  apt_repository:
+    repo: 'ppa:nginx/stable'
+    update_cache: yes
 
 - name: install NGINX Server.
-  apt: pkg=nginx state=installed
+  apt: pkg=nginx-full state=installed
 
 - name: make sure ssl directory exists
   file: path={{ ssl_cert_dir }} state=directory
@@ -19,7 +19,12 @@
 
 # running cron job each monday
 - name: add letsencrypt renew cron
-  cron: name="Renew all certificates" minute="0" hour="2" weekday="1" job="PATH=$PATH:/usr/local/bin && certbot-auto renew --non-interactive --webroot -w {{ letsencrypt_challange_root }} --renew-hook 'service nginx reload' >> /var/log/certbot.log"
+  cron:
+   name: "Renew all certificates"
+   minute: "0"
+   hour: "2"
+   weekday: "1"
+   job: 'certbot renew --non-interactive --webroot -w {{ letsencrypt_challange_root }} --renew-hook "service nginx reload"'
   when: vm == 0 and use_letsencrypt
 
 - name: check ssl/nginx.crt exists

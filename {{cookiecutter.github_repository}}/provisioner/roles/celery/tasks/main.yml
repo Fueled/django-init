@@ -20,6 +20,7 @@
 
 - name: ensure celery package is installed
   pip: name=celery state=present executable={{ venv_path }}/bin/pip
+  become: false
   tags: ['celery']
 
 - name: copy celery service
