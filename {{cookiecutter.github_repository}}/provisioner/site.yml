@@ -18,6 +18,13 @@
     # - redis
     # - celery
 {%- endif %}
+{%- if cookiecutter.add_frontend_deployment.lower() == 'y' %}
+    - nodejs
+    - frontend
+{%- else %}
+    # - nodejs
+    # - frontend
+{%- endif %}
 
 #= Dev
 #===================================================
@@ -39,6 +46,13 @@
 {%- else %}
     # - redis
     # - celery
+{%- endif %}
+{%- if cookiecutter.add_frontend_deployment.lower() == 'y' %}
+    - nodejs
+    - frontend
+{%- else %}
+    # - nodejs
+    # - frontend
 {%- endif %}
 
 #= QA
@@ -62,6 +76,13 @@
     # - redis
     # - celery
 {%- endif %}
+{%- if cookiecutter.add_frontend_deployment.lower() == 'y' %}
+    - nodejs
+    - frontend
+{%- else %}
+    # - nodejs
+    # - frontend
+{%- endif %}
 
 #= Production
 #===================================================
@@ -82,4 +103,11 @@
 {%- else %}
     # - redis
     # - celery
+{%- endif %}
+{%- if cookiecutter.add_frontend_deployment.lower() == 'y' %}
+    - nodejs
+    - frontend
+{%- else %}
+    # - nodejs
+    # - frontend
 {%- endif %}

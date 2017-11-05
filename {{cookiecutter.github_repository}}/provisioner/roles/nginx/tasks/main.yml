@@ -59,6 +59,11 @@
   when: nginx_cert.stat.exists == true and nginx_key.stat.exists == true
   notify: reload nginx
 
+- name: copy frontend site host configuration.
+  template: src=frontend.site.conf.j2 dest=/etc/nginx/sites-available/frontend.{{ nginx_conf_file_name }}.conf
+  when: add_frontend_deployment and nginx_cert.stat.exists == true and nginx_key.stat.exists == true
+  notify: reload nginx
+
 - name: put host port 80 configuration in sites-enabled
   file: src=/etc/nginx/sites-available/{{ nginx_conf_file_name }}.80.conf dest=/etc/nginx/sites-enabled/{{ nginx_conf_file_name }}.80 state=link
   notify: reload nginx
@@ -66,6 +71,11 @@
 - name: put host port 443 configuration in sites-enabled
   file: src=/etc/nginx/sites-available/{{ nginx_conf_file_name }}.443.conf dest=/etc/nginx/sites-enabled/{{ nginx_conf_file_name }}.443 state=link
   when: nginx_cert.stat.exists == true and nginx_key.stat.exists == true
+  notify: reload nginx
+
+- name: put frontend host configuration in sites-enabled
+  file: src=/etc/nginx/sites-available/frontend.{{ nginx_conf_file_name }}.conf dest=/etc/nginx/sites-enabled/frontend.{{ nginx_conf_file_name }} state=link
+  when: add_frontend_deployment and nginx_cert.stat.exists == true and nginx_key.stat.exists == true
   notify: reload nginx
 
 - name: ensure nginx is running

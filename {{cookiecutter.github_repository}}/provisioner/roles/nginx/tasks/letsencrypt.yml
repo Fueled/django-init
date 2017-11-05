@@ -35,9 +35,13 @@
 - name: stop nginx if running
   service: name=nginx state=stopped
 
-- name: request cert
-  shell: certbot certonly --standalone -w {{ letsencrypt_challange_root }} -d {{ domain_name }} --email {{ letsencrypt_email }} --agree-tos --non-interactive
-  args:
+- name: request cert{%endraw%}
+{%- if cookiecutter.add_frontend_deployment.lower() == 'y' %}
+  {%raw%}shell: certbot certonly --standalone -w {{ letsencrypt_challange_root }} -d {{ domain_name }} -d www.{{ frontend_domain_name }} --email {{ letsencrypt_email }} --agree-tos --non-interactive{%endraw%}
+{%- else %}
+  {%raw%}shell: certbot certonly --standalone -w {{ letsencrypt_challange_root }} -d {{ domain_name }} --email {{ letsencrypt_email }} --agree-tos --non-interactive{%endraw%}
+{%- endif %}
+  {%raw%}args:
     creates: '{{ letsencrypt_ssl_cert_dir }}'
 
 - name: start nginx

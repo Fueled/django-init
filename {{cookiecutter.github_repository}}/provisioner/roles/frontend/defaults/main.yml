@@ -1,0 +1,8 @@
+{%- raw %}
+# Override domain/path/repo/node_env in `hosts` for each environment
+frontend_domain_name: '{{ cookiecutter.main_module }}.com'
+frontend_path: '{{ project_path }}/../{{ project_name }}-frontend'
+frontend_repo_url: 'git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.frontend_repository }}.git'
+frontend_node_env: dev
+add_frontend_auth: False
+uwsgi_group: www-data{% endraw %}

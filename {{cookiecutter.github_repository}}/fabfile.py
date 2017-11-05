@@ -180,6 +180,12 @@ def configure(tags='', skip_tags='deploy'):
 
 def deploy():
     configure(tags='deploy', skip_tags='')
+{%- if cookiecutter.add_frontend_deployment.lower() == 'y' %}
+
+
+def deploy_frontend():
+    configure(tags='frontend', skip_tags='')
+{%- endif %}
 
 
 def deploy_docs():

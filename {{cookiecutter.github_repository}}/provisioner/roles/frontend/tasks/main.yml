@@ -1,0 +1,25 @@
+{% raw %}---
+- name: make sure project directory is owned by uwsgi group
+  file: path={{ frontend_path }} state=directory owner={{user}} group={{uwsgi_group}} recurse=yes
+  tags: ['configure']
+
+- name: get the latest code
+  git: repo={{ frontend_repo_url }} dest={{ frontend_path }} version={{ repo_version }} accept_hostkey=true
+  become: false
+  register: gitresult
+  when: vm == 0
+  tags: ['always']
+
+- debug: msg="Git SHA-1 before={{ gitresult.before }} after={{ gitresult.after }}"
+  tags: ['always']
+
+- name: Install packages based on package.json.
+  npm: path={{ frontend_path }} global=no
+  tags: ['deploy', 'frontend']
+
+- name: Run build
+  command: "npm run build:{{ frontend_node_env }}"
+  become: false
+  tags: ['deploy', 'frontend']
+  args:
+   chdir: "{{ frontend_path }}"{% endraw %}

@@ -15,6 +15,9 @@ pg_db={{ cookiecutter.main_module }}
 pg_user=vagrant
 pg_password=vagrant
 domain_name=vagrant.{{ cookiecutter.main_module }}.com
+{%- if cookiecutter.add_frontend_deployment.lower() == 'y' %}
+frontend_domain_name='vagrant.{{ cookiecutter.main_module }}.com'
+{%- endif %}
 
 [dev]
 dev.{{ cookiecutter.main_module }}.com
@@ -31,6 +34,9 @@ letsencrypt_email={{ cookiecutter.letsencrypt_email }}
 django_requirements_file=requirements.txt
 django_settings="settings.production"
 domain_name=dev.{{ cookiecutter.main_module }}.com
+{%- if cookiecutter.add_frontend_deployment.lower() == 'y' %}
+frontend_domain_name='dev.{{ cookiecutter.main_module }}.com'
+{%- endif %}
 
 
 [qa]
@@ -48,6 +54,9 @@ letsencrypt_email={{ cookiecutter.letsencrypt_email }}
 django_requirements_file=requirements.txt
 django_settings="settings.production"
 domain_name=qa.{{ cookiecutter.main_module }}.com
+{%- if cookiecutter.add_frontend_deployment.lower() == 'y' %}
+frontend_domain_name='qa.{{ cookiecutter.main_module }}.com'
+{%- endif %}
 
 [production]
 {{ cookiecutter.main_module }}.com
@@ -64,3 +73,6 @@ letsencrypt_email={{ cookiecutter.letsencrypt_email }}
 django_requirements_file=requirements.txt
 django_settings="settings.production"
 domain_name={{ cookiecutter.main_module }}.com
+{%- if cookiecutter.add_frontend_deployment.lower() == 'y' %}
+frontend_domain_name='{{ cookiecutter.main_module }}.com'
+{%- endif %}
