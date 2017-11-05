@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Replace gunicorn with uwsgi as wsgi handler (@vikalpj)
 
 ### Fixes
+- Make default s3 region null.
 - RemovedInDjango20Warning: Update admin url to new style url include (@theskumar)
 - RemovedInDjango20Warning: Use new-style MIDDLEWARE settings (@theskumar)
 - Fix letsencrtypt, make certbot-auto run in non-interactive mode.
