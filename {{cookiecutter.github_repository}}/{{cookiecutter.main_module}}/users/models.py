@@ -2,6 +2,7 @@
 
 # Third Party Stuff
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.postgres.fields import CIEmailField
 from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
@@ -35,7 +36,8 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
     first_name = models.CharField(_('First Name'), max_length=120, blank=True)
     last_name = models.CharField(_('Last Name'), max_length=120, blank=True)
-    email = models.EmailField(_('email address'), unique=True, db_index=True)
+    # https://docs.djangoproject.com/en/1.11/ref/contrib/postgres/fields/#citext-fields
+    email = CIEmailField(_('email address'), unique=True, db_index=True)
     is_staff = models.BooleanField(_('staff status'), default=False,
                                    help_text='Designates whether the user can log into this admin site.')
 

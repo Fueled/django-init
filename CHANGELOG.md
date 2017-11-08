@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.10.x]
 
 - Separates out celery beat process as different worker for multi-node setups. (@CuriousLearner)
+- Adds `ERROR` level logging to sentry mails. (@CuriousLearner)
 - Fixes celery beat scheduler issue & makes celery role consistent across deployments. (@CuriousLearner)
 - Add automatic documentation build when using ansible and make it available at `/docs/` url.
 - Handle nested serializer errors in our custom exception handler. (@jainmickey)
@@ -20,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Replace gunicorn with uwsgi as wsgi handler (@vikalpj)
 
 ### Fixes
+- Make default s3 region null.
 - RemovedInDjango20Warning: Update admin url to new style url include (@theskumar)
 - RemovedInDjango20Warning: Use new-style MIDDLEWARE settings (@theskumar)
 - Fix letsencrtypt, make certbot-auto run in non-interactive mode.
