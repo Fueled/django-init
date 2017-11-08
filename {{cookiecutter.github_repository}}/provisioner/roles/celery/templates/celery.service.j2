@@ -1,4 +1,5 @@
-{%raw%}[Unit]
+{%raw%}
+[Unit]
 Description=Celery {{ project_namespace }} Service
 After=network.target
 
@@ -8,12 +9,13 @@ Group={{ celery_group }}
 Type=forking
 Restart=always
 WorkingDirectory={{ project_path }}
-ExecStart={{ venv_path }}/bin/celery multi start worker-{{ project_namespace }} -A {{ project_name }} -B -l {{ celery_log_level }} \
+ExecStart={{ venv_path }}/bin/celery multi start worker-{{ project_namespace }} -A {{ project_name }} -l {{ celery_log_level }} \
     --concurrency={{ celery_concurrency }} --logfile={{ celery_log_file }} --pidfile={{ celery_pid_file }}  --schedule={{ celerybeat_schedule_file}}
 ExecStop={{ venv_path }}/bin/celery multi stopwait worker-{{ project_namespace }} --pidfile={{ celery_pid_file }}
-ExecReload={{ venv_path }}/bin/celery multi restart worker-{{ project_namespace }} -A {{ project_name }} -B -l {{ celery_log_level }} \
+ExecReload={{ venv_path }}/bin/celery multi restart worker-{{ project_namespace }} -A {{ project_name }} -l {{ celery_log_level }} \
     --concurrency={{ celery_concurrency }} --logfile={{ celery_log_file }} --pidfile={{ celery_pid_file }}  --schedule={{ celerybeat_schedule_file}}
 
 [Install]
 WantedBy=multi-user.target
-Alias=celery-{{ project_namespace }}.service{%endraw%}
+Alias=celery-{{ project_namespace }}.service
+{%endraw%}
