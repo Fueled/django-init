@@ -377,7 +377,15 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+            'formatter': 'complete',
+            'filters': ['request_id'],
+        },
+        {%- endif %}
     },
     'loggers': {
         'django': {
@@ -402,7 +410,12 @@ LOGGING = {
         },
         # Catch All Logger -- Captures any other logging
         '': {
-            'handlers': ['console'],
+            'handlers': [
+                'console',
+                {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
+                'sentry'
+                {%- endif %}
+            ],
             'level': 'ERROR',
             'propagate': True,
         },
