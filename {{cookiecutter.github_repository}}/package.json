@@ -6,7 +6,7 @@
     "node": "6.4.0"
   },
   "dependencies": {
-    "autoprefixer": "^6.1.1",
-    "postcss-cli": "^2.3.2"
+    "autoprefixer": "^7.1.6",
+    "postcss-cli": "^4.1.1"
   }
 }
