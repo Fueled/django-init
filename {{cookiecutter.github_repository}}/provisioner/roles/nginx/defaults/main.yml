@@ -2,7 +2,7 @@ ngnix_listen: '443 http2 ssl'
 nginx_user: 'www-data'
 nginx_worker_processes: 1
 nginx_worker_connections: 1024
-nginx_max_file_size: 10
+nginx_client_max_body_size: '10M'
 
 {% raw %}
 nginx_conf_file_name: '{{ project_name }}-{{ environment }}'
@@ -25,5 +25,4 @@ ssl_session_timeout: '1d'
 ssl_session_cache: 'shared:SSL:50m'
 ssl_trusted_certificate: '{{ ssl_cert_dir }}/{{ domain_name }}/chain.pem'
 access_log_file: '/var/log/nginx/{{ domain_name }}.access.log'
-error_log_file: '/var/log/nginx/{{ domain_name }}.error.log'
-client_max_body_size: '{{ nginx_max_file_size }}'{% endraw %}
+error_log_file: '/var/log/nginx/{{ domain_name }}.error.log'{% endraw %}

@@ -32,7 +32,7 @@ server {
     error_log    {{ error_log_file }};
 
 
-    client_max_body_size {{ client_max_body_size}};
+    client_max_body_size {{ nginx_client_max_body_size }};
 
     {% if use_letsencrypt %}
     location /.well-known/acme-challenge {
