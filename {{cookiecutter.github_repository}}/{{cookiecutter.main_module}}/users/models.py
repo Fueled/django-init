@@ -15,7 +15,7 @@ from {{cookiecutter.main_module}}.base.models import UUIDModel
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def _create_user(self, email, password, is_staff, is_superuser, **extra_fields):
+    def _create_user(self, email: str, password: str, is_staff: bool, is_superuser: bool, **extra_fields):
         """Creates and saves a User with the given email and password.
         """
         email = self.normalize_email(email)
@@ -25,10 +25,10 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, email: str, password=None, **extra_fields):
         return self._create_user(email, password, False, False, **extra_fields)
 
-    def create_superuser(self, email, password, **extra_fields):
+    def create_superuser(self, email: str, password: str, **extra_fields):
         return self._create_user(email, password, True, True, **extra_fields)
 
 
@@ -57,13 +57,13 @@ class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
     def __str__(self):
         return str(self.id)
 
-    def get_full_name(self):
+    def get_full_name(self) -> str:
         """Returns the first_name plus the last_name, with a space in between.
         """
         full_name = '{} {}'.format(self.first_name, self.last_name)
         return full_name.strip()
 
-    def get_short_name(self):
+    def get_short_name(self) -> str:
         """Returns the short name for the user.
         """
         return self.first_name.strip()
