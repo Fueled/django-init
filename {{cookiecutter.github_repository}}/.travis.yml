@@ -12,15 +12,13 @@ addons:
 cache:
   directories:
     - $HOME/.cache/pip
-    - $HOME/.pip-accel
 
 before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
 
 install:
-  - pip install pip-accel
-  {% if cookiecutter.add_ansible.lower() == 'y' %}- pip-accel install ansible{% endif %}
-  - pip-accel install -r requirements/development.txt
+  {% if cookiecutter.add_ansible.lower() == 'y' %}- pip install ansible{% endif %}
+  - pip install -r requirements/development.txt
 
 before_script:
 - export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
