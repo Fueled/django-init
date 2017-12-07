@@ -5,7 +5,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import list_route
 from rest_framework.permissions import AllowAny
 
-# {{cookiecutter.main_module}} Stuff
+# {{ cookiecutter.project_name }} Stuff
 from {{cookiecutter.main_module}}.base import response
 from {{cookiecutter.main_module}}.base.api.mixins import MultipleSerializerMixin
 from {{cookiecutter.main_module}}.users.services import create_user_account, get_and_authenticate_user
@@ -35,4 +35,4 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         serializer.is_valid(raise_exception=True)
         user = create_user_account(**serializer.validated_data)
         data = serializers.AuthUserSerializer(user).data
-        return response.Ok(data)
+        return response.Created(data)

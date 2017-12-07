@@ -4,7 +4,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-# {{cookiecutter.main_module}} Stuff
+# {{ cookiecutter.project_name }} Stuff
 from {{cookiecutter.main_module}}.users.models import User, UserManager
 
 from .tokens import get_token_for_user

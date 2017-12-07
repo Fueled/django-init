@@ -5,7 +5,7 @@ import jwt
 from django.apps import apps
 from django.conf import settings
 
-# {{cookiecutter.main_module}} Stuff
+# {{ cookiecutter.project_name }} Stuff
 from {{cookiecutter.main_module}}.base import exceptions as exc
 
 

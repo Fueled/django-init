@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model, authenticate
 
-# {{cookiecutter.main_module}} Stuff
+# {{ cookiecutter.project_name }} Stuff
 from {{cookiecutter.main_module}}.base import exceptions as exc
 
 
@@ -14,6 +14,8 @@ def get_and_authenticate_user(email, password):
     return user
 
 
-def create_user_account(email, password):
-    user = get_user_model().objects.create_user(email=email, password=password)
+def create_user_account(email, password, first_name=None, last_name=None):
+    user = get_user_model().objects.create_user(
+        email=email, password=password, first_name=first_name, last_name=last_name
+    )
     return user
