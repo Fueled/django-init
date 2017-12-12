@@ -51,15 +51,6 @@ if settings.DEBUG:
     from django.views import defaults as dj_default_views
     from django.urls import get_callable
 
-    # debug toolbar
-    import debug_toolbar
-    urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ]
-
-    # Livereloading
-    urlpatterns += [url(r'^devrecargar/', include('devrecargar.urls', namespace='devrecargar'))]
-
     urlpatterns += [
         url(r'^400/$', dj_default_views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
         url(r'^403/$', dj_default_views.permission_denied, kwargs={'exception': Exception('Permission Denied!')}),
@@ -67,3 +58,17 @@ if settings.DEBUG:
         url(r'^404/$', dj_default_views.page_not_found, kwargs={'exception': Exception('Not Found!')}),
         url(r'^500/$', handler500),
     ]
+
+    # Django Debug Toolbar
+    try:
+        import debug_toolbar
+        urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls)), ]
+    except ImportError:
+        pass
+
+    # Livereloading
+    try:
+        from devrecargar.urls import urlpatterns as devrecargar_urls
+        urlpatterns += [url(r'^devrecargar/', include((devrecargar_urls, 'devrecargar', ), namespace='devrecargar'))]
+    except ImportError:
+        pass
