@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Third Party Stuff
 import rest_framework.response
 from django import http

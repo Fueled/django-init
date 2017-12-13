@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Django settings for {{cookiecutter.project_name}} project.
 
 see: https://docs.djangoproject.com/en/dev/ref/settings/

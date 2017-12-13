@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """WSGI config for  project.
 
 This module contains the WSGI application used by Django's development server

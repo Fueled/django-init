@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-
+# {{ cookiecutter.project_name }} Stuff
 from django.conf import settings
 
 

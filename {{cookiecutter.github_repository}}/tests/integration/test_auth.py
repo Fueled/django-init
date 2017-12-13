@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-
 # Standard Library
 import json
 
 # Third Party Stuff
 import pytest
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from .. import factories as f
 

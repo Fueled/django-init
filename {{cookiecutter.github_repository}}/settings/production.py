@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Production Configurations
 
 Adds sensible default for running app in production.

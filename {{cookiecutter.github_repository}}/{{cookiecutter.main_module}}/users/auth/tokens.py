@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Third Party Stuff
 import jwt
 from django.apps import apps

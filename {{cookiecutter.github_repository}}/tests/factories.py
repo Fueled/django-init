@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Helpers to create dynamic model instances for testing purposes.
 
