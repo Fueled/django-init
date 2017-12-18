@@ -32,6 +32,13 @@ class RegisterSerializer(serializers.Serializer):
         return UserManager.normalize_email(value)
 
 
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = get_user_model()
+        fields = ('id', 'first_name', 'last_name', 'email')
+
+
 class AuthUserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     auth_token = serializers.SerializerMethodField()
