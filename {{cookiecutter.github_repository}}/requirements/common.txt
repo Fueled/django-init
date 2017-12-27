@@ -36,7 +36,7 @@ django-versatileimagefield==1.7.1  # versatile image field degrade Pillow versio
 
 # REST APIs
 # -------------------------------------
-djangorestframework==3.6.4
+djangorestframework==3.7.3
 django-rest-swagger==2.1.2
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 

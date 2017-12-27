@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Root url routering file.
 
 You should put the url config in their respective app putting only a
@@ -12,10 +11,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 
-# {{ cookiecutter.project_name }} Stuff
-from {{ cookiecutter.main_module }}.base import views as base_views
+from . import routers
+from .base import views as base_views
+from .base.api import schemas as api_schemas
 
-from . import routers, schemas
 
 handler500 = base_views.server_error
 
@@ -43,8 +42,8 @@ urlpatterns += [
 if settings.API_DEBUG:
     urlpatterns += [
         # Browsable API
-        url('^schema/$', schemas.schema_view, name='schema'),
-        url(r'^api-playground/$', schemas.swagger_schema_view, name='api-playground'),
+        url('^schema/$', api_schemas.schema_view, name='schema'),
+        url(r'^api-playground/$', api_schemas.swagger_schema_view, name='api-playground'),
         url(r'^api/auth-n/', include('rest_framework.urls', namespace='rest_framework')),
     ]
 
