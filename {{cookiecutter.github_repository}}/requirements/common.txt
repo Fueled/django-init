@@ -10,7 +10,7 @@ uWSGI==2.0.15
 # -------------------------------------
 argon2-cffi==18.1.0
 django-environ==0.4.4
--e git+https://github.com/theskumar/django-sites.git@d611eb18b234c7d85371d38d8c875aaae447c231#egg=django-sites
+-e git+https://github.com/niwinz/django-sites.git@9402fb9dccaac9421dc9368002bcedbf30e1a36a#egg=django-sites
 python-dotenv==0.7.1
 {%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
 django-cors-headers==2.1.0
