@@ -1,7 +1,7 @@
 ## Customize the test machine
 machine:
   python:
-    version: '3.5.2'
+    version: '3.6.4'
   environment:
     # each command runs in its own shell, so just adding an export FOO=bar command won't work
     DATABASE_URL: "postgres://ubuntu@localhost/circle_test"

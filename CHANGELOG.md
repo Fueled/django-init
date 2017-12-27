@@ -2,12 +2,13 @@
 All notable changes to this project will be documented in this file.
 
 ## [2.x]
+- Upgrade all the systems to use python 3.6.
 - Add timezone information to datetime displayed in admin. (@saurabh)
 - Support for Django 2.0.x
 - Make whitenoise optional, add static and media routes to nginx if whitenoise is not enabled. (@tucosaurus)
 
-## [1.11]
 
+## [1.11]
 - Upgrade to Django RestFramework 3.7 (@theskumar)
 - Adds custom Token based authentication for user login and registration. (@CuriousLearner)
 - Separates out celery beat process as different worker for multi-node setups. (@CuriousLearner)
