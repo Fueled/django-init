@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [2.x]
 - Support for Django 2.0.x
 
-## [1.10]
+## [1.11]
 
 - Upgrade to Django RestFramework 3.7 (@theskumar)
 - Adds custom Token based authentication for user login and registration. (@CuriousLearner)
