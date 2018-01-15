@@ -6,10 +6,10 @@ from django import http
 class Response(rest_framework.response.Response):
     """The various HTTP responses for use in returning proper HTTP codes.
     """
+
     def __init__(self, data=None, status=None, template_name=None, headers=None, exception=False,
                  content_type=None):
-        super(Response, self).__init__(data, status, template_name, headers, exception,
-                                       content_type)
+        super().__init__(data, status, template_name, headers, exception, content_type)
 
 
 class Ok(Response):
