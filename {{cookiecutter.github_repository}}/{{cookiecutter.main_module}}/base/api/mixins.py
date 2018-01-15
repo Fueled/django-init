@@ -1,4 +1,4 @@
-# {{ cookiecutter.project_name }} Stuff
+# Third Party Stuff
 from django.core.exceptions import ImproperlyConfigured
 
 
