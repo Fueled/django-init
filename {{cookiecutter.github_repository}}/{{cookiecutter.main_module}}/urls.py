@@ -15,7 +15,7 @@ from . import routers
 from .base import views as base_views
 from .base.api import schemas as api_schemas
 
-
+admin.site.site_title = admin.site.site_header = '{{ cookiecutter.project_name }} Administration'
 handler500 = base_views.server_error
 
 # Top Level Pages
