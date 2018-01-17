@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Development Settings
 
 Adds sensible defaults for developement of project

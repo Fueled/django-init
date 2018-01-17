@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-
+# Third Party Stuff
 from django.conf import settings
 
 

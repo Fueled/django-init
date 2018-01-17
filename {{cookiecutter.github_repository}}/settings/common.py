@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Django settings for {{cookiecutter.project_name}} project.
 
 see: https://docs.djangoproject.com/en/dev/ref/settings/
@@ -28,7 +27,6 @@ INSTALLED_APPS = (
     'django_sites',  # http://niwinz.github.io/django-sites/latest/
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'flat_responsive',
     'django.contrib.admin',
     # 'django.contrib.humanize',  # Useful template tags
 

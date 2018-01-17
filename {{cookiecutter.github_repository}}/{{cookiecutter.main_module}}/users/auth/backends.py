@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 Authentication backends for rest framework.
 

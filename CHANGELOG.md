@@ -1,8 +1,10 @@
 # ChangeLog
 All notable changes to this project will be documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.10.x]
+## [2.x]
+- Support for Django 2.0.x
+
+## [1.11]
 
 - Upgrade to Django RestFramework 3.7 (@theskumar)
 - Adds custom Token based authentication for user login and registration. (@CuriousLearner)
