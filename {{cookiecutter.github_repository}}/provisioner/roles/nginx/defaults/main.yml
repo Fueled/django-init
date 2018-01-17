@@ -5,7 +5,7 @@ nginx_worker_connections: 1024
 nginx_client_max_body_size: '10M'
 
 {% raw %}
-nginx_conf_file_name: '{{ project_name }}-{{ environment }}'
+nginx_conf_file_name: '{{ project_name }}-{{ deploy_environment }}'
 
 # SSL common configurations
 ssl_cert_dir: '/etc/nginx/ssl'

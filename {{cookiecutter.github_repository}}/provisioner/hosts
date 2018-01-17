@@ -3,8 +3,8 @@
 
 [vagrant:vars]
 vm=1
-environment=vagrant
-project_namespace={% raw %}{{ project_name }}-{{ environment }}{% endraw %}
+deploy_environment=vagrant
+project_namespace={% raw %}{{ project_name }}-{{ deploy_environment }}{% endraw %}
 user=vagrant
 project_path=/home/vagrant/{{ cookiecutter.github_repository }}
 venv_path=/home/vagrant/venv
@@ -21,11 +21,11 @@ dev.{{ cookiecutter.main_module }}.com
 
 [dev:vars]
 vm=0
-environment=dev
+deploy_environment=dev
 user=ubuntu
-project_namespace={% raw %}{{ project_name }}-{{ environment }}{% endraw %}
-project_path=/home/ubuntu/{% raw %}{{ environment }}{% endraw %}/{{ cookiecutter.github_repository }}
-venv_path=/home/ubuntu/{% raw %}{{ environment }}/{{ project_name }}-venv{% endraw %}
+project_namespace={% raw %}{{ project_name }}-{{ deploy_environment }}{% endraw %}
+project_path=/home/ubuntu/{% raw %}{{ deploy_environment }}{% endraw %}/{{ cookiecutter.github_repository }}
+venv_path=/home/ubuntu/{% raw %}{{ deploy_environment }}/{{ project_name }}-venv{% endraw %}
 use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
 letsencrypt_email={{ cookiecutter.letsencrypt_email }}
 django_requirements_file=requirements.txt
@@ -38,11 +38,11 @@ qa.{{ cookiecutter.main_module }}.com
 
 [qa:vars]
 vm=0
-environment=qa
+deploy_environment=qa
 user=ubuntu
-project_namespace={% raw %}{{ project_name }}-{{ environment }}{% endraw %}
-project_path=/home/ubuntu/{% raw %}{{ environment }}{% endraw %}/{{ cookiecutter.github_repository }}
-venv_path=/home/ubuntu/{% raw %}{{ environment }}/{{ project_name }}-venv{% endraw %}
+project_namespace={% raw %}{{ project_name }}-{{ deploy_environment }}{% endraw %}
+project_path=/home/ubuntu/{% raw %}{{ deploy_environment }}{% endraw %}/{{ cookiecutter.github_repository }}
+venv_path=/home/ubuntu/{% raw %}{{ deploy_environment }}/{{ project_name }}-venv{% endraw %}
 use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
 letsencrypt_email={{ cookiecutter.letsencrypt_email }}
 django_requirements_file=requirements.txt
@@ -54,11 +54,11 @@ domain_name=qa.{{ cookiecutter.main_module }}.com
 
 [production:vars]
 vm=0
-environment=prod
+deploy_environment=prod
 user=ubuntu
-project_namespace={% raw %}{{ project_name }}-{{ environment }}{% endraw %}
-project_path=/home/ubuntu/{% raw %}{{ environment }}{% endraw %}/{{ cookiecutter.github_repository }}
-venv_path=/home/ubuntu/{% raw %}{{ environment }}/{{ project_name }}-venv{% endraw %}
+project_namespace={% raw %}{{ project_name }}-{{ deploy_environment }}{% endraw %}
+project_path=/home/ubuntu/{% raw %}{{ deploy_environment }}{% endraw %}/{{ cookiecutter.github_repository }}
+venv_path=/home/ubuntu/{% raw %}{{ deploy_environment }}/{{ project_name }}-venv{% endraw %}
 use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
 letsencrypt_email={{ cookiecutter.letsencrypt_email }}
 django_requirements_file=requirements.txt
