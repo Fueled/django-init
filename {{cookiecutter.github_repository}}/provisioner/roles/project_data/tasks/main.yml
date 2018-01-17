@@ -15,7 +15,7 @@
 
 - name: copy django-uwsgi logrotate
   template: src=django.logrotate.j2
-            dest=/etc/logrotate.d/uwsgi-{{ environment}}-{{project_name}}-django
+            dest=/etc/logrotate.d/uwsgi-{{ deploy_environment}}-{{project_name}}-django
             mode=644
   tags: ['configure']
 
@@ -71,7 +71,7 @@
 
 - name: copy uwsgi configuration
   template: src=django.uwsgi.ini.j2
-            dest={{ uwsgi_conf_path }}//django-{{project_name}}-{{ environment }}.ini
+            dest={{ uwsgi_conf_path }}//django-{{project_name}}-{{ deploy_environment }}.ini
             mode=644
   tags: ['deploy']
   register: uwsgiconf
