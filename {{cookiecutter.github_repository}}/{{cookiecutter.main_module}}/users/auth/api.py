@@ -17,6 +17,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
     serializer_classes = {
         'login': serializers.LoginSerializer,
         'register': serializers.RegisterSerializer,
+        'password_change': serializers.PasswordChangeSerializer,
     }
 
     @list_route(['POST', ])
@@ -34,3 +35,11 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         user = create_user_account(**serializer.validated_data)
         data = serializers.AuthUserSerializer(user).data
         return response.Created(data)
+
+    @list_route(['POST', ])
+    def password_change(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        request.user.set_password(serializer.validated_data['new_password'])
+        request.user.save()
+        return response.NoContent()

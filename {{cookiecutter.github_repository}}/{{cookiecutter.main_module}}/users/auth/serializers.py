@@ -1,5 +1,5 @@
 # Third Party Stuff
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, password_validation
 from rest_framework import serializers
 
 # {{ cookiecutter.project_name }} Stuff
@@ -21,7 +21,7 @@ class RegisterSerializer(serializers.Serializer):
     password = serializers.CharField(required=True)
 
     class Meta:
-        fields = ['email', 'name']
+        fields = ['email', ]
 
     def validate_email(self, value):
         users = User.objects.filter(email__iexact=value)
@@ -43,3 +43,22 @@ class AuthUserSerializer(serializers.ModelSerializer):
 
     def get_auth_token(self, obj):
         return get_token_for_user(obj, "authentication")
+
+
+class PasswordChangeSerializer(serializers.Serializer):
+    current_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    default_error_messages = {
+        'invalid_password': 'Invalid password.'
+    }
+
+    def validate_current_password(self, value):
+        if not self.context['request'].user.check_password(value):
+            raise serializers.ValidationError(self.error_messages['invalid_password'])
+        return value
+
+    def validate_new_password(self, value):
+        # https://docs.djangoproject.com/en/2.0/topics/auth/passwords/#django.contrib.auth.password_validation.validate_password
+        password_validation.validate_password(value)
+        return value
