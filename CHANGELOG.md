@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [2.x]
 - Add timezone information to datetime displayed in admin. (@saurabh)
 - Support for Django 2.0.x
-
+- Add views for password change, password reset and confirmation to the user app. (@tucosaurus)
 
 ## [1.11]
 
