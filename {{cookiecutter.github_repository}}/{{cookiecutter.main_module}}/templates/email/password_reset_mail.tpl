@@ -1,4 +1,4 @@
-{% endraw %}
+{% raw %}
 {% extends "mail_templated/base.tpl" %}
 {% load i18n %}
 

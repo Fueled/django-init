@@ -354,7 +354,7 @@ PASSWORD_RESET_CONFIRM_URL = env('PASSWORD_RESET_CONFIRM_URL',
 
 # Api's typically run on a different name than the frontend app.
 FRONTEND_DOMAIN = env('FRONTEND_DOMAIN', default='http://localhost:8000')
-FROM_MAIL = env('FROM_EMAIL', default='default@localhost.com')
+FROM_EMAIL = env('FROM_EMAIL', default='default@localhost.com')
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------
