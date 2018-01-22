@@ -165,6 +165,12 @@ LANGUAGES = (
     ('en', _('English')),
 )
 
+if USE_TZ:
+    # Add timezone information to datetime displayed.
+    # https://mounirmesselmeni.github.io/2014/11/06/date-format-in-django-admin/
+    from django.conf.locale.en import formats as en_formats
+    en_formats.DATETIME_FORMAT = 'N j, Y, P (e)'
+
 # A tuple of directories where Django looks for translation files.
 LOCALE_PATHS = (
     str(APPS_DIR.path('locale')),
