@@ -71,3 +71,4 @@ celery[redis]==4.1.0
 # Auth Stuff
 # -------------------------------------
 PyJWT==1.5.3
+django-mail-templated==2.6.5

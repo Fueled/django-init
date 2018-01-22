@@ -1,5 +1,6 @@
 # Third Party Stuff
 from django.contrib.auth import get_user_model, password_validation
+from django.contrib.auth.tokens import default_token_generator
 from rest_framework import serializers
 
 # {{ cookiecutter.project_name }} Stuff
@@ -49,7 +50,7 @@ class PasswordChangeSerializer(serializers.Serializer):
     current_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
 
-    default_error_messages = {
+    error_messages = {
         'invalid_password': 'Invalid password.'
     }
 
@@ -61,4 +62,52 @@ class PasswordChangeSerializer(serializers.Serializer):
     def validate_new_password(self, value):
         # https://docs.djangoproject.com/en/2.0/topics/auth/passwords/#django.contrib.auth.password_validation.validate_password
         password_validation.validate_password(value)
+        return value
+
+
+class PasswordResetSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+    error_messages = {
+        'email_does_not_exist': "No user with the specified email found"
+    }
+
+    def validate_email(self, value):
+        user = User.objects.filter(email__iexact=value, is_active=True).first()
+        if user is None:
+            raise serializers.ValidationError(self.error_messages['email_does_not_exist'])
+        # need the user object in the view. Attach it to the request instead of making another db call
+        self.context['request'].user = user
+        return value
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    new_password = serializers.CharField(required=True)
+    user_id = serializers.CharField(required=True)
+    token = serializers.CharField(required=True)
+
+    error_messages = {
+        'invalid_user_id': 'Invalid user id or the user does not exist',
+        'invalid_token': 'Invalid token or the token has expired'
+    }
+
+    def validate_new_password(self, value):
+        password_validation.validate_password(value)
+        return value
+
+    def validate_user_id(self, value):
+        """
+        Validate the encoded user id and add a user attribute to the serializer.
+        The user attribute is used in the validate_token method
+        """
+        try:
+            uid = decode_uid(value)
+            self.user = User.objects.get(pk=uid)
+        except (User.DoesNotExist, ValueError, TypeError, OverflowError):
+            raise serializers.ValidationError(self.error_messages['invalid_user_id'])
+        return value
+
+    def validate_token(self, value):
+        if not default_token_generator.check_token(self.user, value):
+            raise serializers.ValidationError(self.error_messages['invalid_token'])
         return value
