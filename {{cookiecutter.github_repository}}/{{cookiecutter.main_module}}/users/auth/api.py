@@ -51,7 +51,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
     def password_reset(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        send_password_reset_mail(request.user)
+        send_password_reset_mail(serializer.user)
         return response.NoContent()
 
     @list_route(['POST', ])

@@ -5,6 +5,7 @@ from rest_framework import serializers
 
 # {{ cookiecutter.project_name }} Stuff
 from {{cookiecutter.main_module}}.users.models import User, UserManager
+from {{cookiecutter.main_module}}.users.services import decode_uid
 
 from .tokens import get_token_for_user
 
@@ -76,8 +77,8 @@ class PasswordResetSerializer(serializers.Serializer):
         user = User.objects.filter(email__iexact=value, is_active=True).first()
         if user is None:
             raise serializers.ValidationError(self.error_messages['email_does_not_exist'])
-        # need the user object in the view. Attach it to the request instead of making another db call
-        self.context['request'].user = user
+        # use this as serializer.user in the view
+        self.user = user
         return value
 
 
@@ -101,8 +102,8 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         The user attribute is used in the validate_token method
         """
         try:
-            uid = decode_uid(value)
-            self.user = User.objects.get(pk=uid)
+            user_id = decode_uid(value)
+            self.user = User.objects.get(id=user_id)
         except (User.DoesNotExist, ValueError, TypeError, OverflowError):
             raise serializers.ValidationError(self.error_messages['invalid_user_id'])
         return value

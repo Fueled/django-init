@@ -94,7 +94,7 @@ def test_user_password_reset_confirm(client):
     new_password = 'paSswOrd2'
     user_data = {
         'new_password': new_password,
-        'uid': encode_uid(user.id),
+        'user_id': encode_uid(user.id),
         'token': default_token_generator.make_token(user)
     }
     response = client.json.post(url, json.dumps(user_data))
