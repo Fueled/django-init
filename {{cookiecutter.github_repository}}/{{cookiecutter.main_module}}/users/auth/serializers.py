@@ -73,7 +73,7 @@ class PasswordResetSerializer(serializers.Serializer):
     }
 
     def validate_email(self, value):
-        user = User.objects.filter(email__iexact=value, is_active=True).first()
+        user = User.objects.filter(email__iexact=value).first()
         if user is None:
             raise serializers.ValidationError(self.error_messages['email_does_not_exist'])
         # use this as serializer.user in the view
