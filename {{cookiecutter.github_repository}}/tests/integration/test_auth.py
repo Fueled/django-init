@@ -28,9 +28,7 @@ def test_user_registration(client):
 
 def test_user_login(client):
     url = reverse('auth-login')
-    u = f.create_user(email='test@example.com')
-    u.set_password('test')
-    u.save()
+    u = f.create_user(email='test@example.com', password='test')
 
     credentials = {
         'email': u.email,
@@ -48,9 +46,7 @@ def test_user_password_change(client):
     url = reverse('auth-password-change')
     current_password = 'password1'
     new_password = 'paSswOrd2.#$'
-    user = f.create_user(email='test@example.com')
-    user.set_password(current_password)
-    user.save()
+    user = f.create_user(email='test@example.com', password=current_password)
     change_password_payload = {
         'current_password': current_password,
         'new_password': new_password
@@ -88,9 +84,7 @@ def test_user_password_reset(client, mailoutbox):
 
 def test_user_password_reset_confirm(client):
     url = reverse('auth-password-reset-confirm')
-    user = f.create_user()
-    user.set_password('password1')
-    user.save()
+    user = f.create_user(password='password1')
     new_password = 'paSswOrd2'
     user_data = {
         'new_password': new_password,
