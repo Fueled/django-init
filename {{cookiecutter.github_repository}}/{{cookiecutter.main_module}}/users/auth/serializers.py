@@ -13,16 +13,10 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=300, required=True)
     password = serializers.CharField(required=True)
 
-    class Meta:
-        fields = ['email', ]
-
 
 class RegisterSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     password = serializers.CharField(required=True)
-
-    class Meta:
-        fields = ['email', ]
 
     def validate_email(self, value):
         users = User.objects.filter(email__iexact=value)
