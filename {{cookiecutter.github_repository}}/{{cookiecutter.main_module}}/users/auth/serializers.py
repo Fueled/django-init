@@ -83,11 +83,11 @@ class PasswordResetSerializer(serializers.Serializer):
 
 class PasswordResetConfirmSerializer(serializers.Serializer):
     new_password = serializers.CharField(required=True)
-    user_id = serializers.CharField(required=True)
+    uid = serializers.CharField(required=True)
     token = serializers.CharField(required=True)
 
     error_messages = {
-        'invalid_user_id': 'Invalid user id or the user does not exist',
+        'invalid_uid': 'Invalid or malformed uid',
         'invalid_token': 'Invalid token or the token has expired'
     }
 
@@ -95,16 +95,16 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         password_validation.validate_password(value)
         return value
 
-    def validate_user_id(self, value):
+    def validate_uid(self, value):
         """
         Validate the encoded user id and add a user attribute to the serializer.
-        The user attribute is used in the validate_token method
+        The user attribute is used in the validate_token method and the api view.
         """
         try:
             user_id = decode_uid(value)
             self.user = User.objects.get(id=user_id)
         except (User.DoesNotExist, ValueError, TypeError, OverflowError):
-            raise serializers.ValidationError(self.error_messages['invalid_user_id'])
+            raise serializers.ValidationError(self.error_messages['invalid_uid'])
         return value
 
     def validate_token(self, value):
