@@ -5,9 +5,8 @@ from rest_framework import serializers
 
 # {{ cookiecutter.project_name }} Stuff
 from {{cookiecutter.main_module}}.users.models import User, UserManager
-from {{cookiecutter.main_module}}.users.services import decode_uid
-
 from .tokens import get_token_for_user
+from .utils import decode_uid
 
 
 class LoginSerializer(serializers.Serializer):

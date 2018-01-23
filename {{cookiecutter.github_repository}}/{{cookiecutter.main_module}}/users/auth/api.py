@@ -6,8 +6,8 @@ from rest_framework.permissions import AllowAny
 # {{ cookiecutter.project_name }} Stuff
 from {{cookiecutter.main_module}}.base import response
 from {{cookiecutter.main_module}}.base.api.mixins import MultipleSerializerMixin
-from {{cookiecutter.main_module}}.users.services import (
-    create_user_account, get_and_authenticate_user, send_password_reset_mail)
+from {{cookiecutter.main_module}}.users.services import create_user_account, get_and_authenticate_user
+from {{cookiecutter.main_module}}.users.auth.services import send_password_reset_mail
 
 from . import serializers
 
