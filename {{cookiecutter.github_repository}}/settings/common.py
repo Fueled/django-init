@@ -337,13 +337,18 @@ CELERY_TIMEZONE = env('CELERY_TIMEZONE', default=TIME_ZONE)  # Use django's time
 
 # USER AUTH - PASSWORD RESET
 # -----------------------------------------------------------------------------
-# see user.services.send_password_reset
-PASSWORD_RESET_CONFIRM_URL = env('PASSWORD_RESET_CONFIRM_URL',
-                                 default='reset-password/{token}/{uid}')
+# Api's typically run on a different domain/url than the frontend app.
+FRONTEND_APP_BASE_URL = env('FRONTEND_APP_BASE_URL', default='http://example.com')
 
-# Api's typically run on a different name than the frontend app.
-FRONTEND_DOMAIN = env('FRONTEND_DOMAIN', default='http://localhost:8000')
-FROM_EMAIL = env('FROM_EMAIL', default='default@localhost.com')
+# see user.services.send_password_reset
+# path should have placeholders for token and uid (encoded user id)
+PASSWORD_RESET_CONFIRM_PATH = env('PASSWORD_RESET_CONFIRM_PATH',
+                                  default='reset-password/{token}/{uid}')
+
+# EMAIL
+# ------------------------------------------------------------------------------
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',
+                         default='{{ cookiecutter.default_from_email }}')
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------

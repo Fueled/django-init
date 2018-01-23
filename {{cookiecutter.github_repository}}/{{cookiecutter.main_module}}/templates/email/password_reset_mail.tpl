@@ -13,7 +13,7 @@ for your user account.{% endblocktrans %}
 
 {% trans "Please go to the following page and choose a new password:" %}
 {% block reset_link %}
-{{ frontend_domain }}/{{ url }}
+{{ password_reset_url }}
 {% endblock %}
 
 {% trans "Thanks for using our site!" %}
@@ -29,7 +29,7 @@ for your user account.{% endblocktrans %}
 
 {% trans "Please go to the following page and choose a new password:" %}
 
-<a href="{{ frontend_domain }}/{{ url }}">Reset Password</a>
+<a href="{{ password_reset_url }}">Reset Password</a>
 
 {% trans "Thanks for using our site!" %}
 
