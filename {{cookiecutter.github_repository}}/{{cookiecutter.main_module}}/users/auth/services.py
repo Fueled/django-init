@@ -25,4 +25,5 @@ def send_password_reset_mail(user):
     }
     to_emails = [user.email]
     from_email = settings.DEFAULT_FROM_EMAIL
-    return send_mail('email/password_reset_mail.tpl', ctx, from_email, to_emails)
+    return send_mail(template_name='email/password_reset_mail.tpl',
+                     context=ctx, from_email=from_email, recipient_list=to_emails)
