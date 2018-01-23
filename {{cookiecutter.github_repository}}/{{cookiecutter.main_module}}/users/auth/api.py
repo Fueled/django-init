@@ -7,9 +7,9 @@ from rest_framework.permissions import AllowAny
 from {{cookiecutter.main_module}}.base import response
 from {{cookiecutter.main_module}}.base.api.mixins import MultipleSerializerMixin
 from {{cookiecutter.main_module}}.users.services import create_user_account, get_and_authenticate_user
-from {{cookiecutter.main_module}}.users.auth.services import send_password_reset_mail
 
 from . import serializers
+from . import services as auth_services
 
 
 class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
@@ -51,7 +51,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
     def password_reset(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        send_password_reset_mail(serializer.user)
+        auth_services.send_password_reset_mail(serializer.user)
         return response.NoContent()
 
     @list_route(['POST', ])
