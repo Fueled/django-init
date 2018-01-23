@@ -5,9 +5,7 @@ import json
 import pytest
 from parse import parse
 from django.urls import reverse
-from django.contrib.auth.tokens import default_token_generator
 
-from {{cookiecutter.main_module}}.users.auth.utils import encode_uid
 from .. import factories as f
 
 pytestmark = pytest.mark.django_db
