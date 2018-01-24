@@ -55,4 +55,14 @@ server {
         uwsgi_param UWSGI_SCHEME $http_x_forwarded_proto;
     }
 
+    {%- if cookiecutter.add_whitenoise.lower() == 'n' %}
+    location /static/ {
+        alias {{ project_path }}/.staticfiles/;
+    }
+
+    location /media/ {
+        alias {{ project_path }}/.media/;
+    }
+    {% endif %}
+
 }{%endraw%}

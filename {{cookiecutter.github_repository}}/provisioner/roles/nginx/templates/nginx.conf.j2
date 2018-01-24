@@ -68,12 +68,21 @@ http {
     gzip on;
     gzip_disable "msie6";
 
+    {%- if cookiecutter.add_whitenoise.lower() == 'y' %}
     # gzip_vary on;
     # gzip_proxied any;
     # gzip_comp_level 6;
     # gzip_buffers 16 8k;
     # gzip_http_version 1.1;
     # gzip_types text/plain text/css application/json text/javascript application/javascript application/x-javascript text/xml application/xml application/xml+rss;
+    {%- else %}
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json text/javascript application/javascript application/x-javascript text/xml application/xml application/xml+rss;
+    {%- endif %}
 
 
     # nginx-naxsi config
