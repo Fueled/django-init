@@ -18,7 +18,7 @@ import os
 # Third Party Stuff
 from django.core.wsgi import get_wsgi_application
 from dotenv import load_dotenv
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' and cookiecutter.add_whitenoise.lower() == 'y' %}
 from whitenoise.django import DjangoWhiteNoise
 
 
@@ -58,7 +58,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings.production')
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' and cookiecutter.add_whitenoise.lower() == 'y' %}
 application = DjangoCompressorWhiteNoise(get_wsgi_application())
 {%- else %}
 application = get_wsgi_application()

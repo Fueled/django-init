@@ -9,6 +9,7 @@
     , "version": "0.0.0"
     , "newrelic" : "y"
     , "postgis": "n"
+    , "add_whitenoise": "n"
     , "add_ansible": "y"
     , "letsencrypt": "y"
     , "letsencrypt_email": "backend+{{ cookiecutter.main_module|replace('_', '-') }}@fueled.com"
