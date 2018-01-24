@@ -55,7 +55,7 @@ server {
         uwsgi_param UWSGI_SCHEME $http_x_forwarded_proto;
     }
 
-    {%- if cookiecutter.add_whitenoise.lower() == 'n' %}
+    {% if enable_whitenoise %}
     location /static/ {
         alias {{ project_path }}/.staticfiles/;
     }

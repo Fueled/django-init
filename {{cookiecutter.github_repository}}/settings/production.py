@@ -3,7 +3,7 @@
 Adds sensible default for running app in production.
 - Disable DEBUG
 - Make SECRET_KEY mandatory
-{%- if cookiecutter.add_whitenoise.lower() == 'y' %}
+{%- if cookiecutter.enable_whitenoise.lower() == 'y' %}
 - Use whitenoise to serve static files
 {%- endif %}
 - Disable browsable API
@@ -118,7 +118,7 @@ if ENABLE_MEDIA_UPLOAD_TO_S3:
 
 # Static Assests
 # ------------------------
-{%- if cookiecutter.add_whitenoise.lower() == 'y' %}
+{%- if cookiecutter.enable_whitenoise.lower() == 'y' %}
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 {%- else %}
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'

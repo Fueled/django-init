@@ -21,7 +21,7 @@ INTERNAL_IPS = ('127.0.0.1', '192.168.33.12', )
 
 ALLOWED_HOSTS = ['*']
 
-{%- if cookiecutter.add_whitenoise.lower() == 'y' %}
+{%- if cookiecutter.enable_whitenoise.lower() == 'y' %}
 # Staticfiles
 # ------------------------------------------------------------------------------
 # Disable Django's static file handling and allow WhiteNoise to take over. This
