@@ -34,6 +34,7 @@ test:
     {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
 ## Customize deployment commands
+{% if cookiecutter.enable_heroku_deployment.lower() == 'y' %}
 # To enable Heroku deployment add heroku API key under project settings deployment in circle
 deployment:
   dev:
@@ -51,6 +52,7 @@ deployment:
     owner: {{ cookiecutter.github_username }}
     heroku:
       appname: {{ cookiecutter.main_module }}-prod
+{% endif %}
 
 ## Custom notifications
 #notify:
