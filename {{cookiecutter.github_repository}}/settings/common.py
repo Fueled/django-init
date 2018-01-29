@@ -46,7 +46,7 @@ INSTALLED_APPS = (
 {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     'raven.contrib.django.raven_compat',
 {%- endif %}
-    'mail_templated',
+    'mail_templated',  # https://github.com/artemrizhov/django-mail-templated
 )
 
 # INSTALLED APPS CONFIGURATION

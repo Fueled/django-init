@@ -1,7 +1,7 @@
 # Third Party Stuff
 from rest_framework import viewsets
 from rest_framework.decorators import list_route
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 # {{ cookiecutter.project_name }} Stuff
 from {{cookiecutter.main_module}}.base import response
@@ -39,7 +39,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         data = serializers.AuthUserSerializer(user).data
         return response.Created(data)
 
-    @list_route(['POST', ])
+    @list_route(['POST', ], permission_classes=[IsAuthenticated, ])
     def password_change(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
