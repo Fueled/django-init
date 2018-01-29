@@ -26,7 +26,7 @@ ALLOWED_HOSTS = ['*']
 # ------------------------------------------------------------------------------
 # Disable Django's static file handling and allow WhiteNoise to take over. This
 # helps in minimizing dev/prod differences when serving static files.
-INSTALLED_APPS = ('whitenoise.runserver_nostatic', )  INSTALLED_APPS
+INSTALLED_APPS = ('whitenoise.runserver_nostatic', ) + INSTALLED_APPS
 {%- endif %}
 
 
