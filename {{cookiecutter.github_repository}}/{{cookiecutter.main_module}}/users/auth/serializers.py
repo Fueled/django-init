@@ -4,7 +4,8 @@ from django.contrib.auth.tokens import default_token_generator
 from rest_framework import serializers
 
 # {{ cookiecutter.project_name }} Stuff
-from {{cookiecutter.main_module}}.users.models import User, UserManager
+from {{cookiecutter.main_module}}.users.services import get_user_by_email
+from {{cookiecutter.main_module}}.users.models import UserManager
 from .tokens import get_token_for_user
 from .utils import decode_uid
 
@@ -19,8 +20,8 @@ class RegisterSerializer(serializers.Serializer):
     password = serializers.CharField(required=True)
 
     def validate_email(self, value):
-        users = User.objects.filter(email__iexact=value)
-        if users:
+        user = get_user_by_email(email=value)
+        if user:
             raise serializers.ValidationError("Email is already taken.")
         return UserManager.normalize_email(value)
 
