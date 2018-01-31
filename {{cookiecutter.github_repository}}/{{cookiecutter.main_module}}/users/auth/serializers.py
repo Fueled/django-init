@@ -62,18 +62,6 @@ class PasswordChangeSerializer(serializers.Serializer):
 class PasswordResetSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
 
-    default_error_messages = {
-        'email_does_not_exist': "No user with the specified email found"
-    }
-
-    def validate_email(self, value):
-        user = User.objects.filter(email__iexact=value).first()
-        if user is None:
-            raise serializers.ValidationError(self.default_error_messages['email_does_not_exist'])
-        # use this as serializer.user in the view
-        self.user = user
-        return value
-
 
 class PasswordResetConfirmSerializer(serializers.Serializer):
     new_password = serializers.CharField(required=True)

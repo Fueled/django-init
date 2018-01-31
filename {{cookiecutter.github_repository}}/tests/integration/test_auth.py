@@ -77,7 +77,7 @@ def test_user_password_reset(client, mailoutbox):
     user = f.create_user(email='test@example.com')
 
     response = client.json.post(url, json.dumps({'email': user.email}))
-    assert response.status_code == 204
+    assert response.status_code == 200
     assert len(mailoutbox) == 1
 
 
@@ -87,7 +87,7 @@ def test_user_password_reset_and_confirm(client, settings, mocker):
     mock_email = mocker.patch('{{cookiecutter.main_module}}.users.auth.services.send_mail')
 
     response = client.json.post(url, json.dumps({'email': user.email}))
-    assert response.status_code == 204
+    assert response.status_code == 200
     assert mock_email.call_count == 1
 
     args, kwargs = mock_email.call_args
