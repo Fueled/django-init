@@ -86,11 +86,12 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         try:
             user_id = decode_uid(value)
             self.user = get_user_model().objects.get(id=user_id)
-        except (get_user_model().DoesNotExist, ValueError, TypeError, OverflowError):
+        except Exception:
             raise serializers.ValidationError(self.default_error_messages['invalid_uid'])
         return value
 
     def validate_token(self, value):
-        if not default_token_generator.check_token(self.user, value):
-            raise serializers.ValidationError(self.default_error_messages['invalid_token'])
+        if hasattr(self, 'user'):
+            if not default_token_generator.check_token(self.user, value):
+                raise serializers.ValidationError(self.default_error_messages['invalid_token'])
         return value
