@@ -46,6 +46,7 @@ INSTALLED_APPS = (
 {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     'raven.contrib.django.raven_compat',
 {%- endif %}
+    'mail_templated',  # https://github.com/artemrizhov/django-mail-templated
 )
 
 # INSTALLED APPS CONFIGURATION
@@ -333,6 +334,21 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = env('CELERY_TIMEZONE', default=TIME_ZONE)  # Use django's timezone by default
 {%- endif %}
+
+# USER AUTH - PASSWORD RESET
+# -----------------------------------------------------------------------------
+# Api's typically run on a different domain/url than the frontend app.
+FRONTEND_APP_BASE_URL = env('FRONTEND_APP_BASE_URL', default='http://example.com')
+
+# see user.services.send_password_reset
+# path should have placeholders for token and uid (encoded user id)
+PASSWORD_RESET_CONFIRM_PATH = env('PASSWORD_RESET_CONFIRM_PATH',
+                                  default='reset-password/{token}/{uid}')
+
+# EMAIL
+# ------------------------------------------------------------------------------
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',
+                         default='{{ cookiecutter.default_from_email }}')
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------

@@ -16,7 +16,7 @@ from django.utils import six
 
 from .common import *  # noqa F405
 from .common import (DATABASES, INSTALLED_APPS, {% if cookiecutter.add_django_auth_wall.lower() == 'y' %}MIDDLEWARE,{%- endif %}
-                     REST_FRAMEWORK, TEMPLATES, env)
+                     REST_FRAMEWORK, TEMPLATES, env, DEFAULT_FROM_EMAIL)
 
 # SITE CONFIGURATION
 # Hosts/domain names that are valid for this site.
@@ -127,8 +127,7 @@ COMPRESS_OFFLINE = True
 
 # EMAIL
 # ------------------------------------------------------------------------------
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',
-                         default='{{ cookiecutter.default_from_email }}')
+# DEFAULT_FROM_EMAIL in settings/common.py
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
