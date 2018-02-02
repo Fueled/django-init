@@ -8,4 +8,7 @@ def encode_uid(pk):
 
 
 def decode_uid(pk):
-    return force_text(urlsafe_base64_decode(pk))
+    try:
+        return force_text(urlsafe_base64_decode(pk))
+    except (ValueError, OverflowError, TypeError):
+        return None

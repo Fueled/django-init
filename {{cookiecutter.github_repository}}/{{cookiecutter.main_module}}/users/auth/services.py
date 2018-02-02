@@ -1,12 +1,29 @@
-# Third Party Stuff
+# Stdlib Stuff
+import uuid
 
-from django.conf import settings
+# Third Party Stuff
 from django.contrib.auth.tokens import default_token_generator
+from rest_framework.exceptions import ValidationError
 from django_sites import get_current
 from mail_templated import send_mail
+from django.conf import settings
 
 # {{ cookiecutter.project_name }} Stuff
 from .utils import encode_uid
+
+
+def validate_uuid(uuid_value, raise_exception=False, error_message=None):
+    try:
+        uuid.UUID(hex=str(uuid_value))
+    except ValueError as exc:
+        _error = error_message if error_message else exc.detail
+    else:
+        _error = {}
+
+    if raise_exception:
+        raise ValidationError(_error)
+
+    return not bool(_error)
 
 
 def send_password_reset_mail(user):
