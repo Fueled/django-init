@@ -6,6 +6,7 @@ from rest_framework import serializers
 # {{ cookiecutter.project_name }} Stuff
 from {{cookiecutter.main_module}}.users.services import get_user_by_email
 from {{cookiecutter.main_module}}.users.models import UserManager
+from . import services as auth_services
 from .tokens import get_token_for_user
 from .utils import decode_uid
 
@@ -90,7 +91,7 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
             raise serializers.ValidationError(self.default_error_messages['invalid_uid'])
 
         # validate the user_id(uuid) and raise an exception if its invalid
-        validate_uuid(user_id, raise_exception=True)
+        auth_services.validate_uuid(user_id, raise_exception=True)
 
         # our uuid is valid, get our user and attach it to the serializer
         self.user = get_user_model().objects.filter(id=user_id).first()
