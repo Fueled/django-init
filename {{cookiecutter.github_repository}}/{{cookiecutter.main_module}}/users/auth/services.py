@@ -13,6 +13,19 @@ from .utils import encode_uid
 
 
 def validate_uuid(uuid_value, raise_exception=False, error_message=None):
+    """
+    Validate whether the uuid_value is a valid uuid. If raise_exception is true,
+    an exception would be raised if the value is not a valid uuid with the default error detail.
+
+    :param uuid_value: uuid value to be validated
+    :param raise_exception: whether to raise an exception if uuid is not valid
+    :param error_message: Error detail message with which the error should be raised. Default detail is used otherwise
+    :type uuid_value: string
+    :type raise_exception: bool
+    :type error_message: string
+    :return: Boolean denoting whether the value is valid or not
+    :rtype: bool
+    """
     try:
         uuid.UUID(hex=str(uuid_value))
     except ValueError as exc:
@@ -20,9 +33,8 @@ def validate_uuid(uuid_value, raise_exception=False, error_message=None):
     else:
         _error = {}
 
-    if raise_exception:
+    if _error and raise_exception:
         raise ValidationError(_error)
-
     return not bool(_error)
 
 
