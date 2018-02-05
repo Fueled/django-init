@@ -67,4 +67,48 @@ server {
         try_files $uri $uri/ /index.html;
         root {{ frontend_path }}/dist/;
     }
+}
+
+# Serve static files and redirect any other request to django wsgi server
+server {
+    listen       {{ ngnix_listen }};
+    server_name  {{ frontend_domain_name }};
+
+    ssl on;
+    ssl_certificate     {{ ssl_certificate }};
+    ssl_certificate_key {{ ssl_certificate_key }};
+    ssl_dhparam         {{ ssl_dhparam }};
+
+    # Oldest compatible clients: Firefox 1, Chrome 1, IE 7, Opera 5, Safari 1, Windows XP IE8, Android 2.3, Java 7
+    ssl_protocols {{ ssl_protocols }};
+    ssl_ciphers '{{ ssl_ciphers }}';
+    ssl_prefer_server_ciphers on;
+
+    ssl_session_timeout {{ ssl_session_timeout }};
+    ssl_session_cache {{ ssl_session_cache }};
+    ssl_session_tickets off;
+
+    # OCSP Stapling ---
+    # fetch OCSP records from URL in ssl_certificate and cache them
+    ssl_stapling on;
+    ssl_stapling_verify on;
+
+    ## verify chain of trust of OCSP response using Root CA and Intermediate certs
+    ssl_trusted_certificate {{ ssl_trusted_certificate }};
+
+    access_log   {{ access_log_dir }};
+    error_log    {{ error_log_dir }};
+
+    client_max_body_size {{ client_max_body_size}};
+
+    {% if use_letsencrypt %}
+    location /.well-known/acme-challenge {
+            root {{ letsencrypt_challange_root }};
+            try_files $uri =404;
+    }
+    {% endif %}
+
+    location / {
+        return 301   https://www.{{ frontend_domain_name }}$request_uri;
+    }
 }{% endraw %}
