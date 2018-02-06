@@ -74,13 +74,18 @@ def test_user_password_change(client):
     assert user.check_password(new_password)
 
 
-def test_user_password_reset(client, mailoutbox):
+def test_user_password_reset(client, mailoutbox, settings):
     url = reverse('auth-password-reset')
     user = f.create_user(email='test@example.com')
 
     response = client.json.post(url, json.dumps({'email': user.email}))
     assert response.status_code == 200
     assert len(mailoutbox) == 1
+    mail_body = mailoutbox[0].body
+    token = get_token_for_password_reset(user)
+    assert "{}://{}".format(settings.FRONTEND_SITE_SCHEME, settings.FRONTEND_SITE_DOMAIN) in mail_body
+    assert token in mail_body
+    assert user.email in mailoutbox[0].to
 
 
 def test_user_password_reset_and_confirm(client, settings, mocker):

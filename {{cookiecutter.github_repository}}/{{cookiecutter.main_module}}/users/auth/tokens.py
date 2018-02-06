@@ -57,11 +57,11 @@ def get_user_for_password_reset_token(token):
         'user_not_found': 'No user exists for given token'
     }
     try:
-        uuid_value, reset_token = token.split("::")
+        uidb64, reset_token = token.split("::")
     except ValueError:
         raise exc.RequestValidationError(default_error_messages['invalid_token'])
 
-    user_id = decode_uuid_from_base64(uuid_value)
+    user_id = decode_uuid_from_base64(uidb64)
     if not user_id:
         raise exc.RequestValidationError(default_error_messages['invalid_token'])
 
