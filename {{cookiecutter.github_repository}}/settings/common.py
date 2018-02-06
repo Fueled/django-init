@@ -113,12 +113,18 @@ REST_FRAMEWORK = {
     ),
     'EXCEPTION_HANDLER': '{{ cookiecutter.main_module }}.base.exceptions.exception_handler',
 }
+
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
 # see: http://django-sites.readthedocs.org
 SITE_SCHEME = env("SITE_SCHEME", default='http')
 SITE_DOMAIN = env("SITE_DOMAIN", default='localhost:8000')
-SITE_NAME = env("SITE_NAME", default='Local')
+SITE_NAME = env("SITE_NAME", default='{{ cookiecutter.project_name }}')
+
+# This is used in-case of the frontend is deployed at a different url than this django app.
+FRONTEND_SITE_SCHEME = env('FRONTEND_SITE_SCHEME', default='https')
+FRONTEND_SITE_DOMAIN = env('FRONTEND_SITE_DOMAIN', default='example.com')
+FRONTEND_SITE_NAME = env('FRONTEND_SITE_NAME', default='{{ cookiecutter.project_name }}')
 
 SITES = {
     'current': {
@@ -126,8 +132,20 @@ SITES = {
         'scheme': SITE_SCHEME,
         'name': SITE_NAME
     },
+    'frontend': {
+        'domain': FRONTEND_SITE_DOMAIN,
+        'scheme': FRONTEND_SITE_SCHEME,
+        'name': FRONTEND_SITE_NAME
+    },
 }
 SITE_ID = 'current'
+
+# see user.services.send_password_reset
+# path should have placeholders for token and uid (encoded user id)
+FRONTEND_URLS = {
+    'home': '/',
+    'password-confirm': '/reset-password/{token}/',
+}
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -345,16 +363,6 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = env('CELERY_TIMEZONE', default=TIME_ZONE)  # Use django's timezone by default
 {%- endif %}
-
-# USER AUTH - PASSWORD RESET
-# -----------------------------------------------------------------------------
-# Api's typically run on a different domain/url than the frontend app.
-FRONTEND_APP_BASE_URL = env('FRONTEND_APP_BASE_URL', default='http://example.com')
-
-# see user.services.send_password_reset
-# path should have placeholders for token and uid (encoded user id)
-PASSWORD_RESET_CONFIRM_PATH = env('PASSWORD_RESET_CONFIRM_PATH',
-                                  default='reset-password/{token}/{uid}')
 
 # EMAIL
 # ------------------------------------------------------------------------------

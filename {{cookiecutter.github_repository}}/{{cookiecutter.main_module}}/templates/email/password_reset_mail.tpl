@@ -1,6 +1,8 @@
 {% raw %}
 {% extends "mail_templated/base.tpl" %}
 {% load i18n %}
+{% resolve_frontend_url from urls_extra %}
+
 
 {% block subject %}
 Reset your {{ site.name }} Password!
@@ -12,13 +14,10 @@ Reset your {{ site.name }} Password!
 for your user account.{% endblocktrans %}
 
 {% trans "Please go to the following page and choose a new password:" %}
-{% block reset_link %}
-{{ password_reset_url }}
-{% endblock %}
+
+{% resolve_frontend_url password-confirm token=token uuid=uuid %}
 
 {% trans "Thanks for using our site!" %}
-
-- {{ site.name }}
 
 {% endblock %}
 
@@ -29,11 +28,9 @@ for your user account.{% endblocktrans %}
 
 {% trans "Please go to the following page and choose a new password:" %}
 
-<a href="{{ password_reset_url }}">Reset Password</a>
+<a href="{% resolve_frontend_url password-confirm token=token uuid=uuid %}">{% trans "Reset Password" %}</a>
 
 {% trans "Thanks for using our site!" %}
-
-- {{ site.name }}
 
 {% endblock %}
 {% endraw %}
