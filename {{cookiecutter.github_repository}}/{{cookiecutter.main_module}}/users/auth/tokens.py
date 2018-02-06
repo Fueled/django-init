@@ -67,10 +67,10 @@ def get_user_for_password_reset_token(token):
 
     user = get_user_model().objects.filter(id=user_id).first()
 
-    if not PasswordResetTokenGenerator().check_token(user, reset_token):
-        raise exc.RequestValidationError(default_error_messages['invalid_token'])
-
     if not user:
         raise exc.RequestValidationError(default_error_messages['user_not_found'])
+
+    if not PasswordResetTokenGenerator().check_token(user, reset_token):
+        raise exc.RequestValidationError(default_error_messages['invalid_token'])
 
     return user
