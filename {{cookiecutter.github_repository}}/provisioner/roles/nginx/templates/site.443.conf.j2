@@ -54,5 +54,14 @@ server {
         # set correct scheme
         uwsgi_param UWSGI_SCHEME $http_x_forwarded_proto;
     }
+{% endraw %}
+    {%- if cookiecutter.enable_whitenoise.lower() == 'n' %}
+    {%raw%}location /static/ {
+        alias {{ project_path }}/.staticfiles/;
+    }
 
-}{%endraw%}
+    location /media/ {
+        alias {{ project_path }}/.media/;
+    }{% endraw %}
+    {%- endif %}
+}
