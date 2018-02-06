@@ -10,8 +10,7 @@ from {{cookiecutter.main_module}}.users.services import (
     create_user_account, get_and_authenticate_user, get_user_by_email
 )
 
-from . import serializers
-from . import services as auth_services
+from . import serializers, services
 
 
 class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
@@ -54,8 +53,8 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = get_user_by_email(serializer.data['email'])
-        if user is not None:
-            auth_services.send_password_reset_mail(user)
+        if user:
+            services.send_password_reset_mail(user)
         return response.Ok({'message': 'Further instructions will be sent to the email if it exists'})
 
     @list_route(['POST', ])

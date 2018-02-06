@@ -1,14 +1,12 @@
 # Third Party Stuff
 from django.contrib.auth import get_user_model, password_validation
-from django.contrib.auth.tokens import default_token_generator
 from rest_framework import serializers
 
 # {{ cookiecutter.project_name }} Stuff
-from {{cookiecutter.main_module}}.users.services import get_user_by_email
+from {{cookiecutter.main_module}}.users.services as user_services
 from {{cookiecutter.main_module}}.users.models import UserManager
-from . import services as auth_services
-from .tokens import get_token_for_user
-from .utils import decode_uid
+
+from . import tokens
 
 
 class LoginSerializer(serializers.Serializer):
@@ -21,7 +19,7 @@ class RegisterSerializer(serializers.Serializer):
     password = serializers.CharField(required=True)
 
     def validate_email(self, value):
-        user = get_user_by_email(email=value)
+        user = user_services.get_user_by_email(email=value)
         if user:
             raise serializers.ValidationError("Email is already taken.")
         return UserManager.normalize_email(value)
@@ -39,7 +37,7 @@ class AuthUserSerializer(serializers.ModelSerializer):
         return obj.get_full_name()
 
     def get_auth_token(self, obj):
-        return get_token_for_user(obj, "authentication")
+        return tokens.get_token_for_user(obj, "authentication")
 
 
 class PasswordChangeSerializer(serializers.Serializer):
@@ -67,40 +65,12 @@ class PasswordResetSerializer(serializers.Serializer):
 
 class PasswordResetConfirmSerializer(serializers.Serializer):
     new_password = serializers.CharField(required=True)
-    uid = serializers.CharField(required=True)
     token = serializers.CharField(required=True)
-
-    default_error_messages = {
-        'invalid_uid': 'Invalid or malformed uid',
-        'invalid_token': 'Invalid token or the token has expired',
-        'user_not_found': 'No user exists for given uid'
-    }
 
     def validate_new_password(self, value):
         password_validation.validate_password(value)
         return value
 
-    def validate_uid(self, value):
-        """
-        Validate the encoded user id and add a user attribute to the serializer.
-        The user attribute is used in the validate_token method and the api view.
-        """
-        # decode_uid returns None if the uid cannot be decoded.
-        user_id = decode_uid(value)
-        if not user_id:
-            raise serializers.ValidationError(self.default_error_messages['invalid_uid'])
-
-        # validate the user_id(uuid) and raise an exception if its invalid
-        auth_services.validate_uuid(user_id, raise_exception=True)
-
-        # our uuid is valid, get our user and attach it to the serializer
-        self.user = get_user_model().objects.filter(id=user_id).first()
-        if not self.user:
-            raise serializers.ValidationError(self.default_error_messages['user_not_found'])
-        return value
-
     def validate_token(self, value):
-        if hasattr(self, 'user'):
-            if not default_token_generator.check_token(self.user, value):
-                raise serializers.ValidationError(self.default_error_messages['invalid_token'])
+        self.user = tokens.get_user_for_password_reset_token(value)
         return value

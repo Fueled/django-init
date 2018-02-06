@@ -12,7 +12,7 @@ for your user account.{% endblocktrans %}
 
 {% trans "Please go to the following page and choose a new password:" %}
 
-{% resolve_frontend_url password-confirm token=token uuid=uuid %}
+{% resolve_frontend_url password-confirm token=token %}
 
 {% trans "Thanks for using our site!" %}
 {% endblock body %}
@@ -24,7 +24,7 @@ for your user account.{% endblocktrans %}
 for your user account.{% endblocktrans %}</p>
 
 <p>{% trans "Please go to the following page and choose a new password:" %}
-<a href="{% resolve_frontend_url password-confirm token=token uuid=uuid %}">{% trans "Reset Password" %}</a>
+<a href="{% resolve_frontend_url password-confirm token=token %}">{% trans "Reset Password" %}</a>
 </p>
 
 <p>{% trans "Thanks for using our site!" %}</p>
