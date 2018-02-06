@@ -115,10 +115,18 @@ REST_FRAMEWORK = {
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
 # see: http://django-sites.readthedocs.org
+SITE_SCHEME = env("SITE_SCHEME", default='http')
+SITE_DOMAIN = env("SITE_DOMAIN", default='localhost:8000')
+SITE_NAME = env("SITE_NAME", default='Local')
+
 SITES = {
-    'local': {'domain': 'localhost:8000', 'scheme': 'http', 'name': 'localhost'},
+    'current': {
+        'domain': SITE_DOMAIN,
+        'scheme': SITE_SCHEME,
+        'name': SITE_NAME
+    },
 }
-SITE_ID = 'local'
+SITE_ID = 'current'
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -310,7 +318,8 @@ MEDIA_ROOT = str(ROOT_DIR.path('.media'))
 # URL that handles the media served from MEDIA_ROOT.
 # Examples: 'http://example.com/media/', 'http://media.example.com/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = '/media/'
+MEDIA_URL = env("MEDIA_URL",
+                default="{}://{}/media/".format(SITE_SCHEME, SITE_DOMAIN))
 
 #  SECURITY
 # -----------------------------------------------------------------------------
