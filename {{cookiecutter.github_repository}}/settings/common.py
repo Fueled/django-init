@@ -131,7 +131,9 @@ MIDDLEWARE = [
 {%- endif %}
     'log_request_id.middleware.RequestIDMiddleware',  # For generating/adding Request id for all the logs
     'django.middleware.security.SecurityMiddleware',
+{%- if cookiecutter.enable_whitenoise.lower() == 'y' %}
     'whitenoise.middleware.WhiteNoiseMiddleware',
+{%- endif %}
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
