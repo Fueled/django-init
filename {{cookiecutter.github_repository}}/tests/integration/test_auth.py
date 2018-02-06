@@ -3,8 +3,10 @@ import json
 
 # Third Party Stuff
 import pytest
-from parse import parse
 from django.urls import reverse
+
+# {{ cookiecutter.project_name }} Stuff
+from {{cookiecutter.main_module}}.users.auth.tokens import get_token_for_password_reset
 
 from .. import factories as f
 
@@ -94,19 +96,13 @@ def test_user_password_reset_and_confirm(client, settings, mocker):
     assert user.email in kwargs.get('recipient_list')
 
     # get the context passed to template
-    ctx = kwargs.get('context')
-    password_reset_url = ctx.get('password_reset_url')
-    password_reset_url_settings = "{base_url}/{path}".format(
-        base_url=settings.FRONTEND_APP_BASE_URL, path=settings.PASSWORD_RESET_CONFIRM_PATH)
-    # use parse to get the values for our placeholders
-    parsed_url = parse(password_reset_url_settings, password_reset_url)
+    token = kwargs['context']['token']
 
     # confirm we can reset password using context values
     new_password = 'paSswOrd2'
     password_reset_confirm_data = {
         'new_password': new_password,
-        'uid': parsed_url['uid'],
-        'token': parsed_url['token']
+        'token': token
     }
     url = reverse('auth-password-reset-confirm')
     response = client.json.post(url, json.dumps(password_reset_confirm_data))

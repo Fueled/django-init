@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model, password_validation
 from rest_framework import serializers
 
 # {{ cookiecutter.project_name }} Stuff
-from {{cookiecutter.main_module}}.users.services as user_services
+from {{cookiecutter.main_module}}.users import services as user_services
 from {{cookiecutter.main_module}}.users.models import UserManager
 
 from . import tokens

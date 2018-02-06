@@ -1,7 +1,7 @@
 # Third Party Stuff
 import django_sites as sites
-from django.urls import reverse as django_reverse
 from django.conf import settings
+from django.urls import reverse as django_reverse
 
 URL_TEMPLATE = '{scheme}://{domain}/{path}'
 

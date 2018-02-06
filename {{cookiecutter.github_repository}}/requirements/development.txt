@@ -22,10 +22,6 @@ django-dynamic-fixture==2.0.0
 flake8-mypy==17.8.0
 pytest-mock==1.6.3
 
-# Parse placeholders of url's in tests
-# https://github.com/r1chardj0n3s/parse
-parse==1.8.2
-
 # Versioning
 # -------------------------------------
 bumpversion==0.5.3
