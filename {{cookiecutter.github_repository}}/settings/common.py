@@ -141,7 +141,7 @@ SITES = {
 SITE_ID = 'current'
 
 # see user.services.send_password_reset
-# path should have placeholders for token and uid (encoded user id)
+# password-confirm path should have placeholder for token
 FRONTEND_URLS = {
     'home': '/',
     'password-confirm': '/reset-password/{token}/',
