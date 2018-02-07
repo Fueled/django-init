@@ -21,12 +21,14 @@ from .common import (DATABASES, INSTALLED_APPS, {% if cookiecutter.add_django_au
                      REST_FRAMEWORK, TEMPLATES, env)
 
 # SITE CONFIGURATION
+# Ensure these are set in the `.env` file manually.
+SITE_SCHEME = env('SITE_SCHEME')
+SITE_DOMAIN = env('SITE_DOMAIN')
+
 # Hosts/domain names that are valid for this site.
 # "*" matches anything, ".example.com" matches example.com and all subdomains
 # See https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
-
-SITE_SCHEME = env('SITE_SCHEME', default='https')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[SITE_DOMAIN])
 
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -44,15 +46,6 @@ MANAGERS = ADMINS
 CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST')
 {%- endif %}
 
-# DJANGO_SITES
-# ------------------------------------------------------------------------------
-# see: http://niwinz.github.io/django-sites/latest/
-SITES['remote'] = {  # noqa: F405
-    'domain': env('SITE_DOMAIN'),
-    'scheme': SITE_SCHEME,
-    'name': env('SITE_NAME'),
-}
-SITE_ID = env('DJANGO_SITE_ID', default='remote')
 {% if cookiecutter.add_django_auth_wall.lower() == 'y' %}
 # Basic Auth Protection
 # -----------------------------------------------------------------------------
@@ -114,7 +107,8 @@ if ENABLE_MEDIA_UPLOAD_TO_S3:
     }
 
     # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
-    MEDIA_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+    MEDIA_URL = env('MEDIA_URL',
+                    default='https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME)
 
 # Static Assests
 # ------------------------
