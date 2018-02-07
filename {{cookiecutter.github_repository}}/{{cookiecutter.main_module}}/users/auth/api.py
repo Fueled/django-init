@@ -9,7 +9,7 @@ from {{cookiecutter.main_module}}.base.api.mixins import MultipleSerializerMixin
 from {{cookiecutter.main_module}}.users import services as user_services
 
 
-from . import serializers, services
+from . import serializers, services, tokens
 
 
 class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
@@ -60,6 +60,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
     def password_reset_confirm(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.user.set_password(serializer.validated_data['new_password'])
-        serializer.user.save()
+        user = tokens.get_user_for_password_reset_token(serializer.validated_data['token'])
+        user.set_password(serializer.validated_data['new_password'])
+        user.save()
         return response.NoContent()

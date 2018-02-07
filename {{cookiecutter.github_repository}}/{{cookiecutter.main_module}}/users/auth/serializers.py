@@ -70,7 +70,3 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
     def validate_new_password(self, value):
         password_validation.validate_password(value)
         return value
-
-    def validate_token(self, value):
-        self.user = tokens.get_user_for_password_reset_token(value)
-        return value
