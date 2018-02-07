@@ -18,7 +18,7 @@ from django.utils import six
 
 from .common import *  # noqa F405
 from .common import (DATABASES, INSTALLED_APPS, {% if cookiecutter.add_django_auth_wall.lower() == 'y' %}MIDDLEWARE,{%- endif %}
-                     REST_FRAMEWORK, TEMPLATES, env, DEFAULT_FROM_EMAIL)
+                     REST_FRAMEWORK, TEMPLATES, env)
 
 # SITE CONFIGURATION
 # Ensure these are set in the `.env` file manually.
