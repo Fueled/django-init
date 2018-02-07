@@ -25,6 +25,10 @@ else
     read  yn
 fi
 
+if echo "{{ cookiecutter.enable_heroku_deployment }}" | grep -iq "^n"; then
+    rm -rf Procfile runtime.txt bin
+fi
+
 if echo "{{ cookiecutter.add_ansible }}" | grep -iq "^n"; then
     rm -rf provisioner Vagrantfile
 fi

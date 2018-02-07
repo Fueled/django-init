@@ -9,6 +9,7 @@
     , "version": "0.0.0"
     , "newrelic" : "y"
     , "postgis": "n"
+    , "enable_heroku_deployment": "n"
     , "enable_whitenoise": "n"
     , "add_ansible": "y"
     , "letsencrypt": "y"

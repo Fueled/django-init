@@ -40,6 +40,7 @@ notifications:
     on_success: change  # [always|never|change]
     on_failure: always  # [always|never|change]
 
+{%- if cookiecutter.enable_heroku_deployment.lower() == 'y' %}
 deploy:
   provider: heroku
   buildpack: python
@@ -53,3 +54,4 @@ deploy:
     prod: {{ cookiecutter.main_module }}-prod
   on:
     repo: {{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}
+{% endif %}

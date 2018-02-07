@@ -60,8 +60,10 @@ MIDDLEWARE = ['django_auth_wall.middleware.BasicAuthMiddleware', ] + MIDDLEWARE
 # that header/value, request.is_secure() will return True.
 # WARNING! Only set this if you fully understand what you're doing. Otherwise,
 # you may be opening yourself up to a security risk.
+{%- if cookiecutter.enable_heroku_deployment.lower() == 'y' %}
 # This ensures that Django will be able to detect a secure connection
 # properly on Heroku.
+{%- endif %}
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 #  SECURITY
@@ -156,7 +158,9 @@ CACHES = {
             'PARSER_CLASS': 'redis.connection.HiredisParser',
             'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
             'CONNECTION_POOL_CLASS_KWARGS': {
+{%- if cookiecutter.enable_heroku_deployment.lower() == 'y' %}
                 # Hobby redistogo on heroku only supports max. 10, increase as required.
+{%- endif %}
                 'max_connections': env.int('REDIS_MAX_CONNECTIONS', default=10),
                 'timeout': 20,
             }
