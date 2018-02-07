@@ -15,12 +15,10 @@ def resolve_frontend_url(name, **kwargs):
 
     Usages:
     ```
-    {% raw %}
-    {% load resolve_frontend_url from urls_extra %}
+    {% raw %}{% load resolve_frontend_url from urls_extra %}
 
     {% resolve_frontend_url "home" %}
-    {% resolve_frontend_url "password-reset" token=token %}
-    {% endraw %}
+    {% resolve_frontend_url "password-reset" token=token %}{% endraw %}
     ```
     """
     return _resolve_frontend_url(name, **kwargs)
