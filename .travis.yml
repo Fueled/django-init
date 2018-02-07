@@ -4,8 +4,7 @@
 language: python
 sudo: false
 python:
-- '2.7'
-# - '3.4'  # not supported yet due to dependency on 'fabric'
+- '3.5'
 
 services:
   - postgresql
@@ -17,7 +16,7 @@ addons:
       - postgresql-9.5-postgis-2.3
 
 install:
-  - pip install -U pip cookiecutter fabric
+  - pip install -U pip cookiecutter fabric3 ansible==2.4.3
 
 script:
   - ./run_test.sh

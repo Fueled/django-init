@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - Support for Django 2.0.x
 - Make whitenoise optional, add static and media routes to nginx if whitenoise is not enabled. (@tucosaurus)
 - Make heroku deployment optional. (@tucosaurus)
+- Add api views (and docs) for password change, password reset and confirmation to the user app. (@tucosaurus, @saurabh)
 
 ## [1.11]
 

@@ -1,31 +1,26 @@
 # Third Party Stuff
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, password_validation
 from rest_framework import serializers
 
 # {{ cookiecutter.project_name }} Stuff
-from {{cookiecutter.main_module}}.users.models import User, UserManager
+from {{cookiecutter.main_module}}.users import services as user_services
+from {{cookiecutter.main_module}}.users.models import UserManager
 
-from .tokens import get_token_for_user
+from . import tokens
 
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=300, required=True)
     password = serializers.CharField(required=True)
 
-    class Meta:
-        fields = ['email', ]
-
 
 class RegisterSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     password = serializers.CharField(required=True)
 
-    class Meta:
-        fields = ['email', 'name']
-
     def validate_email(self, value):
-        users = User.objects.filter(email__iexact=value)
-        if users:
+        user = user_services.get_user_by_email(email=value)
+        if user:
             raise serializers.ValidationError("Email is already taken.")
         return UserManager.normalize_email(value)
 
@@ -42,4 +37,36 @@ class AuthUserSerializer(serializers.ModelSerializer):
         return obj.get_full_name()
 
     def get_auth_token(self, obj):
-        return get_token_for_user(obj, "authentication")
+        return tokens.get_token_for_user(obj, "authentication")
+
+
+class PasswordChangeSerializer(serializers.Serializer):
+    current_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+    default_error_messages = {
+        'invalid_password': 'Current password does not match'
+    }
+
+    def validate_current_password(self, value):
+        if not self.context['request'].user.check_password(value):
+            raise serializers.ValidationError(self.default_error_messages['invalid_password'])
+        return value
+
+    def validate_new_password(self, value):
+        # https://docs.djangoproject.com/en/2.0/topics/auth/passwords/#django.contrib.auth.password_validation.validate_password
+        password_validation.validate_password(value)
+        return value
+
+
+class PasswordResetSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    new_password = serializers.CharField(required=True)
+    token = serializers.CharField(required=True)
+
+    def validate_new_password(self, value):
+        password_validation.validate_password(value)
+        return value

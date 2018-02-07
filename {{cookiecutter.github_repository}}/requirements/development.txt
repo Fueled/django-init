@@ -20,6 +20,7 @@ pytest-pythonpath==0.7.1
 pytest-cov==2.5.1
 django-dynamic-fixture==2.0.0
 flake8-mypy==17.8.0
+pytest-mock==1.6.3
 
 # Versioning
 # -------------------------------------

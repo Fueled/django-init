@@ -46,6 +46,7 @@ INSTALLED_APPS = (
 {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     'raven.contrib.django.raven_compat',
 {%- endif %}
+    'mail_templated',  # https://github.com/artemrizhov/django-mail-templated
 )
 
 # INSTALLED APPS CONFIGURATION
@@ -112,12 +113,18 @@ REST_FRAMEWORK = {
     ),
     'EXCEPTION_HANDLER': '{{ cookiecutter.main_module }}.base.exceptions.exception_handler',
 }
+
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
 # see: http://django-sites.readthedocs.org
 SITE_SCHEME = env("SITE_SCHEME", default='http')
 SITE_DOMAIN = env("SITE_DOMAIN", default='localhost:8000')
-SITE_NAME = env("SITE_NAME", default='Local')
+SITE_NAME = env("SITE_NAME", default='{{ cookiecutter.project_name }}')
+
+# This is used in-case of the frontend is deployed at a different url than this django app.
+FRONTEND_SITE_SCHEME = env('FRONTEND_SITE_SCHEME', default='https')
+FRONTEND_SITE_DOMAIN = env('FRONTEND_SITE_DOMAIN', default='example.com')
+FRONTEND_SITE_NAME = env('FRONTEND_SITE_NAME', default='{{ cookiecutter.project_name }}')
 
 SITES = {
     'current': {
@@ -125,8 +132,20 @@ SITES = {
         'scheme': SITE_SCHEME,
         'name': SITE_NAME
     },
+    'frontend': {
+        'domain': FRONTEND_SITE_DOMAIN,
+        'scheme': FRONTEND_SITE_SCHEME,
+        'name': FRONTEND_SITE_NAME
+    },
 }
 SITE_ID = 'current'
+
+# see user.services.send_password_reset
+# password-confirm path should have placeholder for token
+FRONTEND_URLS = {
+    'home': '/',
+    'password-confirm': '/reset-password/{token}/',
+}
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -344,6 +363,14 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = env('CELERY_TIMEZONE', default=TIME_ZONE)  # Use django's timezone by default
 {%- endif %}
+
+# EMAIL
+# ------------------------------------------------------------------------------
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',
+                         default='{{ cookiecutter.default_from_email }}')
+EMAIL_SUBJECT_PREFIX = env('EMAIL_SUBJECT_PREFIX', default='[{{cookiecutter.project_name}}] ')
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
+SERVER_EMAIL = env('SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------

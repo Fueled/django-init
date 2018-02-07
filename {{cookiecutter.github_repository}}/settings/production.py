@@ -130,15 +130,11 @@ COMPRESS_OFFLINE = True
 
 # EMAIL
 # ------------------------------------------------------------------------------
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',
-                         default='{{ cookiecutter.default_from_email }}')
+# DEFAULT_FROM_EMAIL in settings/common.py
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_PORT = env.int('EMAIL_PORT', default=587)
-EMAIL_SUBJECT_PREFIX = env('EMAIL_SUBJECT_PREFIX', default='[{{cookiecutter.project_name}}] ')
-EMAIL_USE_TLS = True
-SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
