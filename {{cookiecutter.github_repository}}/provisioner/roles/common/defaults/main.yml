@@ -16,7 +16,8 @@ base_ubuntu:
       - htop
       - curl
       - python-dev
-      - python3-dev
+      - python3.6
+      - python3.6-dev
       - python-setuptools
       - python-virtualenv
       - python-pip
@@ -33,5 +34,9 @@ base_ubuntu:
       - postgis
       - ca-certificates
       - uwsgi-emperor
-      - uwsgi-plugin-python3
+      - uwsgi
+      - uwsgi-src
+      - uuid-dev
+      - libcap-dev
+      - libpcre3-dev
 {%endraw%}

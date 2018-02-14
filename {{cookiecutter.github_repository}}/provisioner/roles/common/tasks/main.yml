@@ -35,6 +35,11 @@
         force=yes
         state=link
 
+- name: 'Add python3.6 (ppa:deadsnakes/ppa) repository'
+  apt_repository:
+    repo: 'ppa:deadsnakes/ppa'
+    update_cache: yes
+
 - name: update apt cache
   shell: apt update
   become: yes
@@ -55,3 +60,11 @@
 
 - name: ensure there is a user www-data
   user: name=www-data group=www-data system=yes
+
+# https://dev.to/pauloxnet/how-to-use-uwsgi-with-ptyhon36-in-ubuntu
+- name: compile python36 plugin for uwsgi
+  shell: >
+    mkdir -p /usr/src/uwsgi/plugins/python &&
+    PYTHON=python3.6 uwsgi --build-plugin "/usr/src/uwsgi/plugins/python python36" &&
+    mv python36_plugin.so /usr/lib/uwsgi/plugins/python36_plugin.so &&
+    chmod 644 /usr/lib/uwsgi/plugins/python36_plugin.so
