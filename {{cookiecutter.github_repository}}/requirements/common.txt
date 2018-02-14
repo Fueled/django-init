@@ -1,10 +1,10 @@
 # Core Stuff
 # -------------------------------------
-Django==2.0.1
+Django==2.0.2
 
 # WSGI HTTP Server
 # -------------------------------------
-uWSGI==2.0.15
+uWSGI==2.0.16
 
 # Configuration
 # -------------------------------------
@@ -24,16 +24,16 @@ whitenoise==3.3.1
 
 # Extensions
 # -------------------------------------
-pytz==2017.3
+pytz==2018.3
 
 # Models
 # -------------------------------------
-psycopg2==2.7.3.2
+psycopg2==2.7.4
 
 Pillow==5.0.0
-django-extensions==1.9.8
+django-extensions==1.9.9
 django-uuid-upload-path==1.0.0
-django-versatileimagefield==1.8.1  # versatile image field degrade Pillow version to 4.0.0
+django-versatileimagefield==1.9
 
 # REST APIs
 # -------------------------------------
@@ -59,7 +59,7 @@ mkdocs==0.17.2
 {% if cookiecutter.use_sentry_for_error_reporting == "y" -%}
 # Raven is the Sentry client
 # --------------------------
-raven==6.4.0
+raven==6.5.0
 {%- endif %}
 {%- if cookiecutter.add_celery.lower() == "y" %}
 
