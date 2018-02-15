@@ -28,20 +28,34 @@ def cleared_cache():
 
 @pytest.fixture
 def client():
-    from rest_framework.test import APIClient
+    """Django Test Client, with some convenient overriden methods.
+    """
+    from django.test import Client
 
-    class _Client(APIClient):
+    class _Client(Client):
+
         def login(self, user=None, backend="django.contrib.auth.backends.ModelBackend", **credentials):
+            """Modified login method, which allows setup a authenticated session with just passing in the
+            user object, if provided.
+            """
             if user is None:
-                return super(_Client, self).login(**credentials)
+                return super().login(**credentials)
 
             with mock.patch('django.contrib.auth.authenticate') as authenticate:
                 user.backend = backend
                 authenticate.return_value = user
-                return super(_Client, self).login(**credentials)
+                return super().login(**credentials)
 
         @property
         def json(self):
+            """Add json method on the client for sending json type request.
+
+            Usages:
+            >>> import json
+            >>> url = reverse("api-login")
+            >>> client.json.get(url)
+            >>> client.json.post(url, data=json.dumps(payload))
+            """
             return PartialMethodCaller(obj=self, content_type='application/json;charset="utf-8"')
 
     return _Client()
