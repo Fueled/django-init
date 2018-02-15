@@ -80,8 +80,7 @@
   command: uwsgi --reload {{ uwsgi_pid_file }}
   become: true
   when: not uwsgiconf.changed
-  tags: ['deploy']
-{% endraw %}
+  tags: ['deploy']{% endraw %}
   {%- if cookiecutter.add_celery.lower() == 'y' %}
-    notify: reload celery  # reload celery everytime uwsgi conf changes
+  notify: reload celery  # reload celery everytime uwsgi conf changes
   {%- endif %}
