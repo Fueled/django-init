@@ -74,7 +74,7 @@ if echo "$yn" | grep -iq "^y"; then
         echo ""
         echo "cd {{ cookiecutter.github_repository }}"
         echo "./venv/bin/activate"
-        echo "py.test"
+        echo "pytest"
         echo "./manage.py runserver"
         echo ""
         echo "============================================"
