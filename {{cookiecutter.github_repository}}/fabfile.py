@@ -66,7 +66,7 @@ def test(options='--pdb --cov'):
     """
     with virtualenv():
         local('flake8 .')
-        local('py.test %s' % options)
+        local('pytest %s' % options)
 
 
 def serve(host='127.0.0.1:8000'):

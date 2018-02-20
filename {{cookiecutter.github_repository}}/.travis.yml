@@ -32,7 +32,7 @@ before_script:
 
 script:
 - flake8
-- py.test --cov -v --tb=native
+- pytest --cov -v --tb=native
 {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
 notifications:

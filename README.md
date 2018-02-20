@@ -13,7 +13,7 @@ Project template for django based projects, optimized for making REST API with d
 - [Django Rest Framework][drf] 3.7.x. ready.
 - Uses `django_sites` instead of `django.contrib.sites`
 - Use [mkdocs] for project documentation.
-- Uses [py.test] as test runner.
+- Uses [pytest] as test runner.
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Custom `User` app, for easier extensibility.
 - Media storage using Amazon S3 (optional)
@@ -67,7 +67,7 @@ Built with ♥ at [Fueled](https://fueled.com)
 [wiki]: https://github.com/Fueled/django-init/wiki
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net
-[py.test]: http://pytest.org/
+[pytest]: http://pytest.org/
 [django-environ]: https://github.com/joke2k/django-environ
 [Ansible]: http://docs.ansible.com/index.html
 [devrecargar]: https://github.com/scottwoodall/django-devrecargar

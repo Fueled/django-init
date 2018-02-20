@@ -29,7 +29,7 @@ database:
 test:
   override:
     - flake8
-    - py.test --cov --cov-report term-missing -v --tb=native --junitxml=$CIRCLE_TEST_REPORTS/summary.xml
+    - pytest --cov --cov-report term-missing -v --tb=native --junitxml=$CIRCLE_TEST_REPORTS/summary.xml
     - coverage html -d $CIRCLE_ARTIFACTS
     {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
