@@ -108,6 +108,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
 
+        # Primary api authentication
+        '{{ cookiecutter.main_module }}.users.auth.backends.UserTokenAuthentication',
+
         # Mainly used for api debug.
         'rest_framework.authentication.SessionAuthentication',
     ),
