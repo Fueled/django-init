@@ -38,7 +38,7 @@
 
 - name: ensure django app config is added as uwsgi vassal
   template: src=django.uwsgi.ini.j2
-            dest={{ uwsgi_conf_path }}//django-{{project_name}}-{{ deploy_environment }}.ini
+            dest={{ uwsgi_conf_path }}/django-{{project_name}}-{{ deploy_environment }}.ini
             mode=644
   tags: ['deploy']
   register: uwsgiconf
