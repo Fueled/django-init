@@ -36,6 +36,6 @@
   tags: ['celery']
 
 - name: ensure celerybeat worker is running
-  systemd: state=restarted daemon_reload=yes enabled=yes name=celerybeat-{{ project_namespace }}
+  systemd: state=started daemon_reload=yes enabled=yes name=celerybeat-{{ project_namespace }}
   tags: ['celery']
 {% endraw %}
