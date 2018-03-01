@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [2.x]
+- Fix celerybeat service to be started/stopped correctly from systemctl. (@CuriousLearner)
 - Use new `pytest` instead of `py.test`. (@CuriousLearner)
 - Upgrade all the systems to use python 3.6.
 - Add timezone information to datetime displayed in admin. (@saurabh)
