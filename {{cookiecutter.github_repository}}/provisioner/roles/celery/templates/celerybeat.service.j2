@@ -6,7 +6,6 @@ After=network.target
 [Service]
 User={{ celery_user }}
 Group={{ celery_group }}
-Type=forking
 Restart=always
 WorkingDirectory={{ project_path }}
 ExecStart={{ venv_path }}/bin/celery beat -A {{ project_name }}  -l {{ celery_log_level }} \
