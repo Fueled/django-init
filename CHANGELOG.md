@@ -2,15 +2,17 @@
 All notable changes to this project will be documented in this file.
 
 ## [2.x]
-- Fix celerybeat service to be started/stopped correctly from systemctl. (@CuriousLearner)
-- Use new `pytest` instead of `py.test`. (@CuriousLearner)
-- Upgrade all the systems to use python 3.6.
-- Add timezone information to datetime displayed in admin. (@saurabh)
-- Support for Django 2.0.x
-- Make whitenoise optional, add static and media routes to nginx if whitenoise is not enabled. (@tucosaurus)
-- Make heroku deployment optional. (@tucosaurus)
-- Add api views (and docs) for password change, password reset and confirmation to the user app. (@tucosaurus, @saurabh)
-- Ansible: make the log output human readable (@saurabh)
+
+- Add `SWAGGER_SETTINGS` as per current drf setup ([@theskumar])
+- Fix celerybeat service to be started/stopped correctly from systemctl. ([@CuriousLearner])
+- Use new `pytest` instead of `py.test`. ([@CuriousLearner])
+- Upgrade all the systems to use python 3.6. ([@theskumar])
+- Add timezone information to datetime displayed in admin. ([@theskumar])
+- Support for Django 2.0.x ([@theskumar])
+- Make whitenoise optional, add static and media routes to nginx if whitenoise is not enabled. ([@tucosaurus])
+- Make heroku deployment optional. ([@tucosaurus])
+- Add api views (and docs) for password change, password reset and confirmation to the user app. ([@tucosaurus], [@theskumar])
+- Ansible: make the log output human readable ([@theskumar])
 
 
 ## [1.11]
@@ -126,3 +128,7 @@ All notable changes to this project will be documented in this file.
 [1.2.0-dev]: https://github.com/Fueled/django-init/compare/v1.1.0...master
 [1.1.0]: https://github.com/Fueled/django-init/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Fueled/django-init/compare/v0.0.1...v1.0.0
+
+[@theskumar]: https://github.com/theskumar
+[@CuriousLearner]: https://github.com/CuriousLearner
+[@tucosaurus]: https://github.com/tucosaurus

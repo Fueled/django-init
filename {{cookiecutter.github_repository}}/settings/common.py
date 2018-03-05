@@ -117,6 +117,24 @@ REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': '{{ cookiecutter.main_module }}.base.exceptions.exception_handler',
 }
 
+# https://django-rest-swagger.readthedocs.io/en/latest/settings/
+SWAGGER_SETTINGS = {
+    'LOGIN_URL': 'rest_framework:login',
+    'LOGOUT_URL': 'rest_framework:logout',
+    'SECURITY_DEFINITIONS': {
+        # For BasicAuthentication
+        'basic': {
+            'type': 'basic'
+        },
+        # For UserTokenAuthentication
+        "api_key": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        },
+    },
+}
+
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
 # see: http://django-sites.readthedocs.org
