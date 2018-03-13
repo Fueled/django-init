@@ -44,7 +44,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
     @list_route(['POST', ])
     def logout(self, request):
         """
-        Calls Django logout method
+        Calls Django logout method; Does not work for UserTokenAuth.
         """
         logout(request)
         return response.Ok({"success": "Successfully logged out."})
@@ -78,7 +78,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
 
 class CurrentUserViewSet(viewsets.GenericViewSet):
     serializer_class = serializers.UserSerializer
-    queryset = User.objects.all()
+    queryset = User.objects.filter(is_active=True)
     permission_classes = (IsAuthenticated, )
 
     def get_object(self):

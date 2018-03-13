@@ -32,7 +32,7 @@ urlpatterns += [
         base_views.root_txt_files, name='root-txt-files'),
 
     # Rest API
-    url(r'^api/', include(routers)),
+    url(r'^api/', include(routers.router.urls)),
 
     # Django Admin
     url(r'^{}/'.format(settings.DJANGO_ADMIN_URL), admin.site.urls),
