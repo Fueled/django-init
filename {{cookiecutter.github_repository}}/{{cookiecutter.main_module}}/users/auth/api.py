@@ -44,8 +44,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
     @list_route(['POST', ])
     def logout(self, request):
         """
-        Calls Django logout method and delete the Token object
-        assigned to the current User object.
+        Calls Django logout method
         """
         logout(request)
         return response.Ok({"success": "Successfully logged out."})
@@ -77,16 +76,16 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         return response.NoContent()
 
 
-class CurrentUserView(viewsets.GenericViewSet):
+class CurrentUserViewSet(viewsets.GenericViewSet):
     serializer_class = serializers.UserSerializer
     queryset = User.objects.all()
-    authentication_classes = (backends.UserTokenAuthentication, )
     permission_classes = (IsAuthenticated, )
 
     def get_object(self):
         return self.request.user
 
-    def get(self, request):
+    @list_route(['GET', ])
+    def get_current_user_profile(self, request):
         """
         Get logged in user profile
         """
@@ -94,7 +93,8 @@ class CurrentUserView(viewsets.GenericViewSet):
         serializer = self.get_serializer(self.get_object(), context=ctx)
         return response.Ok(serializer.data)
 
-    def put(self, request, *args, **kwargs):
+    @list_route(['PUT', ])
+    def udpate_current_user_profile(self, request, *args, **kwargs):
         """
         Update logged in user profile
         """
@@ -106,10 +106,10 @@ class CurrentUserView(viewsets.GenericViewSet):
         serializer.save()
         return response.Ok(serializer.data)
 
-    def patch(self, request, *args, **kwargs):
+    @list_route(['PATCH', ])
+    def update_current_user_profile_partially(self, request, *args, **kwargs):
         """
         Update logged in user profile partially
         """
         kwargs['partial'] = True
-        return self.put(request, *args, **kwargs)
-
+        return self.udpate_current_user_profile(request, *args, **kwargs)

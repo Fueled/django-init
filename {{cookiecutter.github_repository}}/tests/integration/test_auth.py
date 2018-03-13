@@ -6,10 +6,8 @@ import pytest
 from django.urls import reverse
 
 # {{ cookiecutter.project_name }} Stuff
-from {{cookiecutter.main_module}}.users.auth.tokens import get_token_for_password_reset
-
-# {{ cookiecutter.project_name }} Stuff
-from {{cookiecutter.main_module}}.users.auth.tokens import get_token_for_user
+from {{cookiecutter.main_module}}.users.auth.tokens import (get_token_for_password_reset, get_token_for_user
+)
 from .. import factories as f
 
 pytestmark = pytest.mark.django_db
