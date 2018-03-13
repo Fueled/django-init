@@ -21,6 +21,7 @@ default_section=THIRDPARTY
 import_heading_stdlib=Standard Library
 import_heading_firstparty={{ cookiecutter.project_name }} Stuff
 import_heading_thirdparty=Third Party Stuff
+skip_glob=*/migrations/*
 
 [*.{html,css,scss,json,yml}]
 indent_style = space

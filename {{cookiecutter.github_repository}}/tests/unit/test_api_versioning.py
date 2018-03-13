@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 
 def test_api_default_and_allowed_versions(settings):
     assert settings.REST_FRAMEWORK['DEFAULT_VERSION'] == '1.0'

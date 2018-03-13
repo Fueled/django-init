@@ -1,7 +1,7 @@
 ## Customize the test machine
 machine:
   python:
-    version: '3.5.2'
+    version: '3.6.4'
   environment:
     # each command runs in its own shell, so just adding an export FOO=bar command won't work
     DATABASE_URL: "postgres://ubuntu@localhost/circle_test"
@@ -29,11 +29,12 @@ database:
 test:
   override:
     - flake8
-    - py.test --cov --cov-report term-missing -v --tb=native --junitxml=$CIRCLE_TEST_REPORTS/summary.xml
+    - pytest --cov --cov-report term-missing -v --tb=native --junitxml=$CIRCLE_TEST_REPORTS/summary.xml
     - coverage html -d $CIRCLE_ARTIFACTS
     {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
 ## Customize deployment commands
+{% if cookiecutter.enable_heroku_deployment.lower() == 'y' %}
 # To enable Heroku deployment add heroku API key under project settings deployment in circle
 deployment:
   dev:
@@ -51,6 +52,7 @@ deployment:
     owner: {{ cookiecutter.github_username }}
     heroku:
       appname: {{ cookiecutter.main_module }}-prod
+{% endif %}
 
 ## Custom notifications
 #notify:

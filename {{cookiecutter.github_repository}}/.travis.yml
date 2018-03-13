@@ -4,7 +4,7 @@
 language: python
 sudo: false
 python:
-- '3.5.2'
+- '3.6.4'
 
 addons:
   postgresql: "9.5"
@@ -32,7 +32,7 @@ before_script:
 
 script:
 - flake8
-- py.test --cov -v --tb=native
+- pytest --cov -v --tb=native
 {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
 notifications:
@@ -40,6 +40,7 @@ notifications:
     on_success: change  # [always|never|change]
     on_failure: always  # [always|never|change]
 
+{%- if cookiecutter.enable_heroku_deployment.lower() == 'y' %}
 deploy:
   provider: heroku
   buildpack: python
@@ -53,3 +54,4 @@ deploy:
     prod: {{ cookiecutter.main_module }}-prod
   on:
     repo: {{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}
+{% endif %}

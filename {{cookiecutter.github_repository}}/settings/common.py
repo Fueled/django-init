@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Django settings for {{cookiecutter.project_name}} project.
 
 see: https://docs.djangoproject.com/en/dev/ref/settings/
@@ -28,7 +27,6 @@ INSTALLED_APPS = (
     'django_sites',  # http://niwinz.github.io/django-sites/latest/
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'flat_responsive',
     'django.contrib.admin',
     # 'django.contrib.humanize',  # Useful template tags
 
@@ -48,6 +46,7 @@ INSTALLED_APPS = (
 {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     'raven.contrib.django.raven_compat',
 {%- endif %}
+    'mail_templated',  # https://github.com/artemrizhov/django-mail-templated
 )
 
 # INSTALLED APPS CONFIGURATION
@@ -109,18 +108,65 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
 
+        # Primary api authentication
+        '{{ cookiecutter.main_module }}.users.auth.backends.UserTokenAuthentication',
+
         # Mainly used for api debug.
         'rest_framework.authentication.SessionAuthentication',
     ),
     'EXCEPTION_HANDLER': '{{ cookiecutter.main_module }}.base.exceptions.exception_handler',
 }
+
+# https://django-rest-swagger.readthedocs.io/en/latest/settings/
+SWAGGER_SETTINGS = {
+    'LOGIN_URL': 'rest_framework:login',
+    'LOGOUT_URL': 'rest_framework:logout',
+    'SECURITY_DEFINITIONS': {
+        # For BasicAuthentication
+        'basic': {
+            'type': 'basic'
+        },
+        # For UserTokenAuthentication
+        "api_key": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        },
+    },
+}
+
 # DJANGO_SITES
 # ------------------------------------------------------------------------------
 # see: http://django-sites.readthedocs.org
+SITE_SCHEME = env("SITE_SCHEME", default='http')
+SITE_DOMAIN = env("SITE_DOMAIN", default='localhost:8000')
+SITE_NAME = env("SITE_NAME", default='{{ cookiecutter.project_name }}')
+
+# This is used in-case of the frontend is deployed at a different url than this django app.
+FRONTEND_SITE_SCHEME = env('FRONTEND_SITE_SCHEME', default='https')
+FRONTEND_SITE_DOMAIN = env('FRONTEND_SITE_DOMAIN', default='example.com')
+FRONTEND_SITE_NAME = env('FRONTEND_SITE_NAME', default='{{ cookiecutter.project_name }}')
+
 SITES = {
-    'local': {'domain': 'localhost:8000', 'scheme': 'http', 'name': 'localhost'},
+    'current': {
+        'domain': SITE_DOMAIN,
+        'scheme': SITE_SCHEME,
+        'name': SITE_NAME
+    },
+    'frontend': {
+        'domain': FRONTEND_SITE_DOMAIN,
+        'scheme': FRONTEND_SITE_SCHEME,
+        'name': FRONTEND_SITE_NAME
+    },
 }
-SITE_ID = 'local'
+SITE_ID = 'current'
+
+# see user.services.send_password_reset
+# password-confirm path should have placeholder for token
+FRONTEND_URLS = {
+    'home': '/',
+    'password-confirm': '/reset-password/{token}/',
+}
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -133,7 +179,9 @@ MIDDLEWARE = [
 {%- endif %}
     'log_request_id.middleware.RequestIDMiddleware',  # For generating/adding Request id for all the logs
     'django.middleware.security.SecurityMiddleware',
+{%- if cookiecutter.enable_whitenoise.lower() == 'y' %}
     'whitenoise.middleware.WhiteNoiseMiddleware',
+{%- endif %}
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -166,6 +214,12 @@ LANGUAGE_CODE = 'en-us'
 LANGUAGES = (
     ('en', _('English')),
 )
+
+if USE_TZ:
+    # Add timezone information to datetime displayed.
+    # https://mounirmesselmeni.github.io/2014/11/06/date-format-in-django-admin/
+    from django.conf.locale.en import formats as en_formats
+    en_formats.DATETIME_FORMAT = 'N j, Y, P (e)'
 
 # A tuple of directories where Django looks for translation files.
 LOCALE_PATHS = (
@@ -304,7 +358,8 @@ MEDIA_ROOT = str(ROOT_DIR.path('.media'))
 # URL that handles the media served from MEDIA_ROOT.
 # Examples: 'http://example.com/media/', 'http://media.example.com/'
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = '/media/'
+MEDIA_URL = env("MEDIA_URL",
+                default="{}://{}/media/".format(SITE_SCHEME, SITE_DOMAIN))
 
 #  SECURITY
 # -----------------------------------------------------------------------------
@@ -329,6 +384,14 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = env('CELERY_TIMEZONE', default=TIME_ZONE)  # Use django's timezone by default
 {%- endif %}
+
+# EMAIL
+# ------------------------------------------------------------------------------
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',
+                         default='{{ cookiecutter.default_from_email }}')
+EMAIL_SUBJECT_PREFIX = env('EMAIL_SUBJECT_PREFIX', default='[{{cookiecutter.project_name}}] ')
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
+SERVER_EMAIL = env('SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------

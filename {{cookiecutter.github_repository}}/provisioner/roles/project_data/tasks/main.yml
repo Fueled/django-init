@@ -1,8 +1,4 @@
 {% raw %}---
-- name: make sure project directory is owned by uwsgi group
-  file: path={{ project_path }} state=directory owner={{user}} group={{uwsgi_group}} recurse=yes
-  tags: ['configure']
-
 - name: get the latest code
   git: repo={{ project_repo_url }} dest={{ project_path }} version={{ repo_version }} accept_hostkey=true
   become: false
@@ -13,18 +9,8 @@
 - debug: msg="Git SHA-1 before={{ gitresult.before }} after={{ gitresult.after }}"
   tags: ['always']
 
-- name: copy django-uwsgi logrotate
-  template: src=django.logrotate.j2
-            dest=/etc/logrotate.d/uwsgi-{{ environment}}-{{project_name}}-django
-            mode=644
-  tags: ['configure']
-
-- name: make sure log directory exists
-  file: path={{ project_log_dir }} state=directory owner={{uwsgi_user}} group={{uwsgi_group}} mode=751 recurse=yes
-  tags: ['configure']
-
 - name: ensure python virtualenv exist
-  command: virtualenv {{ venv_path }} -p python3 creates={{ venv_path }}
+  command: virtualenv {{ venv_path }} -p python3.6 creates={{ venv_path }}
   become: false
   tags: ['always']
 
@@ -69,19 +55,13 @@
   become: false
   tags: ['deploy', 'documentation']
 
-- name: copy uwsgi configuration
-  template: src=django.uwsgi.ini.j2
-            dest={{ uwsgi_conf_path }}//django-{{project_name}}-{{ environment }}.ini
-            mode=644
-  tags: ['deploy']
-  register: uwsgiconf
+- import_tasks: uwsgi-setup.yml
 
 - name: reload uwsgi processes
   command: uwsgi --reload {{ uwsgi_pid_file }}
   become: true
   when: not uwsgiconf.changed
-  tags: ['deploy']
-{% endraw %}
+  tags: ['deploy']{% endraw %}
   {%- if cookiecutter.add_celery.lower() == 'y' %}
-    notify: reload celery  # reload celery everytime uwsgi conf changes
+  notify: reload celery  # reload celery everytime uwsgi conf changes
   {%- endif %}

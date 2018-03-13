@@ -1,20 +1,19 @@
-django-init | [![Build Status](https://travis-ci.org/Fueled/django-init.svg?branch=user-app)](https://travis-ci.org/Fueled/django-init)
+django-init | [![Build Status](https://travis-ci.org/Fueled/django-init.svg?branch=master)](https://travis-ci.org/Fueled/django-init)
 ============
 
 Project template for django based projects, optimized for making REST API with deployment on Heroku and EC2 instances via Ansible.
 
 ## Features
 
-- Django 1.11.x
-- Python 3.5.x only
+- Django 2.0.x
+- Python 3.6.x 
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - PostresSQL everywhere (support of postgis is available)
-- [Procfile] for deploying to Heroku
-- [Ansible] playbook for deployment to Ubuntu 16 LTS (optional)
-- Designed to work with [Django Rest Framework][drf] 3.6.x.
+- Ready to deploy on Heroku (optional) and Ubuntu 16 LTS via [Ansible](Optional)
+- [Django Rest Framework][drf] 3.7.x. ready.
 - Uses `django_sites` instead of `django.contrib.sites`
 - Use [mkdocs] for project documentation.
-- Uses [py.test] as test runner.
+- Uses [pytest] as test runner.
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Custom `User` app, for easier extensibility.
 - Custom `Auth` app with JWT based Token Backend system with `login`, `logout` and `current_user_profile` modification views for easier extensibility.
@@ -69,8 +68,7 @@ Built with ♥ at [Fueled](https://fueled.com)
 [wiki]: https://github.com/Fueled/django-init/wiki
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net
-[py.test]: http://pytest.org/
-[Procfile]: https://devcenter.heroku.com/articles/procfile
+[pytest]: http://pytest.org/
 [django-environ]: https://github.com/joke2k/django-environ
 [Ansible]: http://docs.ansible.com/index.html
 [devrecargar]: https://github.com/scottwoodall/django-devrecargar

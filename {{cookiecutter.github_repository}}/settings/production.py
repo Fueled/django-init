@@ -1,10 +1,11 @@
-# -*- coding: utf-8 -*-
 """Production Configurations
 
 Adds sensible default for running app in production.
 - Disable DEBUG
 - Make SECRET_KEY mandatory
+{%- if cookiecutter.enable_whitenoise.lower() == 'y' %}
 - Use whitenoise to serve static files
+{%- endif %}
 - Disable browsable API
 """
 
@@ -20,12 +21,14 @@ from .common import (DATABASES, INSTALLED_APPS, {% if cookiecutter.add_django_au
                      REST_FRAMEWORK, TEMPLATES, env)
 
 # SITE CONFIGURATION
+# Ensure these are set in the `.env` file manually.
+SITE_SCHEME = env('SITE_SCHEME')
+SITE_DOMAIN = env('SITE_DOMAIN')
+
 # Hosts/domain names that are valid for this site.
 # "*" matches anything, ".example.com" matches example.com and all subdomains
 # See https://docs.djangoproject.com/en/1.11/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
-
-SITE_SCHEME = env('SITE_SCHEME', default='https')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[SITE_DOMAIN])
 
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -43,15 +46,6 @@ MANAGERS = ADMINS
 CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST')
 {%- endif %}
 
-# DJANGO_SITES
-# ------------------------------------------------------------------------------
-# see: http://niwinz.github.io/django-sites/latest/
-SITES['remote'] = {  # noqa: F405
-    'domain': env('SITE_DOMAIN'),
-    'scheme': SITE_SCHEME,
-    'name': env('SITE_NAME'),
-}
-SITE_ID = env('DJANGO_SITE_ID', default='remote')
 {% if cookiecutter.add_django_auth_wall.lower() == 'y' %}
 # Basic Auth Protection
 # -----------------------------------------------------------------------------
@@ -66,8 +60,10 @@ MIDDLEWARE = ['django_auth_wall.middleware.BasicAuthMiddleware', ] + MIDDLEWARE
 # that header/value, request.is_secure() will return True.
 # WARNING! Only set this if you fully understand what you're doing. Otherwise,
 # you may be opening yourself up to a security risk.
+{%- if cookiecutter.enable_heroku_deployment.lower() == 'y' %}
 # This ensures that Django will be able to detect a secure connection
 # properly on Heroku.
+{%- endif %}
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 #  SECURITY
@@ -113,11 +109,17 @@ if ENABLE_MEDIA_UPLOAD_TO_S3:
     }
 
     # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
-    MEDIA_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+    MEDIA_URL = env('MEDIA_URL',
+                    default='https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME)
 
 # Static Assests
 # ------------------------
+{%- if cookiecutter.enable_whitenoise.lower() == 'y' %}
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+{%- else %}
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+{%- endif %}
+
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
 # Compress static files offline
@@ -128,15 +130,11 @@ COMPRESS_OFFLINE = True
 
 # EMAIL
 # ------------------------------------------------------------------------------
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',
-                         default='{{ cookiecutter.default_from_email }}')
+# DEFAULT_FROM_EMAIL in settings/common.py
 EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_PORT = env.int('EMAIL_PORT', default=587)
-EMAIL_SUBJECT_PREFIX = env('EMAIL_SUBJECT_PREFIX', default='[{{cookiecutter.project_name}}] ')
-EMAIL_USE_TLS = True
-SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -156,7 +154,9 @@ CACHES = {
             'PARSER_CLASS': 'redis.connection.HiredisParser',
             'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
             'CONNECTION_POOL_CLASS_KWARGS': {
+{%- if cookiecutter.enable_heroku_deployment.lower() == 'y' %}
                 # Hobby redistogo on heroku only supports max. 10, increase as required.
+{%- endif %}
                 'max_connections': env.int('REDIS_MAX_CONNECTIONS', default=10),
                 'timeout': 20,
             }

@@ -14,7 +14,7 @@
   stat: path={{ letsencrypt_ssl_cert_dir }}
   register: letsencrypt_dir
 
-- include: letsencrypt.yml
+- import_tasks: letsencrypt.yml
   when: vm == 0 and use_letsencrypt and letsencrypt_dir.stat.exists == false
 
 # running cron job each monday

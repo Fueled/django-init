@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """This urls.py is for all API related URLs.
 """
 

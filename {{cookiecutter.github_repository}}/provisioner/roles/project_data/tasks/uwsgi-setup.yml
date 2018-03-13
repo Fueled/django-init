@@ -1,0 +1,45 @@
+{% raw %}---
+- name: apt_get install uwsgi packages
+  apt: pkg={{ item }} state=present
+  with_items:
+    - uwsgi-emperor
+    - uwsgi
+    - uwsgi-src
+    - uuid-dev
+    - libcap-dev
+    - libpcre3-dev
+  tags: ['configure']
+
+# compile python36 plugin for uwsgi
+# https://dev.to/pauloxnet/how-to-use-uwsgi-with-ptyhon36-in-ubuntu
+- name: python36 plugin | create build dir
+  file: path=/usr/src/uwsgi/plugins/python state=directory owner={{user}} group={{uwsgi_group}} recurse=yes
+  tags: ['configure']
+
+- name: compile python36 plugin for uwsgi
+  shell: >
+    PYTHON=python3.6 uwsgi --build-plugin "/usr/src/uwsgi/plugins/python python36" &&
+    mv python36_plugin.so /usr/lib/uwsgi/plugins/python36_plugin.so &&
+    chmod 644 /usr/lib/uwsgi/plugins/python36_plugin.so
+
+- name: make sure project directory is owned by uwsgi group
+  file: path={{ project_path }} state=directory owner={{user}} group={{uwsgi_group}} recurse=yes
+  tags: ['configure']
+
+- name: copy django-uwsgi logrotate
+  template: src=django.logrotate.j2
+            dest=/etc/logrotate.d/uwsgi-{{ deploy_environment}}-{{project_name}}-django
+            mode=644
+  tags: ['configure']
+
+- name: make sure log directory exists
+  file: path={{ project_log_dir }} state=directory owner={{uwsgi_user}} group={{uwsgi_group}} mode=751 recurse=yes
+  tags: ['configure']
+
+- name: ensure django app config is added as uwsgi vassal
+  template: src=django.uwsgi.ini.j2
+            dest={{ uwsgi_conf_path }}/django-{{project_name}}-{{ deploy_environment }}.ini
+            mode=644
+  tags: ['deploy']
+  register: uwsgiconf
+{% endraw %}

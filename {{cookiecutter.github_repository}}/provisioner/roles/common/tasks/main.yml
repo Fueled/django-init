@@ -35,6 +35,11 @@
         force=yes
         state=link
 
+- name: 'Add python3.6 (ppa:deadsnakes/ppa) repository'
+  apt_repository:
+    repo: 'ppa:deadsnakes/ppa'
+    update_cache: yes
+
 - name: update apt cache
   shell: apt update
   become: yes

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Third Party Stuff
 from django.core.exceptions import PermissionDenied as DjangoPermissionDenied
 from django.http import Http404
@@ -68,7 +66,7 @@ class NotAuthenticated(exceptions.NotAuthenticated):
     pass
 
 
-def parse_field_errors(field, error_msg, depth=0):
+def parse_field_errors(field, error_msg, error_values, depth=0):
     # We only parse errors upto 10 nested serializers
     if depth is not None:
         assert depth >= 0, "'depth' may not be negative."
@@ -83,14 +81,15 @@ def parse_field_errors(field, error_msg, depth=0):
                     {
                         'field': field,
                         'message': None,
-                        'errors': parse_field_errors(error_msg_key, msg, depth=depth + 1)
+                        'errors': parse_field_errors(error_msg_key, msg, error_values, depth=depth + 1)
                     }
                 )
     else:
         errors.append(
             {
-                'field': field,
-                'message': error_msg,
+                'field': error_msg if error_msg and error_values and type(error_values) != list else field,
+                'message': ' '.join(error_values[error_msg]) if error_msg and error_values and
+                           type(error_values) != list else error_msg,
             }
         )
 
@@ -114,7 +113,7 @@ def format_exception(exc):
                         }
                     )
                 else:
-                    detail['errors'] = detail['errors'] + parse_field_errors(error_key, error_msg)
+                    detail['errors'] = detail['errors'] + parse_field_errors(error_key, error_msg, error_values)
     elif isinstance(exc.detail, list):
         for error_msg in exc.detail:
             detail['errors'].append(

@@ -25,6 +25,10 @@ else
     read  yn
 fi
 
+if echo "{{ cookiecutter.enable_heroku_deployment }}" | grep -iq "^n"; then
+    rm -rf uwsgi.ini Procfile runtime.txt bin
+fi
+
 if echo "{{ cookiecutter.add_ansible }}" | grep -iq "^n"; then
     rm -rf provisioner Vagrantfile
 fi
@@ -70,7 +74,7 @@ if echo "$yn" | grep -iq "^y"; then
         echo ""
         echo "cd {{ cookiecutter.github_repository }}"
         echo "./venv/bin/activate"
-        echo "py.test"
+        echo "pytest"
         echo "./manage.py runserver"
         echo ""
         echo "============================================"
