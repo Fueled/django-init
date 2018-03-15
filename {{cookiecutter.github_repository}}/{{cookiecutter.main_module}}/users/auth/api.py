@@ -84,8 +84,7 @@ class CurrentUserViewSet(viewsets.GenericViewSet):
     def get_object(self):
         return self.request.user
 
-    @list_route(['GET', ])
-    def get_current_user_profile(self, request):
+    def list(self, request):
         """
         Get logged in user profile
         """
@@ -93,8 +92,7 @@ class CurrentUserViewSet(viewsets.GenericViewSet):
         serializer = self.get_serializer(self.get_object(), context=ctx)
         return response.Ok(serializer.data)
 
-    @list_route(['PUT', ])
-    def udpate_current_user_profile(self, request, *args, **kwargs):
+    def update(self, request, *args, **kwargs):
         """
         Update logged in user profile
         """
@@ -106,10 +104,9 @@ class CurrentUserViewSet(viewsets.GenericViewSet):
         serializer.save()
         return response.Ok(serializer.data)
 
-    @list_route(['PATCH', ])
-    def update_current_user_profile_partially(self, request, *args, **kwargs):
+    def partial_update(self, request, *args, **kwargs):
         """
         Update logged in user profile partially
         """
         kwargs['partial'] = True
-        return self.udpate_current_user_profile(request, *args, **kwargs)
+        return self.update(request, *args, **kwargs)
