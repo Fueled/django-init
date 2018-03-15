@@ -46,7 +46,21 @@ server {
         alias {{ project_path }}/_docs_html/;
     }
 
-    # Setup named location for Django requests and handle proxy details
+{% endraw %}
+    {%- if cookiecutter.add_flower.lower() == 'n' %}
+    {%raw%}location /flower {
+        {% if add_frontend_auth %}
+        auth_basic            "Private Login";
+        auth_basic_user_file {{ frontend_path }}/dist/.htpasswd;
+        {% endif %}
+        rewrite ^/flower/(.*)$ /$1 break;
+        proxy_pass http://unix:/var/run/flower/{{domain_name}}.sock:/;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+    }{% endraw %}
+
+    {%- endif %}
+    {%raw%}# Setup named location for Django requests and handle proxy details
     location / {
         uwsgi_pass unix:///tmp/django-{{ domain_name }}-uwsgi.sock;
         include /etc/nginx/uwsgi_params;
@@ -55,7 +69,7 @@ server {
         uwsgi_param UWSGI_SCHEME $http_x_forwarded_proto;
     }
 {% endraw %}
-    {%- if cookiecutter.enable_whitenoise.lower() == 'n' %}
+    {%- if cookiecutter.add_flower.lower() == 'n' %}
     {%raw%}location /static/ {
         alias {{ project_path }}/.staticfiles/;
     }

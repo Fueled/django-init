@@ -1,0 +1,17 @@
+[Unit]
+Description=Flower {{ project_namespace }} Service
+After=network.target
+
+[Service]
+User={{ celery_user }}
+Group={{ celery_group }}
+WorkingDirectory={{ project_path }}
+Restart=on-failure
+Type=simple
+ExecStart={{ venv_path }}/bin/flower -A {{ project_name }} --xheaders --url_prefix={{ flower_urlprefix }} --unix-socket={{flower_sock_file}} --basic-auth={{ flower_basic_auth }}
+ExecStop={{ venv_path }}/bin/flower -A {{ project_name }} --xheaders --url_prefix={{ flower_urlprefix }} --unix-socket={{flower_sock_file}} --basic-auth={{ flower_basic_auth }}
+ExecRestart={{ venv_path }}/bin/flower -A {{ project_name }} --xheaders --url_prefix={{ flower_urlprefix }} --unix-socket={{flower_sock_file}} --basic-auth={{ flower_basic_auth }}
+
+[Install]
+WantedBy=multi-user.target
+Alias=flower-{{ project_namespace }}.service

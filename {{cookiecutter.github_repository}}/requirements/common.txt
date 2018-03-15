@@ -63,6 +63,9 @@ raven==6.6.0
 # -------------------------------------
 celery[redis]==4.1.0
 {%- endif %}
+{%- if cookiecutter.add_flower.lower() == "y" %}
+flower==0.9.2
+{%- endif %}
 
 # Auth Stuff
 # -------------------------------------

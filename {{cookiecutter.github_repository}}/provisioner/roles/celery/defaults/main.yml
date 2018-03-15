@@ -10,4 +10,10 @@ celerybeat_schedule_dir: /var/run/celery
 celerybeat_schedule_file: "{{ celerybeat_schedule_dir }}/schedule-{{ project_namespace }}.db"
 celery_pid_file: /tmp/celery-{{ project_namespace }}.pid
 celerybeat_pid_file: /tmp/celerybeat-{{ project_namespace }}.pid
+
+flower_enabled: true
+flower_sock_dir: /var/run/flower
+flower_sock_file: "{{flower_sock_dir}}/{{domain_name}}.sock"
+flower_basic_auth: backend:{{ project_name }}1234!
+flower_urlprefix: flower
 {% endraw %}

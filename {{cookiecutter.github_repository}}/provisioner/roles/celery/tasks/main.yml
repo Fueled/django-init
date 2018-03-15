@@ -39,3 +39,20 @@
   systemd: state=started daemon_reload=yes enabled=yes name=celerybeat-{{ project_namespace }}
   tags: ['celery', 'deploy']
 {% endraw %}
+{%- if cookiecutter.add_flower.lower() == "y" %}
+
+{% raw %}- name: copy flower service
+  template: src=flower.service.j2 dest=/etc/systemd/system/flower-{{ project_namespace }}.service
+  when: flower_enabled
+  tags: ['celery']
+
+- name: make sure flower sock dir exists, with correct permission
+  file: path={{flower_sock_dir}} state=directory owner={{celery_user}} group={{celery_group}} mode=751 recurse=yes
+  tags: ['configure', 'celery']
+
+- name: ensure celery flower is running
+  systemd: state=restarted daemon_reload=yes enabled=yes name=flower-{{ project_namespace }}
+  when: flower_enabled
+  tags: ['celery']
+{% endraw %}
+{%- endif %}

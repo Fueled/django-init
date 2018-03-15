@@ -25,4 +25,5 @@ ssl_session_timeout: '1d'
 ssl_session_cache: 'shared:SSL:50m'
 ssl_trusted_certificate: '{{ ssl_cert_dir }}/{{ domain_name }}/chain.pem'
 access_log_file: '/var/log/nginx/{{ domain_name }}.access.log'
-error_log_file: '/var/log/nginx/{{ domain_name }}.error.log'{% endraw %}
+error_log_file: '/var/log/nginx/{{ domain_name }}.error.log'
+add_flower_auth: False{% endraw %}
