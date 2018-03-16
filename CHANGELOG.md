@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.x]
 
+- Move `paginated_response` utility to `base.api.pagination`. ([@theskumar])
 - Add flake8 in travis builds for django-init. ([@CuriousLearner])
 - Change `created` and `modified` to `created_at` & `modified_at` respectively in `TimeStampedUUIDModel`. ([@CuriousLearner])
 - Add `SWAGGER_SETTINGS` as per current drf setup ([@theskumar])
