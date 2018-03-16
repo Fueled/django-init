@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Setup for returning a non-zero exit code if any of the command fails.
+err=0
+trap 'err=1' ERR
+
 # Setup
 createdb hello_world
 if [ $? -ne 0 ]; then
@@ -22,3 +26,5 @@ flake8
 fab test:"--cov"
 # Running 2to3 to ensure python3 compatible code is written
 2to3 hello_world
+
+test $err = 0 # Return non-zero if any command failed
