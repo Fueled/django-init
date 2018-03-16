@@ -5,7 +5,7 @@
 from rest_framework.routers import DefaultRouter
 
 # {{ cookiecutter.project_name }} Stuff
-from {{cookiecutter.main_module}}.base.utils.routers import SingletonRouter
+from {{cookiecutter.main_module}}.base.api.routers import SingletonRouter
 from {{cookiecutter.main_module}}.users.auth.api import (
     AuthViewSet, CurrentUserViewSet
 )
