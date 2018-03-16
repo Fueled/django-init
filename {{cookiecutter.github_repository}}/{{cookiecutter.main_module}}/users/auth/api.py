@@ -1,4 +1,5 @@
 # Third Party Stuff
+from django.contrib.auth import logout
 from rest_framework import viewsets
 from rest_framework.decorators import list_route
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -7,7 +8,6 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from {{cookiecutter.main_module}}.base import response
 from {{cookiecutter.main_module}}.base.api.mixins import MultipleSerializerMixin
 from {{cookiecutter.main_module}}.users import services as user_services
-
 
 from . import serializers, services, tokens
 
@@ -18,6 +18,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
     serializer_classes = {
         'login': serializers.LoginSerializer,
         'register': serializers.RegisterSerializer,
+        'logout': serializers.EmptySerializer,
         'password_change': serializers.PasswordChangeSerializer,
         'password_reset': serializers.PasswordResetSerializer,
         'password_reset_confirm': serializers.PasswordResetConfirmSerializer,
@@ -38,6 +39,14 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         user = user_services.create_user_account(**serializer.validated_data)
         data = serializers.AuthUserSerializer(user).data
         return response.Created(data)
+
+    @list_route(['POST', ])
+    def logout(self, request):
+        """
+        Calls Django logout method; Does not work for UserTokenAuth.
+        """
+        logout(request)
+        return response.Ok({"success": "Successfully logged out."})
 
     @list_route(['POST', ], permission_classes=[IsAuthenticated, ])
     def password_change(self, request):

@@ -33,7 +33,8 @@ Status: 200 OK
     "auth_token": "eyJ0eXAiOiJKV1QiL",
     "email": "ak123@fueled.com",
     "id": "f9dceed1-0f19-49f4-a874-0c2e131abf79",
-    "name": ""
+    "first_name": "",
+    "last_name": ""
 }
 ```
 
@@ -66,7 +67,8 @@ Status: 201 Created
     "auth_token": "eyJ0eXAiOiJKV1QiLCJh",
     "email": "test@test.com",
     "id": "f9dceed1-0f19-49f4-a874-0c2e131abf79",
-    "name": ""
+    "first_name": "",
+    "last_name": ""
 }
 ```
 
@@ -159,3 +161,46 @@ Status: 204 No-Content
 
 **Note**
 - The verification link uses the format of key `password-confirm` in `FRONTEND_URLS` dict in settings/common.
+
+
+# Current user actions
+
+## Get profile of current logged-in user
+```
+GET /api/me (requires authentication)
+```
+
+__Response__
+
+```json
+{
+    "id": "629b1e03-53f0-43ef-9a03-17164cf782ac",
+    "first_name": "John",
+    "last_name": "Hawley",
+    "email": "john@localhost.com"
+}
+```
+
+## Update profile of current logged-in user
+```
+PATCH /api/me (requires authentication)
+```
+
+__Example__
+```json
+{
+    "first_name": "James",
+    "last_name": "Warner"
+}
+```
+
+__Response__
+
+```json
+{
+    "id": "629b1e03-53f0-43ef-9a03-17164cf782ac",
+    "first_name": "James",
+    "last_name": "Warner",
+    "email": "john@localhost.com",
+}
+```

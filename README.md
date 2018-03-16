@@ -16,6 +16,7 @@ Project template for django based projects, optimized for making REST API with d
 - Uses [pytest] as test runner.
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Custom `User` app, for easier extensibility.
+- Custom `Auth` app with JWT based Token Backend system with `login`, `logout` and `current_user_profile` modification views for easier extensibility.
 - Media storage using Amazon S3 (optional)
 - [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org)
 - SASS with autoprefixing support using django-compressor (optional)
