@@ -88,8 +88,7 @@ class CurrentUserViewSet(viewsets.GenericViewSet):
         """
         Get logged in user profile
         """
-        ctx = {'request': request}
-        serializer = self.get_serializer(self.get_object(), context=ctx)
+        serializer = self.get_serializer(self.get_object())
         return response.Ok(serializer.data)
 
     def update(self, request, *args, **kwargs):
@@ -98,8 +97,7 @@ class CurrentUserViewSet(viewsets.GenericViewSet):
         """
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
-        ctx = {'request': request}
-        serializer = self.get_serializer(instance, data=request.data, context=ctx, partial=partial)
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return response.Ok(serializer.data)

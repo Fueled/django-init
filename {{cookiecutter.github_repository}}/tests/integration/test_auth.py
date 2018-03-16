@@ -53,7 +53,7 @@ def test_get_current_user_api(client):
         'HTTP_AUTHORIZATION': 'Token {}'.format(auth_token)
     }
 
-    url = reverse('me-get-current-user-profile')
+    url = reverse('me')
     response = client.json.get(url, **auth_headers)
     # assert response is None
     assert response.status_code == 200
@@ -72,7 +72,7 @@ def test_patch_current_user_api(client):
         'HTTP_AUTHORIZATION': 'Token {}'.format(auth_token)
     }
 
-    url = reverse('me-update-current-user-profile-partially')
+    url = reverse('me')
     data = {
         'first_name': 'modified_test',
         'last_name': 'modified_test',
@@ -100,7 +100,7 @@ def test_put_current_user_api(client):
         'HTTP_AUTHORIZATION': 'Token {}'.format(auth_token)
     }
 
-    url = reverse('me-udpate-current-user-profile')
+    url = reverse('me')
     data = {
         'first_name': 'modified_test',
         'last_name': 'modified_test',
