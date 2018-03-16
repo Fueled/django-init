@@ -3,7 +3,6 @@ from django.contrib.auth import logout
 from rest_framework import viewsets
 from rest_framework.decorators import list_route
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework import generics
 
 # {{ cookiecutter.project_name }} Stuff
 from {{cookiecutter.main_module}}.base import response
@@ -11,7 +10,7 @@ from {{cookiecutter.main_module}}.users.models import User
 from {{cookiecutter.main_module}}.base.api.mixins import MultipleSerializerMixin
 from {{cookiecutter.main_module}}.users import services as user_services
 
-from . import serializers, backends, services, tokens
+from . import serializers, services, tokens
 
 
 class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
