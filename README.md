@@ -61,6 +61,12 @@ Refer to [CHANGELOG.md](CHANGELOG.md).
 
 Everyone interacting in the django-init project's codebases, issue trackers, chat rooms, and mailing lists is expected to follow the [PyPA Code of Conduct](https://www.pypa.io/en/latest/code-of-conduct/).
 
+## Related Projects
+
+- https://github.com/pydanny/cookiecutter-django
+- https://github.com/wemake-services/wemake-django-template
+- https://github.com/lionheart/django-template
+
 --------
 
 Built with ♥ at [Fueled](https://fueled.com)

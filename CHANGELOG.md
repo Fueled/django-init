@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.x]
 
+- Change `created` and `modified` to `created_at` & `modified_at` respectively in `TimeStampedUUIDModel`. ([@CuriousLearner])
 - Add `SWAGGER_SETTINGS` as per current drf setup ([@theskumar])
 - Fix celerybeat service to be started/stopped correctly from systemctl. ([@CuriousLearner])
 - Use new `pytest` instead of `py.test`. ([@CuriousLearner])
