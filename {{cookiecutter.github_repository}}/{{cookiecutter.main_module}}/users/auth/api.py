@@ -73,37 +73,3 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         user.set_password(serializer.validated_data['new_password'])
         user.save()
         return response.NoContent()
-
-
-class CurrentUserViewSet(viewsets.GenericViewSet):
-    serializer_class = serializers.UserSerializer
-    queryset = User.objects.filter(is_active=True)
-    permission_classes = (IsAuthenticated, )
-
-    def get_object(self):
-        return self.request.user
-
-    def list(self, request):
-        """
-        Get logged in user profile
-        """
-        serializer = self.get_serializer(self.get_object())
-        return response.Ok(serializer.data)
-
-    def update(self, request, *args, **kwargs):
-        """
-        Update logged in user profile
-        """
-        partial = kwargs.pop('partial', False)
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=partial)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return response.Ok(serializer.data)
-
-    def partial_update(self, request, *args, **kwargs):
-        """
-        Update logged in user profile partially
-        """
-        kwargs['partial'] = True
-        return self.update(request, *args, **kwargs)
