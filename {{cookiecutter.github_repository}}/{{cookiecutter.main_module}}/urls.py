@@ -11,7 +11,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 
-from . import routers
+from . import api_urls
 from .base import views as base_views
 from .base.api import schemas as api_schemas
 
@@ -32,7 +32,7 @@ urlpatterns += [
         base_views.root_txt_files, name='root-txt-files'),
 
     # Rest API
-    url(r'^api/', include(routers.urlpatterns)),
+    url(r'^api/', include(api_urls)),
 
     # Django Admin
     url(r'^{}/'.format(settings.DJANGO_ADMIN_URL), admin.site.urls),
