@@ -7,7 +7,7 @@ from {{cookiecutter.main_module}}.users.api import CurrentUserViewSet
 from {{cookiecutter.main_module}}.users.auth.api import AuthViewSet
 
 default_router = DefaultRouter(trailing_slash=False)
-singleton_router = SingletonRouter()
+singleton_router = SingletonRouter(trailing_slash=False)
 
 # Register all the django rest framework viewsets below.
 default_router.register('auth', AuthViewSet, base_name='auth')
