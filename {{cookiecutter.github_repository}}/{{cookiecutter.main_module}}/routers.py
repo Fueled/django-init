@@ -8,7 +8,7 @@ from rest_framework import routers
 from {{cookiecutter.main_module}}.users.auth.api import (
     AuthViewSet, CurrentUserViewSet
 )
-from {{cookiecutter.main_module}}.base.utils.routers import BaseNameRouter
+from {{cookiecutter.main_module}}.base.utils.routers import SingletonRouter
 
 # Add all your router urls in urlpatters
 urlpatterns = list()
@@ -16,7 +16,7 @@ urlpatterns = list()
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'auth', AuthViewSet, base_name='auth')
 
-custom_router = BaseNameRouter()
+custom_router = SingletonRouter()
 custom_router.register(r'me', CurrentUserViewSet, base_name='me')
 
 urlpatterns.extend(router.urls)
