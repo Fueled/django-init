@@ -33,7 +33,8 @@ Status: 200 OK
     "auth_token": "eyJ0eXAiOiJKV1QiL",
     "email": "ak123@fueled.com",
     "id": "f9dceed1-0f19-49f4-a874-0c2e131abf79",
-    "name": ""
+    "first_name": "",
+    "last_name": ""
 }
 ```
 
@@ -66,7 +67,8 @@ Status: 201 Created
     "auth_token": "eyJ0eXAiOiJKV1QiLCJh",
     "email": "test@test.com",
     "id": "f9dceed1-0f19-49f4-a874-0c2e131abf79",
-    "name": ""
+    "first_name": "",
+    "last_name": ""
 }
 ```
 

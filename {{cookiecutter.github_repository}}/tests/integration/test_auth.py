@@ -22,7 +22,7 @@ def test_user_registration(client):
     response = client.json.post(url, json.dumps(credentials))
     assert response.status_code == 201
     expected_keys = [
-        'id', 'email', 'name', 'auth_token'
+        'id', 'email', 'first_name', 'last_name', 'auth_token'
     ]
     assert set(expected_keys).issubset(response.data.keys())
 
@@ -38,7 +38,7 @@ def test_user_login(client):
     response = client.json.post(url, json.dumps(credentials))
     assert response.status_code == 200
     expected_keys = [
-        'id', 'email', 'name', 'auth_token'
+        'id', 'email', 'first_name', 'last_name', 'auth_token'
     ]
     assert set(expected_keys).issubset(response.data.keys())
 
@@ -66,7 +66,7 @@ def test_user_password_change(client):
     response = client.json.post(url, json.dumps(credentials))
     assert response.status_code == 200
     expected_keys = [
-        'id', 'email', 'name', 'auth_token'
+        'id', 'email', 'first_name', 'last_name', 'auth_token'
     ]
     assert set(expected_keys).issubset(response.data.keys())
 
