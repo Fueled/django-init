@@ -19,14 +19,10 @@ class CurrentUserViewSet(viewsets.GenericViewSet):
         serializer = self.get_serializer(self.get_object())
         return response.Ok(serializer.data)
 
-    def update(self, request, partial=False):
+    def update(self, request):
         """Update logged in user profile"""
         instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return response.Ok(serializer.data)
-
-    def partial_update(self, request):
-        """Update logged in user profile partially"""
-        return self.update(request, partial=True)
