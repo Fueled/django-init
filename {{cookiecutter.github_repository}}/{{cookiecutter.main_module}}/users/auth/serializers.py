@@ -10,6 +10,10 @@ from {{cookiecutter.main_module}}.users.serializers import UserSerializer
 from . import tokens
 
 
+class EmptySerializer(serializers.Serializer):
+    pass
+
+
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=300, required=True)
     password = serializers.CharField(required=True)

@@ -18,6 +18,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
     serializer_classes = {
         'login': serializers.LoginSerializer,
         'register': serializers.RegisterSerializer,
+        'logout': serializers.EmptySerializer,
         'password_change': serializers.PasswordChangeSerializer,
         'password_reset': serializers.PasswordResetSerializer,
         'password_reset_confirm': serializers.PasswordResetConfirmSerializer,
