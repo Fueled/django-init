@@ -2,11 +2,7 @@
 
 see: https://docs.djangoproject.com/en/dev/ref/settings/
 """
-
 # Third Party Stuff
-{%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
-import os
-{%- endif %}
 import environ
 from django.utils.translation import ugettext_lazy as _
 
@@ -260,6 +256,11 @@ DJANGO_ADMIN_URL = env.str('DJANGO_ADMIN_URL', default='admin')
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
                     default='django.core.mail.backends.smtp.EmailBackend')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',
+                         default='{{ cookiecutter.default_from_email }}')
+EMAIL_SUBJECT_PREFIX = env('EMAIL_SUBJECT_PREFIX', default='[{{cookiecutter.project_name}}] ')
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
+SERVER_EMAIL = env('SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -385,14 +386,6 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = env('CELERY_TIMEZONE', default=TIME_ZONE)  # Use django's timezone by default
 {%- endif %}
 
-# EMAIL
-# ------------------------------------------------------------------------------
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL',
-                         default='{{ cookiecutter.default_from_email }}')
-EMAIL_SUBJECT_PREFIX = env('EMAIL_SUBJECT_PREFIX', default='[{{cookiecutter.project_name}}] ')
-EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
-SERVER_EMAIL = env('SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
-
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
@@ -489,15 +482,15 @@ LOGGING = {
 def get_release():
     import {{cookiecutter.main_module}}
     {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
+    import os
     import raven
-    from raven import exceptions as raven_exceptions
     {%- endif %}
     release = {{cookiecutter.main_module}}.__version__
     {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
     try:
         git_hash = raven.fetch_git_sha(os.path.dirname(os.pardir))[:7]
         release = '{}-{}'.format(release, git_hash)
-    except raven_exceptions.InvalidGitRepository:
+    except raven.exceptions.InvalidGitRepository:
         pass
     {%- endif %}
     return release
