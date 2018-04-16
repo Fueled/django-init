@@ -24,7 +24,5 @@ ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 source venv/bin/activate
 flake8
 fab test:"--cov"
-# Running 2to3 to ensure python3 compatible code is written
-2to3 hello_world
 
 test $err = 0 # Return non-zero if any command failed
