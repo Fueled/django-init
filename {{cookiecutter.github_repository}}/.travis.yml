@@ -20,7 +20,6 @@ before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
 
 install:
-  {% if cookiecutter.add_ansible.lower() == 'y' %}- pip install ansible{% endif %}
   - pip install -r requirements/development.txt
 
 before_script:

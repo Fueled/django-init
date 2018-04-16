@@ -24,3 +24,8 @@ pytest-mock==1.7.1
 # Versioning
 # -------------------------------------
 bumpversion==0.5.3
+
+# Deployment and Tasks
+# -------------------------------------
+fabric3==1.14.post1
+{%- if cookiecutter.add_ansible.lower() == 'y' %}ansible==2.5.0{% endif %}

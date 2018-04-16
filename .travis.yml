@@ -16,7 +16,7 @@ addons:
       - postgresql-9.5-postgis-2.3
 
 install:
-  - pip install -U pip cookiecutter fabric3 ansible==2.4.3
+  - pip install -U pip cookiecutter fabric3 ansible==2.5.0
 
 script:
   - ./run_test.sh
