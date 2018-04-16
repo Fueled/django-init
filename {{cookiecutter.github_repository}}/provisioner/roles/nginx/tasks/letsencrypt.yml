@@ -15,7 +15,7 @@
 - name: install certbot
   apt:
     pkg: python-certbot-nginx
-    state: installed
+    state: present
 
 - name: create certbot folder
   become: yes

@@ -7,7 +7,7 @@
 - name: install postgres packages for Ubuntu
   apt:
     pkg: "{{ item }}"
-    state: installed
+    state: present
   with_items:
     - postgresql
     - postgresql-contrib
@@ -16,7 +16,7 @@
 - name: install postgis packages for Ubuntu
   apt:
     pkg: "postgis"
-    state: installed
+    state: present
   when: pg_gis
 
 - name: setup database

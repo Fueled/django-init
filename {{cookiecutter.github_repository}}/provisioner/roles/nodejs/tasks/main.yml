@@ -13,4 +13,6 @@
   become: yes
 
 - name: Install Node.js
-  apt: pkg=nodejs state=installed
+  apt:
+    pkg: nodejs
+    state: present
