@@ -8,6 +8,7 @@ import raven
 from celery import Celery
 from django.conf import settings
 from dotenv import load_dotenv
+from raven.contrib.celery import register_signal, register_logger_signal
 
 # Set the default Django settings module for the 'celery' program.
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
@@ -20,11 +21,12 @@ class CeleryCustomised(Celery):
     def on_configure(self):
         client = raven.Client(os.getenv('SENTRY_DSN'), environment=os.getenv('SENTRY_ENVIRONMENT'))
 
+        # Always ensure you import register_logger_signal, register_signal and not their parent modules
         # register a custom filter to filter out duplicate logs
-        raven.contrib.celery.register_logger_signal(client)
+        register_logger_signal(client)
 
         # hook into the Celery error handler
-        raven.contrib.celery.register_signal(client)
+        register_signal(client)
 
 
 app = CeleryCustomised('{{ cookiecutter.main_module }}')
