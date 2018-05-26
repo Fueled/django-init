@@ -23,6 +23,7 @@ class SingletonRouter(routers.SimpleRouter):
                 'delete': 'destroy',
             },
             name='{basename}',
+            detail=False,
             initkwargs={'suffix': ''}
         ),
         # Dynamically generated list routes.
