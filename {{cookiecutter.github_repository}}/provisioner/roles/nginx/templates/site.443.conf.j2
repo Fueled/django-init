@@ -44,6 +44,8 @@ server {
     location /docs {
         # mkdocs html generated via "product_data" role
         alias {{ project_path }}/_docs_html/;
+        auth_basic "Restricted Content";
+        auth_basic_user_file {{ htpasswd_file_path }};
     }
 
     # Setup named location for Django requests and handle proxy details

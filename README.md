@@ -12,7 +12,7 @@ Project template for django based projects, optimized for making REST API with d
 - Ready to deploy on Heroku (optional) and Ubuntu 16 LTS via [Ansible](Optional)
 - [Django Rest Framework][drf] 3.7.x. ready.
 - Uses `django_sites` instead of `django.contrib.sites`
-- Use [mkdocs] for project documentation.
+- Uses [mkdocs] for project documentation. Docs password protected when deployed.
 - Uses [pytest] as test runner.
 - `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Custom `User` app, for easier extensibility.

@@ -14,6 +14,8 @@
   stat: path={{ letsencrypt_ssl_cert_dir }}
   register: letsencrypt_dir
 
+- import_tasks: htpasswd.yml
+
 - import_tasks: letsencrypt.yml
   when: vm == 0 and use_letsencrypt and letsencrypt_dir.stat.exists == false
 

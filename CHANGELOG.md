@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - Make heroku deployment optional. ([@tucosaurus])
 - Add api views (and docs) for password change, password reset and confirmation to the user app. ([@tucosaurus], [@theskumar])
 - Ansible: make the log output human readable ([@theskumar])
+- Add password protection to the project documentation url. [@tucosaurus]
 
 
 ## [1.11]
