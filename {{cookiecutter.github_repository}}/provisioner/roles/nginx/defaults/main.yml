@@ -25,10 +25,10 @@ ssl_session_timeout: '1d'
 ssl_session_cache: 'shared:SSL:50m'
 ssl_trusted_certificate: '{{ ssl_cert_dir }}/{{ domain_name }}/chain.pem'
 access_log_file: '/var/log/nginx/{{ domain_name }}.access.log'
-error_log_file: '/var/log/nginx/{{ domain_name }}.error.log'{% endraw %}
+error_log_file: '/var/log/nginx/{{ domain_name }}.error.log'
 
 # htpasswsd
 # docs username, password
 htpasswd_file_path: '/etc/nginx/.htpasswd'
 nginx_docs_username: '{{ project_name }}-docs'
-nginx_docs_password: '{{ project_name }}-1234!'
+nginx_docs_password: '{{ project_name }}-1234!'{% endraw %}
