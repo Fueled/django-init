@@ -1,7 +1,7 @@
 # Third Party Stuff
 from django.contrib.auth import logout
 from rest_framework import viewsets
-from rest_framework.decorators import list_route
+from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 # {{ cookiecutter.project_name }} Stuff
@@ -24,7 +24,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         'password_reset_confirm': serializers.PasswordResetConfirmSerializer,
     }
 
-    @list_route(['POST', ])
+    @action(methods=['POST', ], detail=False)
     def login(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -32,7 +32,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         data = serializers.AuthUserSerializer(user).data
         return response.Ok(data)
 
-    @list_route(['POST', ])
+    @action(methods=['POST', ], detail=False)
     def register(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -40,7 +40,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         data = serializers.AuthUserSerializer(user).data
         return response.Created(data)
 
-    @list_route(['POST', ])
+    @action(methods=['POST', ], detail=False)
     def logout(self, request):
         """
         Calls Django logout method; Does not work for UserTokenAuth.
@@ -48,7 +48,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         logout(request)
         return response.Ok({"success": "Successfully logged out."})
 
-    @list_route(['POST', ], permission_classes=[IsAuthenticated, ])
+    @action(methods=['POST', ], detail=False, permission_classes=[IsAuthenticated, ])
     def password_change(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -56,7 +56,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         request.user.save()
         return response.NoContent()
 
-    @list_route(['POST', ])
+    @action(methods=['POST', ], detail=False)
     def password_reset(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -65,7 +65,7 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
             services.send_password_reset_mail(user)
         return response.Ok({'message': 'Further instructions will be sent to the email if it exists'})
 
-    @list_route(['POST', ])
+    @action(methods=['POST', ], detail=False)
     def password_reset_confirm(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
