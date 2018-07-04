@@ -335,10 +335,12 @@ STATICFILES_FINDERS = (
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
 # Django Compressor Configuration
-COMPRESS_CSS_FILTERS = [
-    'django_compressor_autoprefixer.AutoprefixerFilter',
-    'compressor.filters.cssmin.CSSMinFilter',
-]
+COMPRESS_FILTERS = {
+    'css': [
+        'django_compressor_autoprefixer.AutoprefixerFilter',
+        'compressor.filters.cssmin.CSSMinFilter'
+    ]
+}
 
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
