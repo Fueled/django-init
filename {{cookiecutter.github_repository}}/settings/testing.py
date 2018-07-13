@@ -16,5 +16,5 @@ INSTALLED_APPS += ('tests', )  # noqa: F405
 # Travis CI run with node 0.10.0 which is incompatible with the version
 # postcss required.
 # This causes the autoprefixer to not run on the complied css.
-COMPRESS_CSS_FILTERS.remove('django_compressor_autoprefixer.AutoprefixerFilter')  # noqa: F405
+COMPRESS_FILTERS = {}
 {%- endif %}
