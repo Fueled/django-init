@@ -11,11 +11,10 @@
     - nginx
     - postgresql
     - project_data
-{%- if cookiecutter.add_celery.lower() == 'y' %}
     - redis
+{%- if cookiecutter.add_celery.lower() == 'y' %}
     - celery
 {%- else %}
-    # - redis
     # - celery
 {%- endif %}
 
@@ -33,11 +32,10 @@
     - nginx
     - postgresql
     - project_data
-{%- if cookiecutter.add_celery.lower() == 'y' %}
     - redis
+{%- if cookiecutter.add_celery.lower() == 'y' %}
     - celery
 {%- else %}
-    # - redis
     # - celery
 {%- endif %}
 
@@ -55,11 +53,10 @@
     - nginx
     - project_data
     - postgresql
-{%- if cookiecutter.add_celery.lower() == 'y' %}
     - redis
+{%- if cookiecutter.add_celery.lower() == 'y' %}
     - celery
 {%- else %}
-    # - redis
     # - celery
 {%- endif %}
 
@@ -76,10 +73,9 @@
     - common
     - nginx
     - project_data
-{%- if cookiecutter.add_celery.lower() == 'y' %}
     - redis
+{%- if cookiecutter.add_celery.lower() == 'y' %}
     - celery
 {%- else %}
-    # - redis
     # - celery
 {%- endif %}
