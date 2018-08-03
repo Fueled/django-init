@@ -51,6 +51,20 @@
     - { src: 'bashrc', dest: '.bashrc' }
     - { src: 'inputrc', dest: '.inputrc' }
 
+- name: ensure .pip directory exists
+  file:
+    path: /home/{{ user }}/.pip
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0775
+
+- name: ensure default pypi mirror for easy_install and virtualenv is pypi.python.org
+  copy: src={{ item.src }} dest=/home/{{ user }}/{{ item.dest }} owner={{ user }} group={{ user }}
+  with_items:
+    - { src: 'pydistutils.cfg', dest: '.pydistutils.cfg' }
+    - { src: 'pip.conf', dest: '.pip/pip.conf' }
+
 - name: apt_get install common packages
   apt: pkg={{ item }} state=present
   with_items: "{{base_ubuntu.common.apt_packages}}"

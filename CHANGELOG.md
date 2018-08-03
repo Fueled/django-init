@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ## [2.x]
 
+- Add task for compiling static string translations. ([@CuriousLearner])
+- Ensure pypi and easy_install mirror is set to `pypi.python.org` ([@CuriousLearner])
 - Move `paginated_response` utility to `base.api.pagination`. ([@theskumar])
 - Add flake8 in travis builds for django-init. ([@CuriousLearner])
 - Change `created` and `modified` to `created_at` & `modified_at` respectively in `TimeStampedUUIDModel`. ([@CuriousLearner])
