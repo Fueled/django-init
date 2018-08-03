@@ -57,6 +57,11 @@
 
 - import_tasks: uwsgi-setup.yml
 
+- name: run compilemessages for static translations
+  django_manage: command=compilemessages app_path={{ project_path }} virtualenv={{ venv_path }}
+  become: false
+  tags: ['deploy']
+
 - name: reload uwsgi processes
   command: uwsgi --reload {{ uwsgi_pid_file }}
   become: true
