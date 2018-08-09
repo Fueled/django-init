@@ -61,7 +61,7 @@ raven==6.6.0
 
 # Async Tasks
 # -------------------------------------
-celery[redis]==4.1.0
+celery[redis]==4.1.1
 {%- endif %}
 
 # Auth Stuff
