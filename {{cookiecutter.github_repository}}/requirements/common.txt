@@ -1,13 +1,13 @@
 # Core Stuff
 # -------------------------------------
-Django==2.0.5
+Django==2.1
 
 # Configuration
 # -------------------------------------
 argon2-cffi==18.1.0
-django-environ==0.4.4
+django-environ==0.4.5
 django-sites==0.10
-python-dotenv==0.8.2
+python-dotenv==0.9.1
 {%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
 django-cors-headers==2.2.0
 {%- endif %}
@@ -50,12 +50,12 @@ django-log-request-id==1.3.2
 
 # Documentation
 # -------------------------------------
-mkdocs==0.17.3
+mkdocs==1.0
 
 {% if cookiecutter.use_sentry_for_error_reporting == "y" -%}
 # Raven is the Sentry client
 # --------------------------
-raven==6.6.0
+raven==6.9.0
 {%- endif %}
 {%- if cookiecutter.add_celery.lower() == "y" %}
 
@@ -66,5 +66,5 @@ celery[redis]==4.1.1
 
 # Auth Stuff
 # -------------------------------------
-PyJWT==1.6.0
+PyJWT==1.6.4
 django-mail-templated==2.6.5
