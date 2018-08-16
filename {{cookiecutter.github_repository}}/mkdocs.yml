@@ -4,7 +4,7 @@ site_description: {{ cookiecutter.project_description }}
 site_author: {{ cookiecutter.github_username }}
 repo_url: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}
 
-pages:
+nav:
 - Home: 'index.md'
 - API:
   - 'Overview & Usages': 'api/overview.md'
