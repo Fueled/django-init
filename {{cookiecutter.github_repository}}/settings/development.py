@@ -87,3 +87,9 @@ DEBUG_TOOLBAR_CONFIG = {
 
 # This will expose all browsable api urls. For dev the default value is true
 API_DEBUG = env.bool('API_DEBUG', default=True)
+
+# MEDIA CONFIGURATION
+# ------------------------------------------------------------------------------
+
+# Media configuration to support deployment of media files while is debug=True or development.
+MEDIA_URL = env("MEDIA_URL", default="/media/")
