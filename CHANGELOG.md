@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file.
 - Add api views (and docs) for password change, password reset and confirmation to the user app. ([@tucosaurus], [@theskumar])
 - Ansible: make the log output human readable ([@theskumar])
 - Upgrade to Django RestFramework 3.8 ([@tucosaurus])
-- Add password protection to the project documentation url. [@tucosaurus]
+- Add optional password protection to the project documentation url. [@tucosaurus]
 
 
 ## [1.11]
