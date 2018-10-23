@@ -27,11 +27,12 @@ class SingletonRouter(routers.SimpleRouter):
             initkwargs={'suffix': ''}
         ),
         # Dynamically generated list routes.
-        # Generated using @list_route decorator
+        # Generated using @action decorator
         # on methods of the viewset.
-        routers.DynamicListRoute(
-            url=r'^{prefix}/{methodname}{trailing_slash}$',
-            name='{basename}-{methodnamehyphen}',
+        routers.DynamicRoute(
+            url=r'^{prefix}/{url_path}$',
+            name='{basename}-{url_name}',
+            detail=False,
             initkwargs={}
         ),
     ]
