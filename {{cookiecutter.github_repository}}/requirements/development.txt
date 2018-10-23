@@ -10,13 +10,13 @@ devrecargar==0.1.4
 
 # Debugging
 # -------------------------------------
-django-debug-toolbar==1.9.1
+django-debug-toolbar==1.10.1
 ipdb==0.11
 
 # Testing and coverage
 # -------------------------------------
-pytest-django==3.3.3
-pytest-cov==2.5.1
+pytest-django==3.4.3
+pytest-cov==2.6.0
 django-dynamic-fixture==2.0.0
 flake8-mypy==17.8.0
 pytest-mock==1.10.0
