@@ -28,11 +28,11 @@
   when: vm == 0 and use_letsencrypt
 
 - name: check ssl/nginx.crt exists
-  stat: path={{ ssl_cert_dir }}/{{ domain_name }}/fullchain.pem
+  stat: path={{ ssl_certificate }}
   register: nginx_cert
 
 - name: check ssl/nginx.key exists
-  stat: path={{ ssl_cert_dir }}/{{ domain_name }}/privkey.pem
+  stat: path={{ ssl_certificate_key }}
   register: nginx_key
 
 - fail: msg="Whoops! ssl certificate doesn't exist"
