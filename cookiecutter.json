@@ -14,6 +14,7 @@
     , "add_ansible": "y"
     , "letsencrypt": "y"
     , "letsencrypt_email": "backend+{{ cookiecutter.main_module|replace('_', '-') }}@fueled.com"
+    , "have_password_protected_docs": "n"
     , "add_sass_with_django_compressor": "y"
     , "use_sentry_for_error_reporting": "y"
     , "add_django_auth_wall": "y"
