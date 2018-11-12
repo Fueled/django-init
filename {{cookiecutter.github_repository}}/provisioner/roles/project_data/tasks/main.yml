@@ -30,6 +30,11 @@
   become: false
   tags: ['configure']
 
+- name: install gettext for translations
+  apt:
+    pkg: gettext
+    state: present
+
 - name: collect static
   django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
