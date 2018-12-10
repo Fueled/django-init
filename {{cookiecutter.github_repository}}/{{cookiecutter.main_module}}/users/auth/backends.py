@@ -28,8 +28,8 @@ from .tokens import get_user_for_token
 class UserTokenAuthentication(BaseAuthentication):
 
     """
-    Self-contained stateles authentication implementatrion
-    that work similar to oauth2.
+    Self-contained stateles authentication implementation
+    that work similar to OAuth2.
     It uses json web tokens (https://github.com/jpadilla/pyjwt) for trust
     data stored in the token.
     """
