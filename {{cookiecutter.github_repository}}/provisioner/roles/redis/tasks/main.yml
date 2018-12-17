@@ -7,4 +7,4 @@
 - name: install redis server
   apt:
     pkg: redis-server
-    state: installed
+    state: present
