@@ -41,7 +41,7 @@ ADMINS = getaddresses([env('DJANGO_ADMINS')])
 MANAGERS = ADMINS
 {%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
 
-# cors
+# CORS
 # --------------------------------------------------------------------------
 CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST')
 {%- endif %}
