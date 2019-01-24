@@ -4,7 +4,9 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 """
 # Third Party Stuff
 import environ
+{%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
 from corsheaders.defaults import default_headers
+{%- endif %}
 from django.utils.translation import ugettext_lazy as _
 
 
