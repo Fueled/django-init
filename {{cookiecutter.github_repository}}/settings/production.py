@@ -44,18 +44,6 @@ MANAGERS = ADMINS
 # CORS
 # --------------------------------------------------------------------------
 CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST')
-CORS_ALLOW_HEADERS = (
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-    'access-control-allow-origin',
-)
 {%- endif %}
 
 {% if cookiecutter.add_django_auth_wall.lower() == 'y' %}

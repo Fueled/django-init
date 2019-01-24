@@ -4,6 +4,7 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 """
 # Third Party Stuff
 import environ
+from corsheaders.defaults import default_headers
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -376,6 +377,17 @@ X_FRAME_OPTIONS = 'DENY'
 
 # django-log-request-id - Sending request id in response
 REQUEST_ID_RESPONSE_HEADER = 'REQUEST_ID'
+
+{%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
+
+# CORS
+# --------------------------------------------------------------------------
+CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST', default=[])
+CORS_ALLOW_HEADERS = default_headers + (
+    'access-control-allow-origin',
+)
+{%- endif %}
+
 
 {%- if cookiecutter.add_celery.lower() == 'y' %}
 
