@@ -527,6 +527,6 @@ RAVEN_CONFIG = {
 SITE_INFO = {
     'RELEASE_VERSION': RELEASE_VERSION,
 {%- if cookiecutter.use_sentry_for_error_reporting == 'y' %}
-    'IS_RAVEN_INSTALLED': RAVEN_CONFIG['dsn'] is not ''
+    'IS_RAVEN_INSTALLED': RAVEN_CONFIG['dsn'] != ''
 {%- endif %}
 }
