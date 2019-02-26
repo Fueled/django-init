@@ -8,7 +8,9 @@ import raven
 from celery import Celery
 from django.conf import settings
 from dotenv import load_dotenv
+{%- if cookiecutter.use_sentry_for_error_reporting.lower() == 'y'%}
 from raven.contrib.celery import register_signal, register_logger_signal
+{%- endif %}
 
 # Set the default Django settings module for the 'celery' program.
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
