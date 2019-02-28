@@ -94,7 +94,7 @@ DJANGO_AWS_STORAGE_BUCKET_NAME=<YOUR_BUCKET_NAME_HERE>
 ```
 
 
-**Note:**
+__Note:__
 - Use `--app=<heroku-app-name>` if you have more than one Heroku app configured in current project.
 - Update `travis.yml`, and add the `<heroku-app-name>` to automatically deploy to this configured Heroku app.
 {% endif %}

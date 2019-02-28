@@ -14,8 +14,8 @@ __Version:__ {{ cookiecutter.version }}
 - [Server Setup & Configurations](backend/server_config.md)
 - [Coding Rules](backend/coding_rules.md)
 
-**NOTE:** This documentation changes frequently, checkout the [changelog](api/changelog.md) for detailed breaking changes and features added.
+__NOTE:__ This documentation changes frequently, checkout the [changelog](api/changelog.md) for detailed breaking changes and features added.
 
-Write your documentation using **Markdown** in `docs/` folder. Need help? Read mkdocs [documentation][mkdocs].
+Write your documentation using __Markdown__ in `docs/` folder. Need help? Read mkdocs [documentation][mkdocs].
 
 [mkdocs]: http://www.mkdocs.org/user-guide/writing-your-docs/

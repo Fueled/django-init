@@ -23,15 +23,15 @@
 * All fields have `verbose_name`. Also `help_text` if needed to fully explain the field meaning.
 * All fields have explicit `blank` and `null` parameters. Use only those combinations, unless there a documented need of other thing:
 
-    **Normal fields** (IntegerField, DateField, ForeignKey, FileField...)
+    __Normal fields__ (IntegerField, DateField, ForeignKey, FileField...)
       - (optional) `null = True`, `blank = True`
       - (required) `null = False`, `blank = False`
 
-    **Text fields** (CharField, TextField, URLField...)
+    __Text fields__ (CharField, TextField, URLField...)
       - (optional) `null = False`, `blank = True`
       - (required) `null = False`, `blank = False`
 
-    **Boolean fields**:  
+    __Boolean fields__:  
       - (two values, T/F) `null = False`, `blank = True`
       - (three values, T/F/Null) `null = True`, `blank = True`
 
