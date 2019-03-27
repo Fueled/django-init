@@ -12,6 +12,7 @@ from unittest import mock
 # Third Party Stuff
 import pytest
 
+
 class PartialMethodCaller:
     def __init__(self, obj, **partial_params):
         self.obj = obj
