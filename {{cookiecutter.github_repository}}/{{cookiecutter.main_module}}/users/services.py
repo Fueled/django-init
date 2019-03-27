@@ -1,5 +1,5 @@
 # Third Party Stuff
-from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth import authenticate, get_user_model
 
 # {{ cookiecutter.project_name }} Stuff
 from {{cookiecutter.main_module}}.base import exceptions as exc

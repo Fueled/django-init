@@ -7,11 +7,10 @@ It may be also used for extending doctest's context:
 
 # Standard Library
 import functools
+from unittest import mock
 
 # Third Party Stuff
 import pytest
-from unittest import mock
-
 
 class PartialMethodCaller:
     def __init__(self, obj, **partial_params):
