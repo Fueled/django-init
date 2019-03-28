@@ -51,9 +51,9 @@ def install_requirements(file=env.requirements_file):
     # activate virtualenv and install
     with virtualenv():
         local('pip install -r %s' % file)
-
-
 {%- if cookiecutter.pre_commit_install.lower() == 'y' %}
+
+
 def pre_commit_install():
     verify_virtualenv()
     # activate virtualenv and install pre-commit hooks
