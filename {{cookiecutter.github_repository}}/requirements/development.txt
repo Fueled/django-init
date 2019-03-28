@@ -30,3 +30,8 @@ bumpversion==0.5.3
 # -------------------------------------
 fabric3==1.14.post1
 {% if cookiecutter.add_ansible.lower() == 'y' %}ansible==2.5.0{% endif %}
+
+
+# Code quality
+#--------------------------------------
+pre-commit==0.8.2
