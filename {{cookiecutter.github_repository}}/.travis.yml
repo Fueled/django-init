@@ -11,6 +11,11 @@ addons:
   apt:
     packages:
       - postgresql-10-postgis-2.4
+      - postgresql-client-10
+
+env:
+  global:
+  - PGPORT=5432
 
 cache:
   directories:
@@ -23,6 +28,9 @@ install:
   - pip install -r requirements/development.txt
 
 before_script:
+- sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/10/main/postgresql.conf
+- sudo cp /etc/postgresql/{9.4,10}/main/pg_hba.conf
+- sudo service postgresql restart
 - export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
 - psql -c "CREATE DATABASE {{ cookiecutter.main_module }};" -U postgres
 {%- if cookiecutter.postgis.lower() == 'y' %}
