@@ -52,6 +52,7 @@
     password: "{{ pg_password }}"
     role_attr_flags: "CREATEDB,SUPERUSER"
     state: present
+    encrypted: yes
 
 - name: ensure postgres is running
   service: name=postgresql state=started enabled=yes{% endraw %}
