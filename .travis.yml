@@ -10,13 +10,23 @@ services:
   - postgresql
 
 addons:
-  postgresql: "9.5"
+  postgresql: "10.6"
   apt:
     packages:
-      - postgresql-9.5-postgis-2.3
+      - postgresql-10-postgis-2.4
+      - postgresql-client-10
+
+env:
+  global:
+  - PGPORT=5432
 
 install:
   - pip install -U pip cookiecutter fabric3 ansible==2.5.0
+
+before_script:
+- sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/10/main/postgresql.conf
+- sudo cp /etc/postgresql/{9.4,10}/main/pg_hba.conf
+- sudo service postgresql restart
 
 script:
   - ./run_test.sh
