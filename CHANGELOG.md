@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.x]
 
+- Upgrade to Postgres 10 and Postgis 2.4. ([@CuriousLearner])
 - Add task for compiling static string translations. ([@CuriousLearner])
 - Ensure pypi and easy_install mirror is set to `pypi.python.org` ([@CuriousLearner])
 - Move `paginated_response` utility to `base.api.pagination`. ([@theskumar])
