@@ -8,7 +8,7 @@ Project template for django based projects, optimized for making REST API with d
 - Django 2.0.x
 - Python 3.6.x
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
-- Supports PostresSQL 10.0 (support of postgis-2.4 is available).
+- Supports PostreSQL 10.0 (support of postgis-2.4 is available).
 - Ready to deploy on Heroku (optional) and Ubuntu 16 LTS via [Ansible](Optional)
 - [Django Rest Framework][drf] 3.8.x. ready.
 - Uses `django_sites` instead of `django.contrib.sites`
