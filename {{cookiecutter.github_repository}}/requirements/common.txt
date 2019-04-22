@@ -34,7 +34,7 @@ django-versatileimagefield==1.10
 # REST APIs
 # -------------------------------------
 djangorestframework==3.9.0
-django-rest-swagger==2.1.2
+django-rest-swagger==2.2.0
 {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
 
 # Static files
