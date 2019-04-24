@@ -66,8 +66,7 @@
     - { src: 'pip.conf', dest: '.pip/pip.conf' }
 
 - name: apt_get install common packages
-  apt: pkg={{ item }} state=present
-  with_items: "{{base_ubuntu.common.apt_packages}}"
+  apt: pkg={{base_ubuntu.common.apt_packages}} state=present
 
 - name: ensure there is a group www-data
   group: name=www-data state=present system=yes{% endraw %}

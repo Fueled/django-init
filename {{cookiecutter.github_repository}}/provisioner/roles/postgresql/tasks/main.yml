@@ -11,20 +11,17 @@
   shell: wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
 - name: Add to PostgreSQL.list
-  shell: sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main" > /etc/apt/sources.list.d/PostgreSQL.list'
+  shell: sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main" > /etc/apt/sources.list.d/PostgreSQL.list'
+  become_user: root
 
 - name: install postgres packages for Ubuntu
   apt:
-    pkg: "{{ item }}"
+    pkg: ['postgresql-11', 'postgresql-contrib', 'python-psycopg2']
     state: present
-  with_items:
-    - postgresql-10
-    - postgresql-contrib
-    - python-psycopg2
 
 - name: install postgis packages for Ubuntu
   apt:
-    pkg: "postgis-2.4"
+    pkg: "postgis-2.5"
     state: present
   when: pg_gis
 

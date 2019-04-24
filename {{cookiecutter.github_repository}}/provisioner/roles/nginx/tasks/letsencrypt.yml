@@ -1,11 +1,8 @@
 {%raw%}---
 - name: apt-get install letsencrypt dependencies packages
-  apt: pkg={{ item }} state=present
-  with_items:
-    - augeas-lenses
-    - dialog
-    - libaugeas0
-    - libffi-dev
+  apt:
+    pkg: ['augeas-lenses', 'dialog', 'libaugeas0', 'libffi-dev']
+    state: present
 
 - name: Add official Certbot repo
   apt_repository:
