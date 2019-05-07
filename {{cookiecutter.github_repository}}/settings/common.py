@@ -515,13 +515,13 @@ SITE_INFO = {
 # =============================================================================
 INSTALLED_APPS += ('webpack_loader', )
 WEBPACK_LOADER = {
-   'DEFAULT': {
-       'CACHE': True,
-       'BUNDLE_DIR_NAME': 'dist/assets/',  # It will add static path before and it must end with slash
-       'STATS_FILE': str(ROOT_DIR.path('webpack-stats.json')),
-       'POLL_INTERVAL': 0.1,
-       'TIMEOUT': None,
-       'IGNORE': ['.+\.hot-update.js', '.+\.map']
-   }
+    'DEFAULT': {
+        'CACHE': True,
+        'BUNDLE_DIR_NAME': 'dist/',  # It will add static path before and it must end with slash
+        'STATS_FILE': str(ROOT_DIR.path('webpack-stats.json')),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
+    }
 }
 {%- endif %}

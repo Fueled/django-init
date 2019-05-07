@@ -17,8 +17,6 @@ from .common import INSTALLED_APPS, env
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG  # noqa: F405
 
-WEBPACK_LOADER['DEFAULT']['CACHE'] = False  # noqa: F405
-
 INTERNAL_IPS = ('127.0.0.1', '192.168.33.12', )
 
 ALLOWED_HOSTS = ['*']
@@ -85,3 +83,7 @@ API_DEBUG = env.bool('API_DEBUG', default=True)
 
 # Media configuration to support deployment of media files while is debug=True or development.
 MEDIA_URL = env("MEDIA_URL", default="/media/")
+
+{%- if cookiecutter.webpack.lower() == 'y' %}
+WEBPACK_LOADER['DEFAULT']['CACHE'] = False  # noqa: F405
+{%- endif %}

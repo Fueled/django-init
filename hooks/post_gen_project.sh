@@ -36,9 +36,7 @@ fi
 if echo "{{ cookiecutter.webpack }}" | grep -iq "^n"; then
     rm -f package.json
     rm -f {{cookiecutter.main_module}}/static/server.js
-    rm -f {{cookiecutter.main_module}}/static/webpack.base.config.js
-    rm -f {{cookiecutter.main_module}}/static/webpack.dev.config.js
-    rm -f {{cookiecutter.main_module}}/static/webpack.prod.config.js
+    rm -f {{cookiecutter.main_module}}/static/webpack.config.js
     rm -f webpack-stats.json
 fi
 

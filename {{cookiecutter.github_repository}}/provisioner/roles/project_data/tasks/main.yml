@@ -28,16 +28,14 @@
   apt:
     pkg: gettext
     state: present
-
+{% endraw %}{%- if cookiecutter.webpack.lower() == 'y' %}
+- include: webpack.yml
+{% else %}{% raw %}
 - name: collect static
   django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
-  when: not webpack_enabled
-
-# Runs collectstatic with ignored webpack files
-- include: webpack.yml
-  when: webpack_enabled
+{% endraw %}{% endif %}{% raw %}
 
 - name: Run database migrations
   django_manage: command=migrate app_path={{ project_path }} virtualenv={{ venv_path }}

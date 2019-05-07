@@ -45,7 +45,7 @@ before_script:
 
 script:
 - flake8
-{% if cookiecutter.webpack.lower() == 'y' %}- ./node_modules/.bin/webpack --config {{ cookiecutter.main_module }}/static/webpack.prod.config.js{% endif %}
+{% if cookiecutter.webpack.lower() == 'y' %}- NODE_ENV=production ./node_modules/.bin/webpack --config {{ cookiecutter.main_module }}/static/webpack.config.js{% endif %}
 - py.test --cov -v --tb=native
 {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 

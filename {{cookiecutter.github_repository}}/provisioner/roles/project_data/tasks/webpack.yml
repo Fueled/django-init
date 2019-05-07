@@ -26,7 +26,7 @@
     group: "{{uwsgi_group}}"
 
 - name: Run build webpack
-  command: "{{ webpack_path }} --config {{ webpack_config }}"
+  command: "NODE_ENV=production {{ webpack_path }} --config {{ webpack_config }}"
   become: false
   tags: ['deploy']
   args:
@@ -34,7 +34,7 @@
 
 - name: collect static
   django_manage:
-    command: "collectstatic --no-input -i js -i css -i server.js -i webpack.base.config.js -i webpack.dev.config.js -i webpack.prod.config.js"
+    command: "collectstatic --no-input -i js -i css -i server.js -i webpack.config.js"
     app_path: "{{ project_path }}"
     virtualenv: "{{ venv_path }}"
   become: false
