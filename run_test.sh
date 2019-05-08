@@ -21,7 +21,7 @@ yes 'y' | cookiecutter . --no-input
 
 # Run the tests present inside generate project
 cd hello-world-web;
-fab prod build
+npm run build
 ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 fab test:"--cov"
 

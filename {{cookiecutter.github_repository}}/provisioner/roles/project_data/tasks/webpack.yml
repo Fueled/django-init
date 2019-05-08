@@ -25,8 +25,13 @@
     owner: "{{user}}"
     group: "{{uwsgi_group}}"
 
+- name: Install packages based on package.json.
+  npm:
+    path: "{{ project_path }}"
+  tags: ['deploy']
+
 - name: Run build webpack
-  command: "NODE_ENV=production {{ webpack_path }} --config {{ webpack_config }}"
+  command: "npm run build"
   become: false
   tags: ['deploy']
   args:

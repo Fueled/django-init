@@ -9,11 +9,11 @@ python manage.py check --deploy
 
 # build node packages
 npm install
-./node_modules/.bin/webpack --config {{ cookiecutter.main_module }}/static/webpack.prod.config.js
+./node_modules/.bin/webpack --config {{ cookiecutter.main_module }}/static/webpack.config.js
 touch webpack-stats.json
 {%- endif %}
 
 # Run collectstatic with new build files and with clear to avoid webpack config files
-python manage.py collectstatic --noinput --clear -i js -i css -i server.js -i webpack.base.config.js -i webpack.dev.config.js -i webpack.prod.config.js
+python manage.py collectstatic --noinput --clear -i js -i css -i server.js -i webpack.config.js
 
 # used by heroku after slug compilation

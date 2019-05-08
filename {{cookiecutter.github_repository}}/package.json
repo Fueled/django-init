@@ -5,6 +5,10 @@
   "engines": {
     "node": "10.x.x"
   },
+  "scripts": {
+    "start": "node {{ cookiecutter.main_module }}/static/server.js",
+    "build": "NODE_ENV=production webpack --config {{ cookiecutter.main_module }}/static/webpack.config.js"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "autoprefixer": "^9.1.5",

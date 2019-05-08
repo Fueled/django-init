@@ -28,9 +28,8 @@ Useful commands:
 - `fab deploy_docs` - deploy docs to server
 - `fab test` - run the test locally with ipdb
 {%- if cookiecutter.webpack == 'y' %}
-- `fab watch` - build dev staticfiles and start [node server](http://localhost:3000/)
-- `fab build` - build dev staticfiles
-- `fab prod build` - build production staticfiles
+- `npm run watch` - start webpack for watching and compling static files and auto-reloading server.
+- `npm run build` - build production staticfiles
 {%- endif %}
 
 **NOTE:** Checkout `fabfile.py` for all the options available and what/how they do it.

@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 """Fabric file for managing this project.
 
 See: http://www.fabfile.org/
 """
-from __future__ import absolute_import, unicode_literals, with_statement
 
 # Standard Library
 from contextlib import contextmanager as _contextmanager
@@ -45,8 +43,8 @@ def init(vagrant=False):
 
     install_requirements()
     {%- if cookiecutter.webpack.lower() == 'y' %}
-    install_webpack_dependencies()
-    build()
+    local('npm install')
+    local('npm run build')
     {%- endif %}
     local('createdb %(project_name)s' % env)  # create postgres database
     manage('migrate')
@@ -116,19 +114,6 @@ def createapp(appname):
     local('mkdir %s' % path)
     manage('startapp %s %s' % (appname, path))
 {%- if cookiecutter.webpack.lower() == 'y' %}
-
-
-def install_webpack_dependencies():
-    local('npm install')
-
-
-def build(options='--progress --colors'):
-    """Generate bundles by invoking webpack with provided config
-    """
-    local('NODE_ENV=production ./node_modules/.bin/webpack --config %s %s' % (
-        env.webpack_config_path, options)
-    )
-
 
 def watch():
     local('node %s' % env.webpack_server_path)
