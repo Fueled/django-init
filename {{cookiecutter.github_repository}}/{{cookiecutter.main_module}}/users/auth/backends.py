@@ -40,8 +40,7 @@ class UserTokenAuthentication(BaseAuthentication):
         if "HTTP_AUTHORIZATION" not in request.META:
             return None
 
-        token_rx_match = self.auth_rx.search(
-            request.META["HTTP_AUTHORIZATION"])
+        token_rx_match = self.auth_rx.search(request.META["HTTP_AUTHORIZATION"])
         if not token_rx_match:
             return None
 

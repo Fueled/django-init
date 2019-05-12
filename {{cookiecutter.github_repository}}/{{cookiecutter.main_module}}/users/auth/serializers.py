@@ -34,7 +34,7 @@ class AuthUserSerializer(UserSerializer):
     auth_token = serializers.SerializerMethodField()
 
     class Meta(UserSerializer.Meta):
-        fields = UserSerializer.Meta.fields + ['auth_token']
+        fields = UserSerializer.Meta.fields + ["auth_token"]
 
     def get_auth_token(self, obj):
         return tokens.get_token_for_user(obj, "authentication")
@@ -44,13 +44,13 @@ class PasswordChangeSerializer(serializers.Serializer):
     current_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
 
-    default_error_messages = {
-        'invalid_password': 'Current password does not match'
-    }
+    default_error_messages = {"invalid_password": "Current password does not match"}
 
     def validate_current_password(self, value):
-        if not self.context['request'].user.check_password(value):
-            raise serializers.ValidationError(self.default_error_messages['invalid_password'])
+        if not self.context["request"].user.check_password(value):
+            raise serializers.ValidationError(
+                self.default_error_messages["invalid_password"]
+            )
         return value
 
     def validate_new_password(self, value):
