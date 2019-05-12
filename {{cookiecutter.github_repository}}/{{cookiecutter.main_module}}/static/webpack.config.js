@@ -9,7 +9,6 @@ const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   context: __dirname,
-
   mode: devMode? 'development': 'production',
 
   entry: path.join(__dirname, '/js/main'), // entry point of our app. assets/js/main.js should require other js modules and dependencies it needs
@@ -44,7 +43,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: "babel-loader",
+          options: {
+            presets: ['@babel/preset-env']
+          }
         }
       },
       {
