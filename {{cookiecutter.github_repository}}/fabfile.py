@@ -115,6 +115,7 @@ def createapp(appname):
     manage('startapp %s %s' % (appname, path))
 {%- if cookiecutter.webpack.lower() == 'y' %}
 
+
 def watch():
     local('node %s' % env.webpack_server_path)
 {%- endif %}
