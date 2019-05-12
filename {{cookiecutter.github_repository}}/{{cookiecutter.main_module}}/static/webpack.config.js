@@ -1,7 +1,9 @@
-var path = require("path")
-var webpack = require('webpack')
-const BundleTracker = require('webpack-bundle-tracker')
+var path = require("path");
+var webpack = require('webpack');
+const BundleTracker = require('webpack-bundle-tracker');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production'
 
@@ -14,11 +16,12 @@ module.exports = {
 
   output: {
     path: __dirname + '/dist',
-    filename: devMode ? '[name].js' : '[name]-[hash].js',
+    filename: devMode ? '[name].js' : '[name]-[contenthash].js',
   },
 
   // https://webpack.js.org/configuration/optimization/
   optimization: {
+    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
     minimize: !devMode,
     noEmitOnErrors: devMode
   },
@@ -28,7 +31,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: devMode ? '[name].css' : '[name]-[hash].css',
+      filename: devMode ? '[name].css' : '[name]-[contenthash].css',
       chunkFilename: "[id].css"
     }),
     // Creates manifest file to be used by Djnago Server
