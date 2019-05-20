@@ -22,6 +22,8 @@ env:
 
 install:
   - pip install -U pip cookiecutter fabric3 ansible==2.5.0
+  - nvm install v6.3.0
+  - npm install -g npm
 
 before_script:
 - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/10/main/postgresql.conf

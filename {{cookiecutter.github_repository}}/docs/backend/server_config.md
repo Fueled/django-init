@@ -45,7 +45,7 @@ heroku create --ssh-git <heroku-app-name>
 
 heroku buildpacks:set heroku/python --app=<heroku-app-name>
 
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+{%- if cookiecutter.webpack.lower() == 'y' %}
 heroku buildpacks:add --index 1 heroku/nodejs --app=<heroku-app-name>
 {%- endif %}
 

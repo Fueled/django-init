@@ -26,6 +26,11 @@ before_cache:
 
 install:
   - pip install -r requirements/development.txt
+  {%- if cookiecutter.webpack.lower() == 'y' %}
+  - nvm install v6.3.0
+  - npm install -g npm
+  - npm install
+  {%- endif %}
 
 before_script:
 - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/10/main/postgresql.conf
@@ -39,7 +44,8 @@ before_script:
 
 script:
 - flake8
-- pytest --cov -v --tb=native
+{% if cookiecutter.webpack.lower() == 'y' %}- npm run build{% endif %}
+- py.test --cov -v --tb=native
 {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
 notifications:

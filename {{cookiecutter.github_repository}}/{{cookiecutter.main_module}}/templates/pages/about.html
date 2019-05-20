@@ -1,9 +1,8 @@
 {% raw %}{% extends 'pages/base.html' %}
-{% load i18n %}
+{% load staticfiles i18n %}
 {% block title %}{% trans 'About' %} • {{ block.super }}{% endblock title %}
 {% block body_classes %}{{ block.super}} page-about {% endblock body_classes %}
+
 {% block content %}
-    <p>
-        {% trans 'About page coming soon!' %}
-    </p>
+    <p>{% trans 'About page coming soon!' %}</p>
 {% endblock content %}{% endraw %}
