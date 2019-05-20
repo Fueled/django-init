@@ -52,11 +52,6 @@
     ================================================== -->
     {# Placed at the end of the document so the pages load faster #}
     {% block js %}
-      <!-- Latest JQuery -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-      <!-- Your stuff: Third-party javascript libraries go here -->
-
       <!-- place project specific Javascript in this file -->{% endraw %}
       {%- if cookiecutter.webpack.lower() == 'y' %}
       {% raw %}{% render_bundle 'main' 'js' %}{% endraw %}
