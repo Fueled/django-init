@@ -1,3 +1,0 @@
----
-dependencies:
-  - { role: nodejs, when: sass_with_django_compressor }

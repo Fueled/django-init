@@ -1,12 +1,33 @@
 {
-  "name": "django-compressor-helpers",
+  "name": "django",
   "version": "0.1.0",
-  "description": "Installs commandline tools needed by django-compressor for post-processing of css/js.",
+  "description": "Installs commandline tools needed by django-webpack-loader.",
   "engines": {
-    "node": "6.4.0"
+    "node": "10.x.x"
   },
-  "dependencies": {
-    "autoprefixer": "^7.1.6",
-    "postcss-cli": "^4.1.1"
-  }
+  "scripts": {
+    "start": "node {{ cookiecutter.main_module }}/static/server.js",
+    "build": "NODE_ENV=production webpack --config {{ cookiecutter.main_module }}/static/webpack.config.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.4.4",
+    "autoprefixer": "^9.1.5",
+    "babel-loader": "^8.0.2",
+    "core-js": "^2.4.1",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "mini-css-extract-plugin": "^0.6.0",
+    "node-sass": "^4.12.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "terser-webpack-plugin": "^1.2.3",
+    "url-loader": "^1.1.1",
+    "webpack": "^4.31.0",
+    "webpack-bundle-tracker": "^0.4.2-beta",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1"
+  },
+  "dependencies": {}
 }

@@ -3,17 +3,17 @@ import django_sites as sites
 from django.conf import settings
 from django.urls import reverse as django_reverse
 
-URL_TEMPLATE = '{scheme}://{domain}/{path}'
+URL_TEMPLATE = "{scheme}://{domain}/{path}"
 
 
-def build_url(path, scheme='http', domain='localhost'):
-    return URL_TEMPLATE.format(scheme=scheme, domain=domain, path=path.lstrip('/'))
+def build_url(path, scheme="http", domain="localhost"):
+    return URL_TEMPLATE.format(scheme=scheme, domain=domain, path=path.lstrip("/"))
 
 
 def is_absolute_url(path):
     """Test wether or not `path` is absolute url.
     """
-    return path.startswith('http')
+    return path.startswith("http")
 
 
 def get_absolute_url(path, site_id=None):
@@ -28,9 +28,8 @@ def get_absolute_url(path, site_id=None):
     return build_url(path, scheme=site.scheme, domain=site.domain)
 
 
-def resolve_frontend_url(name, site_id='frontend', **kwargs):
-    """Returns the absolute url for the frontend site.
-    url
+def resolve_frontend_url(name, site_id="frontend", **kwargs):
+    """Returns the absolute url for the frontend site
     resolve_front_urls('password-confirm', token="xyz", uuid="abc")
     """
     urls = settings.FRONTEND_URLS

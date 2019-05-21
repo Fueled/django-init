@@ -1,0 +1,47 @@
+{% raw %}---
+- name: Download NodeSource Setup script
+  get_url:
+    url: "https://deb.nodesource.com/setup_{{ webpack_node_version }}.x"
+    dest: "/tmp/node_setup_{{ webpack_node_version }}.x"
+  become: false
+
+- name: Run NodeSource setup script
+  command: "bash /tmp/node_setup_{{ webpack_node_version }}.x"
+  become: true
+
+- name: Update apt-cache separately
+  shell: apt update
+  become: yes
+
+- name: Install Node.js
+  apt:
+    pkg: nodejs
+    state: present
+
+- name: Make sure webpack stats file exists
+  file:
+    path: "{{ project_path }}/webpack-stats.json"
+    state: touch
+    owner: "{{user}}"
+    group: "{{uwsgi_group}}"
+
+- name: Install packages based on package.json.
+  npm:
+    path: "{{ project_path }}"
+  tags: ['deploy']
+
+- name: Run build webpack
+  command: "npm run build"
+  become: false
+  tags: ['deploy']
+  args:
+   chdir: "{{ project_path }}"
+
+- name: collect static
+  django_manage:
+    command: "collectstatic --no-input -i js -i css -i server.js -i webpack.config.js"
+    app_path: "{{ project_path }}"
+    virtualenv: "{{ venv_path }}"
+  become: false
+  tags: ['deploy']
+{% endraw %}

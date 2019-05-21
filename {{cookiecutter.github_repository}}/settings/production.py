@@ -126,14 +126,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 {%- endif %}
 
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
-
-# Compress static files offline
-# http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
-COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
-COMPRESS_OFFLINE = True
-{%- endif %}
-
 # EMAIL
 # ------------------------------------------------------------------------------
 # DEFAULT_FROM_EMAIL in settings/common.py
