@@ -1,6 +1,6 @@
 # Core Stuff
 # -------------------------------------
-Django==2.1.5
+Django==2.1.7
 
 # Configuration
 # -------------------------------------
@@ -34,15 +34,7 @@ django-versatileimagefield==1.10
 # REST APIs
 # -------------------------------------
 djangorestframework==3.9.0
-django-rest-swagger==2.1.2
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
-
-# Static files
-# -------------------------------------
-django-compressor==2.2
-django-libsass==0.7
-django-compressor-autoprefixer==0.1.0
-{%- endif %}
+django-rest-swagger==2.2.0
 
 # LOGGING
 # -------------------------------------
@@ -57,6 +49,7 @@ mkdocs==1.0.4
 # --------------------------
 raven==6.9.0
 {%- endif %}
+
 {%- if cookiecutter.add_celery.lower() == "y" %}
 
 # Async Tasks
@@ -68,3 +61,9 @@ celery[redis]==4.2.1
 # -------------------------------------
 PyJWT==1.7.1
 django-mail-templated==2.6.5
+{%- if cookiecutter.webpack.lower() == 'y' %}
+
+# WEBPACK
+# -------------------------------------
+django-webpack-loader==0.6.0
+{%- endif %}

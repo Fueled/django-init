@@ -1,5 +1,7 @@
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
-{%- raw %}{% load compress %}{% endraw %}
+{% raw %}{% load staticfiles i18n %}{% endraw %}
+{%- if cookiecutter.webpack.lower() == 'y' %}
+{%- raw %}{% load webpack_static from webpack_loader %}
+{% load render_bundle from webpack_loader %}{%- endraw %}
 {%- endif %}
 {%- if cookiecutter.use_sentry_for_error_reporting.lower() == 'y' %}
 {%- raw %}{% load raven %}{% endraw %}
@@ -20,15 +22,13 @@
     {% endif %}{% endraw %}
     {%- endif %}{% raw %}
 
-    {% block css %}
-    <link href="{% static 'css/normalize.css' %}" rel="stylesheet">{% endraw %}
-    {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
-    {% raw %}{% compress css %}
-    <link href="{% static 'css/main.scss' %}"  type="text/x-scss" rel="stylesheet">
-    {% endcompress %}{% endraw %}
-    {%- else %}
-    {% raw %}<link href="{% static 'css/main.css' %}" rel="stylesheet">{% endraw %}
-    {%- endif %}{% raw %}
+    {% block css %}{% endraw %}
+      {%- if cookiecutter.webpack.lower() != 'y' %}
+      {% raw %}<link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+      <link href="{% static 'css/main.css' %}" rel="stylesheet">{% endraw %}
+      {% else %}
+      {% raw %}{% render_bundle 'main' 'css' %}{% endraw %}
+      {%- endif %}{% raw %}
     {% endblock css %}
     {% block head_extras %}{% endblock %}
   </head>
@@ -52,24 +52,12 @@
     ================================================== -->
     {# Placed at the end of the document so the pages load faster #}
     {% block js %}
-      <!-- Latest JQuery -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-      <!-- Your stuff: Third-party javascript libraries go here -->
-
       <!-- place project specific Javascript in this file -->{% endraw %}
-      {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
-      {% raw %}{% compress js %}{% endraw %}
+      {%- if cookiecutter.webpack.lower() == 'y' %}
+      {% raw %}{% render_bundle 'main' 'js' %}{% endraw %}
+      {%- else %}
+      {% raw %}<script src="{% static 'js/main.js' %}"></script>{% endraw %}
       {%- endif %}{% raw %}
-      <script src="{% static 'js/main.js' %}"></script>{% endraw %}
-      {%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
-      {% raw %}{% endcompress %}{% endraw %}
-      {%- endif %}{% raw %}
-
-      {% if debug %}
-        <!--Livereloading support -->
-        <script>{% include "devrecargar/devrecargar.js" %}</script>
-      {% endif %}
     {% endblock js %}
   </body>
 </html>{% endraw %}

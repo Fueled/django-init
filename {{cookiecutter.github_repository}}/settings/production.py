@@ -17,8 +17,14 @@ from django.utils import six
 
 
 from .common import *  # noqa F405
-from .common import (DATABASES, INSTALLED_APPS, {% if cookiecutter.add_django_auth_wall.lower() == 'y' %}MIDDLEWARE,{%- endif %}
-                     REST_FRAMEWORK, TEMPLATES, env)
+from .common import (
+    DATABASES,
+    INSTALLED_APPS,
+    {% if cookiecutter.add_django_auth_wall.lower() == 'y' %}MIDDLEWARE,{%- endif %}
+    REST_FRAMEWORK,
+    TEMPLATES,
+    env
+)
 
 # SITE CONFIGURATION
 # Ensure these are set in the `.env` file manually.
@@ -118,14 +124,6 @@ if ENABLE_MEDIA_UPLOAD_TO_S3:
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 {%- else %}
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-{%- endif %}
-
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
-
-# Compress static files offline
-# http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
-COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
-COMPRESS_OFFLINE = True
 {%- endif %}
 
 # EMAIL

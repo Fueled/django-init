@@ -65,10 +65,3 @@ if settings.DEBUG:
         urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls)), ]
     except ImportError:
         pass
-
-    # Livereloading
-    try:
-        from devrecargar.urls import urlpatterns as devrecargar_urls
-        urlpatterns += [url(r'^devrecargar/', include((devrecargar_urls, 'devrecargar', ), namespace='devrecargar'))]
-    except ImportError:
-        pass

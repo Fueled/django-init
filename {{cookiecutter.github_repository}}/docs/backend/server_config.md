@@ -45,7 +45,7 @@ heroku create --ssh-git <heroku-app-name>
 
 heroku buildpacks:set heroku/python --app=<heroku-app-name>
 
-{%- if cookiecutter.add_sass_with_django_compressor.lower() == 'y' %}
+{%- if cookiecutter.webpack.lower() == 'y' %}
 heroku buildpacks:add --index 1 heroku/nodejs --app=<heroku-app-name>
 {%- endif %}
 
@@ -94,7 +94,7 @@ DJANGO_AWS_STORAGE_BUCKET_NAME=<YOUR_BUCKET_NAME_HERE>
 ```
 
 
-**Note:**
+__Note:__
 - Use `--app=<heroku-app-name>` if you have more than one Heroku app configured in current project.
 - Update `travis.yml`, and add the `<heroku-app-name>` to automatically deploy to this configured Heroku app.
 {% endif %}

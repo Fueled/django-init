@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 """Fabric file for managing this project.
 
 See: http://www.fabfile.org/
 """
-from __future__ import absolute_import, unicode_literals, with_statement
 
 # Standard Library
 from contextlib import contextmanager as _contextmanager
@@ -11,7 +9,8 @@ from functools import partial
 from os.path import dirname, isdir, join
 
 # Third Party Stuff
-from fabric.api import local as fabric_local, env
+from fabric.api import env
+from fabric.api import local as fabric_local
 from fabric import api as fab
 
 local = partial(fabric_local, shell='/bin/bash')
@@ -25,9 +24,14 @@ HERE = dirname(__file__)
 env.project_name = '{{ cookiecutter.main_module }}'
 env.apps_dir = join(HERE, env.project_name)
 env.docs_dir = join(HERE, 'docs')
+env.static_dir = join(env.apps_dir, 'static')
 env.virtualenv_dir = join(HERE, 'venv')
 env.requirements_file = join(HERE, 'requirements/development.txt')
-env.shell = '/bin/bash -l -i -c'
+env.shell = "/bin/bash -l -i -c"
+{%- if cookiecutter.webpack.lower() == 'y' %}
+env.webpack_config_path = join(env.static_dir, 'webpack.config.js')
+env.webpack_server_path = join(env.static_dir, 'server.js')
+{%- endif %}
 
 {% if cookiecutter.add_ansible.lower() == 'y' -%}env.use_ssh_config = True
 env.dotenv_path = join(HERE, '.env')
@@ -38,6 +42,10 @@ def init(vagrant=False):
     """Prepare a local machine for development."""
 
     install_requirements()
+    {%- if cookiecutter.webpack.lower() == 'y' %}
+    local('npm install')
+    local('npm run build')
+    {%- endif %}
     local('createdb %(project_name)s' % env)  # create postgres database
     {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
     add_pre_commit()
@@ -117,9 +125,15 @@ def createapp(appname):
     path = join(env.apps_dir, appname)
     local('mkdir %s' % path)
     manage('startapp %s %s' % (appname, path))
-{%- if cookiecutter.add_ansible.lower() == 'y' %}
+{%- if cookiecutter.webpack.lower() == 'y' %}
 
 
+def watch():
+    local('node %s' % env.webpack_server_path)
+{%- endif %}
+
+
+{% if cookiecutter.add_ansible.lower() == 'y' -%}
 #  Enviroments & Deployments
 # ---------------------------------------------------------
 def dev():

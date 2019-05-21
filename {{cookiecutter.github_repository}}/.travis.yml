@@ -7,10 +7,15 @@ python:
 - '3.6.4'
 
 addons:
-  postgresql: "9.5"
+  postgresql: "10.6"
   apt:
     packages:
-      - postgresql-9.5-postgis-2.3
+      - postgresql-10-postgis-2.4
+      - postgresql-client-10
+
+env:
+  global:
+  - PGPORT=5432
 
 cache:
   directories:
@@ -21,8 +26,16 @@ before_cache:
 
 install:
   - pip install -r requirements/development.txt
+  {%- if cookiecutter.webpack.lower() == 'y' %}
+  - nvm install v6.3.0
+  - npm install -g npm
+  - npm install
+  {%- endif %}
 
 before_script:
+- sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/10/main/postgresql.conf
+- sudo cp /etc/postgresql/{9.4,10}/main/pg_hba.conf
+- sudo service postgresql restart
 - export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
 - psql -c "CREATE DATABASE {{ cookiecutter.main_module }};" -U postgres
 {%- if cookiecutter.postgis.lower() == 'y' %}
@@ -31,7 +44,8 @@ before_script:
 
 script:
 - flake8
-- pytest --cov -v --tb=native
+{% if cookiecutter.webpack.lower() == 'y' %}- npm run build{% endif %}
+- py.test --cov -v --tb=native
 {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
 notifications:

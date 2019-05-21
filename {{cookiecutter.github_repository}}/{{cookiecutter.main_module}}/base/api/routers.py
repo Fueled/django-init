@@ -11,28 +11,29 @@ class SingletonRouter(routers.SimpleRouter):
     you are able to `GET /me`, `PUT /me`, `DELETE /me` and can also add any list_routes like
     `POST /me/change-avatar`.
     """
+
     routes = [
         # Mapping for list, create, update, partial_update and delete function to http verb.
         routers.Route(
-            url=r'^{prefix}{trailing_slash}$',
+            url=r"^{prefix}{trailing_slash}$",
             mapping={
-                'get': 'list',
-                'post': 'create',
-                'patch': 'partial_update',
-                'put': 'update',
-                'delete': 'destroy',
+                "get": "list",
+                "post": "create",
+                "patch": "partial_update",
+                "put": "update",
+                "delete": "destroy",
             },
-            name='{basename}',
+            name="{basename}",
             detail=False,
-            initkwargs={'suffix': ''}
+            initkwargs={"suffix": ""},
         ),
         # Dynamically generated list routes.
         # Generated using @action decorator
         # on methods of the viewset.
         routers.DynamicRoute(
-            url=r'^{prefix}/{url_path}$',
-            name='{basename}-{url_name}',
+            url=r"^{prefix}/{url_path}$",
+            name="{basename}-{url_name}",
             detail=False,
-            initkwargs={}
+            initkwargs={},
         ),
     ]
