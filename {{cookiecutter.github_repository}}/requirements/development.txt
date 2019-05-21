@@ -30,5 +30,5 @@ fabric3==1.14.post1
 {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
 # Code quality
 #--------------------------------------
-pre-commit==0.8.2
+pre-commit==1.16.1
 {%- endif %}
