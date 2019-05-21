@@ -47,6 +47,9 @@ def init(vagrant=False):
     local('npm run build')
     {%- endif %}
     local('createdb %(project_name)s' % env)  # create postgres database
+    {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
+    add_pre_commit()
+    {%- endif %}
     manage('migrate')
 
 
@@ -56,6 +59,15 @@ def install_requirements(file=env.requirements_file):
     # activate virtualenv and install
     with virtualenv():
         local('pip install -r %s' % file)
+{%- if cookiecutter.add_pre_commit.lower() == 'y' %}
+
+
+def add_pre_commit():
+    verify_virtualenv()
+    # activate virtualenv and install pre-commit hooks
+    with virtualenv():
+        local('pre-commit install')
+{%- endif %}
 
 
 def serve_docs(options=''):
