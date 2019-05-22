@@ -29,7 +29,7 @@
     state: present
 
 - name: Install webpack
-  shell: npm i webpack
+  shell: npm i webpack@4.31.0
 
 - name: Make sure webpack stats file exists
   file:
