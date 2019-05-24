@@ -12,6 +12,9 @@ services:
 addons:
   postgresql: "11"
   apt:
+    sources:
+      - sourceline: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg 11'
+        key_url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc'
     packages:
       - postgresql-11
       - postgresql-client-11
