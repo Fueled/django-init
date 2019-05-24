@@ -28,10 +28,17 @@ install:
   - nvm install v6.3.0
   - npm install -g npm
 
-before_script:
-- sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/11/main/postgresql.conf
-- sudo cp /etc/postgresql/{9.4,11}/main/pg_hba.conf
-- sudo service postgresql restart
+before_install:
+  - sudo apt-get update
+  - sudo apt-get --yes remove postgresql\*
+  - sudo apt-get install -y postgresql-11 postgresql-client-11
+  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
+  - sudo service postgresql restart 11
+
+# before_script:
+# - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/11/main/postgresql.conf
+# - sudo cp /etc/postgresql/{9.4,11}/main/pg_hba.conf
+# - sudo service postgresql restart
 
 script:
   - ./run_test.sh
