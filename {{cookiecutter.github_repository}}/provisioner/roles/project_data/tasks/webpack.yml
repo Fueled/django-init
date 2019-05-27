@@ -13,23 +13,18 @@
   shell: apt update
   become: yes
 
-- name: Install Node dependencies for Ubuntu
-  become: yes
-  apt:
-    pkg: "{{ item }}"
-    state: present
-  with_items:
-    - libssl1.0-dev
-    - node-gyp
-    - npm
+- name: Add PPA for node 10
+  command: "curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh"
+  become: true
+
+- name: Update cache for installing Node
+  command: "sudo bash nodesource_setup.sh"
+  become: true
 
 - name: Install Node.js
   apt:
     pkg: nodejs
     state: present
-
-- name: Install webpack
-  shell: npm i webpack@4.31.0
 
 - name: Make sure webpack stats file exists
   file:
