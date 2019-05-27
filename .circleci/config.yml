@@ -32,9 +32,10 @@ jobs:
             npm install -g npx webpack webpack-cli jest
             node --version
             npm --version
+      - run: sudo apt install -y postgresql-client || true
       - run:
           command: |  # use pipenv to install dependencies
-            pip install --user -U pip cookiecutter fabric3 ansible==2.5.0
+            pip install --user -U pip cookiecutter fabric3 ansible==2.5.0 cookiecutter
             nvm install v6.3.0
             npm install -g npm
             ./run_test.sh
