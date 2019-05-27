@@ -14,6 +14,25 @@ jobs:
       - checkout  # checkout source code to working directory
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run:
+          name: Setup nvm and npm
+          command: |
+            wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+            # Activate nvm
+            export NVM_DIR=$HOME/.nvm
+            touch $HOME/.nvmrc
+            source $NVM_DIR/nvm.sh
+            # Use node 8.9
+            nvm install 8.9 && nvm alias default 8.9
+            echo 8.9 > $HOME/.nvmrc
+            echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV
+            echo 'source $NVM_DIR/nvm.sh' >> $BASH_ENV
+            # To fix npm install : "node-pre-gyp: Permission denied"
+            npm config set user 0
+            npm config set unsafe-perm true
+            npm install -g npx webpack webpack-cli jest
+            node --version
+            npm --version
+      - run:
           command: |  # use pipenv to install dependencies
             pip install --user -U pip cookiecutter fabric3 ansible==2.5.0
             nvm install v6.3.0
