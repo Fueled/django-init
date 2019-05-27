@@ -36,6 +36,8 @@
 - name: Install packages based on package.json.
   npm:
     path: "{{ project_path }}"
+    global: no
+  become: false
   tags: ['deploy']
 
 - name: Run build webpack
