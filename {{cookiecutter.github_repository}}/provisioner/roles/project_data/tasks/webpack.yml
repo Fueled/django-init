@@ -34,6 +34,8 @@
   command: "npm run build"
   become: false
   tags: ['deploy']
+  environment:
+    NODE_ENV: production
   args:
    chdir: "{{ project_path }}"
 
