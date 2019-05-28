@@ -2,6 +2,8 @@ version: 2
 jobs:
   build:
     working_directory: ~/django-init
+    environment:
+      TEST_RESULTS: /tmp/test-results
     docker:
       - image: circleci/python:3.7.2
         environment:
@@ -12,6 +14,7 @@ jobs:
           POSTGRES_DB: circle_test
     steps:
       - checkout  # checkout source code to working directory
+      - run: mkdir -p $TEST_RESULTS
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run:
           name: Setup nvm and npm
@@ -37,16 +40,24 @@ jobs:
             wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
             sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/PostgreSQL.list'
             sudo apt update
-      - run: sudo apt-get update && sudo apt-get install -y postgresql-client-11
-      - run:
-        command: |
-          sudo systemctl stop postgresql.service
-          sudo systemctl start postgresql.service
+            sudo apt-get update && sudo apt-get install -y postgresql-client-11
       - run:
           command: |  # use pipenv to install dependencies
             pip install --user -U pip cookiecutter fabric3 ansible==2.5.0
             nvm install v6.3.0
             npm install -g npm
+      - run:
+          name: Waiting for Postgres to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 5432 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for Postgres && exit 1
+      -run:
+          command: |
             ./run_test.sh
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results
