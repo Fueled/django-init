@@ -45,7 +45,7 @@ jobs:
             sudo apt-get update && sudo apt-get install -y postgresql-client-11
       - run:
           command: |  # use pipenv to install dependencies
-            pip install --user -U pip cookiecutter fabric3 ansible==2.5.0
+            pip install --user -U pip cookiecutter fabric3 ansible==2.5.0 fabric3==1.14.post1
             nvm install v6.3.0
             npm install -g npm
       - run:
@@ -60,7 +60,6 @@ jobs:
             echo Failed waiting for Postgres && exit 1
       - run:
           command: |
-            pip install ansible==2.5.0 fabric3==1.14.post1
             ./run_test.sh
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results
