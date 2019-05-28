@@ -14,8 +14,10 @@ jobs:
           POSTGRES_DB: circle_test
     steps:
       - checkout  # checkout source code to working directory
-      - run: mkdir -p $TEST_RESULTS
-      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run:
+          command: |
+            mkdir -p $TEST_RESULTS
+            sudo chown -R circleci:circleci /usr/local/bin
       - run:
           name: Setup nvm and npm
           command: |
