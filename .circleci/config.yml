@@ -15,6 +15,7 @@ jobs:
     steps:
       - run:
           command: |
+            checkout
             mkdir -p $TEST_RESULTS
             sudo chown -R circleci:circleci /usr/local/bin
       - run:
