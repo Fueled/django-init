@@ -62,7 +62,7 @@ jobs:
           command: |
             virtualenv venv
             source venv/bin/activate
-            pip install -r requirements/development.txt
+            pip install -r "{{cookiecutter.github_repository}}/requirements/development.txt"
             ./run_test.sh
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results
