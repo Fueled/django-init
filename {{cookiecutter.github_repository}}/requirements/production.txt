@@ -5,7 +5,7 @@
 # Static Files and Media Storage
 # -------------------------------------
 django-storages==1.7.1
-boto3==1.9.62
+boto3==1.9.156
 
 # Caching
 # -------------------------------------
