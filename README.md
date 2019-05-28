@@ -1,4 +1,4 @@
-django-init | [![Build Status](https://travis-ci.org/Fueled/django-init.svg?branch=master)](https://travis-ci.org/Fueled/django-init)
+django-init | [![Build Status](https://travis-ci.com/Fueled/django-init.svg?branch=master)](https://travis-ci.com/Fueled/django-init)
 ============
 
 Project template for django based projects, optimized for making REST API with deployment on Heroku and EC2 instances via Ansible.
