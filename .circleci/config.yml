@@ -32,6 +32,11 @@ jobs:
             npm install -g npx webpack webpack-cli jest
             node --version
             npm --version
+      - run:
+          command: |
+            wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+            sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main" > /etc/apt/sources.list.d/PostgreSQL.list'
+            sudo apt update
       - run: sudo apt-get update && sudo apt-get install -y postgresql-client-11
       - run:
           command: |  # use pipenv to install dependencies
