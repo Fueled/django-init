@@ -39,8 +39,12 @@ jobs:
             sudo apt update
       - run: sudo apt-get update && sudo apt-get install -y postgresql-client-11
       - run:
+        command: |
+          sudo systemctl stop postgresql.service
+          sudo systemctl start postgresql.service
+      - run:
           command: |  # use pipenv to install dependencies
-            pip install --user -U pip cookiecutter fabric3 ansible==2.5.0 cookiecutter
+            pip install --user -U pip cookiecutter fabric3 ansible==2.5.0
             nvm install v6.3.0
             npm install -g npm
             ./run_test.sh
