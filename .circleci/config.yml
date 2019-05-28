@@ -13,9 +13,9 @@ jobs:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
     steps:
+      - checkout
       - run:
           command: |
-            checkout
             mkdir -p $TEST_RESULTS
             sudo chown -R circleci:circleci /usr/local/bin
       - run:
