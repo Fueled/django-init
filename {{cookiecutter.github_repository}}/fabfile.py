@@ -47,7 +47,7 @@ def init(vagrant=False):
     local('npm install')
     local('npm run build')
     {%- endif %}
-    if not env.CI:
+    if not env.ci:
         local('createdb %(project_name)s' % env)  # create postgres database
     manage('migrate')
 
