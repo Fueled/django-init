@@ -7,11 +7,11 @@ jobs:
     docker:
       - image: circleci/python:3.7.2
         environment:
-          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
+          DATABASE_URL: postgresql://root@localhost/hello_world?sslmode=disable
       - image: circleci/postgres:11.0
         environment:
           POSTGRES_USER: root
-          POSTGRES_DB: circle_test
+          POSTGRES_DB: hello_world
     steps:
       - checkout
       - run:
