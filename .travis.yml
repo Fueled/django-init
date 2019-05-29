@@ -17,22 +17,19 @@ cache:
 services:
   - docker
 
+env:
+  - DATABASE_URL=postgres://postgres@localhost/postgres
+
 before_install:
   # Let's stop postgresql
   - sudo service postgresql stop
-  # wait for postgresql to shutdown
-  - while sudo lsof -Pi :5432 -sTCP:LISTEN -t; do sleep 1; done
-  # Pull and run postgres
   - docker pull postgres:11
   - mkdir -p $HOME/docker/volumes/postgres
   - docker run --rm --name pg-docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data  postgres:11
   - docker ps
-  - export DATABASE_URL=postgres://postgres@localhost/postgres
 
 install:
-  - pip install -U pip cookiecutter fabric3==1.14.post1 ansible==2.5.0
-  # - nvm install v6.3.0
-  # - npm install -g npm
+  - pip install -U cookiecutter fabric3==1.14.post1 ansible==2.5.0
 
 script:
   - ./run_test.sh
