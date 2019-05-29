@@ -15,6 +15,7 @@ jobs:
     steps:
       - checkout  # Get the latest clone of the repo in CI.
       - run:
+          name: Set-up test_results directory and set-up permissions
           command: |
             mkdir -p $TEST_RESULTS
             sudo chown -R circleci:circleci /usr/local/bin
