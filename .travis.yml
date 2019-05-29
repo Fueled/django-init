@@ -5,7 +5,14 @@ language: python
 dist: xenial
 
 python:
-- '3.6'
+  - '3.6'
+
+node_js:
+  - "10"
+
+cache:
+  - pip
+  - npm
 
 services:
   - docker
@@ -23,10 +30,11 @@ before_install:
 
 install:
   - pip install -U pip cookiecutter fabric3==1.14.post1 ansible==2.5.0
-  - nvm install v6.3.0
-  - npm install -g npm
+  # - nvm install v6.3.0
+  # - npm install -g npm
 
 script:
+  - sleep 3
   - ./run_test.sh
 
 notifications:
