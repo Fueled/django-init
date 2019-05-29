@@ -11,14 +11,20 @@ node_js:
   - "10"
 
 cache:
-  - pip
-  - npm
+  pip: true
+  directories:
+  - node_modules # NPM packages
 
 services:
   - docker
 
 env:
-  - DATABASE_URL=postgres://postgres@localhost/postgres
+  global:
+  # - DATABASE_URL=postgres://postgres@localhost/postgres
+  - PGDATABASE=postgres
+  - PGHOST=localhost
+  - PGUSER=postgres
+  - PGPORT=5432
 
 before_install:
   # Let's stop postgresql
