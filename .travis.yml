@@ -28,7 +28,7 @@ before_install:
   - docker ps
 
 install:
-  - pip install -U cookiecutter==1.6.0
+  - pip install cookiecutter==1.6.0
 
 script:
   - ./run_test.sh
