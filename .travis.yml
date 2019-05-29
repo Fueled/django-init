@@ -20,18 +20,14 @@ services:
 
 env:
   global:
-  # - DATABASE_URL=postgres://postgres@localhost/postgres
-  - PGDATABASE=postgres
   - PGHOST=localhost
   - PGUSER=postgres
   - PGPORT=5432
 
 before_install:
-  # Let's stop postgresql
-  - sudo service postgresql stop
+  - service postgresql stop
   - docker pull postgres:11
-  - mkdir -p $HOME/docker/volumes/postgres
-  - docker run --rm --name pg-docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data  postgres:11
+  - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw postgres:11
   - docker ps
 
 install:
