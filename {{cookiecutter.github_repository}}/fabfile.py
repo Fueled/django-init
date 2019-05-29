@@ -26,6 +26,7 @@ env.apps_dir = join(HERE, env.project_name)
 env.docs_dir = join(HERE, 'docs')
 env.static_dir = join(env.apps_dir, 'static')
 env.virtualenv_dir = join(HERE, 'venv')
+env.ci = join(HERE, "CI")
 env.requirements_file = join(HERE, 'requirements/development.txt')
 env.shell = "/bin/bash -l -i -c"
 {%- if cookiecutter.webpack.lower() == 'y' %}
@@ -46,7 +47,8 @@ def init(vagrant=False):
     local('npm install')
     local('npm run build')
     {%- endif %}
-    local('createdb %(project_name)s' % env)  # create postgres database
+    if not env.CI:
+        local('createdb %(project_name)s' % env)  # create postgres database
     manage('migrate')
 
 
