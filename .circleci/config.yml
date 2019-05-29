@@ -64,6 +64,7 @@ jobs:
       - run:
           name: Run tests
           command: |
+            source venv/bin/activate
             ./run_test.sh
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results
