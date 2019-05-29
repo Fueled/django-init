@@ -27,6 +27,7 @@ before_install:
   - mkdir -p $HOME/docker/volumes/postgres
   - docker run --rm --name pg-docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data  postgres:11
   - docker ps
+  - export DATABASE_URL=postgres://postgres@localhost/postgres
 
 install:
   - pip install -U pip cookiecutter fabric3==1.14.post1 ansible==2.5.0
@@ -34,7 +35,6 @@ install:
   # - npm install -g npm
 
 script:
-  - sleep 3
   - ./run_test.sh
 
 notifications:
