@@ -1,16 +1,16 @@
-django-init | [![Build Status](https://travis-ci.org/Fueled/django-init.svg?branch=master)](https://travis-ci.org/Fueled/django-init)
+django-init | [![Build Status](https://travis-ci.com/Fueled/django-init.svg?branch=master)](https://travis-ci.com/Fueled/django-init)
 ============
 
 Project template for django based projects, optimized for making REST API with deployment on Heroku and EC2 instances via Ansible.
 
 ## Features
 
-- Django 2.0.x
+- Django 2.1.x
 - Python 3.6.x
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - Supports PostreSQL 10.0 (support of postgis-2.4 is available).
 - Ready to deploy on Heroku (optional) and Ubuntu 16 LTS via [Ansible](Optional)
-- [Django Rest Framework][drf] 3.8.x. ready.
+- [Django Rest Framework][drf] 3.9.x. ready.
 - Uses `django_sites` instead of `django.contrib.sites`
 - Uses [mkdocs] for project documentation. Optionally, password protect the docs when deployed.
 - Uses [pytest] as test runner.
@@ -19,8 +19,7 @@ Project template for django based projects, optimized for making REST API with d
 - Custom `Auth` app with JWT based Token Backend system with `login`, `logout` and `current_user_profile` modification views for easier extensibility.
 - Media storage using Amazon S3 (optional)
 - [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org)
-- SASS with autoprefixing support using django-compressor (optional)
-- Livereloading of browser in development via [devrecargar]
+- Static assets handling via webpack (optional)
 - robots.txt and humans.txt configured
 
 ## Getting Started
@@ -59,7 +58,7 @@ Refer to [CHANGELOG.md](CHANGELOG.md).
 
 ## Code of Conduct
 
-Everyone interacting in the django-init project's codebases, issue trackers, chat rooms, and mailing lists is expected to follow the [PyPA Code of Conduct](https://www.pypa.io/en/latest/code-of-conduct/).
+Everyone interacting in the django-init project's codebase, issue trackers, chat rooms, and mailing lists is expected to follow the [PyPA Code of Conduct](https://www.pypa.io/en/latest/code-of-conduct/).
 
 ## Related Projects
 

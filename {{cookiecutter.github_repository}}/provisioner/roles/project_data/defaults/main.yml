@@ -21,7 +21,7 @@ uwsgi_pid_file: /tmp/django-{{ domain_name }}-wsgi.pid
 project_log_dir: /var/log/django/{{ deploy_environment }}/{{ project_name}}
 
 # webpack related valriables
-webpack_node_version: 6
+webpack_node_version: 10
 webpack_config: '{{ project_path }}/{{ project_name }}/static/webpack.prod.config.js'
 webpack_path: '{{ project_path }}/node_modules/.bin/webpack'
 {% endraw %}
