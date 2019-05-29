@@ -62,7 +62,7 @@ jobs:
             virtualenv venv
             source venv/bin/activate
             pip install cookiecutter
-            pip install --user -U pip cookiecutter ansible==2.5.0 fabric3==1.14.post1
+            pip install -U pip cookiecutter ansible==2.5.0 fabric3==1.14.post1
             ./run_test.sh
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results
