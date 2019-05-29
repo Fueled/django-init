@@ -13,7 +13,7 @@ jobs:
           POSTGRES_USER: root
           POSTGRES_DB: hello_world
     steps:
-      - checkout
+      - checkout  # Get the latest clone of the repo in CI.
       - run:
           command: |
             mkdir -p $TEST_RESULTS
@@ -34,19 +34,16 @@ jobs:
             # To fix npm install : "node-pre-gyp: Permission denied"
             npm config set user 0
             npm config set unsafe-perm true
-            npm install -g npx webpack webpack-cli jest
+            npm install -g npx webpack webpack-cli jest npm
             node --version
             npm --version
       - run:
+          name: Update apt source list for Postgres
           command: |
             wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
             sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/PostgreSQL.list'
             sudo apt update
             sudo apt-get update && sudo apt-get install -y postgresql-client-11
-      - run:
-          command: |
-            nvm install v6.3.0
-            npm install -g npm
       - run:
           name: Waiting for Postgres to be ready
           command: |
@@ -58,11 +55,15 @@ jobs:
             done
             echo Failed waiting for Postgres && exit 1
       - run:
+          name: Install requirements
           command: |
             virtualenv venv
             source venv/bin/activate
             pip install cookiecutter
             pip install -U pip cookiecutter ansible==2.5.0 fabric3==1.14.post1
+      - run:
+          name: Run tests
+          command: |
             ./run_test.sh
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results

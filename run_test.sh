@@ -16,7 +16,7 @@ if [ ! $CI ]; then
     fi
 fi
 
-# rm -rf hello-world-web/;
+rm -rf hello-world-web/;
 
 # Generate new code, (it also creates db, migrate and install dependencies)
 yes 'y' | cookiecutter . --no-input
