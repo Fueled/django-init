@@ -47,12 +47,12 @@ def init(vagrant=False):
     local('npm install')
     local('npm run build')
     {%- endif %}
-    if not env.ci:
-        local('createdb %(project_name)s' % env)  # create postgres database
     {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
     add_pre_commit()
     {%- endif %}
-    manage('migrate')
+    if not env.ci:
+        local('createdb %(project_name)s' % env)  # create postgres database
+        manage('migrate')
 
 
 def install_requirements(file=env.requirements_file):
