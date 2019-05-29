@@ -26,6 +26,6 @@ ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 fab test:"--cov"
 
 # Cleanup
-dropdb hello_world
+# dropdb hello_world
 
 test $err = 0 # Return non-zero if any command failed
