@@ -2,19 +2,26 @@
 # see the Travis CI documentation: https://docs.travis-ci.com
 
 language: python
-sudo: false
-python:
-- '3.6.4'
+dist: xenial
 
-addons:
-  postgresql: "11"
-  apt:
-    packages:
-      - postgresql-11
-      - postgresql-client-11
+python:
+  - '3.6.4'
+
+node_js:
+  - "10"
+
+cache:
+  pip: true
+  directories:
+  - node_modules # NPM packages
+
+services:
+  - docker
 
 env:
   global:
+  - PGHOST=localhost
+  - PGUSER=postgres
   - PGPORT=5432
 
 cache:
@@ -41,11 +48,10 @@ before_script:
 - cp config/database.yml.travis config/database.yml
 
 before_install:
-  - sudo apt-get update
-  - sudo apt-get --yes remove postgresql\*
-  - sudo apt-get install -y postgresql-11 postgresql-client-11
-  - sudo cp /etc/postgresql/{9.4,11}/main/pg_hba.conf
-  - sudo service postgresql restart 11
+  - sudo service postgresql stop
+  - docker pull postgres:11
+  - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw postgres:11
+  - docker ps
 
 script:
 - flake8
