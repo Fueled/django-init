@@ -2,43 +2,34 @@
 # see the Travis CI documentation: https://docs.travis-ci.com
 
 language: python
-sudo: false
+dist: xenial
+
 python:
-- '3.6'
+  - '3.6'
+
+node_js:
+  - "10"
+
+cache:
+  - pip
+  - npm
 
 services:
-  - postgresql
-
-addons:
-  postgresql: "11"
-  apt:
-    sources:
-      - sourceline: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg 11'
-        key_url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc'
-    packages:
-      - postgresql-11
-      - postgresql-client-11
+  - docker
 
 env:
-  global:
-  - PGPORT=5432
-
-install:
-  - pip install -U pip cookiecutter fabric3 ansible==2.5.0
-  - nvm install v6.3.0
-  - npm install -g npm
+  - DATABASE_URL=postgres://postgres@localhost/postgres
 
 before_install:
-  - sudo apt-get update
-  - sudo apt-get --yes remove postgresql\*
-  - sudo apt-get install -y postgresql-11 postgresql-client-11
-  - sudo cp /etc/postgresql/{9.2,11}/main/pg_hba.conf
-  - sudo service postgresql restart 11
+  # Let's stop postgresql
+  - sudo service postgresql stop
+  - docker pull postgres:11
+  - mkdir -p $HOME/docker/volumes/postgres
+  - docker run --rm --name pg-docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data  postgres:11
+  - docker ps
 
-# before_script:
-# - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/11/main/postgresql.conf
-# - sudo cp /etc/postgresql/{9.4,11}/main/pg_hba.conf
-# - sudo service postgresql restart
+install:
+  - pip install -U cookiecutter fabric3==1.14.post1 ansible==2.5.0
 
 script:
   - ./run_test.sh
