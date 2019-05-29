@@ -1,6 +1,3 @@
-# For more information about the configurations used in this file, please
-# see the Travis CI documentation: https://docs.travis-ci.com
-
 language: python
 dist: xenial
 
@@ -25,13 +22,13 @@ env:
   - PGPORT=5432
 
 before_install:
-  - service postgresql stop
+  - sudo service postgresql stop
   - docker pull postgres:11
   - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw postgres:11
   - docker ps
 
 install:
-  - pip install -U cookiecutter fabric3==1.14.post1 ansible==2.5.0
+  - pip install -U cookiecutter==1.6.0
 
 script:
   - ./run_test.sh
