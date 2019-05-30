@@ -45,7 +45,6 @@ before_script:
 {%- if cookiecutter.postgis.lower() == 'y' %}
 - psql -c "CREATE EXTENSION postgis;" -U postgres -d {{ cookiecutter.main_module }}
 {%- endif %}
-- cp config/database.yml.travis config/database.yml
 
 before_install:
   - sudo service postgresql stop
