@@ -25,7 +25,7 @@ bumpversion==0.5.3
 # Deployment and Tasks
 # -------------------------------------
 fabric3==1.14.post1
-{% if cookiecutter.add_ansible.lower() == 'y' %}ansible==2.5.0{% endif %}
+{% if cookiecutter.add_ansible.lower() == 'y' %}ansible==2.5.15{% endif %}
 
 {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
 # Code quality
