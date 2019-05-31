@@ -10,23 +10,40 @@ python:
 node_js:
   - "10"
 
+services:
+  - docker
+
+addons:
+  apt:
+    packages:
+      - libgdal-dev
+
 cache:
   pip: true
   directories:
-  - node_modules # NPM packages
+  - node_modules  # NPM packages
 
 services:
   - docker
 
 env:
   global:
+  - PGDATABASE=postgres
   - PGHOST=localhost
   - PGUSER=postgres
+  - PGPASS=''
   - PGPORT=5432
+  - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
+  - POSTGRES_IMAGE=mdillon/postgis:11
 
 cache:
   directories:
     - $HOME/.cache/pip
+
+before_install:
+  - sudo service postgresql stop
+  - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw ${POSTGRES_IMAGE}
+  - docker ps
 
 before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
@@ -46,16 +63,11 @@ before_script:
 - psql -c "CREATE EXTENSION postgis;" -U postgres -d {{ cookiecutter.main_module }}
 {%- endif %}
 
-before_install:
-  - sudo service postgresql stop
-  - docker pull postgres:11
-  - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw postgres:11
-  - docker ps
 
 script:
 - flake8
 {% if cookiecutter.webpack.lower() == 'y' %}- npm run build{% endif %}
-- py.test --cov -v --tb=native
+- pytest --cov -v --tb=native
 {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
 notifications:
