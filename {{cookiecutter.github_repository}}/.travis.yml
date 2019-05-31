@@ -51,18 +51,8 @@ before_cache:
 install:
   - pip install -r requirements/development.txt
   {%- if cookiecutter.webpack.lower() == 'y' %}
-  - nvm install v6.3.0
-  - npm install -g npm
   - npm install
   {%- endif %}
-
-before_script:
-- export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
-- psql -c "CREATE DATABASE {{ cookiecutter.main_module }};" -U postgres
-{%- if cookiecutter.postgis.lower() == 'y' %}
-- psql -c "CREATE EXTENSION postgis;" -U postgres -d {{ cookiecutter.main_module }}
-{%- endif %}
-
 
 script:
 - flake8

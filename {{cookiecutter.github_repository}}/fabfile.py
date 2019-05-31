@@ -26,7 +26,6 @@ env.apps_dir = join(HERE, env.project_name)
 env.docs_dir = join(HERE, 'docs')
 env.static_dir = join(env.apps_dir, 'static')
 env.virtualenv_dir = join(HERE, 'venv')
-env.ci = join(HERE, "CI")
 env.requirements_file = join(HERE, 'requirements/development.txt')
 env.shell = "/bin/bash -l -i -c"
 {%- if cookiecutter.webpack.lower() == 'y' %}
