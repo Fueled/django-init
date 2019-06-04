@@ -60,6 +60,8 @@ if echo "$yn" | grep -iq "^y"; then
     if ! hash fab 2>/dev/null; then
         echo "fab command not found... installing it..."
         sudo pip install fabric3==1.14.post1
+        echo "==> Install django-environ"
+        sudo pip install django-environ==0.4.5
     fi
 
     echo "==> Initialize git repo and create first commit and tag it with v{{ cookiecutter.version }}"
