@@ -9,7 +9,7 @@ from functools import partial
 from os.path import dirname, isdir, join
 
 # Third Party Stuff
-import environ
+import os
 from fabric.api import env
 from fabric.api import local as fabric_local
 from fabric import api as fab
@@ -50,7 +50,7 @@ def init(vagrant=False):
     {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
     add_pre_commit()
     {%- endif %}
-    if not environ.Env().bool('CI', default=False):
+    if not os.getenv('CI', 'False').lower() == 'true':
         local('createdb %(project_name)s' % env)  # create postgres database
         manage('migrate')
 
