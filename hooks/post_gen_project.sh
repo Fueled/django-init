@@ -47,6 +47,9 @@ fi
 if echo "$yn" | grep -iq "^y"; then
     echo "==> Checking system dependencies. You may need to enter your sudo password."
 
+    echo "==> Install django-environ"
+    sudo pip install django-environ==0.4.5
+
     echo "==> Install pip, if not present."
     if ! hash pip 2>/dev/null; then
         echo "pip not found.... installing it..."
