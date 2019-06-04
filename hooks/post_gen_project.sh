@@ -47,9 +47,6 @@ fi
 if echo "$yn" | grep -iq "^y"; then
     echo "==> Checking system dependencies. You may need to enter your sudo password."
 
-    echo "==> Install django-environ"
-    sudo pip install django-environ==0.4.5
-
     echo "==> Install pip, if not present."
     if ! hash pip 2>/dev/null; then
         echo "pip not found.... installing it..."
@@ -60,8 +57,6 @@ if echo "$yn" | grep -iq "^y"; then
     if ! hash fab 2>/dev/null; then
         echo "fab command not found... installing it..."
         sudo pip install fabric3==1.14.post1
-        echo "==> Install django-environ"
-        sudo pip install django-environ==0.4.5
     fi
 
     echo "==> Initialize git repo and create first commit and tag it with v{{ cookiecutter.version }}"
