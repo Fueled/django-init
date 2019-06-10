@@ -5,6 +5,7 @@ After=network.target
 
 [Service]
 User={{ celery_user }}
+RuntimeDirectory={{ celery_runtime_dir }}
 Group={{ celery_group }}
 Restart=always
 WorkingDirectory={{ project_path }}
