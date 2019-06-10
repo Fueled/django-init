@@ -13,10 +13,12 @@ node_js:
 services:
   - docker
 
+{%- if cookiecutter.postgis.lower() == 'y' %}
 addons:
   apt:
     packages:
       - libgdal-dev
+{%- endif %}
 
 cache:
   pip: true
@@ -33,12 +35,13 @@ env:
   - PGUSER=postgres
   - PGPASS=''
   - PGPORT=5432
+{%- if cookiecutter.postgis.lower() == 'y' %}
   - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
   - POSTGRES_IMAGE=mdillon/postgis:11
-
-cache:
-  directories:
-    - $HOME/.cache/pip
+{%- else %}
+  - DATABASE_URL=postgres://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
+  - POSTGRES_IMAGE=postgres:11
+{%- endif %}
 
 before_install:
   - sudo service postgresql stop

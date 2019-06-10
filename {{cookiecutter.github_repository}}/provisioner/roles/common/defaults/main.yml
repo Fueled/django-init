@@ -30,6 +30,5 @@ base_ubuntu:
       - liblcms2-dev
       - postgresql-client
       - libpq-dev
-      - postgis
       - ca-certificates
 {% endraw %}
