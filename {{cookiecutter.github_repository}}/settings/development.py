@@ -42,7 +42,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", default='CHANGEME!!!')
 
 # cors
 # --------------------------------------------------------------------------
-CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST', default=['localhost', 'localhost:8000'])
+CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST', default=['http://localhost', 'http://localhost:8000'])
 {%- endif %}
 
 # Mail settings

@@ -1,13 +1,8 @@
 {% raw %}---
 - name: apt_get install uwsgi packages
-  apt: pkg={{ item }} state=present
-  with_items:
-    - uwsgi-emperor
-    - uwsgi
-    - uwsgi-src
-    - uuid-dev
-    - libcap-dev
-    - libpcre3-dev
+  apt:
+    pkg: ['uwsgi-emperor', 'uwsgi', 'uwsgi-src', 'uuid-dev', 'libcap-dev', 'libpcre3-dev']
+    state: present
   tags: ['configure']
 
 # compile python36 plugin for uwsgi

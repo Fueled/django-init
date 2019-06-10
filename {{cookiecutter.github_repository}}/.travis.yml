@@ -2,24 +2,51 @@
 # see the Travis CI documentation: https://docs.travis-ci.com
 
 language: python
-sudo: false
-python:
-- '3.6.4'
+dist: xenial
 
+python:
+  - '3.6.4'
+
+node_js:
+  - "10"
+
+services:
+  - docker
+
+{%- if cookiecutter.postgis.lower() == 'y' %}
 addons:
-  postgresql: "10.6"
   apt:
     packages:
-      - postgresql-10-postgis-2.4
-      - postgresql-client-10
+      - libgdal-dev
+{%- endif %}
+
+cache:
+  pip: true
+  directories:
+  - node_modules  # NPM packages
+
+services:
+  - docker
 
 env:
   global:
+  - PGDATABASE=postgres
+  - PGHOST=localhost
+  - PGUSER=postgres
+  - PGPASS=''
   - PGPORT=5432
+{%- if cookiecutter.postgis.lower() == 'y' %}
+  - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
+  - POSTGRES_IMAGE=mdillon/postgis:11
+{%- else %}
+  - DATABASE_URL=postgres://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
+  - POSTGRES_IMAGE=postgres:11
+{%- endif %}
 
-cache:
-  directories:
-    - $HOME/.cache/pip
+before_install:
+  - sudo service postgresql stop
+  - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw ${POSTGRES_IMAGE}
+  - docker ps
 
 before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
@@ -27,25 +54,13 @@ before_cache:
 install:
   - pip install -r requirements/development.txt
   {%- if cookiecutter.webpack.lower() == 'y' %}
-  - nvm install v6.3.0
-  - npm install -g npm
   - npm install
   {%- endif %}
-
-before_script:
-- sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/10/main/postgresql.conf
-- sudo cp /etc/postgresql/{9.4,10}/main/pg_hba.conf
-- sudo service postgresql restart
-- export DATABASE_URL=postgres://postgres@localhost/{{ cookiecutter.main_module }}
-- psql -c "CREATE DATABASE {{ cookiecutter.main_module }};" -U postgres
-{%- if cookiecutter.postgis.lower() == 'y' %}
-- psql -c "CREATE EXTENSION postgis;" -U postgres -d {{ cookiecutter.main_module }}
-{%- endif %}
 
 script:
 - flake8
 {% if cookiecutter.webpack.lower() == 'y' %}- npm run build{% endif %}
-- py.test --cov -v --tb=native
+- pytest --cov -v --tb=native
 {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
 notifications:

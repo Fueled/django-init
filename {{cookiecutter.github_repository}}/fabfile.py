@@ -9,6 +9,7 @@ from functools import partial
 from os.path import dirname, isdir, join
 
 # Third Party Stuff
+import os
 from fabric.api import env
 from fabric.api import local as fabric_local
 from fabric import api as fab
@@ -46,11 +47,12 @@ def init(vagrant=False):
     local('npm install')
     local('npm run build')
     {%- endif %}
-    local('createdb %(project_name)s' % env)  # create postgres database
     {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
     add_pre_commit()
     {%- endif %}
-    manage('migrate')
+    if not os.getenv('CI', 'False').lower() == 'true':
+        local('createdb %(project_name)s' % env)  # create postgres database
+        manage('migrate')
 
 
 def install_requirements(file=env.requirements_file):

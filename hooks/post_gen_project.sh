@@ -56,7 +56,7 @@ if echo "$yn" | grep -iq "^y"; then
     echo "==> Install fabric, if not present."
     if ! hash fab 2>/dev/null; then
         echo "fab command not found... installing it..."
-        sudo pip install fabric
+        sudo pip install fabric3==1.14.post1
     fi
 
     echo "==> Initialize git repo and create first commit and tag it with v{{ cookiecutter.version }}"

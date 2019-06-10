@@ -1,34 +1,34 @@
-# For more information about the configurations used in this file, please
-# see the Travis CI documentation: https://docs.travis-ci.com
-
 language: python
-sudo: false
+dist: xenial
+
 python:
-- '3.6'
+  - '3.6'
+
+node_js:
+  - "10"
+
+cache:
+  pip: true
+  directories:
+  - node_modules # NPM packages
 
 services:
-  - postgresql
-
-addons:
-  postgresql: "10.6"
-  apt:
-    packages:
-      - postgresql-10-postgis-2.4
-      - postgresql-client-10
+  - docker
 
 env:
   global:
+  - PGHOST=localhost
+  - PGUSER=postgres
   - PGPORT=5432
 
-install:
-  - pip install -U pip cookiecutter fabric3 ansible==2.5.0
-  - nvm install v6.3.0
-  - npm install -g npm
+before_install:
+  - sudo service postgresql stop
+  - docker pull postgres:11
+  - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw postgres:11
+  - docker ps
 
-before_script:
-- sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/10/main/postgresql.conf
-- sudo cp /etc/postgresql/{9.4,10}/main/pg_hba.conf
-- sudo service postgresql restart
+install:
+  - pip install cookiecutter==1.6.0
 
 script:
   - ./run_test.sh

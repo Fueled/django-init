@@ -22,10 +22,11 @@ yes 'y' | cookiecutter . --no-input
 # Run the tests present inside generate project
 cd hello-world-web;
 npm run build
+source venv/bin/activate
 ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 fab test:"--cov"
 
 # Cleanup
-dropdb hello_world
+test ! $CI && dropdb hello_world
 
 test $err = 0 # Return non-zero if any command failed
