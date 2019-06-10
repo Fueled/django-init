@@ -1,12 +1,4 @@
 {% raw %}---
-- name: Update apt-cache if not already ran
-  shell: apt update
-  become: yes
-  when: apt_updated is not defined
-
-# For earlier version of Ubuntu, just make sure to get auth keys to validate
-# official postgres packages
-
 - name: Add an Apt signing key to validate packages from PostgreSQL Repo
   apt_key:
     url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
@@ -14,15 +6,15 @@
 
 - name: Add to PostgreSQL.list
   apt_repository:
-    repo: deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main
+    repo: deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
     state: present
 
-- name: install postgres packages for Ubuntu
+- name: Install postgresql packages
   apt:
     pkg: ['postgresql-11', 'postgresql-contrib', 'python-psycopg2']
     state: present
 
-- name: install postgis packages for Ubuntu
+- name: Install postgis packages
   apt:
     pkg: "postgis-2.5"
     state: present
