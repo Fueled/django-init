@@ -13,11 +13,6 @@
 #- name: Disable ipv6 for local interface
 #  sysctl: name="net.ipv6.conf.lo.disable_ipv6" value=1 state=present
 #  when: vm == 1
-
-# Ansible requires aptitude and python2 for various tasks
-- name: Install Aptitude and Python-minimal for ansible
-  raw: apt-get install -qq python-apt aptitude
-
 - name: Set hostname
   action: shell hostnamectl set-hostname {{ domain_name }}
   when: vm == 0
