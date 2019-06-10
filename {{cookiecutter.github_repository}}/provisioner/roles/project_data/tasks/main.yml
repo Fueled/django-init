@@ -57,3 +57,10 @@
   {%- if cookiecutter.add_celery.lower() == 'y' %}
   notify: reload celery  # reload celery everytime uwsgi conf changes
   {%- endif %}
+
+{% raw %}- name: Build documentation for "/docs" url.
+  command: "{{ venv_path }}/bin/mkdocs build"
+  args:
+    chdir: "{{ project_path }}"
+  become: false
+  tags: ['deploy', 'documentation']{% endraw %}
