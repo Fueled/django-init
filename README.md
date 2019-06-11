@@ -5,7 +5,7 @@ Project template for django based projects, optimized for making REST API with d
 
 ## Features
 
-- Django 2.1.x
+- Django 2.2.x
 - Python 3.6.x
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - Supports PostreSQL 11.0 (support of postgis-2.5 is available).

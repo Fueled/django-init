@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Standard Library
 from uuid import UUID
 
@@ -9,7 +10,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 def encode_uuid_to_base64(uuid_) -> str:
     """Returns a  urlsafe based64 encoded representation of a UUID object or UUID like string.
     """
-    return urlsafe_base64_encode(force_bytes(uuid_)).decode()
+    return urlsafe_base64_encode(force_bytes(uuid_))
 
 
 def decode_uuid_from_base64(uuid_value: str):
