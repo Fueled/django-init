@@ -1,15 +1,15 @@
 # Core Stuff
 # -------------------------------------
-Django==2.1.7
+Django==2.2.2
 
 # Configuration
 # -------------------------------------
 argon2-cffi==19.1.0
 django-environ==0.4.5
 django-sites==0.10
-python-dotenv==0.10.2
+python-dotenv==0.10.3
 {%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
-django-cors-headers==3.0.1
+django-cors-headers==3.0.2
 {%- endif %}
 
 {% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
@@ -27,7 +27,7 @@ pytz==2019.1
 psycopg2-binary==2.8.2
 
 Pillow==5.4.1
-django-extensions==2.1.7
+django-extensions==2.1.9
 django-uuid-upload-path==1.0.0
 django-versatileimagefield==1.10
 
