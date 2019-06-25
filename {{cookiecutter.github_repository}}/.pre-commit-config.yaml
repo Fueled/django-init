@@ -3,23 +3,23 @@ repos:
 - repo: git://github.com/pre-commit/pre-commit-hooks
   rev: v1.4.0
   hooks:
-   - id: flake8
-   - id: end-of-file-fixer
-   - id: trailing-whitespace
-   - id: check-case-conflict
-   - id: check-merge-conflict
-   - id: check-yaml
-   - id: detect-private-key
-   - id: forbid-new-submodules
-   - id: check-json
-   - id: pretty-format-json
-   - id: check-added-large-files
-   - id: double-quote-string-fixer
-   - id: fix-encoding-pragma
+    - id: flake8
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+    - id: check-case-conflict
+    - id: check-merge-conflict
+    - id: check-yaml
+    - id: detect-private-key
+    - id: forbid-new-submodules
+    - id: check-json
+    - id: pretty-format-json
+    - id: check-added-large-files
+    - id: double-quote-string-fixer
+    - id: fix-encoding-pragma
 
 - repo: git://github.com/CuriousLearner/pre-commit-python-sorter
   sha: 5294cde9d51cff119af537e987c30c320e9fbe2f
   hooks:
-   - id: python-import-sorter
-     args: ['--silent-overwrite']
+    - id: python-import-sorter
+      args: ['--silent-overwrite']
 {%- endif %}
