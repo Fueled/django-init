@@ -394,12 +394,8 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        },
-        'request_id': {
-            '()': 'log_request_id.filters.RequestIDFilter'
-        }
+        'require_debug_false': {'()': 'django.utils.log.RequireDebugFalse'},
+        'request_id': {'()': 'log_request_id.filters.RequestIDFilter'},
     },
     'formatters': {
         'complete': {
@@ -407,23 +403,24 @@ LOGGING = {
             # formatter in any handlers.
             'format': '%(asctime)s:[%(levelname)s]:logger=%(name)s:request_id=%(request_id)s message="%(message)s"'
         },
-        'simple': {
-            'format': '%(levelname)s:%(asctime)s: %(message)s'
-        },
-        'null': {
-            'format': '%(message)s',
+        'simple': {'format': '%(levelname)s:%(asctime)s: %(message)s'},
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[%(server_time)s] %(message)s',
         },
     },
     'handlers': {
-        'null': {
-            'level': 'DEBUG',
-            'class': 'logging.NullHandler',
-        },
+        'null': {'level': 'DEBUG', 'class': 'logging.NullHandler'},
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'complete',
             'filters': ['request_id'],
+        },
+        'django.server': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
         },
         'mail_admins': {
             'level': 'ERROR',
@@ -451,7 +448,7 @@ LOGGING = {
             'propagate': False,
         },
         'django.server': {
-            'handlers': ['console'],
+            'handlers': ['django.server'],
             'level': 'INFO',
             'propagate': False,
         },
