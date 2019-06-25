@@ -14,10 +14,6 @@
   become: false
   tags: ['celery']
 
-- name: make sure celerybeat schedule directory exists
-  file: path={{ celerybeat_schedule_dir }} state=directory owner={{celery_user}} group={{celery_group}} mode=751 recurse=yes
-  tags: ['configure', 'celery']
-
 - name: ensure celery package is installed
   pip: name=celery state=present executable={{ venv_path }}/bin/pip
   become: false
