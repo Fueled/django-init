@@ -9,11 +9,11 @@ python manage.py check --deploy
 
 # build node packages
 npm install
-./node_modules/.bin/webpack --config {{ cookiecutter.main_module }}/static/webpack.config.js
+npm run build
 touch webpack-stats.json
 {%- endif %}
 
-# Run collectstatic with new build files and with clear to avoid webpack config files
-python manage.py collectstatic --noinput --clear -i js -i css -i server.js -i webpack.config.js
+# Run collectstatic
+python manage.py collectstatic --noinput {%- if cookiecutter.webpack.lower() == 'y' %}--clear -i js -i css -i server.js -i webpack.config.js{% endif %}
 
 # used by heroku after slug compilation
