@@ -1,7 +1,5 @@
 This describes the resources that make up the official {{ cookiecutter.project_name }} API v1.
 
-[TOC]
-
 ## Current Version
 
 By default, all requests receive the `1.0` version of the API. We encourage you to explicitly request this version via the Accept header.
@@ -48,8 +46,3 @@ Note that page numbering is 1-based and that omitting the `?page` parameter will
 ## Rate Limit
 
 All the unauthorized urls have a rate limit of 10,000 requests/day/IP. After exceeding the limit, you'll get `HTTP TOO MANY REQUESTS` with status code `429`. When this happens you'll also receive `X-Throttle-Wait-Seconds: <time_in_sec>` header in response header.
-
-
-## Authorization
-
-TODO
