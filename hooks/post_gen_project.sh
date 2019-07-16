@@ -44,6 +44,10 @@ if echo "{{ cookiecutter.add_celery }}" | grep -iq "^n"; then
     rm -rf {{ cookiecutter.main_module }}/celery.py
 fi
 
+if echo "{{ cookiecutter.add_pre_commit }}" | grep -iq "^n"; then
+    rm .pre-commit-config.yaml
+fi
+
 if echo "$yn" | grep -iq "^y"; then
     echo "==> Checking system dependencies. You may need to enter your sudo password."
 
