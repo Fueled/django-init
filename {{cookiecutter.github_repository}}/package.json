@@ -10,7 +10,7 @@
     "build": "NODE_ENV=production ./node_modules/.bin/webpack --config {{ cookiecutter.main_module }}/static/webpack.config.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.0",
+    "@babel/core": "^7.5.4",
     "@babel/preset-env": "^7.4.4",
     "autoprefixer": "^9.1.5",
     "babel-loader": "^8.0.2",
