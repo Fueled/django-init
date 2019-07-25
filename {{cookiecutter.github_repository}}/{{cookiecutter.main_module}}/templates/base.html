@@ -1,4 +1,3 @@
-{% raw %}{% load staticfiles i18n %}{% endraw %}
 {%- if cookiecutter.webpack.lower() == 'y' %}
 {%- raw %}{% load webpack_static from webpack_loader %}
 {% load render_bundle from webpack_loader %}{%- endraw %}
