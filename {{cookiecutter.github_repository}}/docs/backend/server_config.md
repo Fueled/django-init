@@ -1,11 +1,11 @@
 # Server Architecture and configurations
 
-# Third Party Services
+## Third Party Services
 
 Following third-party services are required in order to setup/deploy this project successfully.
 
 {%- if cookiecutter.enable_heroku_deployment.lower() == 'y' %}
-## Heroku
+### Heroku
 
 Heroku is platform as a service provider. We use to host the primarily web server along with different services required by this project like postgres database, newrelic, redis. See getting started docs [here][heroku-docs], you'll require to create an account and install the [cli-tool][heroku-cli] to successfully deploy this project.
 
@@ -15,7 +15,7 @@ Heroku is platform as a service provider. We use to host the primarily web serve
 Note: Alternatively, you should be able configure a linux instance to run the same project as well, heroku like settings can be added via `.env` file. (refer: `settings/common.py`). Just that, this documentation and project is focused more with Heroku as platform of choice.
 {%- endif %}
 
-## Amazon S3
+### Amazon S3
 
 Amazon Simple Storage Service ([Amazon S3]) is used to store the uploaded media files and static content. It is a scalable and cost-efficient storage solution. 
 
@@ -31,7 +31,7 @@ Note:
 {% endif %}
 - IAM user must have permission to list, update, create objects in S3.
 
-# Deploying Project
+## Deploying Project
 
 The deployment are managed via travis, but for the first time you'll need to set the configuration values on each of the server. Read this only, if you need to deploy for the first time.
 

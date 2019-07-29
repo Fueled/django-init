@@ -2,20 +2,14 @@
 
 __Version:__ {{ cookiecutter.version }}
 
-## API
+{{ cookiecutter.project_description }}
 
-- [Overview](api/overview.md)
-- [Endpoints](api/endpoints.md)
-- [Errors](api/errors.md)
-- [Changelog](api/changelog.md)
+## Quick Links
 
-## Backend
+- JIRA Board
+- [API Playground](/api-plaground)
+- [Django Admin](/admin)
 
-- [Server Setup & Configurations](backend/server_config.md)
-- [Coding Rules](backend/coding_rules.md)
+## Release Notes
 
-__NOTE:__ This documentation changes frequently, checkout the [changelog](api/changelog.md) for detailed breaking changes and features added.
-
-Write your documentation using __Markdown__ in `docs/` folder. Need help? Read mkdocs [documentation][mkdocs].
-
-[mkdocs]: http://www.mkdocs.org/user-guide/writing-your-docs/
+{!release_notes.md!}

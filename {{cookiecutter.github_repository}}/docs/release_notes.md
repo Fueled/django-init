@@ -1,6 +1,4 @@
-# Release Notes
-
-## [0.1.0-dev]
+### [0.1.0-dev]
 
 __Date:__ [Under Developement](https://github.com/{{ cookiecutter.github_username}}/{{ cookiecutter.github_repository}}/issues/1)
 
