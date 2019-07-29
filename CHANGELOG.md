@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.x]
 
+- Update celery concurrency to default to number of CPUs ([@theskumar])
 - Upgrade to Postgres 11 and Postgis 2.5. ([@CuriousLearner])
 - Upgrade to Postgres 10 and Postgis 2.4. ([@CuriousLearner])
 - Add task for compiling static string translations. ([@CuriousLearner])
