@@ -10,4 +10,6 @@ __Version:__ {{ cookiecutter.version }}
 - [API Playground](/api-plaground)
 - [Django Admin](/admin)
 
+## Release Notes
+
 {!release_notes.md!}
