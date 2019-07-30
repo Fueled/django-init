@@ -1,6 +1,6 @@
 ngnix_listen: '443 http2 ssl'
 nginx_user: 'www-data'
-nginx_worker_processes: 1
+nginx_worker_processes: auto
 nginx_worker_connections: 1024
 nginx_client_max_body_size: '10M'
 
