@@ -1,13 +1,13 @@
 {% raw %}---
 celery_user: www-data
 celery_group: www-data
-celery_log_dir: /var/log/celery/{{ project_namespace }}
-celery_log_file: "{{ celery_log_dir }}/celery.log"
-celerybeat_log_file: "{{ celery_log_dir }}/celerybeat.log"
+celery_log_dir: /var/log/celery
+celery_log_file: "{{ celery_log_dir }}/{{ project_namespace }}.log"
+celerybeat_log_file: "{{ celery_log_dir }}/{{ project_namespace }}.celerybeat.log"
 celery_log_level: "INFO"
 celery_runtime_dir: celery
-celerybeat_schedule_dir: /var/run/{{ celery_runtime_dir }}
+celerybeat_schedule_dir: "/var/run/{{ celery_runtime_dir }}"
 celerybeat_schedule_file: "{{ celerybeat_schedule_dir }}/schedule-{{ project_namespace }}.db"
-celery_pid_file: /tmp/celery-{{ project_namespace }}.pid
-celerybeat_pid_file: /tmp/celerybeat-{{ project_namespace }}.pid
+celery_pid_file: "/tmp/celery-{{ project_namespace }}.pid"
+celerybeat_pid_file: "/tmp/celerybeat-{{ project_namespace }}.pid"
 {% endraw %}

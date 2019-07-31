@@ -1,6 +1,6 @@
 {% raw %}---
 pg_hstore: False
-pg_db: '{{ project_name }}-{{ deploy_environment }}'
+pg_db: "{{ project_namespace }}"
 pg_user: dev
 pg_password: password
 django_requirements_file: requirements.txt
@@ -15,8 +15,9 @@ uwsgi_timeout: 30
 uwsgi_keepalive: 2
 uwsgi_loglevel: info
 uwsgi_conf_path: /etc/uwsgi-emperor/vassals
-uwsgi_socket: /tmp/django-{{ domain_name }}-uwsgi.sock
-uwsgi_pid_file: /tmp/django-{{ domain_name }}-wsgi.pid
+uwsgi_socket: "/tmp/uwsgi-{{ project_namespace }}.sock"
+uwsgi_pid_file: "/tmp/uwsgi-{{ project_namespace }}.pid"
 
-project_log_dir: /var/log/django/{{ deploy_environment }}/{{ project_name}}
+uwsgi_log_dir: /var/log/uwsgi
+uwsgi_log_file: "{{ uwsgi_log_dir }}/{{ project_namespace }}.log"
 {% endraw %}

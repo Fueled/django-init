@@ -23,7 +23,7 @@ autoload=true
 no-orphans=true
 chmod-socket=660
 log-date=true
-logto = {{project_log_dir}}/uwsgi.log{% endraw %}
+logto={{ uwsgi_log_file }}{% endraw %}
 
 
 # os write errors
