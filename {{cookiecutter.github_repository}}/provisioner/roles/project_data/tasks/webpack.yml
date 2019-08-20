@@ -1,7 +1,7 @@
 {% raw %}---
 - name: Download NodeSource Setup script
   get_url:
-    url: "https://deb.nodesource.com/setup_{{ webpack_node_version }}.x"
+    url: "https://deb.nodesource.com/setup_10.x"
     dest: "/tmp/node_setup_10.x"
   become: false
 
