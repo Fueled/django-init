@@ -23,17 +23,17 @@
 
 - name: copy django-uwsgi logrotate
   template: src=django.logrotate.j2
-            dest=/etc/logrotate.d/uwsgi-{{ deploy_environment}}-{{project_name}}-django
+            dest=/etc/logrotate.d/uwsgi-{{ project_namespace }}
             mode=644
   tags: ['configure']
 
-- name: make sure log directory exists
-  file: path={{ project_log_dir }} state=directory owner={{uwsgi_user}} group={{uwsgi_group}} mode=751 recurse=yes
+- name: make sure uwsgi log directory exists
+  file: path={{ uwsgi_log_dir }} state=directory owner={{uwsgi_user}} group={{uwsgi_group}} mode=751 recurse=yes
   tags: ['configure']
 
 - name: ensure django app config is added as uwsgi vassal
   template: src=django.uwsgi.ini.j2
-            dest={{ uwsgi_conf_path }}/django-{{project_name}}-{{ deploy_environment }}.ini
+            dest={{ uwsgi_conf_path }}/{{project_namespace }}.ini
             mode=644
   tags: ['deploy']
   register: uwsgiconf

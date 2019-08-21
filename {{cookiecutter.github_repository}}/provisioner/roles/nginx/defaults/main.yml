@@ -5,7 +5,7 @@ nginx_worker_connections: 1024
 nginx_client_max_body_size: '10M'
 
 {% raw %}
-nginx_conf_file_name: '{{ project_name }}-{{ deploy_environment }}'
+nginx_conf_file_name: '{{ project_namespace }}'
 
 # SSL common configurations
 ssl_cert_dir: '/etc/nginx/ssl'
@@ -29,6 +29,6 @@ error_log_file: '/var/log/nginx/{{ domain_name }}.error.log'
 
 # htpasswsd
 # docs username, password
-htpasswd_file_path: '/etc/nginx/.htpasswd-{{ deploy_environment }}'
-nginx_docs_username: '{{ project_name }}-docs'
-nginx_docs_password: '{{ project_name }}-1234!'{% endraw %}
+htpasswd_file_path: '/etc/nginx/.htpasswd-{{ project_namespace }}'{% endraw %}
+nginx_docs_username: '{{ cookiecutter.main_module|truncate(3, True, '') }}'
+nginx_docs_password: '{{ cookiecutter.main_module|title|truncate(3, True, '') }}1234!'
