@@ -27,28 +27,28 @@ All notable changes to this project will be documented in this file.
 
 
 ## [1.11]
-- Upgrade to Django RestFramework 3.7 (@theskumar)
-- Adds custom Token based authentication for user login and registration. (@CuriousLearner)
-- Separates out celery beat process as different worker for multi-node setups. (@CuriousLearner)
-- Adds `ERROR` level logging to sentry mails. (@CuriousLearner)
-- Fixes celery beat scheduler issue & makes celery role consistent across deployments. (@CuriousLearner)
+- Upgrade to Django RestFramework 3.7 ([@theskumar])
+- Adds custom Token based authentication for user login and registration. ([@CuriousLearner])
+- Separates out celery beat process as different worker for multi-node setups. ([@CuriousLearner])
+- Adds `ERROR` level logging to sentry mails. ([@CuriousLearner])
+- Fixes celery beat scheduler issue & makes celery role consistent across deployments. ([@CuriousLearner])
 - Add automatic documentation build when using ansible and make it available at `/docs/` url.
-- Handle nested serializer errors in our custom exception handler. (@jainmickey)
-- Remove mock dependency, replace with standard unittest.mock library
-- Add `django-cors-headers` integration (@jainmickey)
-- Add default 'AUTH_PASSWORD_VALIDATORS' in settings
-- Add django-rest-swagger integration
+- Handle nested serializer errors in our custom exception handler. ([@jainmickey])
+- Remove mock dependency, replace with standard unittest.mock library.
+- Add `django-cors-headers` integration. ([@jainmickey])
+- Add default 'AUTH_PASSWORD_VALIDATORS' in settings.
+- Add django-rest-swagger integration.
 - Use simplified bumpversion rules, remove requirement of intermediate release tags e.g. `0.1.0-dev`.
-- Add multiple environment support on a single machine (@theskumar)
-- Add .env.sample file (@theskumar)
-- Add django-flat-responsive to give django-admin a responsive touch (@theskumar)
-- Add django_auth_wall to protect staging environments (@theskumar)
-- Replace gunicorn with uwsgi as wsgi handler (@vikalpj)
+- Add multiple environment support on a single machine. ([@theskumar])
+- Add .env.sample file. ([@theskumar])
+- Add django-flat-responsive to give django-admin a responsive touch. ([@theskumar])
+- Add django_auth_wall to protect staging environments. ([@theskumar])
+- Replace gunicorn with uwsgi as wsgi handler ([@vikalpj])
 
 ### Fixes
 - Make default s3 region null.
-- RemovedInDjango20Warning: Update admin url to new style url include (@theskumar)
-- RemovedInDjango20Warning: Use new-style MIDDLEWARE settings (@theskumar)
+- RemovedInDjango20Warning: Update admin url to new style url include. ([@theskumar])
+- RemovedInDjango20Warning: Use new-style MIDDLEWARE settings. ([@theskumar])
 - Fix letsencrtypt, make certbot-auto run in non-interactive mode.
 - Fix `py.test` to load values from .env
 
@@ -56,18 +56,18 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-## Added
 - Add Webpack Support
 - Support for request-id via django-log-request-id (@vikalpj)
 - Add `ssl_params` support in nginx
 - Add `letsencrypt` support.
 - Add `SASS` and `Django Compressor` support.
 - Add documentation for Drone.io CI
-- Add Circle CI Support (@jasonrfarkas)
+- Add Circle CI Support ([@jasonrfarkas])
+- Livereload support via devrecargar
 
 ### Changed
-- Dropped support for Python2 (@akarambir).
-- Improved project level logging support (@vikalpj)
+- Dropped support for Python2 ([@akarambir]).
+- Improved project level logging support ([@vikalpj])
 - Remove factoryboy, use [django-dynamic-fixtures] for factories.
 - Update SERVER_EMAIL settings to default to DEFAULT_FROM_EMAIL
 - Use `setup.cfg` instead of `.bumpversion`
@@ -81,14 +81,10 @@ All notable changes to this project will be documented in this file.
 - Fix `Http404` and `PermissionDenied` error handling format.
 - Add configurable support for `adding/removing DRF Browsable apis`
 
-
-
 [django-dynamic-fixtures]: https://github.com/paulocheque/django-dynamic-fixture
 
-### Added
-- Livereload support via devrecargar
-
 ## [1.1.0]
+
 ### Added
 - Provide a basic override for `admin/base_site.html`
 - `base.utils.pagination.paginated_response` now accepts and additional `extra_context` parameter.
