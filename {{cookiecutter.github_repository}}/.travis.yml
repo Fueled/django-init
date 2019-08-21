@@ -5,7 +5,7 @@ language: python
 dist: xenial
 
 python:
-  - '3.6.4'
+  - '3.7.3'
 
 node_js:
   - "10"
