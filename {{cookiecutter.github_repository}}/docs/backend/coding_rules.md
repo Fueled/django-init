@@ -24,16 +24,19 @@
 * All fields have explicit `blank` and `null` parameters. Use only those combinations, unless there a documented need of other thing:
 
     __Normal fields__ (IntegerField, DateField, ForeignKey, FileField...)
-      - (optional) `null = True`, `blank = True`
-      - (required) `null = False`, `blank = False`
+ 
+        - (optional) `null = True`, `blank = True`
+        - (required) `null = False`, `blank = False`
 
     __Text fields__ (CharField, TextField, URLField...)
-      - (optional) `null = False`, `blank = True`
-      - (required) `null = False`, `blank = False`
+ 
+        - (optional) `null = False`, `blank = True`
+        - (required) `null = False`, `blank = False`
 
-    __Boolean fields__:  
-      - (two values, T/F) `null = False`, `blank = True`
-      - (three values, T/F/Null) `null = True`, `blank = True`
+    __Boolean fields__:
+
+        - (two values, T/F) `null = False`, `blank = True`
+        - (three values, T/F/Null) `null = True`, `blank = True`
 
 * Don't create text fields with `null = True`, unless you need to distinguish between empty string and `None`.
 * Don't create boolean fields with `blank = False`, otherwise they could only be `True`.
