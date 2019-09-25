@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.x]
 
+- Add black in pre-commit and also formatted exiting code as per black. ([@theskumar])
 - Upgrade to run on Python 3.7 ([@theskumar])
 - Update celery concurrency to default to number of CPUs ([@theskumar])
 - Upgrade to Postgres 11 and Postgis 2.5. ([@CuriousLearner])

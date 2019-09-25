@@ -5,9 +5,9 @@ load_dotenv(find_dotenv())
 
 from .development import *  # noqa F405
 
-MEDIA_ROOT = '/tmp'
+MEDIA_ROOT = "/tmp"
 
-SECRET_KEY = 'top-scret!'
+SECRET_KEY = "top-scret!"
 
-EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
-INSTALLED_APPS += ('tests', )  # noqa: F405
+EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
+INSTALLED_APPS += ("tests",)  # noqa: F405

@@ -20,6 +20,6 @@ def create_user(**kwargs):
     """Create an user along with their dependencies."""
     User = apps.get_model(settings.AUTH_USER_MODEL)
     user = G(User, **kwargs)
-    user.set_password(kwargs.get('password', 'test'))
+    user.set_password(kwargs.get("password", "test"))
     user.save()
     return user

@@ -12,8 +12,8 @@ pytestmark = pytest.mark.django_db
 
 
 def test_get_current_user_api(client):
-    url = reverse('me')
-    user = f.create_user(email='test@example.com')
+    url = reverse("me")
+    user = f.create_user(email="test@example.com")
 
     # should require auth
     response = client.get(url)
@@ -24,21 +24,19 @@ def test_get_current_user_api(client):
 
     # assert response is None
     assert response.status_code == 200
-    expected_keys = [
-        'id', 'email', 'first_name', 'last_name'
-    ]
+    expected_keys = ["id", "email", "first_name", "last_name"]
     assert set(expected_keys).issubset(response.data.keys())
-    assert response.data['id'] == str(user.id)
+    assert response.data["id"] == str(user.id)
 
 
 def test_patch_current_user_api(client):
-    url = reverse('me')
-    user = f.create_user(email='test@example.com', first_name='test', last_name='test')
+    url = reverse("me")
+    user = f.create_user(email="test@example.com", first_name="test", last_name="test")
 
     data = {
-        'first_name': 'modified_test',
-        'last_name': 'modified_test',
-        'email': 'modified_test@example.com'
+        "first_name": "modified_test",
+        "last_name": "modified_test",
+        "email": "modified_test@example.com",
     }
 
     # should require auth
@@ -49,11 +47,9 @@ def test_patch_current_user_api(client):
     response = client.json.patch(url, json.dumps(data))
     # assert response is None
     assert response.status_code == 200
-    expected_keys = [
-        'id', 'email', 'first_name', 'last_name'
-    ]
+    expected_keys = ["id", "email", "first_name", "last_name"]
     assert set(expected_keys).issubset(response.data.keys())
 
-    assert response.data['first_name'] == 'modified_test'
-    assert response.data['last_name'] == 'modified_test'
-    assert response.data['email'] == 'modified_test@example.com'
+    assert response.data["first_name"] == "modified_test"
+    assert response.data["last_name"] == "modified_test"
+    assert response.data["email"] == "modified_test@example.com"

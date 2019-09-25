@@ -1,5 +1,9 @@
 # Third Party Stuff
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.contrib.postgres.fields import CIEmailField
 from django.db import models
 from django.utils import timezone
@@ -12,17 +16,29 @@ from {{cookiecutter.main_module}}.base.models import UUIDModel
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def _create_user(self, email: str, password: str, is_staff: bool, is_superuser: bool, **extra_fields):
-        """Creates and saves a User with the given email and password.
-        """
+    def _create_user(
+        self,
+        email: str,
+        password: str,
+        is_staff: bool,
+        is_superuser: bool,
+        **extra_fields
+    ):
         email = self.normalize_email(email)
-        user = self.model(email=email, is_staff=is_staff, is_active=True,
-                          is_superuser=is_superuser, **extra_fields)
+        user = self.model(
+            email=email,
+            is_staff=is_staff,
+            is_active=True,
+            is_superuser=is_superuser,
+            **extra_fields
+        )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_user(self, email: str, password=None, **extra_fields):
+        """Creates and saves a User with the given email and password.
+        """
         return self._create_user(email, password, False, False, **extra_fields)
 
     def create_superuser(self, email: str, password: str, **extra_fields):

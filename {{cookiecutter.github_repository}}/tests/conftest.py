@@ -22,21 +22,22 @@ class PartialMethodCaller:
         return functools.partial(getattr(self.obj, name), **self.partial_params)
 
 
-@pytest.fixture(autouse=True, scope='function')
+@pytest.fixture(autouse=True, scope="function")
 def cleared_cache():
     """Fixture that exposes django cache, which is empty to start with.
 
     This fixture also makes sures that cache is cleared before running each and every test case.
     """
     from django.core.cache import cache
+
     cache.clear()
     return cache
 
 
-@pytest.fixture(autouse=True, scope='function')
+@pytest.fixture(autouse=True, scope="function")
 def media_root(settings, tmpdir_factory):
     """Forces django to save media files into temp folder."""
-    settings.MEDIA_ROOT = tmpdir_factory.mktemp('media', numbered=True)
+    settings.MEDIA_ROOT = tmpdir_factory.mktemp("media", numbered=True)
     return settings.MEDIA_ROOT
 
 
@@ -47,15 +48,19 @@ def client():
     from django.test import Client
 
     class _Client(Client):
-
-        def login(self, user=None, backend="django.contrib.auth.backends.ModelBackend", **credentials):
+        def login(
+            self,
+            user=None,
+            backend="django.contrib.auth.backends.ModelBackend",
+            **credentials
+        ):
             """Modified login method, which allows setup an authenticated session with just passing in the
             user object, if provided.
             """
             if user is None:
                 return super().login(**credentials)
 
-            with mock.patch('django.contrib.auth.authenticate') as authenticate:
+            with mock.patch("django.contrib.auth.authenticate") as authenticate:
                 user.backend = backend
                 authenticate.return_value = user
                 return super().login(**credentials)
@@ -70,6 +75,8 @@ def client():
             >>> client.json.get(url)
             >>> client.json.post(url, data=json.dumps(payload))
             """
-            return PartialMethodCaller(obj=self, content_type='application/json;charset="utf-8"')
+            return PartialMethodCaller(
+                obj=self, content_type='application/json;charset="utf-8"'
+            )
 
     return _Client()
