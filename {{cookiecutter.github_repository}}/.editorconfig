@@ -14,14 +14,15 @@ indent_size = 4
 
 [*.py]
 # https://github.com/timothycrosley/isort/wiki/isort-Settings
-line_length=120
+line_length=88
 known_first_party={{ cookiecutter.main_module }}
 multi_line_output=3
+include_trailing_comma=True
 default_section=THIRDPARTY
 import_heading_stdlib=Standard Library
 import_heading_firstparty={{ cookiecutter.project_name }} Stuff
 import_heading_thirdparty=Third Party Stuff
-skip_glob=*/migrations/*
+skip_glob=*/migrations/**,*/venv/**,*/docs/**
 
 [*.{html,css,scss,json,yml}]
 indent_style = space

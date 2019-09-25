@@ -19,7 +19,7 @@ Before you submit a pull request, check that it meets these guidelines:
 ## Coding conventions
 
 - Read and pay attention to current code in the repository
-- For the Python part, we follow pep8 in most cases. We use [flake8][flake8] to check for linting errors. Once you're ready to commit changes, check your code with `flake8`.
+- For the Python part, we follow [black](https://pypi.org/project/black/) for formating code. We use modified configuration of [flake8][flake8] to check for linting errors that complies formating standards of `black`. Once you're ready to commit changes, format your code with `black` and check your code with `flake8`. Optionally, setup `pre-commit` with `pre-install --install` to do it automatically before commit.
 - Install a plugin for [EditorConfig][editorconfig] and let it handle some of the formating issues for you.
 - For the Django part, we follow standard [Django coding style][django-coding style].
 - And always remember the Zen.
