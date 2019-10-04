@@ -1,5 +1,19 @@
 This describes the resources that make up the official {{ cookiecutter.project_name }} API v1.
 
+## Authentication
+
+For clients to authenticate, the token key should be included in the Authorization HTTP header. The key should be prefixed by the string literal `Bearer`, with whitespace separating the two strings. For example:
+
+```
+Authorization: Bearer 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b
+```
+Unauthenticated responses that are denied permission will result in an `HTTP 401 Unauthorized` response.
+
+An example request:
+```bash
+curl -X GET http://127.0.0.1:8000/api/example/ -H `Authorization: Bearer 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b`
+```
+
 ## Current Version
 
 By default, all requests receive the `1.0` version of the API. We encourage you to explicitly request this version via the Accept header.

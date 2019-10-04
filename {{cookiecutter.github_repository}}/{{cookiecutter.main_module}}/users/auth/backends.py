@@ -32,7 +32,7 @@ class UserTokenAuthentication(BaseAuthentication):
     data stored in the token.
     """
 
-    auth_rx = re.compile(r"^Token (.+)$")
+    auth_rx = re.compile(r"^Bearer (.+)$")
 
     def authenticate(self, request):
         if "HTTP_AUTHORIZATION" not in request.META:
@@ -48,4 +48,4 @@ class UserTokenAuthentication(BaseAuthentication):
         return (user, token)
 
     def authenticate_header(self, request):
-        return 'Token realm="api"'
+        return 'Bearer realm="api"'
