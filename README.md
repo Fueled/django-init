@@ -41,7 +41,7 @@ If you opt to setup the project automatically, it will also:
 
 then only thing you'll need to do is:
 
-1. `cd` into the new `github_repository` folder just created.
+1. `cd` into the new `{{ cookiecutter.repository }}` folder just created.
 2. Activate virtualenv `source venv/bin/activate`.
 3. Run `fab serve` or `./manage.py runserver`
 
