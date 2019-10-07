@@ -6,7 +6,7 @@ vm=1
 deploy_env=vagrant
 project_namespace={% raw %}{{ project_name }}-{{ deploy_env }}{% endraw %}
 user=vagrant
-project_path=/home/vagrant/{{ cookiecutter.github_repository }}
+project_path=/home/vagrant/{{ cookiecutter.repository }}
 venv_path=/home/vagrant/venv
 django_requirements_file=requirements/development.txt
 django_settings="settings.development"
@@ -24,7 +24,7 @@ vm=0
 deploy_env=dev
 user=ubuntu
 project_namespace={% raw %}{{ project_name }}-{{ deploy_env }}{% endraw %}
-project_path=/home/ubuntu/{% raw %}{{ deploy_env }}{% endraw %}/{{ cookiecutter.github_repository }}
+project_path=/home/ubuntu/{% raw %}{{ deploy_env }}{% endraw %}/{{ cookiecutter.repository }}
 venv_path={% raw %}{{ project_path }}/venv{% endraw %}
 use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
 letsencrypt_email={{ cookiecutter.letsencrypt_email }}
@@ -41,7 +41,7 @@ vm=0
 deploy_env=qa
 user=ubuntu
 project_namespace={% raw %}{{ project_name }}-{{ deploy_env }}{% endraw %}
-project_path=/home/ubuntu/{% raw %}{{ deploy_env }}{% endraw %}/{{ cookiecutter.github_repository }}
+project_path=/home/ubuntu/{% raw %}{{ deploy_env }}{% endraw %}/{{ cookiecutter.repository }}
 venv_path={% raw %}{{ project_path }}/venv{% endraw %}
 use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
 letsencrypt_email={{ cookiecutter.letsencrypt_email }}
@@ -57,7 +57,7 @@ vm=0
 deploy_env=prod
 user=ubuntu
 project_namespace={% raw %}{{ project_name }}-{{ deploy_env }}{% endraw %}
-project_path=/home/ubuntu/{% raw %}{{ deploy_env }}{% endraw %}/{{ cookiecutter.github_repository }}
+project_path=/home/ubuntu/{% raw %}{{ deploy_env }}{% endraw %}/{{ cookiecutter.repository }}
 venv_path={% raw %}{{ project_path }}/venv{% endraw %}
 use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
 letsencrypt_email={{ cookiecutter.letsencrypt_email }}

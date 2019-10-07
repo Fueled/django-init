@@ -9,7 +9,7 @@ find . ! -path "*/venv/*" -type f -name "*.py" -exec bash -c "tail -n1 {} | read
 echo "${green}[Finished]${reset}"
 
 echo "==> Setup project dependencies? It will:"
-echo "  - Create virtualenv at './{{ cookiecutter.github_repository }}/venv/'."
+echo "  - Create virtualenv at './{{ cookiecutter.repository }}/venv/'."
 echo "  - Install development requirements inside virtualenv."
 echo "  - Create a postgres database named '{{ cookiecutter.main_module }}'."
 echo "  - Run './manage.py migrate'."
@@ -77,7 +77,7 @@ if echo "$yn" | grep -iq "^y"; then
         echo "${green}============================================"
         echo "All set! Run these commands to get started:"
         echo ""
-        echo "cd {{ cookiecutter.github_repository }}"
+        echo "cd {{ cookiecutter.repository }}"
         echo "./venv/bin/activate"
         echo "pytest"
         echo "./manage.py runserver"
@@ -94,7 +94,7 @@ if echo "$yn" | grep -iq "^y"; then
     fi
 else
     echo "==> Skipping project setup..."
-    echo "==> You can now 'cd {{ cookiecutter.github_repository }}/' and explore the project. "
+    echo "==> You can now 'cd {{ cookiecutter.repository }}/' and explore the project. "
     echo "    Read 'README.md' inside it for further setup instructions!"
     echo ""
     echo "${green} ============> HAPPY CODING <============ ${reset}"

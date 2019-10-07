@@ -139,18 +139,18 @@ Host {{ cookiecutter.main_module }}.com
     identityfile <PATH_OF_SERVER_PRIVATE_KEY_HERE>
 ```
 
-Add your github private key to your local ssh-agent, which will be used by ansible on remote server to fetch the code using `ForwardAgent`
+Add your {{ cookiecutter.git_hosting_service }} private key to your local ssh-agent, which will be used by ansible on remote server to fetch the code using `ForwardAgent`
 
-    ssh-add <PATH_TO_YOUR_GITHUB_PRIVATE_KEY>
+    ssh-add <PATH_TO_YOUR_{{ cookiecutter.git_hosting_service.upper() }}_PRIVATE_KEY>
 
 Now you can run the ansible script to setup the machine.
 
     fab prod configure
 
-This will setup os dependencies, services like supervisor, nginx and fetch our code from Github. Our production environment requires 
+This will setup os dependencies, services like supervisor, nginx and fetch our code from {{ cookiecutter.git_hosting_service.title() }}. Our production environment requires
 some environment variables in `.env`. So you can write a file `prod.env` locally and upload it to server with
 
-    scp prod.env {{ cookiecutter.main_module }}.com:/home/ubuntu/{{ cookiecutter.github_repository }}/.env
+    scp prod.env {{ cookiecutter.main_module }}.com:/home/ubuntu/{{ cookiecutter.repository }}/.env
 
 You can also use fab to set environment variables one by one:
 

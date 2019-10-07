@@ -39,17 +39,17 @@ test:
 deployment:
   dev:
     branch: master
-    owner: {{ cookiecutter.github_username }}
+    owner: {{ cookiecutter.username }}
     heroku: # add key via https://circleci.com/account/heroku
       appname: {{ cookiecutter.main_module }}-dev
   qa:
     branch: qa
-    owner: {{ cookiecutter.github_username }}
+    owner: {{ cookiecutter.username }}
     heroku:
       appname: {{ cookiecutter.main_module }}-qa
   prod:
     branch: prod
-    owner: {{ cookiecutter.github_username }}
+    owner: {{ cookiecutter.username }}
     heroku:
       appname: {{ cookiecutter.main_module }}-prod
 {% endif %}

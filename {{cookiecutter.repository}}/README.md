@@ -18,7 +18,7 @@ brew install postgres python3
 
 In your terminal, type or copy-paste the following:
 
-    git clone git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}.git; cd {{ cookiecutter.github_repository }}; fab init
+    git clone git@{{ cookiecutter.git_hosting_service }}.com:{{ cookiecutter.username }}/{{ cookiecutter.repository }}.git; cd {{ cookiecutter.repository }}; fab init
 
 Go grab a cup of coffee, we bake your hot development machine.
 
@@ -66,4 +66,4 @@ Avoid working on `master` branch, create a new branch with meaningful name, send
 
 Refer to [CONTRIBUTING.md][contributing]
 
-[contributing]: http://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_repository}}/tree/master/CONTRIBUTING.md
+[contributing]: http://{{ cookiecutter.git_hosting_service }}.com/{{cookiecutter.username}}/{{cookiecutter.repository}}/tree/master/CONTRIBUTING.md

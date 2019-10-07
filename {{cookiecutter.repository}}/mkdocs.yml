@@ -1,8 +1,8 @@
 # See: https://github.com/mkdocs/mkdocs/blob/master/docs/user-guide/configuration.md
 site_name: {{ cookiecutter.project_name }}
 site_description: {{ cookiecutter.project_description }}
-site_author: {{ cookiecutter.github_username }}
-repo_url: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}
+site_author: {{ cookiecutter.username }}
+repo_url: https://{{ cookiecutter.git_hosting_service }}.com/{{ cookiecutter.username }}/{{ cookiecutter.repository }}
 
 nav:
 - Home: index.md

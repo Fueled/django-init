@@ -1,6 +1,6 @@
 ---
 project_name: {{ cookiecutter.main_module }}
-project_repo_url: git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}.git
+project_repo_url: git@{{ cookiecutter.git_hosting_service }}.com:{{ cookiecutter.username }}/{{ cookiecutter.repository }}.git
 project_repo_remote: origin
 repo_version: master
 pg_gis: {{ 'True' if cookiecutter.postgis.lower() == 'y' else 'False' }}

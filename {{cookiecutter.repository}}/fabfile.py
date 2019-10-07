@@ -214,7 +214,7 @@ def deploy_docs():
 
 
 def deploy_docs():
-    """Deploy documentation to github pages.
+    """Deploy documentation to {{ cookiecutter.git_hosting_service }} pages.
     """
     with fab.lcd(HERE) and virtualenv():
         local("mkdocs gh-deploy")

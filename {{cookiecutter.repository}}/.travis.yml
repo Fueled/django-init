@@ -81,5 +81,5 @@ deploy:
     qa: {{ cookiecutter.main_module }}-qa
     prod: {{ cookiecutter.main_module }}-prod
   on:
-    repo: {{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}
+    repo: {{ cookiecutter.username }}/{{ cookiecutter.repository }}
 {% endif %}
