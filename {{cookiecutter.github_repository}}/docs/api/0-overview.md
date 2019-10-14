@@ -19,7 +19,7 @@ curl -X GET http://127.0.0.1:8000/api/example/ -H `Authorization: Bearer 9944b09
 By default, all requests receive the `1.0` version of the API. We encourage you to explicitly request this version via the Accept header.
 
 ```
-Accept: application/vnd.{{ cookicutter.main_module }}-com+json; version=1.0
+Accept: application/vnd.{{ cookiecutter.main_module|replace('_', '')|replace('-', '') }}-com+json; version=1.0
 ```
 
 __Important:__ The default version of the API may change in the future. If you're building an application and care about the stability of the API, be sure to request a specific version in the `Accept` header as shown in the examples below.
@@ -27,7 +27,7 @@ __Important:__ The default version of the API may change in the future. If you'r
 ```
 GET /bookings/ HTTP/1.1
 Host: example.com
-Accept: application/vnd.{{ cookicutter.main_module }}-com+json; version=1.0
+Accept: application/vnd.{{ cookiecutter.main_module|replace('_', '')|replace('-', '') }}-com+json; version=1.0
 ```
 
 
