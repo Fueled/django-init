@@ -81,6 +81,7 @@ REST_FRAMEWORK = {
 
     # Default renderer classes for Rest framework
     "DEFAULT_RENDERER_CLASSES": [
+        "{{ cookicutter.main_module }}.base.renderers.{{ cookicutter.main_module.title() }}ApiRenderer",
         "rest_framework.renderers.JSONRenderer",
         "rest_framework.renderers.BrowsableAPIRenderer",
     ],
