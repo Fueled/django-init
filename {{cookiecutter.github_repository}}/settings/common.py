@@ -81,6 +81,7 @@ REST_FRAMEWORK = {
 
     # Default renderer classes for Rest framework
     "DEFAULT_RENDERER_CLASSES": [
+        "{{ cookiecutter.main_module }}.base.renderers.{{ cookiecutter.main_module|replace('_', ' ')|replace('-', ' ')|title|replace(' ', '') }}ApiRenderer",
         "rest_framework.renderers.JSONRenderer",
         "rest_framework.renderers.BrowsableAPIRenderer",
     ],
