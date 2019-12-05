@@ -6,7 +6,7 @@ server {
 
     {% if use_letsencrypt %}
         location /.well-known/acme-challenge/ {
-            root {{ letsencrypt_challange_root }};
+            root {{ letsencrypt_challenge_root }};
             try_files $uri =404;
         }
     {% endif %}

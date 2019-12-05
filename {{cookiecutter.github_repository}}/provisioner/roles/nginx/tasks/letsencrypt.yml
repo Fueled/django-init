@@ -16,7 +16,7 @@
 
 - name: create certbot folder
   become: yes
-  file: path={{ letsencrypt_challange_root }} state=directory owner={{ user }} group={{ nginx_user }} mode="u=rwx,g=rwxs,o=r"
+  file: path={{ letsencrypt_challenge_root }} state=directory owner={{ user }} group={{ nginx_user }} mode="u=rwx,g=rwxs,o=r"
 
 - name: reload nginx
   service: name=nginx state=reloaded
@@ -33,7 +33,7 @@
   service: name=nginx state=stopped
 
 - name: request cert
-  shell: certbot certonly --standalone -w {{ letsencrypt_challange_root }} -d {{ domain_name }} --email {{ letsencrypt_email }} --agree-tos --non-interactive
+  shell: certbot certonly --standalone -w {{ letsencrypt_challenge_root }} -d {{ domain_name }} --email {{ letsencrypt_email }} --agree-tos --non-interactive
   args:
     creates: '{{ letsencrypt_ssl_cert_dir }}'
 
@@ -45,4 +45,13 @@
 
 - name: symblink certificates
   file: src={{ letsencrypt_ssl_cert_dir }} dest={{ ssl_cert_dir }}/{{ domain_name }} owner={{ user }} group=www-data state=link
+
+# running cron job each monday
+- name: add letsencrypt renew cron
+  cron:
+   name: "Renew all certificates"
+   minute: "0"
+   hour: "2"
+   weekday: "1"
+   job: "certbot renew --non-interactive --webroot --webroot-path {{ letsencrypt_challenge_root }} --renew-hook 'service nginx reload' >> /var/log/certbot.log"
 {%endraw%}
