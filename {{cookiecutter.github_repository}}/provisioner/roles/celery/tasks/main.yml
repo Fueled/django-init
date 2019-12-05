@@ -3,35 +3,35 @@
   template: src=celery.log.j2
             dest=/etc/logrotate.d/celery-{{ project_namespace }}
             mode=644
-  tags: ['configure', 'celery']
+  tags: ["configure", "celery"]
 
 - name: make sure log directory exists
   file: path={{ celery_log_dir }} state=directory owner={{celery_user}} group={{celery_group}} mode=751 recurse=yes
-  tags: ['configure', 'celery']
+  tags: ["configure", "celery"]
 
 - name: manually create the initial virtualenv
   command: virtualenv {{ venv_path }} -p python3 creates={{ venv_path }}
   become: false
-  tags: ['celery']
+  tags: ["celery"]
 
 - name: ensure celery package is installed
   pip: name=celery state=present executable={{ venv_path }}/bin/pip
   become: false
-  tags: ['celery']
+  tags: ["celery"]
 
 - name: copy celery service
   template: src=celery.service.j2 dest=/etc/systemd/system/celery-{{ project_namespace }}.service
-  tags: ['celery']
+  tags: ["celery"]
 
 - name: copy celery beat service
   template: src=celerybeat.service.j2 dest=/etc/systemd/system/celerybeat-{{ project_namespace }}.service
-  tags: ['celery']
+  tags: ["celery"]
 
 - name: ensure celery worker is running
   systemd: state=restarted daemon_reload=yes enabled=yes name=celery-{{ project_namespace }}
-  tags: ['celery', 'deploy']
+  tags: ["celery", "deploy"]
 
 - name: ensure celerybeat worker is running
   systemd: state=started daemon_reload=yes enabled=yes name=celerybeat-{{ project_namespace }}
-  tags: ['celery', 'deploy']
+  tags: ["celery", "deploy"]
 {% endraw %}

@@ -1,11 +1,14 @@
 {%raw%}---
 - name: Add official Nginx repo
   apt_repository:
-    repo: 'ppa:nginx/stable'
+    repo: "ppa:nginx/stable"
     update_cache: yes
 
 - name: install NGINX Server.
-  apt: pkg=nginx-full state=present
+  apt:
+    name: nginx-full
+    state: present
+    cache_valid_time: 300
 
 - name: make sure ssl directory exists
   file: path={{ ssl_cert_dir }} state=directory

@@ -4,57 +4,57 @@
   become: false
   register: gitresult
   when: vm == 0
-  tags: ['always']
+  tags: ["always"]
 
 - debug: msg="Git SHA-1 before={{ gitresult.before }} after={{ gitresult.after }}"
-  tags: ['always']
+  tags: ["always"]
 
 - name: ensure python virtualenv exist
   command: virtualenv {{ venv_path }} -p python3.7 creates={{ venv_path }}
   become: false
-  tags: ['always']
+  tags: ["always"]
 
 - name: install django python dependencies
   pip: requirements={{ project_path }}/{{ django_requirements_file }}  executable={{ venv_path }}/bin/pip
   become: false
-  tags: ['deploy']
+  tags: ["deploy"]
 
 - name: copy env configuration
   template: src=env.env.j2 dest={{ project_path }}/.env force=no
   become: false
-  tags: ['configure']
+  tags: ["configure"]
 
 - name: install gettext for translations
   apt:
     pkg: gettext
     state: present
-{% endraw %}{%- if cookiecutter.webpack.lower() == 'y' %}
+{% endraw %}{%- if cookiecutter.webpack.lower() == "y" %}
 - include: webpack.yml
 {% else %}{% raw %}
 - name: collect static
   django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
-  tags: ['deploy']
+  tags: ["deploy"]
 {% endraw %}{% endif %}{% raw %}
 
 - name: Run database migrations
   django_manage: command=migrate app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
-  tags: ['deploy']
+  tags: ["deploy"]
 
 - import_tasks: uwsgi-setup.yml
 
 - name: run compilemessages for static translations
   django_manage: command=compilemessages app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
-  tags: ['deploy']
+  tags: ["deploy"]
 
 - name: reload uwsgi processes
   command: uwsgi --reload {{ uwsgi_pid_file }}
   become: true
   when: not uwsgiconf.changed
-  tags: ['deploy']{% endraw %}
-  {%- if cookiecutter.add_celery.lower() == 'y' %}
+  tags: ["deploy"]{% endraw %}
+  {%- if cookiecutter.add_celery.lower() == "y" %}
   notify: reload celery  # reload celery everytime uwsgi conf changes
   {%- endif %}
 
@@ -63,4 +63,4 @@
   args:
     chdir: "{{ project_path }}"
   become: false
-  tags: ['deploy', 'documentation']{% endraw %}
+  tags: ["deploy", "documentation"]{% endraw %}

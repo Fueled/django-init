@@ -10,7 +10,7 @@ Group={{ celery_group }}
 Restart=always
 WorkingDirectory={{ project_path }}
 ExecStart={{ venv_path }}/bin/celery beat -A {{ project_name }}  -l {{ celery_log_level }} \
-    --logfile={{ celerybeat_log_file }} --pidfile={{ celerybeat_pid_file }}  --schedule={{ celerybeat_schedule_file}}
+    --logfile={{ celerybeat_log_file }} --pidfile={{ celerybeat_pid_file }}  --schedule={{ celerybeat_schedule_file }}
 
 [Install]
 WantedBy=multi-user.target

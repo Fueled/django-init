@@ -10,10 +10,10 @@ Type=forking
 Restart=always
 WorkingDirectory={{ project_path }}
 ExecStart={{ venv_path }}/bin/celery multi start worker-{{ project_namespace }} -A {{ project_name }} -l {{ celery_log_level }} \
-    --logfile={{ celery_log_file }} --pidfile={{ celery_pid_file }}  --schedule={{ celerybeat_schedule_file}}
+    --logfile={{ celery_log_file }} --pidfile={{ celery_pid_file }}  --schedule={{ celerybeat_schedule_file }}
 ExecStop={{ venv_path }}/bin/celery multi stopwait worker-{{ project_namespace }} --pidfile={{ celery_pid_file }}
 ExecReload={{ venv_path }}/bin/celery multi restart worker-{{ project_namespace }} -A {{ project_name }} -l {{ celery_log_level }} \
-    --logfile={{ celery_log_file }} --pidfile={{ celery_pid_file }}  --schedule={{ celerybeat_schedule_file}}
+    --logfile={{ celery_log_file }} --pidfile={{ celery_pid_file }}  --schedule={{ celerybeat_schedule_file }}
 
 [Install]
 WantedBy=multi-user.target

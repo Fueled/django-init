@@ -1,18 +1,26 @@
 {%raw%}---
-- name: apt-get install letsencrypt dependencies packages
-  apt:
-    pkg: ['augeas-lenses', 'dialog', 'libaugeas0', 'libffi-dev']
-    state: present
-
 - name: Add official Certbot repo
   apt_repository:
-    repo: 'ppa:certbot/certbot'
+    repo: "ppa:certbot/certbot"
     update_cache: yes
+
+- name: apt-get install letsencrypt dependencies packages
+  apt:
+    pkg: [
+      "augeas-lenses",
+      "dialog",
+      "libaugeas0",
+      "libffi-dev",
+      "software-properties-common"
+    ]
+    state: present
+    cache_valid_time: 300
 
 - name: install certbot
   apt:
-    pkg: python-certbot-nginx
+    pkg: ["certbot", "python-certbot-nginx"]
     state: present
+    cache_valid_time: 300
 
 - name: create certbot folder
   become: yes
@@ -27,7 +35,10 @@
   when: apt_updated is not defined
 
 - name: upgrade ca-certificates
-  apt: pkg=ca-certificates state=latest
+  apt:
+    name: ca-certificates
+    state: latest
+    cache_valid_time: 300
 
 - name: stop nginx if running
   service: name=nginx state=stopped
@@ -35,7 +46,7 @@
 - name: request cert
   shell: certbot certonly --standalone -w {{ letsencrypt_challenge_root }} -d {{ domain_name }} --email {{ letsencrypt_email }} --agree-tos --non-interactive
   args:
-    creates: '{{ letsencrypt_ssl_cert_dir }}'
+    creates: "{{ letsencrypt_ssl_cert_dir }}"
 
 - name: start nginx
   service: name=nginx state=started

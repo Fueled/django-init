@@ -30,12 +30,12 @@
     path: "{{ project_path }}"
     global: no
   become: false
-  tags: ['deploy']
+  tags: ["deploy"]
 
 - name: Run build webpack
   command: "npm run build"
   become: false
-  tags: ['deploy']
+  tags: ["deploy"]
   environment:
     NODE_ENV: production
   args:
@@ -47,5 +47,5 @@
     app_path: "{{ project_path }}"
     virtualenv: "{{ venv_path }}"
   become: false
-  tags: ['deploy']
+  tags: ["deploy"]
 {% endraw %}

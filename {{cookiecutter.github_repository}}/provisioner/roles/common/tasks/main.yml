@@ -13,7 +13,7 @@
 #- name: Disable ipv6 for local interface
 #  sysctl: name="net.ipv6.conf.lo.disable_ipv6" value=1 state=present
 #  when: vm == 1
-- name: Set hostname
+- name: set hostname
   action: shell hostnamectl set-hostname {{ domain_name }}
   when: vm == 0
 
@@ -30,21 +30,28 @@
         force=yes
         state=link
 
-- name: 'Add python3.7 (ppa:deadsnakes/ppa) repository'
+- name: add apt repository for python3.7
   apt_repository:
-    repo: 'ppa:deadsnakes/ppa'
+    repo: "ppa:deadsnakes/ppa"
+    state: present
     update_cache: yes
 
-- name: update apt cache
-  shell: apt update
-  become: yes
-  register: apt_updated
+- name: add an Apt signing key to validate packages from PostgreSQL Repo
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
+- name: add to PostgreSQL.list
+  apt_repository:
+    repo: deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
+    state: present
+    update_cache: yes
 
 - name: ensure a default bashrc and inputrc file
   copy: src={{ item.src }} dest=/home/{{ user }}/{{ item.dest }} owner={{ user }} group={{ user }}
   with_items:
-    - { src: 'bashrc', dest: '.bashrc' }
-    - { src: 'inputrc', dest: '.inputrc' }
+    - { src: "bashrc", dest: ".bashrc" }
+    - { src: "inputrc", dest: ".inputrc" }
 
 - name: ensure .pip directory exists
   file:
@@ -57,14 +64,17 @@
 - name: ensure default pypi mirror for easy_install and virtualenv is pypi.python.org
   copy: src={{ item.src }} dest=/home/{{ user }}/{{ item.dest }} owner={{ user }} group={{ user }}
   with_items:
-    - { src: 'pydistutils.cfg', dest: '.pydistutils.cfg' }
-    - { src: 'pip.conf', dest: '.pip/pip.conf' }
+    - { src: "pydistutils.cfg", dest: ".pydistutils.cfg" }
+    - { src: "pip.conf", dest: ".pip/pip.conf" }
 
 - name: apt_get install common packages
-  apt: pkg={{base_ubuntu.common.apt_packages}} state=present
+  apt:
+    name: {{base_ubuntu.common.apt_packages}}
+    state: present
+    cache_valid_time: 300
 
 - name: ensure there is a group www-data
-  group: name=www-data state=present system=yes{% endraw %}
+  group: name=www-data state=present system=yes
 
 - name: ensure there is a user www-data
-  user: name=www-data group=www-data system=yes
+  user: name=www-data group=www-data system=yes{% endraw %}
