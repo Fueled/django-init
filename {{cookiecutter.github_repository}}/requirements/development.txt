@@ -20,7 +20,7 @@ pytest-mock==1.10.4
 
 # Versioning
 # -------------------------------------
-bumpversion==0.5.3
+bump2version==0.5.11
 
 # Deployment and Tasks
 # -------------------------------------
