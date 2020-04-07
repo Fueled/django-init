@@ -11,7 +11,7 @@
 
 - name: Install postgresql packages
   apt:
-    pkg: ['postgresql-11', 'postgresql-contrib', 'python-psycopg2']
+    pkg: ['postgresql-11', 'postgresql-contrib', 'python3-psycopg2']
     state: present
 
 - name: Install postgis packages
