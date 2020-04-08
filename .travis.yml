@@ -12,20 +12,24 @@ cache:
   directories:
   - node_modules # NPM packages
 
-services:
-  - docker
-
 env:
   global:
   - PGHOST=localhost
   - PGUSER=postgres
-  - PGPORT=5432
+  - PGPORT=5433
 
 before_install:
-  - sudo service postgresql stop
-  - docker pull postgres:11
-  - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw postgres:11
-  - docker ps
+  - sudo apt-get update
+  - sudo apt-get --yes remove postgresql\*
+  - sudo apt-get install -y postgresql-11 postgresql-client-11
+  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
+  - sudo service postgresql restart 11
+
+services:
+  - postgresql
+
+addons:
+  postgresql: "11.2"
 
 install:
   - pip install cookiecutter==1.6.0
