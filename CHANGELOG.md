@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.x]
 
+- Remove support for Circle CI ([@theskumar])
 - vendor media type for accept headers. ([@tucosaurus]) 
 - Add black in pre-commit and also formatted exiting code as per black. ([@theskumar])
 - Upgrade to run on Python 3.7 ([@theskumar])
