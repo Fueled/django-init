@@ -19,7 +19,7 @@ env:
   global:
   - PGHOST=localhost
   - PGUSER=postgres
-  - PGPORT=5432
+  - PGPORT=5433
 
 before_install:
   - sudo service postgresql stop
