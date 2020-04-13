@@ -30,7 +30,7 @@ psycopg2-binary==2.8.2
 Pillow==6.2.0
 django-extensions==2.1.9
 django-uuid-upload-path==1.0.0
-django-versatileimagefield==2.01
+django-versatileimagefield==2.0
 
 # REST APIs
 # -------------------------------------
