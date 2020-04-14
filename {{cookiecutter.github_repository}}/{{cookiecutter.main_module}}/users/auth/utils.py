@@ -3,7 +3,7 @@
 from uuid import UUID
 
 # Third Party Stuff
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 
@@ -19,6 +19,6 @@ def decode_uuid_from_base64(uuid_value: str):
     Returns a valid UUID value or None
     """
     try:
-        return UUID(force_text(urlsafe_base64_decode(uuid_value)))
+        return UUID(force_str(urlsafe_base64_decode(uuid_value)))
     except (ValueError, OverflowError, TypeError):
         return None
