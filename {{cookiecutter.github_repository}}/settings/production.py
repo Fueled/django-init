@@ -106,9 +106,7 @@ if ENABLE_MEDIA_UPLOAD_TO_S3:
     # Revert the following and use str after the above-mentioned bug is fixed in
     # either django-storage-redux or boto
     AWS_HEADERS = {
-        "Cache-Control": "max-age={}, s-maxage={}, must-revalidate".format(
-            AWS_EXPIRY, AWS_EXPIRY
-        )
+        "Cache-Control": f"max-age={AWS_EXPIRY}, s-maxage={AWS_EXPIRY}, must-revalidate"
     }
 
     # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
