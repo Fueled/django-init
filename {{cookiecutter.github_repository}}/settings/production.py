@@ -12,10 +12,6 @@ Adds sensible default for running app in production.
 # Standard Library
 from email.utils import getaddresses
 
-# Third Party Stuff
-from django.utils import six
-
-
 from .common import *  # noqa F405
 from .common import (
     DATABASES,
@@ -110,9 +106,7 @@ if ENABLE_MEDIA_UPLOAD_TO_S3:
     # Revert the following and use str after the above-mentioned bug is fixed in
     # either django-storage-redux or boto
     AWS_HEADERS = {
-        "Cache-Control": six.b(
-            "max-age=%d, s-maxage=%d, must-revalidate" % (AWS_EXPIRY, AWS_EXPIRY)
-        )
+        "Cache-Control": f"max-age={AWS_EXPIRY}, s-maxage={AWS_EXPIRY}, must-revalidate"
     }
 
     # URL that handles the media served from MEDIA_ROOT, used for managing stored files.

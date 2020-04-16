@@ -9,7 +9,7 @@ boto3==1.9.165
 
 # Caching
 # -------------------------------------
-django-redis==4.10.0
+django-redis==4.11.0
 hiredis==1.0.0
 
 {% if cookiecutter.newrelic == 'y' %}

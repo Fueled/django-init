@@ -7,7 +7,7 @@ import environ
 {%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
 from corsheaders.defaults import default_headers
 {%- endif %}
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 2 = /a/)
