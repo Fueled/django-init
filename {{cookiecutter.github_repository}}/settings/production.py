@@ -108,6 +108,7 @@ if ENABLE_MEDIA_UPLOAD_TO_S3:
     AWS_HEADERS = {
         "Cache-Control": "max-age={}, s-maxage={}, must-revalidate".format(
             AWS_EXPIRY, AWS_EXPIRY
+        )
     }
 
     # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
