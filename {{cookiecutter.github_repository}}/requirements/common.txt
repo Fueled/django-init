@@ -16,7 +16,7 @@ django-cors-headers==3.1.1
 {% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
 # Staticfiles
 # -------------------------------------
-whitenoise==4.1.2
+whitenoise==5.0.1
 {%- endif %}
 
 # Extensions
