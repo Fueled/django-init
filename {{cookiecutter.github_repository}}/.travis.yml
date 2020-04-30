@@ -2,22 +2,26 @@
 # see the Travis CI documentation: https://docs.travis-ci.com
 
 language: python
-dist: xenial
+dist: bionic
 
 python:
-  - '3.7.3'
+  - '3.7'
 
 node_js:
-  - "10"
+  - '13'
+
+services:
+  - postgresql
 
 addons:
-  postgresql: "11.2"
-
-{%- if cookiecutter.postgis.lower() == 'y' %}
-addons:
+  postgresql: '11'
   apt:
     packages:
-      - libgdal-dev
+    - postgresql-11
+    - postgresql-client-11
+{%- if cookiecutter.postgis.lower() == 'y' %}
+    - libgdal-dev
+    - postgresql-11-postgis-2.5
 {%- endif %}
 
 cache:
@@ -30,28 +34,11 @@ services:
 
 env:
   global:
-  - PGDATABASE=postgres
-  - PGHOST=localhost
-  - PGUSER=postgres
-  - PGPASS=''
-  - PGPORT=5433
 {%- if cookiecutter.postgis.lower() == 'y' %}
-  - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
-  - POSTGRES_IMAGE=mdillon/postgis:11
+  - DATABASE_URL=postgis://postgres@localhost/postgres
 {%- else %}
-  - DATABASE_URL=postgres://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
-  - POSTGRES_IMAGE=postgres:11
+  - DATABASE_URL=postgres://postgres@localhost/postgres
 {%- endif %}
-
-before_install:
-  - sudo apt-get update
-  - sudo apt-get --yes remove postgresql\*
-  - sudo apt-get install -y postgresql-11 postgresql-client-11
-  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
-  - sudo service postgresql restart 11
-
-before_cache:
-  - rm -f $HOME/.cache/pip/log/debug.log
 
 install:
   - pip install -r requirements/development.txt

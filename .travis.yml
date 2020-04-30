@@ -1,5 +1,5 @@
 language: python
-dist: xenial
+dist: bionic
 
 python:
   - '3.7'
@@ -7,29 +7,26 @@ python:
 node_js:
   - "10"
 
-cache:
-  pip: true
-  directories:
-  - node_modules # NPM packages
-
-env:
-  global:
-  - PGHOST=localhost
-  - PGUSER=postgres
-  - PGPORT=5433
-
-before_install:
-  - sudo apt-get update
-  - sudo apt-get --yes remove postgresql\*
-  - sudo apt-get install -y postgresql-11 postgresql-client-11
-  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
-  - sudo service postgresql restart 11
-
 services:
   - postgresql
 
 addons:
-  postgresql: "11.2"
+  postgresql: "11"
+  apt:
+    packages:
+    - postgresql-11
+    - postgresql-client-11
+    - libgdal-dev
+    - postgresql-11-postgis-2.5
+
+env:
+  global:
+    - DATABASE_URL=postgis://postgres@localhost/postgres
+
+cache:
+  pip: true
+  directories:
+  - node_modules # NPM packages
 
 install:
   - pip install cookiecutter==1.6.0
