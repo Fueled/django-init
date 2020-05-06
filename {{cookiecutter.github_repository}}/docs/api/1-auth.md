@@ -37,6 +37,7 @@ Status: 200 OK
 }
 ```
 
+
 ## Register
 
 ```
@@ -45,20 +46,26 @@ POST /api/auth/register
 
 __Parameters__
 
-Name     | Description
----------|-------------------------------------
-email    | email of the user. Errors out if email already registered.
-password | password of the user.
+| Name       | Description                                                |
+| ---------- | ---------------------------------------------------------- |
+| email      | email of the user. Errors out if email already registered. |
+| password   | password of the user.                                      |
+| first_name | first name of the user.                                    |
+| last_name  | last name of the user.                                     |
 
-__Request__
+**Request**
+
 ```json
 {
-    "email": "hello@example.com",
-    "password": "VerySafePassword0909"
+  "email": "hello@example.com",
+  "password": "VerySafePassword0909",
+  "first_name": "S",
+  "last_name": "K"
 }
 ```
 
 __Response__
+
 ```json
 
 Status: 201 Created
@@ -66,8 +73,8 @@ Status: 201 Created
     "auth_token": "eyJ0eXAiOiJKV1QiLCJh",
     "email": "test@test.com",
     "id": "f9dceed1-0f19-49f4-a874-0c2e131abf79",
-    "first_name": "",
-    "last_name": ""
+    "first_name": "S",
+    "last_name": "K"
 }
 ```
 
