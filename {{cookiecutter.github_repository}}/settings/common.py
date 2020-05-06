@@ -103,7 +103,7 @@ REST_FRAMEWORK = {
         # Mainly used for api debug.
         "rest_framework.authentication.SessionAuthentication",
     ),
-    "DEFAULT_SCHEMA_CLASS": 'rest_framework.schemas.coreapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "EXCEPTION_HANDLER": "{{ cookiecutter.main_module }}.base.exceptions.exception_handler",
 }
 
@@ -399,7 +399,7 @@ LOGGING = {
         "mail_admins": {
             "level": "ERROR",
             "filters": ["require_debug_false"],
-            "class": "django.utils.log.AdminEmailHandler"
+            "class": "django.utils.log.AdminEmailHandler",
         },
         {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
         "sentry": {
