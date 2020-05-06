@@ -15,11 +15,50 @@ pytestmark = pytest.mark.django_db
 
 def test_user_registration(client):
     url = reverse("auth-register")
+    credentials = {
+        "email": "test@test.com",
+        "password": "localhost",
+        "first_name": "S",
+        "last_name": "K",
+    }
+    response = client.json.post(url, json.dumps(credentials))
+    assert response.status_code == 201
+    expected_keys = ["id", "email", "first_name", "last_name", "auth_token"]
+    assert set(expected_keys).issubset(response.data.keys())
+
+    assert response.data["email"] == "test@test.com"
+    assert response.data["first_name"] == "S"
+    assert response.data["last_name"] == "K"
+
+
+def test_user_registration_without_name(client):
+    url = reverse("auth-register")
     credentials = {"email": "test@test.com", "password": "localhost"}
     response = client.json.post(url, json.dumps(credentials))
     assert response.status_code == 201
     expected_keys = ["id", "email", "first_name", "last_name", "auth_token"]
     assert set(expected_keys).issubset(response.data.keys())
+
+    assert response.data["email"] == "test@test.com"
+    assert response.data["first_name"] == ""
+    assert response.data["last_name"] == ""
+
+
+def test_user_registration_with_blank_name(client):
+    url = reverse("auth-register")
+    credentials = {
+        "email": "test@test.com",
+        "password": "localhost",
+        "first_name": "",
+        "last_name": "",
+    }
+    response = client.json.post(url, json.dumps(credentials))
+    assert response.status_code == 201
+    expected_keys = ["id", "email", "first_name", "last_name", "auth_token"]
+    assert set(expected_keys).issubset(response.data.keys())
+
+    assert response.data["first_name"] == ""
+    assert response.data["last_name"] == ""
 
 
 def test_user_login(client):
