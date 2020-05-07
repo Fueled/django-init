@@ -20,3 +20,8 @@ repos:
   hooks:
     - id: python-import-sorter
       args: ['--silent-overwrite']
+
+- repo: https://github.com/psf/black
+  rev: stable
+  hooks:
+    - id: black
