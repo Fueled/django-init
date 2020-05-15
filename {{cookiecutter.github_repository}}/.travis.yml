@@ -26,8 +26,6 @@ addons:
 
 cache:
   pip: true
-  directories:
-  - node_modules  # NPM packages
 
 services:
   - postgresql
@@ -42,13 +40,9 @@ env:
 
 install:
   - pip install -r requirements/development.txt
-  {%- if cookiecutter.webpack.lower() == 'y' %}
-  - npm install
-  {%- endif %}
 
 script:
 - flake8
-{% if cookiecutter.webpack.lower() == 'y' %}- npm run build{% endif %}
 - pytest --cov -v --tb=native
 {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 

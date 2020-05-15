@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ## [2.x]
 
+- Remove support for webpack ([@theskumar])
+- Use `Makefile` in the place of `fabric` ([@theskumar])
 - Add support for Django 3.x ([@CuriousLearner]).
 - Remove support for Circle CI ([@theskumar])
 - vendor media type for accept headers. ([@tucosaurus]) 

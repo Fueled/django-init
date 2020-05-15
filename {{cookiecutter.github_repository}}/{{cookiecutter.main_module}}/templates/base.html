@@ -1,7 +1,3 @@
-{%- if cookiecutter.webpack.lower() == 'y' %}
-{%- raw %}{% load webpack_static from webpack_loader %}
-{% load render_bundle from webpack_loader %}{%- endraw %}
-{%- endif %}
 {%- if cookiecutter.use_sentry_for_error_reporting.lower() == 'y' %}
 {%- raw %}{% load raven %}{% endraw %}
 {%- endif %}
@@ -20,14 +16,9 @@
         <script>Raven.config('{% sentry_public_dsn %}').install()</script>
     {% endif %}{% endraw %}
     {%- endif %}{% raw %}
-
-    {% block css %}{% endraw %}
-      {%- if cookiecutter.webpack.lower() != 'y' %}
-      {% raw %}<link href="{% static 'css/normalize.css' %}" rel="stylesheet">
-      <link href="{% static 'css/main.css' %}" rel="stylesheet">{% endraw %}
-      {% else %}
-      {% raw %}{% render_bundle 'main' 'css' %}{% endraw %}
-      {%- endif %}{% raw %}
+    {% block css %}
+      <link href="{% static 'css/normalize.css' %}" rel="stylesheet">
+      <link href="{% static 'css/main.css' %}" rel="stylesheet">
     {% endblock css %}
     {% block head_extras %}{% endblock %}
   </head>
@@ -51,12 +42,8 @@
     ================================================== -->
     {# Placed at the end of the document so the pages load faster #}
     {% block js %}
-      <!-- place project specific Javascript in this file -->{% endraw %}
-      {%- if cookiecutter.webpack.lower() == 'y' %}
-      {% raw %}{% render_bundle 'main' 'js' %}{% endraw %}
-      {%- else %}
-      {% raw %}<script src="{% static 'js/main.js' %}"></script>{% endraw %}
-      {%- endif %}{% raw %}
+      <!-- place project specific Javascript in this file -->
+      <script src="{% static 'js/main.js' %}"></script>
     {% endblock js %}
   </body>
 </html>{% endraw %}

@@ -64,10 +64,6 @@ docs/_build/
 # npm
 node_modules/
 
-# webpack
-webpack-stats.json
-dist
-
 # Campass
 .sass-cache
 

@@ -5,15 +5,8 @@ yes "yes" | python manage.py migrate
 
 # Run production checks
 python manage.py check --deploy
-{%- if cookiecutter.webpack.lower() == 'y' %}
-
-# build node packages
-npm install
-npm run build
-touch webpack-stats.json
-{%- endif %}
 
 # Run collectstatic
-python manage.py collectstatic --noinput {%- if cookiecutter.webpack.lower() == 'y' %}--clear -i js -i css -i server.js -i webpack.config.js{% endif %}
+python manage.py collectstatic --noinput
 
 # used by heroku after slug compilation
