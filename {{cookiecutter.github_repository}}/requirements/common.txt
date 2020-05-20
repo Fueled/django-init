@@ -41,11 +41,6 @@ django-rest-swagger==2.2.0
 # -------------------------------------
 django-log-request-id==1.4.0
 
-# Documentation
-# -------------------------------------
-mkdocs-material==4.4.0
-markdown-include==0.5.1
-
 {% if cookiecutter.use_sentry_for_error_reporting == "y" -%}
 # Raven is the Sentry client
 # --------------------------
@@ -63,3 +58,5 @@ celery[redis]==4.3.0
 # -------------------------------------
 PyJWT==1.7.1
 django-mail-templated==2.6.5
+
+-r docs.txt
