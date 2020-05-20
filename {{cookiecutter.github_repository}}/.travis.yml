@@ -7,48 +7,44 @@ dist: bionic
 python:
   - '3.7'
 
-node_js:
-  - '13'
-
 services:
-  - postgresql
+  - docker
 
+{%- if cookiecutter.postgis.lower() == 'y' %}
 addons:
-  postgresql: '11'
   apt:
     packages:
-    - postgresql-11
-    - postgresql-client-11
-{%- if cookiecutter.postgis.lower() == 'y' %}
     - libgdal-dev
     - postgresql-11-postgis-2.5
 {%- endif %}
 
 cache:
   pip: true
-  directories:
-  - node_modules  # NPM packages
-
-services:
-  - postgresql
 
 env:
   global:
+  - PGDATABASE=postgres
+  - PGHOST=localhost
+  - PGUSER=postgres
+  - PGPASS=''
+  - PGPORT=5432
+  - POSTGRES_IMAGE=mdillon/postgis:11
 {%- if cookiecutter.postgis.lower() == 'y' %}
-  - DATABASE_URL=postgis://postgres@localhost/postgres
+  - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
 {%- else %}
-  - DATABASE_URL=postgres://postgres@localhost/postgres
+  - DATABASE_URL=postgres://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
 {%- endif %}
+
+before_install:
+  - sudo service postgresql stop
+  - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw ${POSTGRES_IMAGE}
+  - docker ps
 
 install:
   - pip install -r requirements/development.txt
-  {%- if cookiecutter.webpack.lower() == 'y' %}
-  - npm install
-  {%- endif %}
 
 script:
 - flake8
-{% if cookiecutter.webpack.lower() == 'y' %}- npm run build{% endif %}
 - pytest --cov -v --tb=native
 {% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 

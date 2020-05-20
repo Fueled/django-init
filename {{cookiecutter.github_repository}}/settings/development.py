@@ -86,7 +86,3 @@ API_DEBUG = env.bool("API_DEBUG", default=True)
 
 # Media configuration to support deployment of media files while is debug=True or development.
 MEDIA_URL = env("MEDIA_URL", default="/media/")
-
-{%- if cookiecutter.webpack.lower() == "y" %}
-WEBPACK_LOADER["DEFAULT"]["CACHE"] = False  # noqa: F405
-{%- endif %}

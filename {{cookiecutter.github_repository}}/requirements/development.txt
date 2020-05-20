@@ -22,10 +22,9 @@ pytest-mock==1.10.4
 # -------------------------------------
 bump2version==0.5.11
 
-# Deployment and Tasks
+{% if cookiecutter.add_ansible.lower() == 'y' %}# Deployment and Tasks
 # -------------------------------------
-fabric3==1.14.post1
-{% if cookiecutter.add_ansible.lower() == 'y' %}ansible==2.5.15{% endif %}
+ansible==2.9.9{% endif %}
 
 {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
 # Code quality

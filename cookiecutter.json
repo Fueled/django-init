@@ -19,6 +19,5 @@
     , "add_django_auth_wall": "y"
     , "add_celery": "n"
     , "add_django_cors_headers": "y"
-    , "webpack": "y"
     , "add_pre_commit": "y"
 }

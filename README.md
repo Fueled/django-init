@@ -20,7 +20,6 @@ Project template for django based projects, optimized for making REST API with d
 - Custom `Auth` app with JWT based Token Backend system with `login`, `logout` and `current_user_profile` modification views for easier extensibility.
 - Media storage using Amazon S3 (optional)
 - [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org)
-- Static assets handling via webpack (optional)
 - robots.txt and humans.txt configured
 
 ## Getting Started
@@ -43,7 +42,7 @@ then only thing you'll need to do is:
 
 1. `cd` into the new `github_repository` folder just created.
 2. Activate virtualenv `source venv/bin/activate`.
-3. Run `fab serve` or `./manage.py runserver`
+3. Run `make run` or `./manage.py runserver`
 
 Don't forget to carefully look at the generated README. Awesome, right?
 

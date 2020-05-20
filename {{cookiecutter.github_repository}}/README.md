@@ -7,32 +7,27 @@ __Version:__ {{ cookiecutter.version }}
 
 ## Getting up and running
 
-Minimum requirements: **pip, fabric, python3.7{% if cookiecutter.webpack == 'y' %}, node, npm{% endif %}, redis & [PostgreSQL 11][install-postgres]{% if cookiecutter.postgis == 'y' %} with postgis-2.4{% endif %}**, setup is tested on Mac OSX only.
+Minimum requirements: **pip, python3.7, redis & [PostgreSQL 11][install-postgres]{% if cookiecutter.postgis == 'y' %} with postgis-2.4{% endif %}**, setup is tested on Mac OSX only.
 
 ```
 brew install postgres python3
-[sudo] pip install fabric
 ```
 
 [install-postgres]: http://www.gotealeaf.com/blog/how-to-install-postgresql-on-a-mac
 
 In your terminal, type or copy-paste the following:
 
-    git clone git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}.git; cd {{ cookiecutter.github_repository }}; fab init
+    git clone git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}.git; cd {{ cookiecutter.github_repository }}; make install
 
 Go grab a cup of coffee, we bake your hot development machine.
 
 Useful commands:
 
-- `fab serve` - start [django server](http://localhost:8000/)
-- `fab deploy_docs` - deploy docs to server
-- `fab test` - run the test locally with ipdb
-{%- if cookiecutter.webpack == 'y' %}
-- `npm run watch` - start webpack for watching and compling static files and auto-reloading server.
-- `npm run build` - build production staticfiles
-{%- endif %}
+- `make run` - start [django server](http://localhost:8000/)
+- `make deploy_docs` - deploy docs to server
+- `make test` - run the test locally with ipdb
 
-**NOTE:** Checkout `fabfile.py` for all the options available and what/how they do it.
+**NOTE:** Checkout `Makefile` for all the options available and how they do it.
 
 
 ## Deploying Project
@@ -47,7 +42,7 @@ Execute the following commands:
 
 ```
 git checkout master
-fab test
+make test
 bumpversion patch  # 'patch' can be replaced with 'minor' or 'major'
 git push origin master
 git push origin master --tags

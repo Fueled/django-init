@@ -63,9 +63,3 @@ celery[redis]==4.3.0
 # -------------------------------------
 PyJWT==1.7.1
 django-mail-templated==2.6.5
-{%- if cookiecutter.webpack.lower() == 'y' %}
-
-# WEBPACK
-# -------------------------------------
-django-webpack-loader==0.6.0
-{%- endif %}
