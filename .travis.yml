@@ -1,29 +1,27 @@
 language: python
-dist: xenial
+dist: bionic
 
 python:
   - '3.7'
 
-services:
-  - postgresql
 
-addons:
-  postgresql: "11"
-  apt:
-    packages:
-    - postgresql-11
-    - postgresql-client-11
-    - libgdal-dev
-    - postgresql-11-postgis-2.5
+services:
+  - docker
 
 env:
   global:
   - PGDATABASE=postgres
-  - PGHOST=127.0.0.1
+  - PGHOST=localhost
   - PGUSER=postgres
   - PGPASS=''
   - PGPORT=5432
-  - DATABASE_URL=postgres://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
+  - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
+  - POSTGRES_IMAGE=mdillon/postgis:11
+
+before_install:
+  - sudo service postgresql stop
+  - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw ${POSTGRES_IMAGE}
+  - docker ps
 
 cache:
   pip: true
