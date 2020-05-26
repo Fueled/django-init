@@ -5,7 +5,7 @@ Project template for django based projects, optimized for making REST API with d
 
 ## Features
 
-- Django 2.2.x
+- Django 3.0.x
 - Python 3.7.x
 - Support for [black](https://pypi.org/project/black/)!
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
