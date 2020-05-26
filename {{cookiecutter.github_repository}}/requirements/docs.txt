@@ -1,0 +1,5 @@
+# Documentation
+# -------------------------------------
+mkdocs-material==5.2.0
+markdown-include==0.5.1
+mkdocs-git-revision-date-localized-plugin==0.5.2

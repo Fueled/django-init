@@ -22,7 +22,7 @@ regenerate:  ## Delete and create new database.
 .PHONY: regenerate
 
 install: venv  ## Install and setup project dependencies
-	${PYTHON_PATH}python -m pip install -q -r requirements/development.txt
+	${PYTHON_PATH}python -m pip install -r requirements/development.txt
 	${PYTHON_PATH}pre-commit install
 ifneq ($(CI),True)
 	-createdb $(DB_NAME)
@@ -62,7 +62,8 @@ djurls:  ## Displays all the django urls
 shell:  ## Enter the django shell
 	${PYTHON_PATH}python manage.py shell_plus
 
-docs: install  ## Start documentation server locally
+docs: venv  ## Start documentation server locally
+	${PYTHON_PATH}python -m pip install -r requirements/docs.txt
 	${PYTHON_PATH}mkdocs serve
 
 {%- if cookiecutter.add_celery == 'y' %}
