@@ -8,6 +8,7 @@ argon2-cffi==19.1.0
 django-environ==0.4.5
 # For Django 3.x
 -e git+git://github.com/CuriousLearner/django-sites@upgrade-django-3.x#egg=django_sites
+black==19.10b0
 python-dotenv==0.10.3
 {%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
 django-cors-headers==3.1.1
