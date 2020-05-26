@@ -4,15 +4,15 @@ See: http://www.fabfile.org/
 """
 
 # Standard Library
+import os
 from contextlib import contextmanager as _contextmanager
 from functools import partial
 from os.path import dirname, isdir, join
 
 # Third Party Stuff
-import os
+from fabric import api as fab
 from fabric.api import env
 from fabric.api import local as fabric_local
-from fabric import api as fab
 
 local = partial(fabric_local, shell="/bin/bash")
 

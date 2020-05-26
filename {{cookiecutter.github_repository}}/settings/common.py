@@ -9,7 +9,6 @@ from corsheaders.defaults import default_headers
 {%- endif %}
 from django.utils.translation import gettext_lazy as _
 
-
 ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 2 = /a/)
 APPS_DIR = ROOT_DIR.path("{{ cookiecutter.main_module }}")
 
