@@ -2,25 +2,25 @@
 
 # Documentation
 # -------------------------------------
-isort==4.3.20
+isort==4.3.21
 
 # Debugging
 # -------------------------------------
 django-debug-toolbar==2.2
-ipdb==0.12
+ipdb==0.13.2
 
 # Testing and coverage
 # -------------------------------------
-pytest==4.6.2
-pytest-django==3.5.0
-pytest-cov==2.7.1
+pytest==5.4.2
+pytest-django==3.9.0
+pytest-cov==2.9.0
 django-dynamic-fixture==3.1.0
 flake8-mypy==17.8.0
-pytest-mock==1.10.4
+pytest-mock==3.1.0
 
 # Versioning
 # -------------------------------------
-bump2version==0.5.11
+bump2version==1.0.0
 
 {% if cookiecutter.add_ansible.lower() == 'y' %}# Deployment and Tasks
 # -------------------------------------
@@ -29,5 +29,5 @@ ansible==2.9.9{% endif %}
 {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
 # Code quality
 #--------------------------------------
-pre-commit==1.17.0
+pre-commit==2.4.0
 {%- endif %}
