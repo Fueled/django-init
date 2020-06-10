@@ -1,0 +1,30 @@
+---
+- name: add python 3 (ppa:deadsnakes/ppa) repository
+  apt_repository:
+    repo: 'ppa:deadsnakes/ppa'
+    update_cache: yes
+
+- name: ensure .pip directory exists
+  file:
+    path: /home/{{ user }}/.pip
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0775
+
+- name: ensure default pypi mirror for easy_install and virtualenv is pypi.python.org
+  copy: src={{ item.src }} dest=/home/{{ user }}/{{ item.dest }} owner={{ user }} group={{ user }}
+  with_items:
+    - { src: 'pydistutils.cfg', dest: '.pydistutils.cfg' }
+    - { src: 'pip.conf', dest: '.pip/pip.conf' }
+
+- name: Install Python {{ python_version }} packages
+  apt:
+    pkg: [
+      'python-setuptools',
+      'python3-virtualenv',
+      'python3-pip',
+      'python{{ python_version }}-dev',
+      'python{{ python_version }}-venv'
+    ]
+    state: present
