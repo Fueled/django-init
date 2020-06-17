@@ -55,7 +55,17 @@
   notify: reload celery  # reload celery everytime uwsgi conf changes
   {%- endif %}
 
-{% raw %}- name: Build documentation for "/docs" url.
+{% raw %}- name: apt_get install graphviz for db schema generation
+  apt: pkg=graphviz state=present
+
+- name: Generate DB Schema.
+  command: "{{ venv_path }}/bin/python bin/generate_db_schema.py"
+  args:
+    chdir: "{{ project_path }}"
+  become: false
+  tags: ['deploy', 'documentation']
+
+- name: Build documentation for "/docs" url.
   command: "{{ venv_path }}/bin/mkdocs build"
   args:
     chdir: "{{ project_path }}"

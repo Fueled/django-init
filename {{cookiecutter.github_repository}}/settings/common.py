@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     "raven.contrib.django.raven_compat",
 {%- endif %}
     "mail_templated",  # https://github.com/artemrizhov/django-mail-templated
+    "django_extensions",  # http://django-extensions.readthedocs.org/
 )
 
 # INSTALLED APPS CONFIGURATION

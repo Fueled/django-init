@@ -9,5 +9,6 @@ __Version:__ {{ cookiecutter.version }}
 - JIRA Board
 - [API Playground](/api-plaground)
 - [Django Admin](/admin)
+- [Database Schema](backend/database-schema.svg)
 
 {!releases.md!}
