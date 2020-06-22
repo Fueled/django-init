@@ -1,7 +1,12 @@
-django-init | [![Build Status](https://travis-ci.com/Fueled/django-init.svg?branch=master)](https://travis-ci.com/Fueled/django-init)
-============
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Fueled/django-init/master/.github/django-init-logo.png">
+</p>
 
-Project template for django based projects, optimized for making REST API with deployment on Heroku and EC2 instances via Ansible.
+<p align="center">
+<strong>django-init</strong> is a project template for Django based projects, optimized for making REST API with deployment on Heroku and EC2 instances via Ansible.
+</p>
+
+[![Build Status](https://travis-ci.com/Fueled/django-init.svg?branch=master)](https://travis-ci.com/Fueled/django-init)
 
 ## Features
 
