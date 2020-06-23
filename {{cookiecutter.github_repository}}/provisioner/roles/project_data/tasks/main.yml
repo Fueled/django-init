@@ -59,9 +59,10 @@
   apt: pkg=graphviz state=present
 
 - name: Generate DB Schema.
-  command: "{{ venv_path }}/bin/python bin/generate_db_schema.py"
+  shell: "source {{ venv_path }}/bin/activate && python bin/generate_db_schema.py"
   args:
     chdir: "{{ project_path }}"
+    executable: /bin/bash
   become: false
   tags: ['deploy', 'documentation']
 
