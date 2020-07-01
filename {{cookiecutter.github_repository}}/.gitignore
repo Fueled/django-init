@@ -84,6 +84,9 @@ _docs_html/
 media/
 provisioner/site.retry
 
+# DB Schema as it gets generated on server
+database-schema.svg
+
 # Virtualenv
 venv/
 

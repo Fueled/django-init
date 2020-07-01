@@ -59,4 +59,9 @@ celery[redis]==4.4.2
 PyJWT==1.7.1
 django-mail-templated==2.6.5
 
+# Generating DB Schema
+# --------------------------------------
+pydot==1.4.1
+pyparsing==2.4.6
+
 -r docs.txt

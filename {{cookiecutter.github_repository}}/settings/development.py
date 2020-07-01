@@ -64,10 +64,6 @@ CACHES = {
     }
 }
 
-# django-extensions (http://django-extensions.readthedocs.org/)
-# ------------------------------------------------------------------------------
-INSTALLED_APPS += ("django_extensions",)
-
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
 MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]  # noqa: F405

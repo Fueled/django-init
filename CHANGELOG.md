@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.x]
 
+- Add database schema generation in docs on deployment ([@jainmickey])
 - Remove support for webpack ([@theskumar])
 - Use `Makefile` in the place of `fabric` ([@theskumar])
 - Add support for Django 3.x ([@CuriousLearner]).

@@ -26,7 +26,7 @@ else
 fi
 
 if echo "{{ cookiecutter.enable_heroku_deployment }}" | grep -iq "^n"; then
-    rm -rf uwsgi.ini Procfile runtime.txt bin
+    rm -rf uwsgi.ini Procfile runtime.txt bin/post_compile
 fi
 
 if echo "{{ cookiecutter.add_ansible }}" | grep -iq "^n"; then
