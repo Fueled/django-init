@@ -1,14 +1,16 @@
 # ChangeLog
+
 All notable changes to this project will be documented in this file.
 
 ## [2.x]
 
+- Add utility `build_urlencoded_query_params` in `base.utils.urls` ([@CuriousLearner]).
 - Add database schema generation in docs on deployment ([@jainmickey])
 - Remove support for webpack ([@theskumar])
 - Use `Makefile` in the place of `fabric` ([@theskumar])
 - Add support for Django 3.x ([@CuriousLearner]).
 - Remove support for Circle CI ([@theskumar])
-- vendor media type for accept headers. ([@tucosaurus]) 
+- vendor media type for accept headers. ([@tucosaurus])
 - Add black in pre-commit and also formatted exiting code as per black. ([@theskumar])
 - Upgrade to run on Python 3.7 ([@theskumar])
 - Update celery concurrency to default to number of CPUs ([@theskumar])
@@ -32,8 +34,8 @@ All notable changes to this project will be documented in this file.
 - Upgrade to Django RestFramework 3.8 ([@tucosaurus])
 - Add optional password protection to the project documentation url. [@tucosaurus]
 
-
 ## [1.11]
+
 - Upgrade to Django RestFramework 3.7 ([@theskumar])
 - Adds custom Token based authentication for user login and registration. ([@CuriousLearner])
 - Separates out celery beat process as different worker for multi-node setups. ([@CuriousLearner])
@@ -53,6 +55,7 @@ All notable changes to this project will be documented in this file.
 - Replace gunicorn with uwsgi as wsgi handler ([@vikalpj])
 
 ### Fixes
+
 - Make default s3 region null.
 - RemovedInDjango20Warning: Update admin url to new style url include. ([@theskumar])
 - RemovedInDjango20Warning: Use new-style MIDDLEWARE settings. ([@theskumar])
@@ -73,6 +76,7 @@ All notable changes to this project will be documented in this file.
 - Livereload support via devrecargar
 
 ### Changed
+
 - Dropped support for Python2 ([@akarambir]).
 - Improved project level logging support ([@vikalpj])
 - Remove factoryboy, use [django-dynamic-fixtures] for factories.
@@ -93,6 +97,7 @@ All notable changes to this project will be documented in this file.
 ## [1.1.0]
 
 ### Added
+
 - Provide a basic override for `admin/base_site.html`
 - `base.utils.pagination.paginated_response` now accepts and additional `extra_context` parameter.
 - Add Postgresql postgis support for Geo-django.
@@ -109,6 +114,7 @@ All notable changes to this project will be documented in this file.
 - Add variable in Nginx site configuration for max body size a client can send/upload.
 
 ### Changed
+
 - Use `REDIS_URL` instead of `REDISTOGO_URL` for production redis connection.
 - Replace redistogo with heroku-redis as default redis provider
 - Use Official Postgresql apt-repo instead of Ubuntu's default.
@@ -120,7 +126,9 @@ All notable changes to this project will be documented in this file.
 - Remove dependency on `django_extensions` for `TimeStampUUIDModel`
 
 ## [1.0.0]
+
 ### Added
+
 - latest template configuration via dict
 - `redistomonitor` addon on heroku setup
 - `django-flat-theme` for admin interface
@@ -144,7 +152,6 @@ All notable changes to this project will be documented in this file.
 [1.2.0-dev]: https://github.com/Fueled/django-init/compare/v1.1.0...master
 [1.1.0]: https://github.com/Fueled/django-init/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Fueled/django-init/compare/v0.0.1...v1.0.0
-
 [@theskumar]: https://github.com/theskumar
-[@CuriousLearner]: https://github.com/CuriousLearner
+[@curiouslearner]: https://github.com/CuriousLearner
 [@tucosaurus]: https://github.com/tucosaurus

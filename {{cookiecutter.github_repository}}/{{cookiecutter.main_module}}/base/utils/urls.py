@@ -2,6 +2,7 @@
 import django_sites as sites
 from django.conf import settings
 from django.urls import reverse as django_reverse
+from urllib.parse import quote_plus
 
 URL_TEMPLATE = "{scheme}://{domain}/{path}"
 
@@ -41,3 +42,9 @@ def reverse(viewname, *args, **kwargs):
     """Same behavior as django's reverse but uses django_sites to compute absolute url.
     """
     return get_absolute_url(django_reverse(viewname, *args, **kwargs))
+
+
+def build_urlencoded_query_params(query_params_dict):
+    """Urlencode a dictionary of query params for generating a valid urlencoded url.
+    """
+    return "&".join([k + "=" + quote_plus(v) for k, v in query_params_dict.items()])
