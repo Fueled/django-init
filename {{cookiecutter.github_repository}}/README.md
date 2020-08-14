@@ -10,7 +10,7 @@ __Version:__ {{ cookiecutter.version }}
 Minimum requirements: **pip, python3.7, redis & [PostgreSQL 11][install-postgres]{% if cookiecutter.postgis == 'y' %} with postgis-2.4{% endif %}**, setup is tested on Mac OSX only.
 
 ```
-brew install postgres python3
+brew install python3 libmagic postgres {% if cookiecutter.postgis == 'y' %}postgis{% endif %}
 ```
 
 [install-postgres]: http://www.gotealeaf.com/blog/how-to-install-postgresql-on-a-mac
