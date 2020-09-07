@@ -1,6 +1,10 @@
 # ChangeLog
 All notable changes to this project will be documented in this file.
 
+## [3.x]
+
+- Renamed setting `CORS_ORIGIN_WHITELIST` to`CORS_ALLOWED_ORIGINS`. ([@theskumar])
+
 ## [2.x]
 
 - Add database schema generation in docs on deployment ([@jainmickey])
@@ -8,7 +12,7 @@ All notable changes to this project will be documented in this file.
 - Use `Makefile` in the place of `fabric` ([@theskumar])
 - Add support for Django 3.x ([@CuriousLearner]).
 - Remove support for Circle CI ([@theskumar])
-- vendor media type for accept headers. ([@tucosaurus]) 
+- vendor media type for accept headers. ([@tucosaurus])
 - Add black in pre-commit and also formatted exiting code as per black. ([@theskumar])
 - Upgrade to run on Python 3.7 ([@theskumar])
 - Update celery concurrency to default to number of CPUs ([@theskumar])
