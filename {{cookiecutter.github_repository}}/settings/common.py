@@ -339,7 +339,7 @@ REQUEST_ID_RESPONSE_HEADER = "REQUEST_ID"
 
 # CORS
 # --------------------------------------------------------------------------
-CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST", default=[])
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=[])
 CORS_ALLOW_HEADERS = default_headers + ("access-control-allow-origin",)
 {%- endif %}
 
