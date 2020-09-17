@@ -111,14 +111,33 @@ def format_exception(exc):
     detail = {"errors": [], "error_type": class_name}
     if isinstance(exc.detail, dict):
         for error_key, error_values in list(exc.detail.items()):
-            for error_msg in error_values:
-                # Special Case for model clean
-                if error_key == "non_field_errors":
-                    detail["errors"].append({"message": error_msg})
-                else:
-                    detail["errors"] = detail["errors"] + parse_field_errors(
-                        error_key, error_msg, error_values
-                    )
+            if isinstance(error_values, dict):
+                # For the cases of nested field e.g. ListField and the error is in
+                # validating one of the child items.
+                detail["errors"].append(
+                    {
+                        "field": error_key,
+                        "message": "Validation failed for one of the item in the list.",
+                        "errors": [
+                            {
+                                "field": error_key,
+                                "message": ", ".join(error_msg)
+                                if isinstance(error_msg, list)
+                                else error_msg,
+                            }
+                            for error_key, error_msg in error_values.items()
+                        ],
+                    }
+                )
+            else:
+                for error_msg in error_values:
+                    # Special Case for model clean
+                    if error_key == "non_field_errors":
+                        detail["errors"].append({"message": error_msg})
+                    else:
+                        detail["errors"] = detail["errors"] + parse_field_errors(
+                            error_key, error_msg, error_values
+                        )
     elif isinstance(exc.detail, list):
         for error_msg in exc.detail:
             detail["errors"].append({"message": error_msg})
