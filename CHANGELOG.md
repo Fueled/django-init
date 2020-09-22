@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [3.x]
 
+- PyTest: Run failed test and then new test cases first ([@theskumar])
 - Renamed setting `CORS_ORIGIN_WHITELIST` to`CORS_ALLOWED_ORIGINS`. ([@theskumar])
 
 ## [2.x]
