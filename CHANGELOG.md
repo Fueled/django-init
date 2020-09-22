@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [3.x]
 
 - Fixed exception formatter for validation error in the child of ListField. ([@theskumar])
+- PyTest: Run failed test and then new test cases first ([@theskumar])
 - Renamed setting `CORS_ORIGIN_WHITELIST` to`CORS_ALLOWED_ORIGINS`. ([@theskumar])
 
 ## [2.x]
