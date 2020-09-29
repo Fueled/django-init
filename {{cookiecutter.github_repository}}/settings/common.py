@@ -106,7 +106,7 @@ REST_FRAMEWORK = {
         # Mainly used for api debug.
         "rest_framework.authentication.SessionAuthentication",
     ),
-    "DEFAULT_SCHEMA_CLASS": 'rest_framework.schemas.coreapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "EXCEPTION_HANDLER": "{{ cookiecutter.main_module }}.base.exceptions.exception_handler",
 }
 
@@ -353,7 +353,9 @@ CELERY_BROKER_URL = env("REDIS_URL", default="redis://localhost:6379/0")
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
-CELERY_TIMEZONE = env("CELERY_TIMEZONE", default=TIME_ZONE)  # Use Django's timezone by default
+CELERY_TIMEZONE = env(
+    "CELERY_TIMEZONE", default=TIME_ZONE
+)  # Use Django's timezone by default
 {%- endif %}
 
 # LOGGING CONFIGURATION
@@ -399,7 +401,7 @@ LOGGING = {
         "mail_admins": {
             "level": "ERROR",
             "filters": ["require_debug_false"],
-            "class": "django.utils.log.AdminEmailHandler"
+            "class": "django.utils.log.AdminEmailHandler",
         },
         {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
         "sentry": {
@@ -411,11 +413,7 @@ LOGGING = {
         {%- endif %}
     },
     "loggers": {
-        "django": {
-            "handlers": ["null"],
-            "propagate": False,
-            "level": "INFO",
-        },
+        "django": {"handlers": ["null"], "propagate": False, "level": "INFO"},
         "django.request": {
             "handlers": ["mail_admins", "console"],
             "level": "ERROR",
@@ -429,7 +427,7 @@ LOGGING = {
         "{{cookiecutter.main_module}}": {"handlers": ["console"], "level": "INFO", "propagate": False},
         # Catch All Logger -- Captures any other logging
         "": {"handlers": ["console",{%- if cookiecutter.use_sentry_for_error_reporting == "y" %} "sentry"{%- endif %}], "level": "ERROR", "propagate": True},
-    }
+    },
 }
 
 
