@@ -1,11 +1,18 @@
-django-init | [![Build Status](https://travis-ci.com/Fueled/django-init.svg?branch=master)](https://travis-ci.com/Fueled/django-init)
-============
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Fueled/django-init/master/.github/django-init-logo.png">
+</p>
 
-Project template for django based projects, optimized for making REST API with deployment on Heroku and EC2 instances via Ansible.
+<p align="center">
+<strong>django-init</strong> is a project boilerplate for Django based projects.
+</p>
+
+<p align="center">
+    <a href="https://travis-ci.com/Fueled/django-init"><img src="https://travis-ci.com/Fueled/django-init.svg?branch=master" alt='Build Status'></a>
+</p>
 
 ## Features
 
-- Django 2.2.x
+- Django 3.0.x
 - Python 3.7.x
 - Support for [black](https://pypi.org/project/black/)!
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
@@ -20,7 +27,6 @@ Project template for django based projects, optimized for making REST API with d
 - Custom `Auth` app with JWT based Token Backend system with `login`, `logout` and `current_user_profile` modification views for easier extensibility.
 - Media storage using Amazon S3 (optional)
 - [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org)
-- Static assets handling via webpack (optional)
 - robots.txt and humans.txt configured
 
 ## Getting Started
@@ -43,7 +49,7 @@ then only thing you'll need to do is:
 
 1. `cd` into the new `github_repository` folder just created.
 2. Activate virtualenv `source venv/bin/activate`.
-3. Run `fab serve` or `./manage.py runserver`
+3. Run `make run` or `./manage.py runserver`
 
 Don't forget to carefully look at the generated README. Awesome, right?
 

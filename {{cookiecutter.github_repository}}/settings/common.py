@@ -4,10 +4,11 @@ see: https://docs.djangoproject.com/en/dev/ref/settings/
 """
 # Third Party Stuff
 import environ
-{%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
 from corsheaders.defaults import default_headers
-{%- endif %}
 from django.utils.translation import gettext_lazy as _
+
+{%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
+{%- endif %}
 
 
 ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 2 = /a/)
@@ -23,6 +24,7 @@ INSTALLED_APPS = (
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
+    "django.contrib.postgres",
     "django_sites",  # http://niwinz.github.io/django-sites/latest/
     "django.contrib.messages",
     "django.contrib.staticfiles",
@@ -40,6 +42,7 @@ INSTALLED_APPS = (
     "raven.contrib.django.raven_compat",
 {%- endif %}
     "mail_templated",  # https://github.com/artemrizhov/django-mail-templated
+    "django_extensions",  # http://django-extensions.readthedocs.org/
 )
 
 # INSTALLED APPS CONFIGURATION
@@ -298,9 +301,6 @@ STATIC_ROOT = str(ROOT_DIR.path(".staticfiles"))
 STATIC_URL = "/static/"
 
 # A list of locations of additional static files
-{%- if cookiecutter.webpack.lower() == "y" %}
-# Specify the static directory in fabfile also.
-{%- endif %}
 STATICFILES_DIRS = (str(APPS_DIR.path("static")),)
 
 # List of finder classes that know how to find static files in
@@ -339,7 +339,7 @@ REQUEST_ID_RESPONSE_HEADER = "REQUEST_ID"
 
 # CORS
 # --------------------------------------------------------------------------
-CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST", default=[])
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=[])
 CORS_ALLOW_HEADERS = default_headers + ("access-control-allow-origin",)
 {%- endif %}
 
@@ -467,19 +467,3 @@ SITE_INFO = {
     "IS_RAVEN_INSTALLED": True if RAVEN_CONFIG.get("dsn") else False,
 {%- endif %}
 }
-{%- if cookiecutter.webpack.lower() == "y" %}
-
-# Webpack Support (https://github.com/owais/django-webpack-loader)
-# =============================================================================
-INSTALLED_APPS += ("webpack_loader",)
-WEBPACK_LOADER = {
-    "DEFAULT": {
-        "CACHE": True,
-        "BUNDLE_DIR_NAME": "dist/",  # It will add static path before and it must end with slash
-        "STATS_FILE": str(ROOT_DIR.path("webpack-stats.json")),
-        "POLL_INTERVAL": 0.1,
-        "TIMEOUT": None,
-        "IGNORE": [r".+\.hot-update.js", r".+\.map"],
-    }
-}
-{%- endif %}

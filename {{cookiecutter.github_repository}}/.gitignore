@@ -64,10 +64,6 @@ docs/_build/
 # npm
 node_modules/
 
-# webpack
-webpack-stats.json
-dist
-
 # Campass
 .sass-cache
 
@@ -87,6 +83,9 @@ dump.rdb
 _docs_html/
 media/
 provisioner/site.retry
+
+# DB Schema as it gets generated on server
+database-schema.svg
 
 # Virtualenv
 venv/

@@ -26,18 +26,11 @@ else
 fi
 
 if echo "{{ cookiecutter.enable_heroku_deployment }}" | grep -iq "^n"; then
-    rm -rf uwsgi.ini Procfile runtime.txt bin
+    rm -rf uwsgi.ini Procfile runtime.txt bin/post_compile
 fi
 
 if echo "{{ cookiecutter.add_ansible }}" | grep -iq "^n"; then
     rm -rf provisioner Vagrantfile ansible.cfg
-fi
-
-if echo "{{ cookiecutter.webpack }}" | grep -iq "^n"; then
-    rm -f package.json package-lock.json
-    rm -f {{cookiecutter.main_module}}/static/server.js
-    rm -f {{cookiecutter.main_module}}/static/webpack.config.js
-    rm -f webpack-stats.json
 fi
 
 if echo "{{ cookiecutter.add_celery }}" | grep -iq "^n"; then
@@ -57,12 +50,6 @@ if echo "$yn" | grep -iq "^y"; then
         sudo easy_install pip
     fi
 
-    echo "==> Install fabric, if not present."
-    if ! hash fab 2>/dev/null; then
-        echo "fab command not found... installing it..."
-        sudo pip install fabric3==1.14.post1
-    fi
-
     echo "==> Initialize git repo and create first commit and tag it with v{{ cookiecutter.version }}"
     git init
     git add .
@@ -70,7 +57,7 @@ if echo "$yn" | grep -iq "^y"; then
     git tag v{{ cookiecutter.version }}
 
     echo "${green}==> Setup the project dependencies and database for local development${reset}"
-    fab init
+    make install
 
     OUT=$?
     if [ $OUT -eq 0 ]; then

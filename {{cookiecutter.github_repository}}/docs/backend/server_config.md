@@ -57,10 +57,6 @@ heroku create --ssh-git <heroku-app-name>
 
 heroku buildpacks:set heroku/python --app=<heroku-app-name>
 
-{%- if cookiecutter.webpack.lower() == 'y' %}
-heroku buildpacks:add --index 1 heroku/nodejs --app=<heroku-app-name>
-{%- endif %}
-
 {% if cookiecutter.postgis == 'y' %}heroku addons:create heroku-postgresql:standard-0 --app=<heroku-app-name>
 {% else %}heroku addons:create heroku-postgresql --app=<heroku-app-name>{% endif %}
 heroku pg:backups schedule DATABASE_URL --at '04:00 UTC' --app=<heroku-app-name>
@@ -145,18 +141,16 @@ Add your github private key to your local ssh-agent, which will be used by ansib
 
 Now you can run the ansible script to setup the machine.
 
-    fab prod configure
+    make configure ENV=prod
+    make configure ENV=staging
 
 This will setup os dependencies, services like supervisor, nginx and fetch our code from Github. Our production environment requires 
 some environment variables in `.env`. So you can write a file `prod.env` locally and upload it to server with
 
     scp prod.env {{ cookiecutter.main_module }}.com:/home/ubuntu/{{ cookiecutter.github_repository }}/.env
 
-You can also use fab to set environment variables one by one:
-
-    fab prod config:set,<VAR_NAME>,<VAR_VALUE>
-
 Now that you have `.env` setup, you can deploy your code and start services:
 
-    fab prod deploy
+    make deploy ENV=prod
+    make deploy ENV=staging
 {% endif %}

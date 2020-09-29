@@ -5,21 +5,31 @@ site_author: {{ cookiecutter.github_username }}
 repo_url: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}
 
 nav:
-- Home: index.md
+- Introduction: index.md
 - API:
-  - 'Overview': api/0-overview.md
-  - 'Authentication': api/1-auth.md
-  - 'Current User': api/2-current-user.md
-  - 'Errors': api/errors.md
-- Backend:
-  - 'Server Configurations': backend/server_config.md
-  - 'Coding Rules': backend/coding_rules.md
-- Release Notes: release_notes.md
+  - Overview: api/0-overview.md
+  - Authentication: api/1-auth.md
+  - Current User: api/2-current-user.md
+  - Errors: api/errors.md
+- Technical Specs:
+  - Server Config: backend/server_config.md
+  - Coding Rules: backend/coding_rules.md
+  - Database Schema: backend/database-schema.svg
+- Releases:
+  - Changelog: releases.md
 
 theme:
   name: 'material'
-  feature:
-    tabs: true
+  features:
+    - tabs
+    - instant
+
+
+plugins:
+  - git-revision-date-localized
+  - search:
+      prebuild_index: true
+
 
 copyright: ''
 
@@ -49,5 +59,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.smartsymbols
   - pymdownx.mark
+  - pymdownx.magiclink
+  - pymdownx.smartsymbols
   - markdown_include.include:
       base_path: docs
