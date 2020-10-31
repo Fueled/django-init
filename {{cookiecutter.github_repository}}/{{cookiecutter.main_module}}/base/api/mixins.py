@@ -29,3 +29,16 @@ class MultipleSerializerMixin(object):
         if self.action in self.serializer_classes.keys():
             return self.serializer_classes[self.action]
         return super().get_serializer_class()
+
+
+class PermissionPerActionMixin:
+    attribute = "permissions_per_action"
+
+    def get_permissions(self):
+        if not isinstance(getattr(self, self.attribute), dict):
+            raise ImproperlyConfigured(f"{self.attribute} should be a dict mapping.")
+
+        if self.action in getattr(self, self.attribute).keys():
+            self.permission_classes = getattr(self, self.attribute)[self.action]
+
+        return super(PermissionPerActionMixin, self).get_permissions()
