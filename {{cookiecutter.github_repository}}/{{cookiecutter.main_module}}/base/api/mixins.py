@@ -41,4 +41,4 @@ class PermissionPerActionMixin:
         if self.action in getattr(self, self.attribute).keys():
             self.permission_classes = getattr(self, self.attribute)[self.action]
 
-        return super(PermissionPerActionMixin, self).get_permissions()
+        return super().get_permissions()
