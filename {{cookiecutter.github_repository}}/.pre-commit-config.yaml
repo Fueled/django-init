@@ -15,11 +15,10 @@ repos:
     - id: check-added-large-files
     - id: flake8
 
-- repo: git://github.com/CuriousLearner/pre-commit-python-sorter
-  sha: 5294cde9d51cff119af537e987c30c320e9fbe2f
+- repo: https://github.com/pycqa/isort
+  rev: 5.6.4
   hooks:
-    - id: python-import-sorter
-      args: ['--silent-overwrite']
+    - id: isort
 
 - repo: https://github.com/psf/black
   rev: stable
