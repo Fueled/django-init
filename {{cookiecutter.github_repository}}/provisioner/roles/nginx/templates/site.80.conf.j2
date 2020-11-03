@@ -2,23 +2,41 @@
 server {
     listen       80;
     listen       [::]:80;
-    server_name  {{ domain_name }};
+    server_name  {% if vm %}_{% else %}{{ domain_name }}{% endif %};
 
     {% if use_letsencrypt %}
-        location /.well-known/acme-challenge/ {
-            root {{ letsencrypt_challenge_root }};
-            try_files $uri =404;
-        }
+    location /.well-known/acme-challenge/ {
+        root {{ letsencrypt_challenge_root }};
+        try_files $uri =404;
+    }
     {% endif %}
 
     {% if vm and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false) %}
     location / {
-        uwsgi_pass unix:///tmp/django-{{ domain_name }}-uwsgi.sock;
+        uwsgi_pass unix:///tmp/uwsgi-{{ project_namespace }}.sock;
         include /etc/nginx/uwsgi_params;
 
         # set correct scheme
         uwsgi_param UWSGI_SCHEME $http_x_forwarded_proto;
     }
+
+    location /docs {
+        # mkdocs html generated via "product_data" role
+        alias {{ project_path }}/_docs_html/;{% endraw %}
+    {%- if cookiecutter.have_password_protected_docs.lower() == 'y' %}
+        {%raw%}auth_basic "Restricted Content";
+        auth_basic_user_file {{ htpasswd_file_path }};{% endraw %}
+    {%- endif -%}{%raw%}
+    }
+
+    location /static/ {
+        alias {{ project_path }}/.staticfiles/;
+    }
+
+    location /media/ {
+        alias {{ project_path }}/.media/;
+    }
+
     {% else %}
     location / {
         return 301   https://$server_name$request_uri;
