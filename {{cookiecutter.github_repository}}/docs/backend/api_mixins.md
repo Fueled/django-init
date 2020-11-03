@@ -33,9 +33,9 @@ class FooViewSet(viewsets.ModelViewSet):
 `MultipleSerializerMixin` available in the `base` module allows us to set different serializer classes for each of the actions (`list`, `retrieve`, `create`, `partial_update`, `update` or any other custom actions) on the viewset.
 
 ```
-import project_name.base.api.mixins import PermissionPerAction
+import project_name.base.api.mixins import MultipleSerializerMixin
 
-class FooViewSet(PermissionPerAction, viewsets.ModelViewSet):
+class FooViewSet(MultipleSerializerMixin, viewsets.ModelViewSet):
     serializer_classes = {
         "create": serializers.CreateFooSerializer,
         "list": serializers.ReadFooSerializer
