@@ -29,3 +29,37 @@ class MultipleSerializerMixin(object):
         if self.action in self.serializer_classes.keys():
             return self.serializer_classes[self.action]
         return super().get_serializer_class()
+
+
+class PermissionPerActionMixin:
+    """
+    Look for permission classes in self.permissions_per_action, which
+    should be a dict mapping action name (key) to permission classes (value),
+    i.e.:
+
+        class MyViewSet(PermissionPerActionMixin, ViewSet):
+            permission_classes = [permissions.IsAuthenticated]
+            permissions_per_action = {
+               'list': [DRFPermissions | CustomPermissions],
+               'my_action': [DRFPermissions | CustomPermissions],
+            }
+
+            @list_route
+            def my_action:
+                ...
+
+    If there are no permission classes available for that action than
+    the default permission classes will be returned as fallback.
+    """
+    attr_name = "permissions_per_action"
+
+    def get_permissions(self):
+        action_permissions = getattr(self, self.attr_name)
+
+        if not isinstance(action_permissions, dict):
+            raise ImproperlyConfigured(f"{self.attr_name} should be a dict mapping.")
+
+        if self.action in action_permissions.keys():
+            self.permission_classes = action_permissions[self.action]
+
+        return super().get_permissions()
