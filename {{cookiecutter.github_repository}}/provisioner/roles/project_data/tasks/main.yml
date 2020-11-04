@@ -7,12 +7,21 @@
   tags: ['always']
 
 - debug: msg="Git SHA-1 before={{ gitresult.before }} after={{ gitresult.after }}"
+  when: vm == 0
   tags: ['always']
 
 - name: ensure python virtualenv exist
   command: virtualenv {{ venv_path }} -p python3.7 creates={{ venv_path }}
   become: false
   tags: ['always']
+
+- name: Install binaries for postgres postgis
+  apt:
+    pkg:
+      - gdal-bin
+    state: present
+    cache_valid_time: 300
+  when: pg_gis
 
 - name: install django python dependencies
   pip: requirements={{ project_path }}/{{ django_requirements_file }}  executable={{ venv_path }}/bin/pip
