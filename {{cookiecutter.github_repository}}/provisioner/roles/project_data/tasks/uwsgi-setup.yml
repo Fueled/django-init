@@ -31,6 +31,17 @@
   file: path={{ uwsgi_log_dir }} state=directory owner={{uwsgi_user}} group={{uwsgi_group}} mode=751 recurse=yes
   tags: ['configure']
 
+- name: update uwsgi-emperor init file
+  template: src=uwsgi-emperor-init.d.j2
+            dest=/etc/init.d/uwsgi-emperor
+            mode=755
+  register: uwsgiconf
+
+- name: ensure uwsgi emperor pid file as correct permissions
+  file:
+    path: '{{ uwsgi_emperor_pid_file }}'
+    mode: '0644'
+
 - name: ensure django app config is added as uwsgi vassal
   template: src=django.uwsgi.ini.j2
             dest={{ uwsgi_conf_path }}/{{project_namespace }}.ini

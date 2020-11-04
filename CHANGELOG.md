@@ -1,13 +1,16 @@
 # ChangeLog
 All notable changes to this project will be documented in this file.
 
-## [3.x]
+# [3.x]
 
+## Nov 3, 2020
+
+- Fix ansible startup for celery and uwsgi ([@theskumar])
 - Fixed exception formatter for validation error in the child of ListField. ([@theskumar])
 - PyTest: Run failed test and then new test cases first ([@theskumar])
 - Renamed setting `CORS_ORIGIN_WHITELIST` to`CORS_ALLOWED_ORIGINS`. ([@theskumar])
 
-## [2.x]
+# [2.x]
 
 - Add database schema generation in docs on deployment ([@jainmickey])
 - Remove support for webpack ([@theskumar])
