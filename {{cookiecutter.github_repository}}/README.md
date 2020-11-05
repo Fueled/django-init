@@ -43,7 +43,7 @@ Execute the following commands:
 ```
 git checkout master
 make test
-bumpversion patch  # 'patch' can be replaced with 'minor' or 'major'
+bump2version patch  # 'patch' can be replaced with 'minor' or 'major'
 git push origin master
 git push origin master --tags
 git checkout qa
