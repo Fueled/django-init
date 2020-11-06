@@ -8,7 +8,10 @@ django_requirements_file: requirements.txt
 # uwsgi related variables
 uwsgi_user: www-data
 uwsgi_group: www-data
-uwsgi_workers: 2
+uwsgi_min_workers: 2
+uwsgi_initial_workers: 4
+uwsgi_max_workers: 10
+uwsgi_workers_spawn_rate: 2
 uwsgi_worker_connections: 5000
 uwsgi_debug: False
 uwsgi_timeout: 30
