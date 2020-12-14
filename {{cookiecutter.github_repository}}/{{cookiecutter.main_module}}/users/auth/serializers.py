@@ -22,8 +22,12 @@ class LoginSerializer(serializers.Serializer):
 class RegisterSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     password = serializers.CharField(required=True)
-    first_name = serializers.CharField(required=False, allow_blank=True)
-    last_name = serializers.CharField(required=False, allow_blank=True)
+    first_name = serializers.CharField(required=False, allow_blank=True, max_length=120)
+    last_name = serializers.CharField(required=False, allow_blank=True, max_length=120)
+
+    def validate_password(self, value):
+        password_validation.validate_password(value)
+        return value
 
     def validate_email(self, value):
         user = user_services.get_user_by_email(email=value)
