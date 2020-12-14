@@ -61,6 +61,35 @@ def test_user_registration_with_blank_name(client):
     assert response.data["last_name"] == ""
 
 
+def test_user_registration_with_long_first_and_last_name(client):
+    url = reverse("auth-register")
+    credentials = {
+        "email": "test@test.com",
+        "password": "localhost",
+        "first_name": "S" * 121,
+        "last_name": "K" * 121,
+    }
+    response = client.json.post(url, json.dumps(credentials))
+    assert response.status_code == 400
+    assert response.data["errors"][0]["field"] == "first_name"
+    assert response.data["errors"][0]["message"] == "Ensure this field has no more than 120 characters."
+    assert response.data["errors"][1]["field"] == "last_name"
+    assert response.data["errors"][1]["message"] == "Ensure this field has no more than 120 characters."
+
+
+def test_validate_password_during_registration(client):
+    url = reverse("auth-register")
+    credentials = {
+        "email": "test@test.com",
+        "password": "123456789",
+        "first_name": "S",
+        "last_name": "K",
+    }
+    response = client.json.post(url, json.dumps(credentials))
+    assert response.status_code == 400
+    assert response.data["errors"][0]["field"] == "password"
+    assert response.data["errors"][0]["message"] == "This password is too common."
+
 def test_user_login(client):
     url = reverse("auth-login")
     u = f.create_user(email="test@example.com", password="test")
