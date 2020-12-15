@@ -21,7 +21,7 @@ env:
   - PGHOST=localhost
   - PGUSER=postgres
   - PGPASS=''
-  - PGPORT=5432
+  - PGPORT=5433
   - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
   - POSTGRES_IMAGE=mdillon/postgis:11
 
