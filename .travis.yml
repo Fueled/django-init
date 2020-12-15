@@ -1,14 +1,16 @@
 language: python
-dist: bionic
+dist: focal
 
 python:
-  - '3.7'
+  - '3.9'
 
 addons:
   apt:
     packages:
     - libgdal-dev
-    - postgresql-11-postgis-2.5
+    - postgresql-12
+    - postgresql-client-12
+    - postgresql-server-dev-12
 
 services:
   - docker
