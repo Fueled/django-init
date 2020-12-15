@@ -30,7 +30,7 @@
         force=yes
         state=link
 
-- name: 'Add python3.7 (ppa:deadsnakes/ppa) repository'
+- name: 'Add python3.9 (ppa:deadsnakes/ppa) repository'
   apt_repository:
     repo: 'ppa:deadsnakes/ppa'
     update_cache: yes

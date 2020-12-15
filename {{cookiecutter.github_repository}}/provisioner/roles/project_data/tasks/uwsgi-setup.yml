@@ -7,15 +7,15 @@
 
 # compile python36 plugin for uwsgi
 # https://dev.to/pauloxnet/how-to-use-uwsgi-with-ptyhon36-in-ubuntu
-- name: python37 plugin | create build dir
+- name: python39 plugin | create build dir
   file: path=/usr/src/uwsgi/plugins/python state=directory owner={{user}} group={{uwsgi_group}} recurse=yes
   tags: ['configure']
 
-- name: compile python37 plugin for uwsgi
+- name: compile python39 plugin for uwsgi
   shell: >
-    PYTHON=python3.7 uwsgi --build-plugin "/usr/src/uwsgi/plugins/python python37" &&
-    mv python37_plugin.so /usr/lib/uwsgi/plugins/python37_plugin.so &&
-    chmod 644 /usr/lib/uwsgi/plugins/python37_plugin.so
+    PYTHON=python3.9 uwsgi --build-plugin "/usr/src/uwsgi/plugins/python python39" &&
+    mv python39_plugin.so /usr/lib/uwsgi/plugins/python39_plugin.so &&
+    chmod 644 /usr/lib/uwsgi/plugins/python39_plugin.so
 
 - name: make sure project directory is owned by uwsgi group
   file: path={{ project_path }} state=directory owner={{user}} group={{uwsgi_group}} recurse=yes

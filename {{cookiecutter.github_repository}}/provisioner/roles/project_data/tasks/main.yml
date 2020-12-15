@@ -11,7 +11,7 @@
   tags: ['always']
 
 - name: ensure python virtualenv exist
-  command: virtualenv {{ venv_path }} -p python3.7 creates={{ venv_path }}
+  command: virtualenv {{ venv_path }} -p python3.9 creates={{ venv_path }}
   become: false
   tags: ['always']
 
