@@ -2,7 +2,7 @@
 # see the Travis CI documentation: https://docs.travis-ci.com
 
 language: python
-dist: bionic
+dist: focal
 
 python:
   - '3.9'
@@ -15,7 +15,7 @@ addons:
   apt:
     packages:
     - libgdal-dev
-    - postgresql-11-postgis-2.5
+    - postgresql-13-postgis-2.5
 {%- endif %}
 
 cache:
@@ -28,7 +28,6 @@ env:
   - PGUSER=postgres
   - PGPASS=''
   - PGPORT=5432
-  - POSTGRES_IMAGE=mdillon/postgis:11
 {%- if cookiecutter.postgis.lower() == 'y' %}
   - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
 {%- else %}
