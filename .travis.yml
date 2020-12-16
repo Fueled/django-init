@@ -20,7 +20,7 @@ env:
   - PGUSER=postgres
   - PGPASS=''
   - PGPORT=5432
-  - POSTGRES_IMAGE=POSTGRES_IMAGE=postgis/postgis:13-master
+  - POSTGRES_IMAGE=postgis/postgis:13-master
   - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
 
 before_install:
