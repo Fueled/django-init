@@ -21,8 +21,8 @@
     virtualenv: "{{ venv_path }}"
     requirements: "{{ project_path }}/{{ django_requirements_file }}"
     virtualenv_python: python3.9
-   become: false
-   tags: ['always']
+    become: false
+    tags: ['always']
 
 - name: Install binaries for postgres postgis
   apt:
