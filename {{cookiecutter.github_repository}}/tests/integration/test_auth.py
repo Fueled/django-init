@@ -90,6 +90,7 @@ def test_validate_password_during_registration(client):
     assert response.data["errors"][0]["field"] == "password"
     assert response.data["errors"][0]["message"] == "This password is too common."
 
+
 def test_user_login(client):
     url = reverse("auth-login")
     u = f.create_user(email="test@example.com", password="test")
