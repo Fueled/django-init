@@ -6,12 +6,12 @@
 
 - name: Add to PostgreSQL.list
   apt_repository:
-    repo: deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
+    repo: deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main
     state: present
 
 - name: Install postgresql packages
   apt:
-    pkg: ['postgresql-11', 'postgresql-contrib', 'python3-psycopg2']
+    pkg: ['postgresql-client-13', 'postgresql-13', 'postgresql-contrib', 'python3-psycopg2']
     state: present
 
 - name: Install postgis packages

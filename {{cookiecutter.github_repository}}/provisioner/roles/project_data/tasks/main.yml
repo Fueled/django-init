@@ -10,10 +10,19 @@
   when: vm == 0
   tags: ['always']
 
+- name: Install virtualenv via pip
+  pip:
+    name: virtualenv
+    executable: pip3
+  tags: ['configure']
+
 - name: ensure python virtualenv exist
-  command: virtualenv {{ venv_path }} -p python3.9 creates={{ venv_path }}
-  become: false
-  tags: ['always']
+  pip:
+    virtualenv: "{{ venv_path }}"
+    requirements: "{{ project_path }}/{{ django_requirements_file }}"
+    virtualenv_python: python3.9
+   become: false
+   tags: ['always']
 
 - name: Install binaries for postgres postgis
   apt:
@@ -22,11 +31,6 @@
     state: present
     cache_valid_time: 300
   when: pg_gis
-
-- name: install django python dependencies
-  pip: requirements={{ project_path }}/{{ django_requirements_file }}  executable={{ venv_path }}/bin/pip
-  become: false
-  tags: ['deploy']
 
 - name: copy env configuration
   template: src=env.env.j2 dest={{ project_path }}/.env force=no
