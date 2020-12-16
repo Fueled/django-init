@@ -28,6 +28,7 @@ env:
   - PGUSER=postgres
   - PGPASS=''
   - PGPORT=5432
+  - POSTGRES_IMAGE=postgis/postgis:13-master
 {%- if cookiecutter.postgis.lower() == 'y' %}
   - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
 {%- else %}
