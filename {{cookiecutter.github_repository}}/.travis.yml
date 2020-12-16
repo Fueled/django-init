@@ -15,7 +15,7 @@ addons:
   apt:
     packages:
     - libgdal-dev
-    - postgresql-13-postgis-2.5
+    - postgresql-13-postgis-3
 {%- endif %}
 
 cache:
