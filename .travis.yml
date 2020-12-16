@@ -8,9 +8,9 @@ addons:
   apt:
     packages:
     - libgdal-dev
-    - postgresql-12
-    - postgresql-client-12
-    - postgresql-server-dev-12
+    - postgresql-13
+    - postgresql-client-13
+    - postgresql-server-dev-13
 
 services:
   - docker
@@ -21,9 +21,8 @@ env:
   - PGHOST=localhost
   - PGUSER=postgres
   - PGPASS=''
-  - PGPORT=5433
+  - PGPORT=5432
   - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
-  - POSTGRES_IMAGE=mdillon/postgis:11
 
 before_install:
   - sudo service postgresql stop
