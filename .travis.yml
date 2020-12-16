@@ -25,10 +25,10 @@ env:
   - PGPORT=5432
   - DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
 
-before_install:
-  - sudo service postgresql stop
-  - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw ${POSTGRES_IMAGE}
-  - docker ps
+# before_install:
+#   - sudo service postgresql stop
+#   - docker run --rm --name pg-docker -d -p ${PGPORT}:5432 --tmpfs /var/lib/postgresql/data:rw ${POSTGRES_IMAGE}
+#   - docker ps
 
 cache:
   pip: true
