@@ -6,12 +6,9 @@ python:
 
 addons:
   postgresql: "13"
-  # apt:
-  #   packages:
-  #   - libgdal-dev
-  #   - postgresql-13
-  #   - postgresql-client-13
-  #   - postgresql-server-dev-13
+  apt:
+    packages:
+    - libgdal-dev
 
 services:
   - docker
