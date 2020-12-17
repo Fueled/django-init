@@ -12,6 +12,7 @@ addons:
 
 services:
   - docker
+  - postgresql-13-postgis-2.5
 
 env:
   global:
