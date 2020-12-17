@@ -251,7 +251,7 @@ SERVER_EMAIL = env("SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres://localhost/{{ cookiecutter.main_module }}")
+    "default": env.db("DATABASE_URL", default="postgres://postgres:postgres@localhost/{{ cookiecutter.main_module }}")
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 DATABASES["default"]["CONN_MAX_AGE"] = 10
