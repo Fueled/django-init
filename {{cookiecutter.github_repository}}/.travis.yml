@@ -9,6 +9,7 @@ python:
 
 services:
   - docker
+  - postgresql-13-postgis-2.5
 
 {%- if cookiecutter.postgis.lower() == 'y' %}
 addons:
