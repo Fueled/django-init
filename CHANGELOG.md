@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 # [3.x]
 
+## Dec 15, 2020
+
+- Upgrade to Python 3.9. ([@CuriousLearner])
+- Upgrade to Ubuntu 20. ([@CuriousLearner])
+- Upgrade to Postgres 13. ([@CuriousLearner])
+
 ## Nov 3, 2020
 
 - Fix ansible startup for celery and uwsgi ([@theskumar])

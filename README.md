@@ -17,7 +17,7 @@
 - Support for [black](https://pypi.org/project/black/)!
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - Supports PostreSQL 11.0 (support of postgis-2.5 is available).
-- Ready to deploy on Heroku (optional) and Ubuntu 18 LTS via [Ansible](Optional)
+- Ready to deploy on Heroku (optional) and Ubuntu 20 LTS via [Ansible](Optional)
 - [Django Rest Framework][drf] 3.9.x.
 - Uses `django_sites` instead of `django.contrib.sites`
 - Uses [mkdocs] for project documentation. Optionally, password protect the docs when deployed.
