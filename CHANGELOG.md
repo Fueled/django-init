@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 - Upgrade to Python 3.9. ([@CuriousLearner])
 - Upgrade to Ubuntu 20. ([@CuriousLearner])
 - Upgrade to Postgres 13. ([@CuriousLearner])
+- Remove Travis CI. ([@CuriousLearner])
+- Add CI through Github Actions. ([@CuriousLearner])
 
 ## Nov 3, 2020
 
