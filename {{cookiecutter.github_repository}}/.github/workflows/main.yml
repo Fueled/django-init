@@ -9,7 +9,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:13
+        image: postgis/postgis:13-master
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -20,18 +20,19 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     env:
-      PGDATABASE=postgres
-      PGHOST=localhost
-      PGUSER=postgres
-      PGPASS=postgres
     {%- if cookiecutter.postgis.lower() == 'y' %}
-      DATABASE_URL=postgis://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
+      DATABASE_URL=postgis://postgres:postgres@localhost:5432/{{cookiecutter.main_module}}
     {%- else %}
-      DATABASE_URL=postgres://${PGUSER}:${PGPASS}@${PGHOST}:${PGPORT}/${PGDATABASE}
+      DATABASE_URL=postgres://postgres:postgres@localhost:5432/{{cookiecutter.main_module}}
     {%- endif %}
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install gdal
+      run: |
+        sudo apt-get install gdal-bin python-gdal
+        sudo apt-get install libgdal-dev
+        sudo apt-get install postgresql-13-postgis-3-scripts
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
@@ -41,8 +42,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install virtualenv
         pip install -r requirements/development.txt
-    - name: Check linting
-      run: flake8
+    - name: flake8 Lint
+      uses: py-actions/flake8@v1
+      with:
+        exclude: "src/"
+        max-line-length: "120"
+        path: "."
     - name: Run tests
       run: |
         pytest --cov -v --tb=native
