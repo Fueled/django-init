@@ -32,11 +32,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    {%- if cookiecutter.postgis.lower() == 'y' %}
     - name: Install gdal
       run: |
         sudo apt-get install gdal-bin python-gdal
         sudo apt-get install libgdal-dev
         sudo apt-get install postgresql-13-postgis-3-scripts
+    {%- endif %}
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
