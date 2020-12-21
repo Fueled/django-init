@@ -9,7 +9,11 @@ jobs:
 
     services:
       postgres:
+      {%- if cookiecutter.postgis.lower() == 'y' %}
         image: postgis/postgis:13-master
+      {%- else %}
+        image: postgres:13
+      {%- endif %}
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
