@@ -29,7 +29,6 @@ base_ubuntu:
       - liblcms2-dev
       - postgresql-client
       - libpq-dev
-      - libicu60
       - libreadline-dev
       - ca-certificates
 {% endraw %}

@@ -1,5 +1,5 @@
 {% raw %}---
-- name: get the latest code
+- name: Download latest code from {{ project_repo_url }}, branch {{ repo_version }}
   git: repo={{ project_repo_url }} dest={{ project_path }} version={{ repo_version }} accept_hostkey=true
   become: false
   register: gitresult
