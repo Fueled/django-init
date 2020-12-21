@@ -25,9 +25,9 @@ jobs:
 
     env:
     {%- if cookiecutter.postgis.lower() == 'y' %}
-      DATABASE_URL=postgis://postgres:postgres@localhost:5432/{{cookiecutter.main_module}}
+      DATABASE_URL: postgis://postgres:postgres@localhost:5432/{{cookiecutter.main_module}}
     {%- else %}
-      DATABASE_URL=postgres://postgres:postgres@localhost:5432/{{cookiecutter.main_module}}
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/{{cookiecutter.main_module}}
     {%- endif %}
 
     steps:
