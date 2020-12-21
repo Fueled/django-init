@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     services:
       postgres:
@@ -35,8 +35,10 @@ jobs:
     {%- if cookiecutter.postgis.lower() == 'y' %}
     - name: Install gdal
       run: |
-        sudo apt-get install gdal-bin python-gdal
+        sudo apt-get install gdal-bin
         sudo apt-get install libgdal-dev
+        # Update is essential for fetching postgis-3 scripts
+        sudo apt-get update
         sudo apt-get install postgresql-13-postgis-3-scripts
     {%- endif %}
     - name: Set up Python 3.9
@@ -48,18 +50,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install virtualenv
         pip install -r requirements/development.txt
-    - name: flake8 Lint
-      uses: py-actions/flake8@v1
-      with:
-        exclude: "src/"
-        max-line-length: "120"
-        path: "."
     - name: Run tests
       run: |
         pytest --cov -v --tb=native
-{% if cookiecutter.add_ansible.lower() == 'y' %}
-    - name: Ansible Syntax checks
+    - name: Linting
       run: |
+        flake8 . --max-line-length=120 --exclude src/
+      {% if cookiecutter.add_ansible.lower() == 'y' %}
         ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
-{% endif %}
+      {% endif %}
 
