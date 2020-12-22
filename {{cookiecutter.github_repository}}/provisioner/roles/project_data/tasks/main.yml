@@ -10,17 +10,8 @@
   when: vm == 0
   tags: ['always']
 
-- name: Install virtualenv via pip
-  pip:
-    name: virtualenv
-    executable: pip3
-  tags: ['configure']
-
-- name: ensure python virtualenv exist
-  pip:
-    virtualenv: "{{ venv_path }}"
-    requirements: "{{ project_path }}/{{ django_requirements_file }}"
-    virtualenv_python: python3.9
+- name: Ensure python virtualenv folder exist
+  command: python3 -m venv {{ venv_path }} creates={{ venv_path }}
   become: false
   tags: ['always']
 
@@ -32,17 +23,22 @@
     cache_valid_time: 300
   when: pg_gis
 
-- name: copy env configuration
+- name: Install python dependencies
+  pip: requirements={{ project_path }}/{{ django_requirements_file }}  executable={{ venv_path }}/bin/pip
+  become: false
+  tags: ['deploy']
+
+- name: Copy env configuration, if it doesn't exist
   template: src=env.env.j2 dest={{ project_path }}/.env force=no
   become: false
   tags: ['configure']
 
-- name: install gettext for translations
+- name: Ensure gettext package is installed for translations
   apt:
     pkg: gettext
     state: present
 
-- name: collect static
+- name: Run collect static
   django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
@@ -54,12 +50,12 @@
 
 - import_tasks: uwsgi-setup.yml
 
-- name: run compilemessages for static translations
+- name: Run compilemessages for static translations
   django_manage: command=compilemessages app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
 
-- name: reload uwsgi processes
+- name: Reload uwsgi processes
   command: uwsgi --reload {{ uwsgi_pid_file }}
   become: true
   when: not uwsgiconf.changed
