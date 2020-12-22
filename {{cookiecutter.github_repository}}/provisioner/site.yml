@@ -2,7 +2,7 @@
 - hosts: vagrant
   vars_files:
     - vars.yml
-  gather_facts: false
+  gather_facts: true
   become: true
   become_method: sudo
 
@@ -24,7 +24,7 @@
 - hosts: dev
   vars_files:
     - vars.yml
-  gather_facts: false
+  gather_facts: true
   become: true
   become_method: sudo
 
@@ -46,7 +46,7 @@
 - hosts: qa
   vars_files:
     - vars.yml
-  gather_facts: false
+  gather_facts: true
   become: true
   become_method: sudo
 
@@ -68,7 +68,7 @@
 - hosts: production
   vars_files:
     - vars.yml
-  gather_facts: false
+  gather_facts: true
   become: true
   become_method: sudo
 

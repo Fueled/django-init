@@ -30,7 +30,7 @@
         force=yes
         state=link
 
-- name: 'Add python3.7 (ppa:deadsnakes/ppa) repository'
+- name: 'Add python3.9 (ppa:deadsnakes/ppa) repository'
   apt_repository:
     repo: 'ppa:deadsnakes/ppa'
     update_cache: yes
@@ -54,7 +54,7 @@
     group: "{{ user }}"
     mode: 0775
 
-- name: ensure default pypi mirror for easy_install and virtualenv is pypi.python.org
+- name: ensure default pypi mirror for easy_install is pypi.python.org
   copy: src={{ item.src }} dest=/home/{{ user }}/{{ item.dest }} owner={{ user }} group={{ user }}
   with_items:
     - { src: 'pydistutils.cfg', dest: '.pydistutils.cfg' }

@@ -53,6 +53,10 @@ if echo "$yn" | grep -iq "^y"; then
     echo "==> Initialize git repo and create first commit and tag it with v{{ cookiecutter.version }}"
     git init
     git add .
+    if [ $CI ]; then
+        git config user.email "you@example.com"
+        git config user.name "Your Name"
+    fi
     git commit -am "chore(setup): create base django project."
     git tag v{{ cookiecutter.version }}
 

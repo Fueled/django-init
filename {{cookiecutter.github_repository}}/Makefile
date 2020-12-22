@@ -13,7 +13,7 @@ run_all:  ## Run all the servers in parallel, requires GNU Make
 .PHONY: run_all
 
 venv:  ## Create python virtualenv at `./venv/`
-	virtualenv -p `which python3` venv
+	python3 -m venv venv
 
 regenerate:  ## Delete and create new database.
 	-dropdb $(DB_NAME)

@@ -9,8 +9,8 @@
   file: path={{ celery_log_dir }} state=directory owner={{celery_user}} group={{celery_group}} mode=751 recurse=yes
   tags: ['configure', 'celery']
 
-- name: manually create the initial virtualenv
-  command: virtualenv {{ venv_path }} -p python3 creates={{ venv_path }}
+- name: ensure python virtualenv exist
+  command: python3 -m venv {{ venv_path }} creates={{ venv_path }}
   become: false
   tags: ['celery']
 

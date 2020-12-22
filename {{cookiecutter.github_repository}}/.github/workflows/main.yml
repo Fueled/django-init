@@ -1,0 +1,61 @@
+name: Run tests for {{cookiecutter.main_module}}
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    services:
+      postgres:
+      {%- if cookiecutter.postgis.lower() == 'y' %}
+        image: postgis/postgis:13-master
+      {%- else %}
+        image: postgres:13
+      {%- endif %}
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+        - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    env:
+    {%- if cookiecutter.postgis.lower() == 'y' %}
+      DATABASE_URL: postgis://postgres:postgres@localhost:5432/{{cookiecutter.main_module}}
+    {%- else %}
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/{{cookiecutter.main_module}}
+    {%- endif %}
+
+    steps:
+    - uses: actions/checkout@v2
+    {%- if cookiecutter.postgis.lower() == 'y' %}
+    - name: Install gdal
+      run: |
+        sudo apt-get install gdal-bin
+        sudo apt-get install libgdal-dev
+        # Update is essential for fetching postgis-3 scripts
+        sudo apt-get update
+        sudo apt-get install postgresql-13-postgis-3-scripts
+    {%- endif %}
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    - name: Install requirements
+      run: |
+        python -m pip install --upgrade pip
+        pip3 install -r requirements/development.txt
+    - name: Run tests
+      run: |
+        pytest --cov -v --tb=native
+    - name: Linting
+      run: |
+        flake8 . --max-line-length=120 --exclude src/
+      {% if cookiecutter.add_ansible.lower() == 'y' %}
+        ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
+      {% endif %}
+

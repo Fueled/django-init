@@ -15,10 +15,9 @@ base_ubuntu:
       - htop
       - curl
       - python-dev
-      - python3.7
-      - python3.7-dev
+      - python3.9
+      - python3.9-dev
       - python-setuptools
-      - python-virtualenv
       - python3-pip
       - sysstat
       - vim
@@ -30,5 +29,6 @@ base_ubuntu:
       - liblcms2-dev
       - postgresql-client
       - libpq-dev
+      - libreadline-dev
       - ca-certificates
 {% endraw %}

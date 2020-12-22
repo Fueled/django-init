@@ -1,57 +1,46 @@
 {%raw%}---
-- name: apt-get install letsencrypt dependencies packages
+- name: update the apt cache
   apt:
-    pkg: ['augeas-lenses', 'dialog', 'libaugeas0', 'libffi-dev']
-    state: present
-
-- name: Add official Certbot repo
-  apt_repository:
-    repo: 'ppa:certbot/certbot'
     update_cache: yes
+    cache_valid_time: 7200
+  become: yes
 
-- name: install certbot
+- name: Install Certbot
   apt:
-    pkg: python-certbot-nginx
+    pkg:
+      - certbot
+      - python3-certbot-nginx
     state: present
+    cache_valid_time: 300
 
 - name: create certbot folder
   become: yes
   file: path={{ letsencrypt_challenge_root }} state=directory owner={{ user }} group={{ nginx_user }} mode="u=rwx,g=rwxs,o=r"
 
-- name: reload nginx
+- name: upgrade ca-certificates
+  apt:
+    name: ca-certificates
+    state: latest
+    cache_valid_time: 300
+
+- name: Check if certificate already exists.
+  stat:
+    path: /etc/letsencrypt/live/{{ domain_name | first | replace('*.', '') }}/cert.pem
+  register: letsencrypt_cert
+
+- name: Reload nginx
   service: name=nginx state=reloaded
 
-- name: Update apt-cache if not already ran
-  shell: apt update
-  become: yes
-  when: apt_updated is not defined
-
-- name: upgrade ca-certificates
-  apt: pkg=ca-certificates state=latest
-
-- name: stop nginx if running
-  service: name=nginx state=stopped
-
 - name: request cert
-  shell: certbot certonly --standalone -w {{ letsencrypt_challenge_root }} -d {{ domain_name }} --email {{ letsencrypt_email }} --agree-tos --non-interactive
+  command: "certbot certonly --nginx --domains {{ domain_name }} --email {{ letsencrypt_email }} --agree-tos --non-interactive"
   args:
-    creates: '{{ letsencrypt_ssl_cert_dir }}'
-
-- name: start nginx
-  service: name=nginx state=started
+    creates: "{{ letsencrypt_ssl_cert_dir }}"
+  become: yes
+  when: not letsencrypt_cert.stat.exists
 
 - name: remove any cert diretory if exist
   file: path={{ ssl_cert_dir }}/{{ domain_name }} state=absent
 
 - name: symblink certificates
   file: src={{ letsencrypt_ssl_cert_dir }} dest={{ ssl_cert_dir }}/{{ domain_name }} owner={{ user }} group=www-data state=link
-
-# running cron job each monday
-- name: add letsencrypt renew cron
-  cron:
-   name: "Renew all certificates"
-   minute: "0"
-   hour: "2"
-   weekday: "1"
-   job: "certbot renew --non-interactive --webroot --webroot-path {{ letsencrypt_challenge_root }} --renew-hook 'service nginx reload' >> /var/log/certbot.log"
 {%endraw%}

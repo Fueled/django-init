@@ -12,22 +12,22 @@
 
 ## Features
 
-- Django 3.0.x
-- Python 3.7.x
+- Django 3.1.x
+- Python 3.9.x
 - Support for [black](https://pypi.org/project/black/)!
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
-- Supports PostreSQL 11.0 (support of postgis-2.5 is available).
-- Ready to deploy on Heroku (optional) and Ubuntu 18 LTS via [Ansible](Optional)
-- [Django Rest Framework][drf] 3.9.x.
-- Uses `django_sites` instead of `django.contrib.sites`
+- Supports PostreSQL 13.0 (support of postgis-3.0 is available).
+- Ready to deploy on Heroku (optional) and Ubuntu 20 LTS via [Ansible](Optional).
+- [Django Rest Framework][drf] 3.12.x.
+- Uses `django_sites` instead of `django.contrib.sites`.
 - Uses [mkdocs] for project documentation. Optionally, password protect the docs when deployed.
 - Uses [pytest] as test runner.
-- `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
+- Github actions for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Custom `User` app, for easier extensibility.
 - Custom `Auth` app with JWT based Token Backend system with `login`, `logout` and `current_user_profile` modification views for easier extensibility.
-- Media storage using Amazon S3 (optional)
-- [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org)
-- robots.txt and humans.txt configured
+- Media storage using Amazon S3 (optional).
+- [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org).
+- robots.txt and humans.txt configured.
 
 ## Getting Started
 
