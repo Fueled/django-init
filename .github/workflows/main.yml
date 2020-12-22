@@ -28,6 +28,12 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: '3.9'
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt', '**/requirements/*.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
     - name: Install cookiecutter
       run: |
         python -m pip install --upgrade pip
