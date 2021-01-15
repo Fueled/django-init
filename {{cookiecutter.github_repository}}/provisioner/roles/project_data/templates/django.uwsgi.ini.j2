@@ -6,11 +6,25 @@ pidfile={{uwsgi_pid_file}}
 uid={{uwsgi_user}}
 gid={{uwsgi_group}}
 vacuum=True
+
+# minimum number of workers to keep at all times
+cheaper = {{ uwsgi_min_workers }}
+
+# number of workers to spawn at startup
+cheaper-initial = {{ uwsgi_initial_workers }}
+
+# maximum number of workers that can be spawned
+workers = {{ uwsgi_max_workers }}
+
+# how many workers should be spawned at a time
+cheaper-step = {{ uwsgi_workers_spawn_rate }}
+
 max-requests={{uwsgi_worker_connections}}
+
 buffer-size=8192
 home={{venv_path}}
+
 socket={{uwsgi_socket}}
-workers={{uwsgi_workers}}
 # daemonize=/var/log/uwsgi/fueled.log
 log-x-forwarded-for=true
 plugins=python{{ python_version | replace(".", "") }}
@@ -24,7 +38,6 @@ no-orphans=true
 chmod-socket=660
 log-date=true
 logto={{ uwsgi_log_file }}{% endraw %}
-
 
 # os write errors
 # https://github.com/getsentry/raven-python/issues/732#issuecomment-176854438
