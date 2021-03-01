@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 # [3.x]
 
+## Mar 1, 2020
+
+- Upgrade Celery to 5.0.2. ([@CuriousLearner])
+
 ## Dec 15, 2020
 
 - Upgrade to Python 3.9. ([@CuriousLearner])
