@@ -9,7 +9,7 @@ RuntimeDirectory={{ celery_runtime_dir }}
 Group={{ celery_group }}
 Restart=always
 WorkingDirectory={{ project_path }}
-ExecStart={{ venv_path }}/bin/celery beat -A {{ project_name }}  -l {{ celery_log_level }} \
+ExecStart={{ venv_path }}/bin/celery -A {{ project_name }} beat -l {{ celery_log_level }} \
     --logfile={{ celerybeat_log_file }} --pidfile={{ celerybeat_pid_file }}  --schedule={{ celerybeat_schedule_file}}
 
 [Install]
