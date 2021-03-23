@@ -1,6 +1,6 @@
 # Core Stuff
 # -------------------------------------
-Django==3.1.4
+Django==3.1.7
 
 # Configuration
 # -------------------------------------
@@ -8,9 +8,9 @@ argon2-cffi==20.1.0
 django-environ==0.4.5
 # For Django 3.x
 -e git+git://github.com/CuriousLearner/django-sites@upgrade-django-3.x#egg=django_sites
-python-dotenv==0.14.0
+python-dotenv==0.15.0
 {%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
-django-cors-headers==3.5.0
+django-cors-headers==3.7.0
 {%- endif %}
 
 {% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
@@ -21,14 +21,14 @@ whitenoise==5.2.0
 
 # Extensions
 # -------------------------------------
-pytz==2020.1
+pytz==2021.1
 
 # Models
 # -------------------------------------
 psycopg2-binary==2.8.6
 
-Pillow==8.0.1
-django-extensions==3.1.0
+Pillow==8.1.2
+django-extensions==3.1.1
 django-uuid-upload-path==1.0.0
 django-versatileimagefield==2.0
 
@@ -51,17 +51,17 @@ raven==6.10.0
 
 # Async Tasks
 # -------------------------------------
-celery[redis]==5.0.2
+celery[redis]==5.0.5
 {%- endif %}
 
 # Auth Stuff
 # -------------------------------------
-PyJWT==1.7.1
+PyJWT==2.0.1
 django-mail-templated==2.6.5
 
 # Generating DB Schema
 # --------------------------------------
-pydot==1.4.1
+pydot==1.4.2
 pyparsing==2.4.7
 
 -r docs.txt
