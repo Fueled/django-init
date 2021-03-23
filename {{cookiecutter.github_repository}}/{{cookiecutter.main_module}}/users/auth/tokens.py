@@ -14,7 +14,7 @@ def get_token_for_user(user, scope: str) -> str:
     """Generate a new signed token containing a specified user limited for a scope (identified as a string).
     """
     data = {"user_%s_id" % (scope): str(user.id)}
-    return jwt.encode(data, settings.SECRET_KEY).decode()
+    return jwt.encode(data, settings.SECRET_KEY)
 
 
 def get_user_for_token(token: str, scope: str):
