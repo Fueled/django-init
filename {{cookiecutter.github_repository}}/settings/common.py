@@ -79,11 +79,11 @@ API_DEBUG = env.bool("API_DEBUG", default=False)
 # rest_framework
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
-{%- if cookiecutter.use_cursor_pagination.lower() == 'y' %}
+{%- if cookiecutter.pagination == 'CursorPagination' %}
     # Cursor Pagination require ordering on field `-created_at`. Make sure that field is part of each model
     # Cursor Pagination does not returns the `count` as part of the response
     "DEFAULT_PAGINATION_CLASS": "{{ cookiecutter.main_module }}.base.api.pagination.CursorPagination",
-{%- else %}
+{%- elif cookiecutter.pagination == 'LimitOffsetPagination' %}
     "DEFAULT_PAGINATION_CLASS": "{{ cookiecutter.main_module }}.base.api.pagination.LimitOffsetPagination",
 {%- endif %}
     "PAGE_SIZE": 30,
