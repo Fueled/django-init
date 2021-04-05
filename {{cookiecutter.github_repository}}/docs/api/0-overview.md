@@ -52,10 +52,19 @@ PUT     | Used for replacing resources or collections. For PUT requests with no 
 DELETE  | Used for deleting resources.
 
 ## Pagination
+{%- if cookiecutter.use_cursor_pagination.lower() == 'y' %}
 
-Requests that return multiple items will be paginated to 30 items by default. You can specify further pages with the `?page` parameter. For some resources, you can also set a custom page size up to 1000 with the `?per_page` parameter.
+Requests that return multiple items will be paginated to 30 items by default. You can specify cursor for the item with the `?cursor` parameter. For some resources, you can also set a custom page size up to 1000 with the `?per_page` parameter.
 
-Note that page numbering is 1-based and that omitting the `?page` parameter will return the first page.
+Note that offset is 1-based and that omitting the `?cursor` parameter will return results from offset 1.
+
+By Default, the results are ordered in descending order of creation time based on field `-created_at` and it does not return `count` as part of the response.
+{%- else %}
+
+Requests that return multiple items will be paginated to 30 items by default. You can specify offset for the item with the `?offset` parameter. For some resources, you can also set a custom page size up to 1000 with the `?per_page` parameter.
+
+Note that offset is 1-based and that omitting the `?offset` parameter will return results from offset 1.
+{%- endif %}
 
 ## Rate Limit
 
