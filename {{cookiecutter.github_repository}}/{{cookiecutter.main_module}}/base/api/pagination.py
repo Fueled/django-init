@@ -47,6 +47,8 @@ class CursorPagination(DrfCursorPagination):
     The cursor pagination implementation is necessarily complex.
     For an overview of the position/offset style we use, see this post:
     https://cra.mr/2011/03/08/building-cursors-for-the-disqus-api
+
+    Cursor Pagination does not returns the `count` as part of the response
     """
 
     # Ordering field used for cursor pagination
