@@ -22,6 +22,7 @@ regenerate:  ## Delete and create new database.
 .PHONY: regenerate
 
 install: venv  ## Install and setup project dependencies
+	${PYTHON_PATH}python -m pip install --upgrade pip wheel
 	${PYTHON_PATH}python -m pip install -r requirements/development.txt
 	${PYTHON_PATH}pre-commit install
 ifneq ($(CI),True)
