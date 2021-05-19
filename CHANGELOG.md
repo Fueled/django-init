@@ -3,7 +3,11 @@ All notable changes to this project will be documented in this file.
 
 # [3.x]
 
-## Mar 1, 2020
+## 19 May, 2021
+
+- Fix: pyjwt now needs the algorithm to be specified when calling decode(). ([@tucosaurus])
+
+## Mar 1, 2021
 
 - Upgrade Celery to 5.0.2. ([@CuriousLearner])
 
