@@ -3,6 +3,22 @@ All notable changes to this project will be documented in this file.
 
 # [3.x]
 
+## 9 Aug, 2021
+
+- Django updated to 3.1.x from 3.2.4 [changelog](https://docs.djangoproject.com/en/3.2/releases/3.2/)
+- python-dotenv updated to 0.19.0 from 0.17.1 [changelog](https://github.com/theskumar/python-dotenv/blob/master/CHANGELOG.md)
+- whitenoise updated to 5.3.0 from 5.2.0 [changelog](http://whitenoise.evans.io/en/stable/changelog.html)
+- psycopg2-binary updated to 2.9.1 from 2.8.6 [changelog](https://www.psycopg.org/docs/news.html#what-s-new-in-psycopg-2-9)
+- Pillow updated to 8.3.1 from 8.2.0 [changelog](https://pillow.readthedocs.io/en/stable/releasenotes/8.3.1.html)
+- django-versatileimagefield updated to 2.1 from 2.0
+- celery updated to 5.1.2 from 5.1.0
+- mkdocs-material updated to 7.2.2 from 7.1.8
+- iSort update to 5.9.3 [changelog](https://github.com/pycqa/isort/blob/main/CHANGELOG.md)
+- pre-commit update to 2.14.0 [changelog](https://github.com/pre-commit/pre-commit/releases)
+- boto3 updated to 1.18.18 from 1.17.94
+- django-redis updated to 5.0.0 from 4.12.1 [changelog](https://pyup.io/changelogs/django-redis/#5.0.0)
+- newrelic updated to 6.8.0.163 from 6.4.1.158
+
 ## 19 May, 2021
 
 - Fix: pyjwt now needs the algorithm to be specified when calling decode(). ([@tucosaurus])

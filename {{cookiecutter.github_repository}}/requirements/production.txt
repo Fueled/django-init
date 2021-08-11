@@ -5,17 +5,17 @@
 # Static Files and Media Storage
 # -------------------------------------
 django-storages==1.11.1
-boto3==1.17.54
+boto3==1.18.18
 
 # Caching
 # -------------------------------------
-django-redis==4.12.1
+django-redis==5.0.0
 hiredis==2.0.0
 
 {% if cookiecutter.newrelic == 'y' %}
 # Logging
 # -------------------------------------
-newrelic==6.2.0.156
+newrelic==6.8.0.163
 {% endif %}
 
 {%- if cookiecutter.add_django_auth_wall.lower() == 'y' %}
