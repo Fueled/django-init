@@ -4,8 +4,7 @@ from django import http
 
 
 class Response(rest_framework.response.Response):
-    """The various HTTP responses for use in returning proper HTTP codes.
-    """
+    """The various HTTP responses for use in returning proper HTTP codes."""
 
     def __init__(
         self,

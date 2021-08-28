@@ -51,6 +51,7 @@ class PermissionPerActionMixin:
     If there are no permission classes available for that action than
     the default permission classes will be returned as fallback.
     """
+
     attr_name = "permissions_per_action"
 
     def get_permissions(self):

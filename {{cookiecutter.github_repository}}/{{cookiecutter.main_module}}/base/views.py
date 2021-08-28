@@ -34,7 +34,7 @@ def csrf_failure(request, reason="", template_name="403_csrf.html"):
     use the in-built default view due to use `render` function. It keeps the
     logic but make things less magical.
     """
-    from django.middleware.csrf import REASON_NO_REFERER, REASON_NO_CSRF_COOKIE
+    from django.middleware.csrf import REASON_NO_CSRF_COOKIE, REASON_NO_REFERER
 
     ctx = {
         "reason": reason,

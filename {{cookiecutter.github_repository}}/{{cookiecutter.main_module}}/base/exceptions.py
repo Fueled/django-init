@@ -16,8 +16,7 @@ class BaseException(exceptions.APIException):
 
 
 class NotFound(BaseException, Http404):
-    """Exception used for not found objects.
-    """
+    """Exception used for not found objects."""
 
     status_code = status.HTTP_404_NOT_FOUND
     default_detail = _("Not found.")
@@ -29,15 +28,13 @@ class NotSupported(BaseException):
 
 
 class BadRequest(BaseException):
-    """Exception used on bad arguments detected on api view.
-    """
+    """Exception used on bad arguments detected on api view."""
 
     default_detail = _("Wrong arguments.")
 
 
 class WrongArguments(BadRequest):
-    """Exception used on bad arguments detected on service. This is same as `BadRequest`.
-    """
+    """Exception used on bad arguments detected on service. This is same as `BadRequest`."""
 
     default_detail = _("Wrong arguments.")
 
@@ -47,8 +44,7 @@ class RequestValidationError(BadRequest):
 
 
 class PermissionDenied(exceptions.PermissionDenied):
-    """Compatibility subclass of restframework `PermissionDenied` exception.
-    """
+    """Compatibility subclass of restframework `PermissionDenied` exception."""
 
     pass
 
@@ -58,15 +54,13 @@ class IntegrityError(BadRequest):
 
 
 class PreconditionError(BadRequest):
-    """Error raised on precondition method on viewset.
-    """
+    """Error raised on precondition method on viewset."""
 
     default_detail = _("Precondition error")
 
 
 class NotAuthenticated(exceptions.NotAuthenticated):
-    """Compatibility subclass of restframework `NotAuthenticated` exception.
-    """
+    """Compatibility subclass of restframework `NotAuthenticated` exception."""
 
     pass
 

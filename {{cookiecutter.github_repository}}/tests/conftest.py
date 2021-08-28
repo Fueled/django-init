@@ -43,8 +43,7 @@ def media_root(settings, tmpdir_factory):
 
 @pytest.fixture
 def client():
-    """Django Test Client, with some convenient overriden methods.
-    """
+    """Django Test Client, with some convenient overriden methods."""
     from django.test import Client
 
     class _Client(Client):

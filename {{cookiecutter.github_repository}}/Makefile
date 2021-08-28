@@ -6,28 +6,48 @@ PROJECT_NAME={{cookiecutter.main_module}}
 DB_NAME=$(PROJECT_NAME)
 INVENTORY=provisioner/hosts
 PLAYBOOK=provisioner/site.yml
-PYTHON_PATH=venv/bin/
+ENV_PREFIX=$(shell python -c "if __import__('pathlib').Path('.venv/bin/pip').exists(): print('.venv/bin/')")
+
+
+.PHONY: help
+help:            ## show the help
+	@echo "Usage: make <target>"
+	@echo ""
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-12s\033[0m %s\n", $$1, $$2}'
+
+
+.PHONY: fmt
+fmt:             ## Format code using black & isort.
+	$(ENV_PREFIX)isort .
+	$(ENV_PREFIX)black .
+
 
 run_all:  ## Run all the servers in parallel, requires GNU Make
 	make -j django docs{% if cookiecutter.add_celery == 'y' %} celery{% endif %} redis
 .PHONY: run_all
 
-venv:  ## Create python virtualenv at `./venv/`
-	python3 -m venv venv
+venv:     ## Create a virtual environment.
+	@echo "creating virtualenv ..."
+	@rm -rf .venv
+	@python3 -m venv .venv
+	@./.venv/bin/pip install -U pip
+	@echo
+	@echo "!!! Please run 'source .venv/bin/activate' to enable the environment !!!"
+
 
 regenerate:  ## Delete and create new database.
 	-dropdb $(DB_NAME)
 	createdb $(DB_NAME)
-	${PYTHON_PATH}python manage.py migrate
+	${ENV_PREFIX}python manage.py migrate
 .PHONY: regenerate
 
 install: venv  ## Install and setup project dependencies
-	${PYTHON_PATH}python -m pip install --upgrade pip wheel
-	${PYTHON_PATH}python -m pip install -r requirements/development.txt
-	${PYTHON_PATH}pre-commit install
+	${ENV_PREFIX}python -m pip install --upgrade pip wheel
+	${ENV_PREFIX}python -m pip install -r requirements/development.txt
+	${ENV_PREFIX}pre-commit install
 ifneq ($(CI),True)
 	-createdb $(DB_NAME)
-	${PYTHON_PATH}python manage.py migrate
+	${ENV_PREFIX}python manage.py migrate
 endif
 .PHONY: install
 
@@ -40,36 +60,36 @@ clean:  ## Remove all temporary files like pycache
 # == Django Helpers
 # ===================================================
 djrun: install  ## Start Django server locally
-	${PYTHON_PATH}python manage.py runserver
+	${ENV_PREFIX}python manage.py runserver
 
 check:  ## Check the project for code-style related errors
-	${PYTHON_PATH}black ${PROJECT_NAME} tests/ settings/
-	${PYTHON_PATH}flake8 .
+	${ENV_PREFIX}black ${PROJECT_NAME} tests/ settings/
+	${ENV_PREFIX}flake8 .
 .PHONY: check
 
 test: ARGS=--pdb --cov  ## Run all the tests
 test: check
-	${PYTHON_PATH}pytest $(ARGS)
+	${ENV_PREFIX}pytest $(ARGS)
 
 djmm:  ## Create Django migrations
-	${PYTHON_PATH}python manage.py makemigrations
+	${ENV_PREFIX}python manage.py makemigrations
 
 djmigrate:  # Run Django migrations
-	${PYTHON_PATH}python manage.py migrate
+	${ENV_PREFIX}python manage.py migrate
 
 djurls:  ## Displays all the django urls
-	${PYTHON_PATH}python manage.py show_urls
+	${ENV_PREFIX}python manage.py show_urls
 
 shell:  ## Enter the django shell
-	${PYTHON_PATH}python manage.py shell_plus
+	${ENV_PREFIX}python manage.py shell_plus
 
 docs: venv  ## Start documentation server locally
-	${PYTHON_PATH}python -m pip install -r requirements/docs.txt
-	${PYTHON_PATH}mkdocs serve
+	${ENV_PREFIX}python -m pip install -r requirements/docs.txt
+	${ENV_PREFIX}mkdocs serve
 
 {%- if cookiecutter.add_celery == 'y' %}
 celery: install  ## Start celery worker
-	${PYTHON_PATH}celery worker -A $(PROJECT_NAME) -B -l INFO
+	${ENV_PREFIX}celery worker -A $(PROJECT_NAME) -B -l INFO
 {%- endif %}
 
 redis:  ## Start redis server
@@ -84,7 +104,7 @@ redis:  ## Start redis server
 
 run_ansible:
 	@[ "${ENV}" ] || ( echo ">> ENV is not set"; exit 1 )
-	${PYTHON_PATH}ansible-playbook -i $(INVENTORY) $(PLAYBOOK) --limit=$(ENV) $(ANSIBLE_ARGS)
+	${ENV_PREFIX}ansible-playbook -i $(INVENTORY) $(PLAYBOOK) --limit=$(ENV) $(ANSIBLE_ARGS)
 
 configure: ANSIBLE_ARGS=--skip-tags=deploy
 configure: run_ansible
@@ -103,8 +123,3 @@ deploy_qa: deploy
 
 deploy_prod: ENV=prod  ## Deploy to production server
 deploy_prod: deploy
-
-help:  ## Display this help
-	# https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-12s\033[0m %s\n", $$1, $$2}'
-.PHONY: help

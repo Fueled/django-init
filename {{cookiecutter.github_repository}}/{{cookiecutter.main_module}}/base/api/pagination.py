@@ -1,25 +1,25 @@
 # Third Party Stuff
-from rest_framework.pagination import (
-    LimitOffsetPagination as DrfLimitOffsetPagination,
-    CursorPagination as DrfCursorPagination,
-)
+from rest_framework.pagination import LimitOffsetPagination as DrfLimitOffsetPagination
+from rest_framework.pagination import CursorPagination as DrfCursorPagination
 
 
 class LimitOffsetPagination(DrfLimitOffsetPagination):
 
     # Client can control the offset using this query parameter.
-    offset_query_param = 'offset'
+    offset_query_param = "offset"
 
     # Client can control the page size using this query parameter.
     # Default is 'None'. Set to eg 'page_size' to enable usage.
-    limit_query_param = 'per_page'
+    limit_query_param = "per_page"
 
     # Set to an integer to limit the maximum page size the client may request.
     # Only relevant if 'page_size_query_param' has also been set.
     max_limit = 1000
 
 
-def limit_offset_paginated_response(request, queryset, serializer_class, extra_context=None):
+def limit_offset_paginated_response(
+    request, queryset, serializer_class, extra_context=None
+):
     """Utlity function to return a paginated response.
 
     Returns `Response` object with pagination info after serializing the django
@@ -53,14 +53,14 @@ class CursorPagination(DrfCursorPagination):
 
     # Ordering field used for cursor pagination
     # While using cursor pagination, ensure ordering field is part of that model
-    ordering = '-created_at'
+    ordering = "-created_at"
 
     # Client can control the cursor using this query parameter.
-    cursor_query_param = 'cursor'
+    cursor_query_param = "cursor"
 
     # Client can control the page size using this query parameter.
     # Default is 'None'. Set to eg 'page_size' to enable usage.
-    page_size_query_param = 'per_page'
+    page_size_query_param = "per_page"
 
     # Set to an integer to limit the maximum page size the client may request.
     # Only relevant if 'page_size_query_param' has also been set.

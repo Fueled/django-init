@@ -9,13 +9,11 @@ from {{cookiecutter.main_module}}.base import exceptions as exc
 
 from .utils import decode_uuid_from_base64, encode_uuid_to_base64
 
-
 HS256_ALGORITHM = "HS256"
 
 
 def get_token_for_user(user, scope: str) -> str:
-    """Generate a new signed token containing a specified user limited for a scope (identified as a string).
-    """
+    """Generate a new signed token containing a specified user limited for a scope (identified as a string)."""
     data = {"user_%s_id" % (scope): str(user.id)}
     return jwt.encode(data, settings.SECRET_KEY, algorithm=HS256_ALGORITHM)
 

@@ -89,6 +89,7 @@ database-schema.svg
 
 # Virtualenv
 venv/
+.venv/
 
 ### Vim ###
 [._]*.s[a-w][a-z]

@@ -37,8 +37,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, email: str, password=None, **extra_fields):
-        """Creates and saves a User with the given email and password.
-        """
+        """Creates and saves a User with the given email and password."""
         return self._create_user(email, password, False, False, **extra_fields)
 
     def create_superuser(self, email: str, password: str, **extra_fields):
@@ -76,12 +75,10 @@ class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
         return str(self.id)
 
     def get_full_name(self) -> str:
-        """Returns the first_name plus the last_name, with a space in between.
-        """
+        """Returns the first_name plus the last_name, with a space in between."""
         full_name = "{} {}".format(self.first_name, self.last_name)
         return full_name.strip()
 
     def get_short_name(self) -> str:
-        """Returns the short name for the user.
-        """
+        """Returns the short name for the user."""
         return self.first_name.strip()

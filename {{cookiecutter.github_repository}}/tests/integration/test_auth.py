@@ -71,10 +71,11 @@ def test_user_registration_with_long_first_and_last_name(client):
     }
     response = client.json.post(url, json.dumps(credentials))
     assert response.status_code == 400
-    assert response.data["errors"][0]["field"] == "first_name"
-    assert response.data["errors"][0]["message"] == "Ensure this field has no more than 120 characters."
-    assert response.data["errors"][1]["field"] == "last_name"
-    assert response.data["errors"][1]["message"] == "Ensure this field has no more than 120 characters."
+    errors = response.data["errors"]
+    assert errors[0]["field"] == "first_name"
+    assert errors[0]["message"] == "Ensure this field has no more than 120 characters."
+    assert errors[1]["field"] == "last_name"
+    assert errors[1]["message"] == "Ensure this field has no more than 120 characters."
 
 
 def test_validate_password_during_registration(client):
@@ -87,8 +88,9 @@ def test_validate_password_during_registration(client):
     }
     response = client.json.post(url, json.dumps(credentials))
     assert response.status_code == 400
-    assert response.data["errors"][0]["field"] == "password"
-    assert response.data["errors"][0]["message"] == "This password is too common."
+    errors = response.data["errors"]
+    assert errors[0]["field"] == "password"
+    assert errors[0]["message"] == "This password is too common."
 
 
 def test_user_login(client):

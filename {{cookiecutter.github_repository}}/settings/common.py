@@ -439,6 +439,7 @@ def get_release():
     import {{cookiecutter.main_module}}
     {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
     import os
+
     import raven
 {% endif %}
     release = {{cookiecutter.main_module}}.__version__
