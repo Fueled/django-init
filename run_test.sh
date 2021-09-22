@@ -16,13 +16,13 @@ if [ ! $CI ]; then
     fi
 fi
 
-rm -rf hello-world-web/;
+rm -rf hello-world-backend/;
 
 # Generate new code, (it also creates db, migrate and install dependencies)
 yes 'y' | cookiecutter . --no-input
 
 # Run the tests present inside generate project
-cd hello-world-web;
+cd hello-world-backend;
 source venv/bin/activate
 ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 make test ARGS="--cov"
