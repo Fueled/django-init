@@ -1,16 +1,16 @@
 # Core Stuff
 # -------------------------------------
-Django==3.2.6
+Django==3.2.7
 
 # Configuration
 # -------------------------------------
-argon2-cffi==20.1.0
-django-environ==0.4.5
+argon2-cffi==21.1.0
+django-environ==0.7.0
 # For Django 3.x
 -e git+git://github.com/CuriousLearner/django-sites@upgrade-django-3.x#egg=django_sites
 python-dotenv==0.19.0
 {%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
-django-cors-headers==3.7.0
+django-cors-headers==3.8.0
 {%- endif %}
 
 {% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
