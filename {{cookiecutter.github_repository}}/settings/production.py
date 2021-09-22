@@ -89,7 +89,9 @@ if ENABLE_MEDIA_UPLOAD_TO_S3:
     # Uploaded Media Files
     # ------------------------
     # See: http://django-storages.readthedocs.org/en/latest/index.html
-    INSTALLED_APPS += ("storages",)
+    INSTALLED_APPS += [
+        "storages",
+    ]
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
     AWS_ACCESS_KEY_ID = env("DJANGO_AWS_ACCESS_KEY_ID")

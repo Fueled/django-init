@@ -65,7 +65,7 @@ You can also explore the [wiki] section for details on advance setup and usages.
 
 ## Changelogs
 
-Refer to [CHANGELOG.md](CHANGELOG.md).
+Refer to [HISTORY.md](HISTORY.md).
 
 ## Code of Conduct
 

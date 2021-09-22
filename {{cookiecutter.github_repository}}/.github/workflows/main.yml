@@ -54,8 +54,4 @@ jobs:
         pytest --cov -v --tb=native
     - name: Linting
       run: |
-        flake8 . --max-line-length=120 --exclude src/
-      {% if cookiecutter.add_ansible.lower() == 'y' %}
-        ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
-      {% endif %}
-
+        make lint

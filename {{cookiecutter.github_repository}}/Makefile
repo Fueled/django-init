@@ -22,6 +22,16 @@ fmt:             ## Format code using black & isort.
 	$(ENV_PREFIX)black .
 
 
+.PHONY: lint
+lint:             ## Run pep8, black, mypy linters.
+	$(ENV_PREFIX)flake8 .
+	$(ENV_PREFIX)black --check .
+	$(ENV_PREFIX)mypy --ignore-missing-imports ${PROJECT_NAME}/
+	{% if cookiecutter.add_ansible.lower() == 'y' -%}
+	$(ENV_PREFIX)ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
+	{%- endif %}
+
+
 run_all:  ## Run all the servers in parallel, requires GNU Make
 	make -j django docs{% if cookiecutter.add_celery == 'y' %} celery{% endif %} redis
 .PHONY: run_all
@@ -51,24 +61,21 @@ ifneq ($(CI),True)
 endif
 .PHONY: install
 
+
+.PHONY: clean
 clean:  ## Remove all temporary files like pycache
 	find . -name \*.rdb -type f -ls -delete
 	find . -name \*.pyc -type f -ls -delete
 	find . -name __pycache__ -ls -delete
-.PHONY: clean
 
 # == Django Helpers
 # ===================================================
 djrun: install  ## Start Django server locally
 	${ENV_PREFIX}python manage.py runserver
 
-check:  ## Check the project for code-style related errors
-	${ENV_PREFIX}black ${PROJECT_NAME} tests/ settings/
-	${ENV_PREFIX}flake8 .
-.PHONY: check
 
 test: ARGS=--pdb --cov  ## Run all the tests
-test: check
+test: lint
 	${ENV_PREFIX}pytest $(ARGS)
 
 djmm:  ## Create Django migrations

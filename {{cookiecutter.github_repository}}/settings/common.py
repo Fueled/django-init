@@ -7,10 +7,6 @@ import environ
 from corsheaders.defaults import default_headers
 from django.utils.translation import gettext_lazy as _
 
-{%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
-{%- endif %}
-
-
 ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 2 = /a/)
 APPS_DIR = ROOT_DIR.path("{{ cookiecutter.main_module }}")
 
@@ -20,7 +16,7 @@ env = environ.Env()
 # ==========================================================================
 # List of strings representing installed apps.
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -35,15 +31,13 @@ INSTALLED_APPS = (
     "rest_framework",  # http://www.django-rest-framework.org/
     "rest_framework_swagger",
     "versatileimagefield",  # https://github.com/WGBH/django-versatileimagefield/
-{%- if cookiecutter.add_django_cors_headers.lower() == "y" %}
     "corsheaders",  # https://github.com/ottoyiu/django-cors-headers/
-{%- endif %}
 {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
     "raven.contrib.django.raven_compat",
 {%- endif %}
     "mail_templated",  # https://github.com/artemrizhov/django-mail-templated
     "django_extensions",  # http://django-extensions.readthedocs.org/
-)
+]
 
 # INSTALLED APPS CONFIGURATION
 # ==========================================================================
@@ -85,7 +79,6 @@ REST_FRAMEWORK = {
 {%- endif %}
     "DEFAULT_PAGINATION_CLASS": "{{ cookiecutter.main_module }}.base.api.pagination.{{ cookiecutter.pagination }}",
     "PAGE_SIZE": 30,
-
     # Default renderer classes for Rest framework
     "DEFAULT_RENDERER_CLASSES": [
         "{{ cookiecutter.main_module }}.base.renderers.{{ cookiecutter.main_module|replace('_', ' ')|replace('-', ' ')|title|replace(' ', '') }}ApiRenderer",
@@ -436,12 +429,13 @@ LOGGING = {
 
 
 def get_release():
-    import {{cookiecutter.main_module}}
     {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
     import os
 
     import raven
 {% endif %}
+    import {{cookiecutter.main_module}}
+
     release = {{cookiecutter.main_module}}.__version__
     {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
     try:

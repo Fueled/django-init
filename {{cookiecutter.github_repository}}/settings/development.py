@@ -10,12 +10,12 @@ Adds sensible defaults for developement of project
 """
 
 from .common import *  # noqa F405
-from .common import INSTALLED_APPS, env
+from .common import INSTALLED_APPS, TEMPLATES, env
 
 # DEBUG
 # ------------------------------------------------------------------------------
 DEBUG = env.bool("DJANGO_DEBUG", default=True)
-TEMPLATES[0]["OPTIONS"]["debug"] = DEBUG  # noqa: F405
+TEMPLATES[0]["OPTIONS"]["debug"] = DEBUG  # type: ignore
 
 INTERNAL_IPS = ("127.0.0.1", "192.168.33.12")
 
@@ -26,7 +26,7 @@ ALLOWED_HOSTS = ["*"]
 # ------------------------------------------------------------------------------
 # Disable Django's static file handling and allow WhiteNoise to take over. This
 # helps in minimizing dev/prod differences when serving static files.
-INSTALLED_APPS = ("whitenoise.runserver_nostatic", ) + INSTALLED_APPS
+INSTALLED_APPS = ["whitenoise.runserver_nostatic", ] + INSTALLED_APPS
 {%- endif %}
 
 
@@ -67,8 +67,9 @@ CACHES = {
 # django-debug-toolbar
 # ------------------------------------------------------------------------------
 MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]  # noqa: F405
-INSTALLED_APPS += ("debug_toolbar",)
-
+INSTALLED_APPS += [
+    "debug_toolbar",
+]
 DEBUG_TOOLBAR_CONFIG = {
     "DISABLE_PANELS": ["debug_toolbar.panels.redirects.RedirectsPanel"],
     "SHOW_TEMPLATE_CONTEXT": True,

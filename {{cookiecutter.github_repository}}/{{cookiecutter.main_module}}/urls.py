@@ -4,6 +4,7 @@
 You should put the url config in their respective app putting only a
 refernce to them here.
 """
+from typing import TYPE_CHECKING, List, Union
 
 # Third Party Stuff
 from django.conf import settings
@@ -16,12 +17,18 @@ from . import api_urls
 from .base import views as base_views
 from .base.api import schemas as api_schemas
 
+if TYPE_CHECKING:
+    from django.urls import URLPattern, URLResolver
+
+    URL = Union[URLPattern, URLResolver]
+    URLList = List[URL]
+
 admin.site.site_title = admin.site.site_header = "{{ cookiecutter.project_name }} Administration"
 handler500 = base_views.server_error
 
 # Top Level Pages
 # ==============================================================================
-urlpatterns = [
+urlpatterns: "URLList" = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
@@ -39,7 +46,7 @@ urlpatterns += [
     path("api/", include(api_urls)),
     # Django Admin
     path("{}/".format(settings.DJANGO_ADMIN_URL), admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 if settings.API_DEBUG:
     urlpatterns += [
@@ -72,6 +79,8 @@ if settings.DEBUG:
         ),
         path("500/", handler500),
     ]
+
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
     # Django Debug Toolbar
     if "debug_toolbar" in settings.INSTALLED_APPS:

@@ -1,6 +1,6 @@
 # Third Party Stuff
-from rest_framework.pagination import LimitOffsetPagination as DrfLimitOffsetPagination
 from rest_framework.pagination import CursorPagination as DrfCursorPagination
+from rest_framework.pagination import LimitOffsetPagination as DrfLimitOffsetPagination
 
 
 class LimitOffsetPagination(DrfLimitOffsetPagination):
