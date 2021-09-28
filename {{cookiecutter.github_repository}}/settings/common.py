@@ -247,9 +247,8 @@ SERVER_EMAIL = env("SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres://localhost/{{ cookiecutter.main_module }}")
-}
+# Using unix socket for postgres connection by default
+DATABASES = {"default": env.db("DATABASE_URL", default="postgres:///{{ cookiecutter.main_module }}")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 DATABASES["default"]["CONN_MAX_AGE"] = 10
 {% if cookiecutter.postgis.lower() == "y" %}DATABASES["default"]["ENGINE"] = "django.contrib.gis.db.backends.postgis"{% endif %}
