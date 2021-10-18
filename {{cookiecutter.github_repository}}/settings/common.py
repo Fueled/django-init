@@ -154,9 +154,7 @@ FRONTEND_URLS = {
 # this middleware classes will be applied in the order given, and in the
 # response phase the middleware will be applied in reverse order.
 MIDDLEWARE = [
-{%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
     "corsheaders.middleware.CorsMiddleware",
-{%- endif %}
     "log_request_id.middleware.RequestIDMiddleware",  # For generating/adding Request id for all the logs
     "django.middleware.security.SecurityMiddleware",
 {%- if cookiecutter.enable_whitenoise.lower() == "y" %}
@@ -331,13 +329,10 @@ X_FRAME_OPTIONS = "DENY"
 # django-log-request-id - Sending request id in response
 REQUEST_ID_RESPONSE_HEADER = "REQUEST_ID"
 
-{%- if cookiecutter.add_django_cors_headers.lower() == "y" %}
-
 # CORS
 # --------------------------------------------------------------------------
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=[])
 CORS_ALLOW_HEADERS = default_headers + ("access-control-allow-origin",)
-{%- endif %}
 
 
 {%- if cookiecutter.add_celery.lower() == "y" %}

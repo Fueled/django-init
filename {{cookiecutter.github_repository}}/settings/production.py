@@ -41,12 +41,11 @@ ADMINS = getaddresses([env("DJANGO_ADMINS")])
 # Not-necessarily-technical managers of the site. They get broken link
 # notifications and other various emails.
 MANAGERS = ADMINS
-{%- if cookiecutter.add_django_cors_headers.lower() == "y" %}
 
 # CORS
 # --------------------------------------------------------------------------
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
-{%- endif %}
+
 
 {% if cookiecutter.add_django_auth_wall.lower() == "y" %}
 # Basic Auth Protection

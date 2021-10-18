@@ -38,14 +38,12 @@ INSTALLED_APPS = ["whitenoise.runserver_nostatic", ] + INSTALLED_APPS
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key only used for development and testing.
 SECRET_KEY = env("DJANGO_SECRET_KEY", default="CHANGEME!!!")
-{%- if cookiecutter.add_django_cors_headers.lower() == "y" %}
 
 # cors
 # --------------------------------------------------------------------------
 CORS_ALLOWED_ORIGINS = env.list(
     "CORS_ALLOWED_ORIGINS", default=["http://localhost", "http://localhost:8000"]
 )
-{%- endif %}
 
 # Mail settings
 # ------------------------------------------------------------------------------
