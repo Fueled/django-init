@@ -24,3 +24,22 @@ repos:
   rev: stable
   hooks:
     - id: black
+
+
+{%- if cookiecutter.add_pre_commit.lower() == 'y' and cookiecutter.add_pre_commit_static_analysis.lower() == 'y' %}
+
+- repo: https://github.com/returntocorp/semgrep
+  rev: v0.69.1
+  hooks:
+    - id: semgrep
+      args: [
+        '--config', 'p/python',
+        '--config', 'p/django',
+        '--config', 'p/secrets',
+        '--exclude', '.env.sample',
+        '--skip-unknown-extensions',
+        '--error',
+        '--quiet',
+        '--disable-metrics'
+      ]
+{%- endif %}
