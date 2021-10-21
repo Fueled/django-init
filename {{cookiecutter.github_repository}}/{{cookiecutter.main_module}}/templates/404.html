@@ -13,8 +13,9 @@
     <p>{% blocktrans %}The requested URL <code>{{ request_path }}</code> was not found on this server.{% endblocktrans %}</p>
 
     <style>#goog-wm ul{list-style: none; padding: 0; margin: 0;}</style>
+    {{ LANGUAGE_CODE|json_script:'lang-code' }}
     <script>
-      var GOOG_FIXURL_LANG = '{{ LANGUAGE_CODE }}';
+      var GOOG_FIXURL_LANG = JSON.parse(document.getElementById('lang-code').textContent);
       var GOOG_FIXURL_SITE = window.location.protocol + '//' + window.location.host;
     </script>
     <script src="https://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
