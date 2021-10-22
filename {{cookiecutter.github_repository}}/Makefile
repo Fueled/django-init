@@ -96,7 +96,7 @@ docs: venv  ## Start documentation server locally
 
 {%- if cookiecutter.add_celery == 'y' %}
 celery: install  ## Start celery worker
-	${ENV_PREFIX}celery worker -A $(PROJECT_NAME) -B -l INFO
+	${ENV_PREFIX}celery -A $(PROJECT_NAME) worker -B -l INFO
 {%- endif %}
 
 redis:  ## Start redis server
