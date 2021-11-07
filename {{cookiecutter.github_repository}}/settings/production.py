@@ -61,7 +61,7 @@ MIDDLEWARE = ["django_auth_wall.middleware.BasicAuthMiddleware"] + MIDDLEWARE
 # that header/value, request.is_secure() will return True.
 # WARNING! Only set this if you fully understand what you"re doing. Otherwise,
 # you may be opening yourself up to a security risk.
-{%- if cookiecutter.enable_heroku_deployment.lower() == "y" %}
+{%- if cookiecutter.add_heroku.lower() == "y" %}
 # This ensures that Django will be able to detect a secure connection
 # properly on Heroku.
 {%- endif %}
@@ -135,7 +135,7 @@ EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 # ------------------------------------------------------------------------------
 # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
 DATABASES["default"].update(env.db("DATABASE_URL"))  # Don't override all db settings
-{% if cookiecutter.postgis == "y" %}DATABASES["default"]["ENGINE"] = "django.contrib.gis.db.backends.postgis"{% endif %}
+{% if cookiecutter.add_postgis == "y" %}DATABASES["default"]["ENGINE"] = "django.contrib.gis.db.backends.postgis"{% endif %}
 
 # CACHING
 # ------------------------------------------------------------------------------
@@ -149,7 +149,7 @@ CACHES = {
             "PARSER_CLASS": "redis.connection.HiredisParser",
             "CONNECTION_POOL_CLASS": "redis.BlockingConnectionPool",
             "CONNECTION_POOL_CLASS_KWARGS": {
-{%- if cookiecutter.enable_heroku_deployment.lower() == "y" %}
+{%- if cookiecutter.add_heroku.lower() == "y" %}
                 # Hobby redistogo on heroku only supports max. 10, increase as required.
 {%- endif %}
                 "max_connections": env.int("REDIS_MAX_CONNECTIONS", default=10),

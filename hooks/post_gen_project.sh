@@ -25,7 +25,7 @@ else
     read  yn
 fi
 
-if echo "{{ cookiecutter.enable_heroku_deployment }}" | grep -iq "^n"; then
+if echo "{{ cookiecutter.add_heroku }}" | grep -iq "^n"; then
     rm -rf uwsgi.ini Procfile runtime.txt bin/post_compile
 fi
 

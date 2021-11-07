@@ -39,7 +39,7 @@ django-rest-swagger==2.2.0
 # -------------------------------------
 django-log-request-id==1.6.0
 
-{% if cookiecutter.use_sentry_for_error_reporting == "y" -%}
+{% if cookiecutter.add_sentry == "y" -%}
 # Raven is the Sentry client
 # --------------------------
 raven==6.10.0

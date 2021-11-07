@@ -12,7 +12,7 @@ boto3==1.18.45
 django-redis==5.0.0
 hiredis==2.0.0
 
-{% if cookiecutter.newrelic == 'y' %}
+{% if cookiecutter.add_newrelic == 'y' %}
 # Logging
 # -------------------------------------
 newrelic==6.8.1.164

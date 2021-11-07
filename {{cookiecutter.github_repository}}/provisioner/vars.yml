@@ -3,7 +3,7 @@ project_name: {{ cookiecutter.main_module }}
 project_repo_url: git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}.git
 project_repo_remote: origin
 repo_version: master
-pg_gis: {{ 'True' if cookiecutter.postgis.lower() == 'y' else 'False' }}
+pg_gis: {{ 'True' if cookiecutter.add_postgis.lower() == 'y' else 'False' }}
 ansible_python_interpreter: /usr/bin/python3
 django_settings: settings.production
 django_requirements_file: requirements.txt

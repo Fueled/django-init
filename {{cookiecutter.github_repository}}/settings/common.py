@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     "rest_framework_swagger",
     "versatileimagefield",  # https://github.com/WGBH/django-versatileimagefield/
     "corsheaders",  # https://github.com/ottoyiu/django-cors-headers/
-{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+{%- if cookiecutter.add_sentry == "y" %}
     "raven.contrib.django.raven_compat",
 {%- endif %}
     "mail_templated",  # https://github.com/artemrizhov/django-mail-templated
@@ -249,7 +249,7 @@ SERVER_EMAIL = env("SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 DATABASES = {"default": env.db("DATABASE_URL", default="postgres:///{{ cookiecutter.main_module }}")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 DATABASES["default"]["CONN_MAX_AGE"] = 10
-{% if cookiecutter.postgis.lower() == "y" %}DATABASES["default"]["ENGINE"] = "django.contrib.gis.db.backends.postgis"{% endif %}
+{% if cookiecutter.add_postgis.lower() == "y" %}DATABASES["default"]["ENGINE"] = "django.contrib.gis.db.backends.postgis"{% endif %}
 
 # TEMPLATE CONFIGURATION
 # -----------------------------------------------------------------------------
@@ -394,7 +394,7 @@ LOGGING = {
             "filters": ["require_debug_false"],
             "class": "django.utils.log.AdminEmailHandler",
         },
-        {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+        {%- if cookiecutter.add_sentry == "y" %}
         "sentry": {
             "level": "ERROR",
             "class": "raven.contrib.django.raven_compat.handlers.SentryHandler",
@@ -417,13 +417,13 @@ LOGGING = {
         },
         "{{cookiecutter.main_module}}": {"handlers": ["console"], "level": "INFO", "propagate": False},
         # Catch All Logger -- Captures any other logging
-        "": {"handlers": ["console",{%- if cookiecutter.use_sentry_for_error_reporting == "y" %} "sentry"{%- endif %}], "level": "ERROR", "propagate": True},
+        "": {"handlers": ["console",{%- if cookiecutter.add_sentry == "y" %} "sentry"{%- endif %}], "level": "ERROR", "propagate": True},
     },
 }
 
 
 def get_release():
-    {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    {%- if cookiecutter.add_sentry == "y" %}
     import os
 
     import raven
@@ -431,7 +431,7 @@ def get_release():
     import {{cookiecutter.main_module}}
 
     release = {{cookiecutter.main_module}}.__version__
-    {%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+    {%- if cookiecutter.add_sentry == "y" %}
     try:
         git_hash = raven.fetch_git_sha(os.path.dirname(os.pardir))[:7]
         release = "{}-{}".format(release, git_hash)
@@ -444,7 +444,7 @@ def get_release():
 RELEASE_VERSION = get_release()
 
 
-{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+{%- if cookiecutter.add_sentry == "y" %}
 RAVEN_CONFIG = {
     "dsn": env("SENTRY_DSN", default=""),
     "environment": env("SENTRY_ENVIRONMENT", default="production"),
@@ -454,7 +454,7 @@ RAVEN_CONFIG = {
 
 SITE_INFO = {
     "RELEASE_VERSION": RELEASE_VERSION,
-{%- if cookiecutter.use_sentry_for_error_reporting == "y" %}
+{%- if cookiecutter.add_sentry == "y" %}
     "IS_RAVEN_INSTALLED": True if RAVEN_CONFIG.get("dsn") else False,
 {%- endif %}
 }

@@ -2,7 +2,7 @@
 # requirements.txt in the root directory of a project.
 -r requirements/production.txt
 
-{%- if cookiecutter.enable_heroku_deployment.lower() == 'y' %}
+{%- if cookiecutter.add_heroku.lower() == 'y' %}
 # WSGI HTTP Server
 # -------------------------------------
 uWSGI==2.0.16

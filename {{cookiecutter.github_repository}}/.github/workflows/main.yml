@@ -1,4 +1,4 @@
-name: Run tests for {{cookiecutter.main_module}}
+name: Run Tests
 
 on: [push, pull_request]
 
@@ -9,11 +9,7 @@ jobs:
 
     services:
       postgres:
-      {%- if cookiecutter.postgis.lower() == 'y' %}
-        image: postgis/postgis:13-master
-      {%- else %}
-        image: postgres:13
-      {%- endif %}
+        image: {% if cookiecutter.add_postgis.lower() == 'y' %}postgis/postgis:13-master{% else %}postgres:13{% endif %}
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -24,15 +20,11 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     env:
-    {%- if cookiecutter.postgis.lower() == 'y' %}
-      DATABASE_URL: postgis://postgres:postgres@localhost:5432/{{cookiecutter.main_module}}
-    {%- else %}
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432/{{cookiecutter.main_module}}
-    {%- endif %}
+      DATABASE_URL: {% if cookiecutter.add_postgis.lower() == 'y' %}postgis{% else %}postgres{% endif %}://postgres:postgres@localhost:5432/{{cookiecutter.main_module}}
 
     steps:
     - uses: actions/checkout@v2
-    {%- if cookiecutter.postgis.lower() == 'y' %}
+    {%- if cookiecutter.add_postgis.lower() == 'y' %}
     - name: Install gdal
       run: |
         sudo apt-get install gdal-bin
