@@ -12,7 +12,7 @@
 
 ## Features
 
-- Django 3.1.x
+- Django 3.2.x
 - Python 3.9.x
 - Support for [black](https://pypi.org/project/black/)!
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.

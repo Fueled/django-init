@@ -1,4 +1,4 @@
-{%- if cookiecutter.use_sentry_for_error_reporting.lower() == 'y' %}
+{%- if cookiecutter.add_sentry.lower() == 'y' %}
 {%- raw %}{% load raven %}{% endraw %}
 {%- endif %}
 {% raw %}{% load static i18n %}<!DOCTYPE html>
@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="version" content="{{ site_info.RELEASE_VERSION }}">
     <meta name="description" content="{% block meta_description %}{% endblock meta_description %}">
-    {% endraw %}{%- if cookiecutter.use_sentry_for_error_reporting.lower() == 'y' %}
+    {% endraw %}{%- if cookiecutter.add_sentry.lower() == 'y' %}
     {% raw %}{% if site_info.IS_RAVEN_INSTALLED %}
         <script>Raven.config('{% sentry_public_dsn %}').install()</script>
     {% endif %}{% endraw %}

@@ -2,20 +2,20 @@
 import os
 
 # Third Party Stuff
-{%- if cookiecutter.use_sentry_for_error_reporting.lower() == 'y' %}
+{%- if cookiecutter.add_sentry.lower() == 'y' %}
 import raven
 {%- endif %}
 from celery import Celery
 from django.conf import settings
 from dotenv import load_dotenv
-{%- if cookiecutter.use_sentry_for_error_reporting.lower() == 'y'%}
+{%- if cookiecutter.add_sentry.lower() == 'y'%}
 from raven.contrib.celery import register_logger_signal, register_signal
 {%- endif %}
 
 # Set the default Django settings module for the 'celery' program.
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env"))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.development")
-{%- if cookiecutter.use_sentry_for_error_reporting.lower() == 'y' %}
+{%- if cookiecutter.add_sentry.lower() == 'y' %}
 
 
 class CeleryCustomised(Celery):
