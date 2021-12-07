@@ -5,9 +5,9 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Hello World API",
-        default_version="0.0.0",
-        description="Add a short project description here.",
+        title="{{ cookiecutter.project_name }} API",
+        default_version="{{ cookiecutter.version }}",
+        description="{{ cookiecutter.project_description }}",
     ),
     public=True,
     permission_classes=[AllowAny],
