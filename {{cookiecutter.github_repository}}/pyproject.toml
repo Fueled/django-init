@@ -53,9 +53,6 @@ raven = "^6.10.0"
 {% if cookiecutter.add_ansible.lower() == 'y' %}
 ansible = "^4.7.0"
 {%- endif %}
-{%- if cookiecutter.add_pre_commit.lower() == 'y' %}
-pre-commit = "^2.15.0"
-{%- endif %}
 {% if cookiecutter.add_newrelic == 'y' %}
 newrelic = "^6.8.1.164"
 {% endif %}
@@ -64,7 +61,9 @@ django-auth-wall = "^0.2.0"
 {%- endif %}
 
 [tool.poetry.dev-dependencies]
-pre-commit = "^2.16.0"
+{%- if cookiecutter.add_pre_commit.lower() == 'y' %}
+pre-commit = "^2.15.0"
+{%- endif %}
 isort = "^5.9.3"
 black = "^21.9b0"
 flake8 = "^4.0.1"
@@ -78,7 +77,6 @@ pytest-mock = "^3.6.1"
 mypy = "^0.910"
 django-stubs = "^1.9.0"
 bump2version = "^1.0.1"
-pre-commit = "^2.15.0"
 watchgod = "^0.7"
 types-requests = "^2.26.0"
 
