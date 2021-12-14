@@ -1,0 +1,128 @@
+[tool.poetry]
+name = "{{cookiecutter.github_repository}}"
+version = "{{cookiecutter.version}}"
+description = "{{cookiecutter.project_description}}"
+authors = ["{{cookiecutter.default_from_email}}"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^3.2.8"
+django-environ = "^0.8.1"
+argon2-cffi = "^21.1.0"
+python-dotenv = "^0.19.1"
+django-cors-headers = "^3.10.0"
+pytz = "^2021.3"
+psycopg2-binary = "^2.9.1"
+Pillow = "^8.4.0"
+django-extensions = "^3.1.3"
+django-uuid-upload-path = "^1.0.0"
+django-versatileimagefield = "^2.2"
+djangorestframework = "^3.12.4"
+django-rest-swagger = "^2.2.0"
+django-log-request-id = "^1.7.0"
+{%- if cookiecutter.add_celery.lower() == "y" %}
+celery = {extras = ["redis"], version = "^5.1.2"}
+{%- endif %}
+PyJWT = "^2.3.0"
+django-mail-templated = "^2.6.5"
+pydot = "^1.4.2"
+pyparsing = "^3.0.1"
+django-storages = "^1.12.2"
+boto3 = "^1.19.3"
+django-redis = "^5.0.0"
+hiredis = "^2.0.0"
+mkdocs-material = "^7.3.4"
+markdown-include = "^0.6.0"
+mkdocs-git-revision-date-localized-plugin = "^0.10.0"
+mkdocs-mermaid2-plugin = "^0.5.2"
+uvicorn = {extras = ["standard"], version = "^0.15.0"}
+flower = "1.0.0"
+Werkzeug = "^2.0.2"
+gunicorn = "^20.1.0"
+django-phonenumber-field = "^5.2.0"
+phonenumbers = "^8.12.36"
+{%- if cookiecutter.add_heroku.lower() == 'y' %}
+uWSGI = "^2.0.16"
+{% endif %}
+{% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
+whitenoise = "^5.3.0"
+{%- endif %}
+{% if cookiecutter.add_sentry == "y" -%}
+raven = "^6.10.0"
+{%- endif %}
+{% if cookiecutter.add_ansible.lower() == 'y' %}
+ansible = "^4.7.0"
+{%- endif %}
+{%- if cookiecutter.add_pre_commit.lower() == 'y' %}
+pre-commit = "^2.15.0"
+{%- endif %}
+{% if cookiecutter.add_newrelic == 'y' %}
+newrelic = "^6.8.1.164"
+{% endif %}
+{%- if cookiecutter.add_django_auth_wall.lower() == 'y' %}
+django-auth-wall = "^0.2.0"
+{%- endif %}
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.16.0"
+isort = "^5.9.3"
+black = "^21.9b0"
+flake8 = "^4.0.1"
+django-debug-toolbar = "^3.2.2"
+ipdb = "^0.13.9"
+pytest = "^6.2.5"
+pytest-django = "^4.4.0"
+pytest-cov = "^3.0.0"
+django-dynamic-fixture = "^3.1.2"
+pytest-mock = "^3.6.1"
+mypy = "^0.910"
+django-stubs = "^1.9.0"
+bump2version = "^1.0.1"
+pre-commit = "^2.15.0"
+watchgod = "^0.7"
+types-requests = "^2.26.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+known_first_party = ["core", "auth", "users"]
+multi_line_output = 3
+include_trailing_comma = true
+default_section = "THIRDPARTY"
+ensure_newline_before_comments = true
+force_grid_wrap = 0
+import_heading_stdlib = "Standard Library"
+import_heading_thirdparty = "Third Party Stuff"
+import_heading_firstparty = "{{ cookiecutter.project_name }} Stuff"
+skip_glob = ["*/migrations/**" , "*/venv/**" , "*/.venv/**" , "*/docs/**"]
+use_parentheses = true
+line_length = 120
+
+[tool.black]
+target_version = [ "py38", "py39" ]
+include = "\\.pyi?$"
+exclude = """
+/(\\.git/
+  |\\.eggs
+  |\\.hg
+  |__pycache__
+  |\\.cache
+  |\\.ipynb_checkpoints
+  |\\.mypy_cache
+  |\\.pytest_cache
+  |\\.tox
+  |\\.venv
+  |node_modules
+  |_build
+  |buck-out
+  |build
+  |dist
+  |media
+  |infrastructure
+  |templates
+  |locale
+)/
+"""
