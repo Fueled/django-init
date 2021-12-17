@@ -2,21 +2,21 @@
 
 # Linting
 # -------------------------------------
-isort==5.9.3
-black==21.9b0
-flake8==3.9.2
+isort==5.10.1
+black==21.12b0
+flake8==4.0.1
 
 # Debugging
 # -------------------------------------
-django-debug-toolbar==3.2.2
+django-debug-toolbar==3.2.3
 ipdb==0.13.9
 
 # Testing and coverage
 # -------------------------------------
 pytest==6.2.5
-pytest-django==4.4.0
-pytest-cov==2.12.1
-django-dynamic-fixture==3.1.1
+pytest-django==4.5.2
+pytest-cov==3.0.0
+django-dynamic-fixture==3.1.2
 pytest-mock==3.6.1
 mypy==0.910
 django-stubs==1.9.0
@@ -27,11 +27,11 @@ bump2version==1.0.1
 
 {% if cookiecutter.add_ansible.lower() == 'y' %}# Deployment and Tasks
 # -------------------------------------
-ansible==2.9.20
+ansible==2.10.7
 {%- endif %}
 
 {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
 # Code quality
 #--------------------------------------
-pre-commit==2.15.0
+pre-commit==2.16.0
 {%- endif %}
