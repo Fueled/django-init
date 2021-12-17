@@ -118,19 +118,18 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.isort]
-profile = "black"
-known_first_party = ["core", "auth", "users"]
-multi_line_output = 3
-include_trailing_comma = true
-default_section = "THIRDPARTY"
-ensure_newline_before_comments = true
-force_grid_wrap = 0
-import_heading_stdlib = "Standard Library"
-import_heading_thirdparty = "Third Party Stuff"
-import_heading_firstparty = "{{ cookiecutter.project_name }} Stuff"
-skip_glob = ["*/migrations/**" , "*/venv/**" , "*/.venv/**" , "*/docs/**"]
-use_parentheses = true
-line_length = 120
+line_length=120
+known_first_party={{ cookiecutter.main_module }}
+multi_line_output=3
+include_trailing_comma=True
+default_section=THIRDPARTY
+ensure_newline_before_comments=True
+force_grid_wrap=0
+import_heading_firstparty={{ cookiecutter.project_name }} Stuff
+import_heading_stdlib=Standard Library
+import_heading_thirdparty=Third Party Stuff
+skip_glob=*/migrations/**,*/venv/**,*/docs/**
+use_parentheses=True
 
 [tool.black]
 target_version = [ "py38", "py39" ]
