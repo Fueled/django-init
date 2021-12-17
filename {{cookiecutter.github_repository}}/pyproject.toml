@@ -120,7 +120,6 @@ exclude = """
   |build
   |dist
   |media
-  |infrastructure
   |templates
   |locale
 )/
