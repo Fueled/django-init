@@ -15,7 +15,7 @@ indent_size = 4
 [*.py]
 # https://github.com/timothycrosley/isort/wiki/isort-Settings
 # https://timothycrosley.github.io/isort/docs/configuration/profiles/#black
-line_length=88
+line_length=120
 known_first_party={{ cookiecutter.main_module }}
 multi_line_output=3
 include_trailing_comma=True
