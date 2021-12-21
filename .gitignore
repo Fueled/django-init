@@ -1,6 +1,10 @@
 ## Project Specific
 hello-world-backend/
 
+## VirtualEnv
+.venv/
+venv/
+
 ### OSX ###
 .DS_Store
 .AppleDouble

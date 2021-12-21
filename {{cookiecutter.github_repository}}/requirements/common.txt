@@ -1,15 +1,14 @@
 # Core Stuff
 # -------------------------------------
-Django==3.2.7
+Django==3.2.10
 
 # Configuration
 # -------------------------------------
-argon2-cffi==21.1.0
-django-environ==0.7.0
-# For Django 3.x
--e git+git://github.com/CuriousLearner/django-sites@upgrade-django-3.x#egg=django_sites
-python-dotenv==0.19.0
-django-cors-headers==3.8.0
+argon2-cffi==21.3.0
+django-environ==0.8.1
+django-sites==0.11
+python-dotenv==0.19.2
+django-cors-headers==3.10.1
 
 {% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
 # Staticfiles
@@ -19,25 +18,25 @@ whitenoise==5.3.0
 
 # Extensions
 # -------------------------------------
-pytz==2021.1
+pytz==2021.3
 
 # Models
 # -------------------------------------
-psycopg2-binary==2.9.1
+psycopg2-binary==2.9.2
 
-Pillow==8.3.2
-django-extensions==3.1.3
+Pillow==8.4.0
+django-extensions==3.1.5
 django-uuid-upload-path==1.0.0
 django-versatileimagefield==2.2
 
 # REST APIs
 # -------------------------------------
-djangorestframework==3.12.4
-drf-yasg==1.20.0
+djangorestframework==3.13.0
+django-rest-swagger==2.2.0
 
 # LOGGING
 # -------------------------------------
-django-log-request-id==1.6.0
+django-log-request-id==1.7.0
 
 {% if cookiecutter.add_sentry == "y" -%}
 # Raven is the Sentry client
@@ -49,17 +48,17 @@ raven==6.10.0
 
 # Async Tasks
 # -------------------------------------
-celery[redis]==5.1.2
+celery[redis]==5.2.1
 {%- endif %}
 
 # Auth Stuff
 # -------------------------------------
-PyJWT==2.1.0
+PyJWT==2.3.0
 django-mail-templated==2.6.5
 
 # Generating DB Schema
 # --------------------------------------
 pydot==1.4.2
-pyparsing==2.4.7
+pyparsing==3.0.6
 
 -r docs.txt
