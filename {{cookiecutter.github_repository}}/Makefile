@@ -63,7 +63,7 @@ install: virtualenv  ## Install and setup project dependencies
 	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
 	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements.txt
 	${ENV_PREFIX}poetry install
-	${ENV_PREFIX}pre-commit install
+	${ENV_PREFIX}poetry run pre-commit install
 ifneq ($(CI),True)
 	-createdb $(DB_NAME)
 	${ENV_PREFIX}python manage.py migrate
