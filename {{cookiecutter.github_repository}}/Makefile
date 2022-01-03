@@ -66,7 +66,7 @@ install: virtualenv  ## Install and setup project dependencies
 	${ENV_PREFIX}poetry run pre-commit install
 ifneq ($(CI),True)
 	-createdb $(DB_NAME)
-	${ENV_PREFIX}python manage.py migrate
+	${ENV_PREFIX}poetry run python manage.py migrate
 endif
 .PHONY: install
 
@@ -80,24 +80,24 @@ clean:  ## Remove all temporary files like pycache
 # == Django Helpers
 # ===================================================
 djrun: install  ## Start Django server locally
-	${ENV_PREFIX}python manage.py runserver
+	${ENV_PREFIX}poetry run python manage.py runserver
 
 
 test: ARGS=--pdb --cov  ## Run all the tests
 test: lint
-	${ENV_PREFIX}pytest $(ARGS)
+	${ENV_PREFIX}poetry run pytest $(ARGS)
 
 djmm:  ## Create Django migrations
-	${ENV_PREFIX}python manage.py makemigrations
+	${ENV_PREFIX}poetry run python manage.py makemigrations
 
 djmigrate:  # Run Django migrations
-	${ENV_PREFIX}python manage.py migrate
+	${ENV_PREFIX}poetry run python manage.py migrate
 
 djurls:  ## Displays all the django urls
-	${ENV_PREFIX}python manage.py show_urls
+	${ENV_PREFIX}poetry run python manage.py show_urls
 
 shell:  ## Enter the django shell
-	${ENV_PREFIX}python manage.py shell_plus
+	${ENV_PREFIX}poetry run python manage.py shell_plus
 
 docs: virtualenv  ## Start documentation server locally
 	${ENV_PREFIX}python -m pip install -r requirements/docs.txt
