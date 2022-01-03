@@ -44,9 +44,7 @@ class UserAdmin(AuthUserAdmin):
         ),
         ("Important dates", {"fields": ("last_login", "date_joined")}),
     )
-    add_fieldsets = (
-        (None, {"classes": ("wide",), "fields": ("email", "password1", "password2")}),
-    )
+    add_fieldsets = ((None, {"classes": ("wide",), "fields": ("email", "password1", "password2")}),)
     readonly_fields = ("date_joined", "last_login")
     form = MyUserChangeForm
     add_form = MyUserCreationForm

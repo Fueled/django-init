@@ -7,9 +7,7 @@ from {{cookiecutter.main_module}}.users.models import User
 
 class UserModelTestCase(TestCase):
     def test_create_user(self):
-        u = User.objects.create_user(
-            email="f@F.com", password="abc", first_name="F", last_name="B"
-        )
+        u = User.objects.create_user(email="f@F.com", password="abc", first_name="F", last_name="B")
         assert u.is_active is True
         assert u.is_staff is False
         assert u.is_superuser is False

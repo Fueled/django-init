@@ -63,17 +63,13 @@ class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):
         user = user_services.get_user_by_email(serializer.data["email"])
         if user:
             services.send_password_reset_mail(user)
-        return response.Ok(
-            {"message": "Further instructions will be sent to the email if it exists"}
-        )
+        return response.Ok({"message": "Further instructions will be sent to the email if it exists"})
 
     @action(methods=["POST"], detail=False)
     def password_reset_confirm(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = tokens.get_user_for_password_reset_token(
-            serializer.validated_data["token"]
-        )
+        user = tokens.get_user_for_password_reset_token(serializer.validated_data["token"])
         user.set_password(serializer.validated_data["new_password"])
         user.save()
         return response.NoContent()

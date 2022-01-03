@@ -54,9 +54,7 @@ class PasswordChangeSerializer(serializers.Serializer):
 
     def validate_current_password(self, value):
         if not self.context["request"].user.check_password(value):
-            raise serializers.ValidationError(
-                self.default_error_messages["invalid_password"]
-            )
+            raise serializers.ValidationError(self.default_error_messages["invalid_password"])
         return value
 
     def validate_new_password(self, value):

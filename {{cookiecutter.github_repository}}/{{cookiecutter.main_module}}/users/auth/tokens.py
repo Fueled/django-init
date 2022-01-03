@@ -45,9 +45,7 @@ def get_user_for_token(token: str, scope: str):
 
 
 def get_token_for_password_reset(user):
-    return "{}::{}".format(
-        encode_uuid_to_base64(user.pk), PasswordResetTokenGenerator().make_token(user)
-    )
+    return "{}::{}".format(encode_uuid_to_base64(user.pk), PasswordResetTokenGenerator().make_token(user))
 
 
 def get_user_for_password_reset_token(token):

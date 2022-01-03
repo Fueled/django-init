@@ -139,10 +139,7 @@ def test_user_password_reset(client, mailoutbox, settings):
     assert len(mailoutbox) == 1
     mail_body = mailoutbox[0].body
     token = get_token_for_password_reset(user)
-    assert (
-        "{}://{}".format(settings.FRONTEND_SITE_SCHEME, settings.FRONTEND_SITE_DOMAIN)
-        in mail_body
-    )
+    assert "{}://{}".format(settings.FRONTEND_SITE_SCHEME, settings.FRONTEND_SITE_DOMAIN) in mail_body
     assert token in mail_body
     assert user.email in mailoutbox[0].to
 

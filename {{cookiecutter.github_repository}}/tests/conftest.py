@@ -47,12 +47,7 @@ def client():
     from django.test import Client
 
     class _Client(Client):
-        def login(
-            self,
-            user=None,
-            backend="django.contrib.auth.backends.ModelBackend",
-            **credentials
-        ):
+        def login(self, user=None, backend="django.contrib.auth.backends.ModelBackend", **credentials):
             """Modified login method, which allows setup an authenticated session with just passing in the
             user object, if provided.
             """
@@ -74,8 +69,6 @@ def client():
             >>> client.json.get(url)
             >>> client.json.post(url, data=json.dumps(payload))
             """
-            return PartialMethodCaller(
-                obj=self, content_type='application/json;charset="utf-8"'
-            )
+            return PartialMethodCaller(obj=self, content_type='application/json;charset="utf-8"')
 
     return _Client()
