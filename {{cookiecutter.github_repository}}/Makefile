@@ -40,7 +40,7 @@ venv:     ## Create a virtual environment.
 	@echo "creating virtualenv ..."
 	@rm -rf .venv
 	@python3 -m venv .venv
-	@./.venv/bin/pip install -U pip
+	@./.venv/bin/pip install -U pip poetry
 	@echo
 	@echo "!!! Please run 'source .venv/bin/activate' to enable the environment !!!"
 
@@ -51,8 +51,14 @@ regenerate:  ## Delete and create new database.
 	${ENV_PREFIX}python manage.py migrate
 .PHONY: regenerate
 
+update-libs:  ## update libs + generate new lockfile & requirements
+	${ENV_PREFIX}poetry update
+	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
+	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements.txt
+.PHONY: update-libs
+
 install: venv  ## Install and setup project dependencies
-	${ENV_PREFIX}python -m pip install --upgrade pip wheel poetry
+	${ENV_PREFIX}python -m pip install --upgrade pip wheel
 	${ENV_PREFIX}poetry lock
 	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
 	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements.txt

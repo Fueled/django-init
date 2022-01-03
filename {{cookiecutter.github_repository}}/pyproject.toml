@@ -5,103 +5,102 @@ description = "{{cookiecutter.project_description}}"
 authors = ["{{cookiecutter.default_from_email}}"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-Django = "^3.2.10"
-six = "^1.16.0"
-django-environ = "^0.8.1"
+python = "~3.9"
+Django = "~3.2.10"
+django-environ = "^0.8"
 django-sites = "^0.11"
-argon2-cffi = "^21.3.0"
-python-dotenv = "^0.19.2"
-django-cors-headers = "^3.10.1"
+argon2-cffi = "^21.3"
+python-dotenv = "^0.19"
+django-cors-headers = "^3.10"
 {% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
-whitenoise = "^5.3.0"
+whitenoise = "^5.3"
 {%- endif %}
 # Extensions
 # -------------------------------------
 pytz = "^2021.3"
 # Models
 # -------------------------------------
-psycopg2-binary = "^2.9.2"
-Pillow = "^8.4.0"
-django-extensions = "^3.1.5"
-django-uuid-upload-path = "^1.0.0"
+psycopg2-binary = "^2.9"
+Pillow = "^8.4"
+django-extensions = "^3.1"
+django-uuid-upload-path = "^1.0"
 django-versatileimagefield = "^2.2"
 # REST APIs
 # -------------------------------------
-djangorestframework = "^3.13.0"
-django-rest-swagger = "^2.2.0"
+djangorestframework = "^3.13"
+django-rest-swagger = "^2.2"
 # Documentation
 # -------------------------------------
-mkdocs = "^1.2.3"
+mkdocs = "^1.2"
 # Raven is the Sentry client
 # --------------------------
 {% if cookiecutter.add_sentry == "y" -%}
-raven = "^6.10.0"
+raven = "^6.10"
 {%- endif %}
 # LOGGING
 # -------------------------------------
-django-log-request-id = "^1.7.0"
+django-log-request-id = "^1.7"
 # Async Tasks
 # -------------------------------------
 {%- if cookiecutter.add_celery.lower() == "y" %}
-celery = {extras = ["redis"], version = "^5.2.1"}
+celery = {extras = ["redis"], version = "~5.2.1"}
 {%- endif %}
 # Auth Stuff
 # -------------------------------------
-PyJWT = "^2.3.0"
-django-mail-templated = "^2.6.5"
+PyJWT = "^2.3"
+django-mail-templated = "^2.6"
 # Production settings
 # =====================================
 # Static Files and Media Storage
 # -------------------------------------
-django-storages = "^1.12.3"
-boto3 = "^1.20.24"
+django-storages = "^1.12"
+boto3 = "~1.20.24"
 # Caching
 # -------------------------------------
-django-redis = "^5.1.0"
-hiredis = "^2.0.0"
+django-redis = "^5.1"
+hiredis = "^2.0"
 {%- if cookiecutter.add_django_auth_wall.lower() == 'y' %}
 # Basic Auth Protection
 # -------------------------------------
-django-auth-wall = "^0.2.0"
+django-auth-wall = "^0.2"
 {%- endif %}
 {%- if cookiecutter.add_heroku.lower() == 'y' %}
-uWSGI = "^2.0.16"
+uWSGI = "^2.0"
 {% endif %}
 {% if cookiecutter.add_newrelic == 'y' %}
 # Logging
 # -------------------------------------
-newrelic = "^7.2.4.171"
+newrelic = "~7.2.4.171"
 {% endif %}
 
 [tool.poetry.dev-dependencies]
 {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
-pre-commit = "^2.16.0"
+pre-commit = "^2.16"
 {%- endif %}
 {% if cookiecutter.add_ansible.lower() == 'y' %}
-ansible = "^4.7.0"
+ansible = "^4.7"
 {%- endif %}
 # Documentation
 # -------------------------------------
-isort = "^5.10.1"
-black = "^21.12b0"
-flake8 = "^4.0.1"
+isort = "^5.10"
+black = "~21.12b0"
+flake8 = "^4.0"
 # Debugging
 # -------------------------------------
-django-debug-toolbar = "^3.2.3"
-ipdb = "^0.13.9"
+django-debug-toolbar = "^3.2"
+ipdb = "^0.13"
 # Testing and coverage
 # -------------------------------------
-pytest = "^6.2.5"
-pytest-django = "^4.5.2"
-pytest-cov = "^3.0.0"
-django-dynamic-fixture = "^3.1.2"
-pytest-mock = "^3.6.1"
-mypy = "^0.910"
-django-stubs = "^1.9.0"
+pytest = "^6.2"
+pytest-django = "^4.5"
+pytest-cov = "^3.0"
+django-dynamic-fixture = "^3.1"
+pytest-mock = "^3.6"
+mypy = "~0.910"
+django-stubs = "^1.9"
 # Versioning
 # -------------------------------------
-bump2version = "^1.0.1"
+bump2version = "^1.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
