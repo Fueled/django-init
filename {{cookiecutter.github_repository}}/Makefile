@@ -6,7 +6,7 @@ PROJECT_NAME={{cookiecutter.main_module}}
 DB_NAME=$(PROJECT_NAME)
 INVENTORY=provisioner/hosts
 PLAYBOOK=provisioner/site.yml
-ENV_PREFIX=$(shell python -c "if __import__('pathlib').Path('.venv/bin/pip').exists(): print('.venv/bin/')")
+ENV_PREFIX=$(shell python -c "if __import__('pathlib').Path('venv/bin/pip').exists(): print('venv/bin/')")
 
 
 .PHONY: help
@@ -18,17 +18,17 @@ help:            ## show the help
 
 .PHONY: fmt
 fmt:             ## Format code using black & isort.
-	$(ENV_PREFIX)isort .
-	$(ENV_PREFIX)black .
+	$(ENV_PREFIX)poetry run isort .
+	$(ENV_PREFIX)poetry run black .
 
 
 .PHONY: lint
 lint:             ## Run pep8, black, mypy linters.
-	$(ENV_PREFIX)flake8 .
-	$(ENV_PREFIX)black --check .
-	$(ENV_PREFIX)mypy --ignore-missing-imports ${PROJECT_NAME}/
+	$(ENV_PREFIX)poetry run flake8 .
+	$(ENV_PREFIX)poetry run black --check .
+	$(ENV_PREFIX)poetry run mypy --ignore-missing-imports ${PROJECT_NAME}/
 	{% if cookiecutter.add_ansible.lower() == 'y' -%}
-	$(ENV_PREFIX)ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
+	$(ENV_PREFIX)poetry run ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 	{%- endif %}
 
 
@@ -36,13 +36,13 @@ run_all:  ## Run all the servers in parallel, requires GNU Make
 	make -j django docs{% if cookiecutter.add_celery == 'y' %} celery{% endif %} redis
 .PHONY: run_all
 
-venv:     ## Create a virtual environment.
+virtualenv:     ## Create a virtual environment.
 	@echo "creating virtualenv ..."
-	@rm -rf .venv
-	@python3 -m venv .venv
-	@./.venv/bin/pip install -U pip poetry
+	@rm -rf venv
+	@python3 -m venv venv
+	@./venv/bin/pip install -U pip poetry
 	@echo
-	@echo "!!! Please run 'source .venv/bin/activate' to enable the environment !!!"
+	@echo "!!! Please run 'source venv/bin/activate' to enable the environment !!!"
 
 
 regenerate:  ## Delete and create new database.
@@ -57,7 +57,7 @@ update-libs:  ## update libs + generate new lockfile & requirements
 	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements.txt
 .PHONY: update-libs
 
-install: venv  ## Install and setup project dependencies
+install: virtualenv  ## Install and setup project dependencies
 	${ENV_PREFIX}python -m pip install --upgrade pip wheel
 	${ENV_PREFIX}poetry lock
 	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
@@ -99,7 +99,7 @@ djurls:  ## Displays all the django urls
 shell:  ## Enter the django shell
 	${ENV_PREFIX}python manage.py shell_plus
 
-docs: venv  ## Start documentation server locally
+docs: virtualenv  ## Start documentation server locally
 	${ENV_PREFIX}python -m pip install -r requirements/docs.txt
 	${ENV_PREFIX}mkdocs serve
 
