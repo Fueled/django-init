@@ -41,13 +41,17 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", default="CHANGEME!!!")
 
 # cors
 # --------------------------------------------------------------------------
-CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://localhost", "http://localhost:8000"])
+CORS_ALLOWED_ORIGINS = env.list(
+    "CORS_ALLOWED_ORIGINS", default=["http://localhost", "http://localhost:8000"]
+)
 
 # Mail settings
 # ------------------------------------------------------------------------------
 EMAIL_HOST = "localhost"
 EMAIL_PORT = 1025
-EMAIL_BACKEND = env("DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
+EMAIL_BACKEND = env(
+    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
+)
 
 # CACHES
 # ------------------------------------------------------------------------------

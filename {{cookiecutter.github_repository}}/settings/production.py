@@ -105,10 +105,14 @@ if ENABLE_MEDIA_UPLOAD_TO_S3:
     # TODO See: https://github.com/jschneier/django-storages/issues/47
     # Revert the following and use str after the above-mentioned bug is fixed in
     # either django-storage-redux or boto
-    AWS_HEADERS = {"Cache-Control": f"max-age={AWS_EXPIRY}, s-maxage={AWS_EXPIRY}, must-revalidate"}
+    AWS_HEADERS = {
+        "Cache-Control": f"max-age={AWS_EXPIRY}, s-maxage={AWS_EXPIRY}, must-revalidate"
+    }
 
     # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
-    MEDIA_URL = env("MEDIA_URL", default="https://s3.amazonaws.com/%s/" % AWS_STORAGE_BUCKET_NAME)
+    MEDIA_URL = env(
+        "MEDIA_URL", default="https://s3.amazonaws.com/%s/" % AWS_STORAGE_BUCKET_NAME
+    )
 
 # Static Assets
 # ------------------------
@@ -161,9 +165,16 @@ SESSION_CACHE_ALIAS = "default"
 # TEMPLATE CONFIGURATION
 # -----------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/templates/api/#django.template.loaders.cached.Loader
-TEMPLATES[0]["OPTIONS"]["loaders"] = [("django.template.loaders.cached.Loader", TEMPLATES[0]["OPTIONS"]["loaders"])]
+TEMPLATES[0]["OPTIONS"]["loaders"] = [
+    ("django.template.loaders.cached.Loader", TEMPLATES[0]["OPTIONS"]["loaders"])
+]
 
 if not API_DEBUG:  # noqa: F405
     # blocking browsable api for rest framework and allowing just json renderer
-    if "rest_framework.renderers.BrowsableAPIRenderer" in REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"]:
-        REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"].remove("rest_framework.renderers.BrowsableAPIRenderer")
+    if (
+        "rest_framework.renderers.BrowsableAPIRenderer"
+        in REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"]
+    ):
+        REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"].remove(
+            "rest_framework.renderers.BrowsableAPIRenderer"
+        )
