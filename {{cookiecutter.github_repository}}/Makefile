@@ -8,17 +8,17 @@ INVENTORY=provisioner/hosts
 PLAYBOOK=provisioner/site.yml
 
 # if [ -d ".venv/bin" ]; then \
-# 	ENV_PREFIX=".venv/bin/"; \
+# 	ENV_PREFIX=$(echo ".venv/bin/"); \
 # elif [ -d "venv/bin" ]; then \
-# 	ENV_PREFIX="venv/bin/"; \
+# 	ENV_PREFIX=$(echo "venv/bin/"); \
 # fi
 
 # if $(which poetry) then \
-# 	ENV_PREFIX="poetry run "; \
+# 	ENV_PREFIX=$(echo "poetry run "); \
 # else \
-# 	ENV_PREFIX=""; \
+# 	ENV_PREFIX=$(echo ""); \
 # fi
-ENV_PREFIX=$(echo "poetry run ")
+ENV_PREFIX=$("poetry run ")
 
 
 .PHONY: help
@@ -30,17 +30,17 @@ help:            ## show the help
 
 .PHONY: fmt
 fmt:        ## Format code using black & isort.
-	${ENV_PREFIX}isort .
-	${ENV_PREFIX}black .
+	$(ENV_PREFIX)isort .
+	$(ENV_PREFIX)black .
 
 
 .PHONY: lint
 lint:       ## Run pep8, black, mypy linters.
-	${ENV_PREFIX}flake8 .
-	${ENV_PREFIX}black --check .
-	${ENV_PREFIX}mypy --ignore-missing-imports ${PROJECT_NAME}/
+	$(ENV_PREFIX)flake8 .
+	$(ENV_PREFIX)black --check .
+	$(ENV_PREFIX)mypy --ignore-missing-imports ${PROJECT_NAME}/
 	{% if cookiecutter.add_ansible.lower() == 'y' -%}
-	${ENV_PREFIX}ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
+	$(ENV_PREFIX)ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 	{%- endif %}
 
 
@@ -59,7 +59,7 @@ virtualenv:     ## Create a virtual environment.
 regenerate:  ## Delete and create new database.
 	-dropdb $(DB_NAME)
 	createdb $(DB_NAME)
-	${ENV_PREFIX}python manage.py migrate
+	$(ENV_PREFIX)python manage.py migrate
 .PHONY: regenerate
 
 update-libs:  ## update libs + generate new lockfile & requirements
@@ -74,10 +74,10 @@ install:  ## Install and setup project dependencies
 	poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
 	poetry export --without-hashes -f requirements.txt -o requirements.txt
 	poetry install
-	${ENV_PREFIX}pre-commit install
+	$(ENV_PREFIX)pre-commit install
 ifneq ($(CI),True)
 	-createdb $(DB_NAME)
-	${ENV_PREFIX}python manage.py migrate
+	$(ENV_PREFIX)python manage.py migrate
 endif
 .PHONY: install
 
@@ -91,31 +91,31 @@ clean:  ## Remove all temporary files like pycache
 # == Django Helpers
 # ===================================================
 djrun: install  ## Start Django server locally
-	${ENV_PREFIX}python manage.py runserver
+	$(ENV_PREFIX)python manage.py runserver
 
 
 test: ARGS=--pdb --cov  ## Run all the tests
 test: lint
-	${ENV_PREFIX}pytest $(ARGS)
+	$(ENV_PREFIX)pytest $(ARGS)
 
 djmm:  ## Create Django migrations
-	${ENV_PREFIX}python manage.py makemigrations
+	$(ENV_PREFIX)python manage.py makemigrations
 
 djmigrate:  # Run Django migrations
-	${ENV_PREFIX}python manage.py migrate
+	$(ENV_PREFIX)python manage.py migrate
 
 djurls:  ## Displays all the django urls
-	${ENV_PREFIX}python manage.py show_urls
+	$(ENV_PREFIX)python manage.py show_urls
 
 shell:  ## Enter the django shell
-	${ENV_PREFIX}python manage.py shell_plus
+	$(ENV_PREFIX)python manage.py shell_plus
 
 docs: virtualenv  ## Start documentation server locally
-	${ENV_PREFIX}mkdocs serve
+	$(ENV_PREFIX)mkdocs serve
 
 {%- if cookiecutter.add_celery == 'y' %}
 celery: install  ## Start celery worker
-	${ENV_PREFIX}celery -A $(PROJECT_NAME) worker -B -l INFO
+	$(ENV_PREFIX)celery -A $(PROJECT_NAME) worker -B -l INFO
 {%- endif %}
 
 redis:  ## Start redis server
