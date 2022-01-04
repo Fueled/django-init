@@ -12,13 +12,11 @@ PLAYBOOK=provisioner/site.yml
 # elif [ -d "venv/bin" ]; then \
 # 	ENV_PREFIX="venv/bin/" \
 # fi
-# if $(which poetry) then \
-# 	ENV_PREFIX="poetry run " \
-# else \
-# 	ENV_PREFIX="" \
-# fi
-ENV_PREFIX=""
-
+if $(which poetry) then \
+	ENV_PREFIX="poetry run " \
+else \
+	ENV_PREFIX="" \
+fi
 
 .PHONY: help
 help:            ## show the help
