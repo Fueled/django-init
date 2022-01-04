@@ -28,13 +28,13 @@ help:            ## show the help
 
 
 .PHONY: fmt
-fmt:             ## Format code using black & isort.
+fmt: virtualenv            ## Format code using black & isort.
 	isort .
 	black .
 
 
 .PHONY: lint
-lint:             ## Run pep8, black, mypy linters.
+lint: virtualenv           ## Run pep8, black, mypy linters.
 	flake8 .
 	black --check .
 	mypy --ignore-missing-imports ${PROJECT_NAME}/
@@ -55,16 +55,16 @@ virtualenv:     ## Create a virtual environment.
 	@echo "!!! Please run 'poetry shell' to enable the environment !!!"
 
 
-regenerate:  ## Delete and create new database.
+regenerate: virtualenv ## Delete and create new database.
 	-dropdb $(DB_NAME)
 	createdb $(DB_NAME)
-	${ENV_PREFIX}python manage.py migrate
+	python manage.py migrate
 .PHONY: regenerate
 
 update-libs:  ## update libs + generate new lockfile & requirements
-	${ENV_PREFIX}poetry update
-	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
-	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements.txt
+	poetry update
+	poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
+	poetry export --without-hashes -f requirements.txt -o requirements.txt
 .PHONY: update-libs
 
 install: virtualenv  ## Install and setup project dependencies
