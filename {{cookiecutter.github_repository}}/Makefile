@@ -39,6 +39,7 @@ run_all:  ## Run all the servers in parallel, requires GNU Make
 virtualenv:     ## Create a virtual environment.
 	@echo "creating virtualenv using poetry..."
 	@pip install -U pip poetry
+	@poetry env use python3
 	@echo
 	@echo "!!! Please run 'poetry shell' to enable the environment !!!"
 

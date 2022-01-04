@@ -114,6 +114,7 @@ def format_exception(exc):
                         "message": "Validation failed for one of the item in the list.",
                         "errors": [
                             {
+                                "field": error_key,
                                 "message": ", ".join(error_msg)
                                 if isinstance(error_msg, list)
                                 else error_msg,
