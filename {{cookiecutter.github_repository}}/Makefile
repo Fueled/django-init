@@ -100,7 +100,6 @@ shell:  ## Enter the django shell
 	${ENV_PREFIX}poetry run python manage.py shell_plus
 
 docs: virtualenv  ## Start documentation server locally
-	${ENV_PREFIX}python -m pip install -r requirements/docs.txt
 	${ENV_PREFIX}mkdocs serve
 
 {%- if cookiecutter.add_celery == 'y' %}
