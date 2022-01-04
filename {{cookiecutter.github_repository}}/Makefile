@@ -6,7 +6,17 @@ PROJECT_NAME={{cookiecutter.main_module}}
 DB_NAME=$(PROJECT_NAME)
 INVENTORY=provisioner/hosts
 PLAYBOOK=provisioner/site.yml
-ENV_PREFIX=$(shell python -c "if __import__('pathlib').Path('venv/bin/pip').exists(): print('venv/bin/')")
+if [ -d ".venv/bin" ]; then \
+	ENV_PREFIX=".venv/bin/" \
+elif [ -d "venv/bin" ]; then \
+	ENV_PREFIX="venv/bin/" \
+fi
+# if $(which poetry) then \
+# 	ENV_PREFIX="poetry run " \
+# else \
+# 	ENV_PREFIX="" \
+# fi
+
 
 
 .PHONY: help
@@ -18,17 +28,17 @@ help:            ## show the help
 
 .PHONY: fmt
 fmt:             ## Format code using black & isort.
-	$(ENV_PREFIX)poetry run isort .
-	$(ENV_PREFIX)poetry run black .
+	$(ENV_PREFIX)isort .
+	$(ENV_PREFIX)black .
 
 
 .PHONY: lint
 lint:             ## Run pep8, black, mypy linters.
-	$(ENV_PREFIX)poetry run flake8 .
-	$(ENV_PREFIX)poetry run black --check .
-	$(ENV_PREFIX)poetry run mypy --ignore-missing-imports ${PROJECT_NAME}/
+	$(ENV_PREFIX)flake8 .
+	$(ENV_PREFIX)black --check .
+	$(ENV_PREFIX)mypy --ignore-missing-imports ${PROJECT_NAME}/
 	{% if cookiecutter.add_ansible.lower() == 'y' -%}
-	$(ENV_PREFIX)poetry run ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
+	$(ENV_PREFIX)ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 	{%- endif %}
 
 
@@ -40,7 +50,7 @@ virtualenv:     ## Create a virtual environment.
 	@echo "creating virtualenv ..."
 	@rm -rf venv
 	@python3 -m venv venv
-	@./venv/bin/pip install -U pip poetry
+	@./venv/bin/pip install -U pip
 	@echo
 	@echo "!!! Please run 'source venv/bin/activate' to enable the environment !!!"
 
@@ -58,15 +68,15 @@ update-libs:  ## update libs + generate new lockfile & requirements
 .PHONY: update-libs
 
 install: virtualenv  ## Install and setup project dependencies
-	${ENV_PREFIX}python -m pip install --upgrade pip wheel
+	${ENV_PREFIX}python -m pip install --upgrade pip wheel poetry
 	${ENV_PREFIX}poetry lock
 	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
 	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements.txt
 	${ENV_PREFIX}poetry install
-	${ENV_PREFIX}poetry run pre-commit install
+	${ENV_PREFIX}pre-commit install
 ifneq ($(CI),True)
 	-createdb $(DB_NAME)
-	${ENV_PREFIX}poetry run python manage.py migrate
+	${ENV_PREFIX}python manage.py migrate
 endif
 .PHONY: install
 
@@ -80,24 +90,24 @@ clean:  ## Remove all temporary files like pycache
 # == Django Helpers
 # ===================================================
 djrun: install  ## Start Django server locally
-	${ENV_PREFIX}poetry run python manage.py runserver
+	${ENV_PREFIX}python manage.py runserver
 
 
 test: ARGS=--pdb --cov  ## Run all the tests
 test: lint
-	${ENV_PREFIX}poetry run pytest $(ARGS)
+	${ENV_PREFIX}pytest $(ARGS)
 
 djmm:  ## Create Django migrations
-	${ENV_PREFIX}poetry run python manage.py makemigrations
+	${ENV_PREFIX}python manage.py makemigrations
 
 djmigrate:  # Run Django migrations
-	${ENV_PREFIX}poetry run python manage.py migrate
+	${ENV_PREFIX}python manage.py migrate
 
 djurls:  ## Displays all the django urls
-	${ENV_PREFIX}poetry run python manage.py show_urls
+	${ENV_PREFIX}python manage.py show_urls
 
 shell:  ## Enter the django shell
-	${ENV_PREFIX}poetry run python manage.py shell_plus
+	${ENV_PREFIX}python manage.py shell_plus
 
 docs: virtualenv  ## Start documentation server locally
 	${ENV_PREFIX}mkdocs serve

@@ -231,7 +231,7 @@ DJANGO_ADMIN_URL = env.str("DJANGO_ADMIN_URL", default="admin")
 # EMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
 EMAIL_BACKEND = env("DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend")
-DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="Hello World <support@hello_world.com>")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="{{ cookiecutter.default_from_email }}")
 EMAIL_SUBJECT_PREFIX = env("EMAIL_SUBJECT_PREFIX", default="[{{cookiecutter.project_name}}] ")
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
 SERVER_EMAIL = env("SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)

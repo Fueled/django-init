@@ -107,6 +107,6 @@ class Migration(migrations.Migration):
                 "verbose_name": "user",
                 "ordering": ("-date_joined",),
             },
-            managers=[("objects", hello_world.users.models.UserManager())],
+            managers=[("objects", {{cookiecutter.main_module}}.users.models.UserManager())],
         )
     ]
