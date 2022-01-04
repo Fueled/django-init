@@ -6,6 +6,7 @@ PROJECT_NAME={{cookiecutter.main_module}}
 DB_NAME=$(PROJECT_NAME)
 INVENTORY=provisioner/hosts
 PLAYBOOK=provisioner/site.yml
+
 if [ -d ".venv/bin" ]; then \
 	ENV_PREFIX=".venv/bin/" \
 elif [ -d "venv/bin" ]; then \
@@ -14,7 +15,7 @@ fi
 if $(which poetry) then \
 	ENV_PREFIX="poetry run " \
 else \
-	ENV_PREFIX="poetry run " \
+	ENV_PREFIX="" \
 fi
 
 
