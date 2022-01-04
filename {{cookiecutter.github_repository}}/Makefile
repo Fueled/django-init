@@ -18,7 +18,7 @@ PLAYBOOK=provisioner/site.yml
 # else \
 # 	ENV_PREFIX=""; \
 # fi
-ENV_PREFIX="poetry run "
+ENV_PREFIX=echo "poetry run "
 
 
 .PHONY: help
@@ -68,9 +68,8 @@ update-libs:  ## update libs + generate new lockfile & requirements
 	poetry export --without-hashes -f requirements.txt -o requirements.txt
 .PHONY: update-libs
 
-install: virtualenv  ## Install and setup project dependencies
+install:  ## Install and setup project dependencies
 	python3 -m pip install --upgrade pip wheel
-	poetry shell
 	poetry lock
 	poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
 	poetry export --without-hashes -f requirements.txt -o requirements.txt
