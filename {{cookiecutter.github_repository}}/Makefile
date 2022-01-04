@@ -28,13 +28,15 @@ help:            ## show the help
 
 
 .PHONY: fmt
-fmt: virtualenv            ## Format code using black & isort.
+fmt:        ## Format code using black & isort.
+	poetry shell
 	isort .
 	black .
 
 
 .PHONY: lint
-lint: virtualenv           ## Run pep8, black, mypy linters.
+lint:       ## Run pep8, black, mypy linters.
+	poetry shell
 	flake8 .
 	black --check .
 	mypy --ignore-missing-imports ${PROJECT_NAME}/
@@ -55,7 +57,7 @@ virtualenv:     ## Create a virtual environment.
 	@echo "!!! Please run 'poetry shell' to enable the environment !!!"
 
 
-regenerate: virtualenv ## Delete and create new database.
+regenerate:  ## Delete and create new database.
 	-dropdb $(DB_NAME)
 	createdb $(DB_NAME)
 	python manage.py migrate
@@ -69,11 +71,11 @@ update-libs:  ## update libs + generate new lockfile & requirements
 
 install: virtualenv  ## Install and setup project dependencies
 	python3 -m pip install --upgrade pip wheel
+	poetry shell
 	poetry lock
 	poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
 	poetry export --without-hashes -f requirements.txt -o requirements.txt
 	poetry install
-	poetry shell
 	pre-commit install
 ifneq ($(CI),True)
 	-createdb $(DB_NAME)
@@ -91,6 +93,7 @@ clean:  ## Remove all temporary files like pycache
 # == Django Helpers
 # ===================================================
 djrun: install  ## Start Django server locally
+	poetry shell
 	python manage.py runserver
 
 
@@ -99,22 +102,28 @@ test: lint
 	pytest $(ARGS)
 
 djmm:  ## Create Django migrations
+	poetry shell
 	python manage.py makemigrations
 
 djmigrate:  # Run Django migrations
+	poetry shell
 	python manage.py migrate
 
 djurls:  ## Displays all the django urls
+	poetry shell
 	python manage.py show_urls
 
 shell:  ## Enter the django shell
+	poetry shell
 	python manage.py shell_plus
 
 docs: virtualenv  ## Start documentation server locally
+	poetry shell
 	mkdocs serve
 
 {%- if cookiecutter.add_celery == 'y' %}
 celery: install  ## Start celery worker
+	poetry shell
 	celery -A $(PROJECT_NAME) worker -B -l INFO
 {%- endif %}
 
