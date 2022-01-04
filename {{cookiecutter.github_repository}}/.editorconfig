@@ -12,7 +12,7 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 4
 
-# Python config is managed by poetry via pyproject.toml
+# Use pyproject.toml for iSort related config.
 
 [*.{html,css,scss,json,yml}]
 indent_style = space
