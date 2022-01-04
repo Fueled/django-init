@@ -17,7 +17,9 @@ class LimitOffsetPagination(DrfLimitOffsetPagination):
     max_limit = 1000
 
 
-def limit_offset_paginated_response(request, queryset, serializer_class, extra_context=None):
+def limit_offset_paginated_response(
+    request, queryset, serializer_class, extra_context=None
+):
     """Utlity function to return a paginated response.
 
     Returns `Response` object with pagination info after serializing the django
@@ -34,7 +36,9 @@ def limit_offset_paginated_response(request, queryset, serializer_class, extra_c
     if extra_context:
         serializer_context.update(extra_context)
 
-    serializer = serializer_class(paginated_queryset, context=serializer_context, many=True)
+    serializer = serializer_class(
+        paginated_queryset, context=serializer_context, many=True
+    )
     return paginator.get_paginated_response(data=serializer.data)
 
 
@@ -86,5 +90,7 @@ def cursor_paginated_response(request, queryset, serializer_class, extra_context
     if extra_context:
         serializer_context.update(extra_context)
 
-    serializer = serializer_class(paginated_queryset, context=serializer_context, many=True)
+    serializer = serializer_class(
+        paginated_queryset, context=serializer_context, many=True
+    )
     return paginator.get_paginated_response(data=serializer.data)

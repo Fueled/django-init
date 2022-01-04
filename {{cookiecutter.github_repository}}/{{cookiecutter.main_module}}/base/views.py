@@ -13,7 +13,10 @@ def server_error(request, *args, **kwargs):
 
     As we don't want to return html response for a json request.
     """
-    if not settings.DEBUG and request.META.get("CONTENT_TYPE", None) == "application/json":
+    if (
+        not settings.DEBUG
+        and request.META.get("CONTENT_TYPE", None) == "application/json"
+    ):
         exc_type, exc_obj, exc_tb = sys.exc_info()
         response_dict = {
             "error_type": exc_type.__name__ if exc_type else "ServerError",

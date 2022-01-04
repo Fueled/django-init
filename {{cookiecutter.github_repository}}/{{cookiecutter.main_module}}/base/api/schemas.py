@@ -13,4 +13,4 @@ schema_view = get_schema_view(
     permission_classes=[AllowAny],
 )
 
-swagger_schema_view = schema_view.with_ui('swagger', cache_timeout=0)
+swagger_schema_view = schema_view.with_ui("swagger", cache_timeout=0)

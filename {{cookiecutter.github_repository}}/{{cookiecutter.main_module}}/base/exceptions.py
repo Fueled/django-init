@@ -80,13 +80,17 @@ def parse_field_errors(field, error_msg, error_values, depth=0):
                     {
                         "field": field,
                         "message": None,
-                        "errors": parse_field_errors(error_msg_key, msg, error_values, depth=depth + 1),
+                        "errors": parse_field_errors(
+                            error_msg_key, msg, error_values, depth=depth + 1
+                        ),
                     }
                 )
     else:
         errors.append(
             {
-                "field": error_msg if error_msg and error_values and type(error_values) != list else field,
+                "field": error_msg
+                if error_msg and error_values and type(error_values) != list
+                else field,
                 "message": " ".join(error_values[error_msg])
                 if error_msg and error_values and type(error_values) != list
                 else error_msg,
@@ -110,8 +114,9 @@ def format_exception(exc):
                         "message": "Validation failed for one of the item in the list.",
                         "errors": [
                             {
-                                "field": error_key,
-                                "message": ", ".join(error_msg) if isinstance(error_msg, list) else error_msg,
+                                "message": ", ".join(error_msg)
+                                if isinstance(error_msg, list)
+                                else error_msg,
                             }
                             for error_key, error_msg in error_values.items()
                         ],
@@ -123,7 +128,9 @@ def format_exception(exc):
                     if error_key == "non_field_errors":
                         detail["errors"].append({"message": error_msg})
                     else:
-                        detail["errors"] = detail["errors"] + parse_field_errors(error_key, error_msg, error_values)
+                        detail["errors"] = detail["errors"] + parse_field_errors(
+                            error_key, error_msg, error_values
+                        )
     elif isinstance(exc.detail, list):
         for error_msg in exc.detail:
             detail["errors"].append({"message": error_msg})
