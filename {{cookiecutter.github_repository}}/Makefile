@@ -7,18 +7,18 @@ DB_NAME=$(PROJECT_NAME)
 INVENTORY=provisioner/hosts
 PLAYBOOK=provisioner/site.yml
 
-# if [ -d ".venv/bin" ]; then \
-# 	ENV_PREFIX=$(echo ".venv/bin/"); \
-# elif [ -d "venv/bin" ]; then \
-# 	ENV_PREFIX=$(echo "venv/bin/"); \
-# fi
+if [ -d ".venv/bin" ]; then \
+	ENV_PREFIX=$(shell echo ".venv/bin/"); \
+elif [ -d "venv/bin" ]; then \
+	ENV_PREFIX=$(shell echo "venv/bin/"); \
+fi
 
-# if $(which poetry) then \
-# 	ENV_PREFIX=$(echo "poetry run "); \
-# else \
-# 	ENV_PREFIX=$(echo ""); \
-# fi
-ENV_PREFIX=$(shell echo 'poetry run ')
+if $(which poetry) then \
+	ENV_PREFIX=$(shell echo 'poetry run '); \
+else \
+	ENV_PREFIX=$(shell echo ""); \
+fi
+# ENV_PREFIX=$(shell echo 'poetry run ')
 
 
 .PHONY: help
