@@ -11,11 +11,11 @@ if [ -d ".venv/bin" ]; then \
 elif [ -d "venv/bin" ]; then \
 	ENV_PREFIX="venv/bin/" \
 fi
-# if $(which poetry) then \
-# 	ENV_PREFIX="poetry run " \
-# else \
-# 	ENV_PREFIX="" \
-# fi
+if $(which poetry) then \
+	ENV_PREFIX="poetry run " \
+else \
+	ENV_PREFIX="poetry run " \
+fi
 
 
 
@@ -47,12 +47,11 @@ run_all:  ## Run all the servers in parallel, requires GNU Make
 .PHONY: run_all
 
 virtualenv:     ## Create a virtual environment.
-	@echo "creating virtualenv ..."
-	@rm -rf venv
-	@python3 -m venv venv
-	@./venv/bin/pip install -U pip
+	@echo "creating virtualenv using poetry..."
+	@pip install -U pip poetry
 	@echo
-	@echo "!!! Please run 'source venv/bin/activate' to enable the environment !!!"
+	@poetry shell
+	@echo "!!! Please run 'poetry shell' to enable the environment !!!"
 
 
 regenerate:  ## Delete and create new database.
@@ -68,7 +67,7 @@ update-libs:  ## update libs + generate new lockfile & requirements
 .PHONY: update-libs
 
 install: virtualenv  ## Install and setup project dependencies
-	${ENV_PREFIX}python -m pip install --upgrade pip wheel poetry
+	${ENV_PREFIX}python3 -m pip install --upgrade pip wheel
 	${ENV_PREFIX}poetry lock
 	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
 	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements.txt
