@@ -67,7 +67,7 @@ update-libs:  ## update libs + generate new lockfile & requirements
 	poetry export --without-hashes -f requirements.txt -o requirements.txt
 .PHONY: update-libs
 
-install:  ## Install and setup project dependencies
+install: virtualenv  ## Install and setup project dependencies
 	python3 -m pip install --upgrade pip wheel
 	poetry lock
 	poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
