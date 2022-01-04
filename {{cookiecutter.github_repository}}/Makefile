@@ -18,7 +18,7 @@ PLAYBOOK=provisioner/site.yml
 # else \
 # 	ENV_PREFIX=""; \
 # fi
-ENV_PREFIX=echo "poetry run "
+ENV_PREFIX=$(echo "poetry run ")
 
 
 .PHONY: help

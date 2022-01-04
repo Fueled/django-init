@@ -69,7 +69,7 @@ if echo "$yn" | grep -iq "^y"; then
         echo "All set! Run these commands to get started:"
         echo ""
         echo "cd {{ cookiecutter.github_repository }}"
-        echo "./venv/bin/activate"
+        echo "poetry shell"
         echo "pytest"
         echo "./manage.py runserver"
         echo ""
