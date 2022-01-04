@@ -18,7 +18,7 @@ PLAYBOOK=provisioner/site.yml
 # else \
 # 	ENV_PREFIX=$(echo ""); \
 # fi
-ENV_PREFIX=$("poetry run ")
+ENV_PREFIX=$(shell python -c "print('poetry run ')")
 
 
 .PHONY: help
