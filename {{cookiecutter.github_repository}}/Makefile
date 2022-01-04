@@ -17,7 +17,7 @@ PLAYBOOK=provisioner/site.yml
 # else \
 # 	ENV_PREFIX="" \
 # fi
-ENV_PREFIX=""
+# ENV_PREFIX=""
 
 
 .PHONY: help
@@ -29,17 +29,17 @@ help:            ## show the help
 
 .PHONY: fmt
 fmt:             ## Format code using black & isort.
-	$(ENV_PREFIX)isort .
-	$(ENV_PREFIX)black .
+	isort .
+	black .
 
 
 .PHONY: lint
 lint:             ## Run pep8, black, mypy linters.
-	$(ENV_PREFIX)flake8 .
-	$(ENV_PREFIX)black --check .
-	$(ENV_PREFIX)mypy --ignore-missing-imports ${PROJECT_NAME}/
+	flake8 .
+	black --check .
+	mypy --ignore-missing-imports ${PROJECT_NAME}/
 	{% if cookiecutter.add_ansible.lower() == 'y' -%}
-	$(ENV_PREFIX)ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
+	ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 	{%- endif %}
 
 
@@ -68,15 +68,16 @@ update-libs:  ## update libs + generate new lockfile & requirements
 .PHONY: update-libs
 
 install: virtualenv  ## Install and setup project dependencies
-	${ENV_PREFIX}python3 -m pip install --upgrade pip wheel
-	${ENV_PREFIX}poetry lock
-	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
-	${ENV_PREFIX}poetry export --without-hashes -f requirements.txt -o requirements.txt
-	${ENV_PREFIX}poetry install
-	${ENV_PREFIX}pre-commit install
+	python3 -m pip install --upgrade pip wheel
+	poetry lock
+	poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
+	poetry export --without-hashes -f requirements.txt -o requirements.txt
+	poetry install
+	poetry shell
+	pre-commit install
 ifneq ($(CI),True)
 	-createdb $(DB_NAME)
-	${ENV_PREFIX}python manage.py migrate
+	python manage.py migrate
 endif
 .PHONY: install
 
@@ -90,31 +91,31 @@ clean:  ## Remove all temporary files like pycache
 # == Django Helpers
 # ===================================================
 djrun: install  ## Start Django server locally
-	${ENV_PREFIX}python manage.py runserver
+	python manage.py runserver
 
 
 test: ARGS=--pdb --cov  ## Run all the tests
 test: lint
-	${ENV_PREFIX}pytest $(ARGS)
+	pytest $(ARGS)
 
 djmm:  ## Create Django migrations
-	${ENV_PREFIX}python manage.py makemigrations
+	python manage.py makemigrations
 
 djmigrate:  # Run Django migrations
-	${ENV_PREFIX}python manage.py migrate
+	python manage.py migrate
 
 djurls:  ## Displays all the django urls
-	${ENV_PREFIX}python manage.py show_urls
+	python manage.py show_urls
 
 shell:  ## Enter the django shell
-	${ENV_PREFIX}python manage.py shell_plus
+	python manage.py shell_plus
 
 docs: virtualenv  ## Start documentation server locally
-	${ENV_PREFIX}mkdocs serve
+	mkdocs serve
 
 {%- if cookiecutter.add_celery == 'y' %}
 celery: install  ## Start celery worker
-	${ENV_PREFIX}celery -A $(PROJECT_NAME) worker -B -l INFO
+	celery -A $(PROJECT_NAME) worker -B -l INFO
 {%- endif %}
 
 redis:  ## Start redis server
@@ -129,7 +130,7 @@ redis:  ## Start redis server
 
 run_ansible:
 	@[ "${ENV}" ] || ( echo ">> ENV is not set"; exit 1 )
-	${ENV_PREFIX}ansible-playbook -i $(INVENTORY) $(PLAYBOOK) --limit=$(ENV) $(ANSIBLE_ARGS)
+	ansible-playbook -i $(INVENTORY) $(PLAYBOOK) --limit=$(ENV) $(ANSIBLE_ARGS)
 
 configure: ANSIBLE_ARGS=--skip-tags=deploy
 configure: run_ansible
