@@ -7,6 +7,9 @@ History
 - Integrate poetry and update makefile commands. ([Sanyam Khurana])
 - Move isort/black config from .editorconfig to .pyproject.toml. ([Sanyam Khurana])
 
+### 2022-01-11
+- Fix the use of letsencrypt tasks to run only on hosts configured with `use_letsencrypt`. ([Sanyam Khurana])
+
 ### 2021-12-07
  - chore: Update django-sites to 0.11 for Django 3.x (#442) ([Sanyam Khurana])
 
