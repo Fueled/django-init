@@ -14,20 +14,30 @@
 
 - Django 3.2.x
 - Python 3.9.x
+- [Poetry][poetry] Support
 - Support for [black](https://pypi.org/project/black/)!
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - Supports PostreSQL 13.0 (support of postgis-3.0 is available).
-- Ready to deploy on Heroku (optional) and Ubuntu 20 LTS via [Ansible](Optional).
 - [Django Rest Framework][drf] 3.12.x.
 - Uses `django_sites` instead of `django.contrib.sites`.
-- Uses [mkdocs] for project documentation. Optionally, password protect the docs when deployed.
+- Uses [mkdocs] for project documentation. Optionally, password protect the docs when deployed via Ansible
 - Uses [pytest] as test runner.
-- Github actions for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
+- Github Actions
 - Custom `User` app, for easier extensibility.
 - Custom `Auth` app with JWT based Token Backend system with `login`, `logout` and `current_user_profile` modification views for easier extensibility.
-- Media storage using Amazon S3 (optional).
-- [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org).
 - robots.txt and humans.txt configured.
+
+### Optional
+- Heroku Setup
+- Ubuntu 20 LTS via [Ansible]
+- Celery
+- AWS S3 media storage
+- [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org).
+- Postgis Setup
+- Newrelic
+- Sentry
+- pre-commit hooks
+
 
 ## Getting Started
 
@@ -44,13 +54,12 @@ If you opt to setup the project automatically, it will also:
 - create a virtualenv in the folder `venv` inside the project.
 - install all the python dependencies inside it.
 - create `poetry.lock` file after resolving dependencies and then generate `requirements.txt` and `requirements_dev.txt` for production and dev use respectively, for backward-compatibility.
-- try to create a postgres database and run the initial migration against it.
+- create a postgres database and run the initial migration against it.
 
 then only thing you'll need to do is:
 
 1. `cd` into the new `github_repository` folder just created.
-2. Activate virtualenv `poetry shell`.
-3. Run `make run` or `./manage.py runserver`
+2. Run `make run` or activate virtualenv with `poetry shell` and run `./manage.py runserver`
 
 Don't forget to carefully look at the generated README. Awesome, right?
 
@@ -72,16 +81,15 @@ You can install Poetry by using `pip install --pre poetry` or by following the o
 For compatibility, `requirements.txt` and `requirements_dev.txt` can be updated by running
 
 ```bash
-poetry export --without-hashes -f requirements.txt -o requirements.txt
+poetry export -f requirements.txt -o requirements.txt
+poetry export -f requirements.txt -o requirements_dev.txt --dev
 ```
 
-and
+or
 
 ```bash
-poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
+make generate_requirements
 ```
-
-, respectively.
 
 ## Articles
 
@@ -110,10 +118,10 @@ Everyone interacting in the django-init project's codebase, issue trackers, chat
 Built with ♥ at [Fueled](https://fueled.com)
 
 [wiki]: https://github.com/Fueled/django-init/wiki
+[poetry]: https://python-poetry.org/docs/
 [mkdocs]: http://www.mkdocs.org/
 [12factor]: http://12factor.net
 [pytest]: http://pytest.org/
 [django-environ]: https://github.com/joke2k/django-environ
 [Ansible]: http://docs.ansible.com/index.html
-[devrecargar]: https://github.com/scottwoodall/django-devrecargar
 [drf]: http://www.django-rest-framework.org/
