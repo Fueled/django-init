@@ -50,7 +50,7 @@ django-log-request-id = "^1.7"
 # Async Tasks
 # -------------------------------------
 {%- if cookiecutter.add_celery.lower() == "y" %}
-celery = {extras = ["redis"], version = "~5.2.1"}
+celery = {extras = ["redis"], version = "~5.2.2"}
 {%- endif %}
 
 # Auth Stuff
