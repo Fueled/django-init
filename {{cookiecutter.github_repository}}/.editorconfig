@@ -1,4 +1,5 @@
 # http://editorconfig.org
+# Use pyproject.toml for iSort related config.
 
 root = true
 
@@ -11,8 +12,6 @@ trim_trailing_whitespace = true
 [*.{py,rst,ini}]
 indent_style = space
 indent_size = 4
-
-# Use pyproject.toml for iSort related config.
 
 [*.{html,css,scss,json,yml}]
 indent_style = space

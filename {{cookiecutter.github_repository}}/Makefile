@@ -50,17 +50,18 @@ regenerate:  ## Delete and create new database.
 	${ENV_PREFIX}python manage.py migrate
 .PHONY: regenerate
 
-update-libs:  ## update libs + generate new lockfile & requirements
+generate_requirements:
+	poetry export -f requirements.txt -o requirements_dev.txt --dev
+	poetry export -f requirements.txt -o requirements.txt
+
+update_libs:  ## update libs + generate new lockfile & requirements
 	poetry update
-	poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
-	poetry export --without-hashes -f requirements.txt -o requirements.txt
+	make generate_requirements
 .PHONY: update-libs
 
 install: virtualenv  ## Install and setup project dependencies
 	python3 -m pip install --upgrade pip wheel
-	poetry lock
-	poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
-	poetry export --without-hashes -f requirements.txt -o requirements.txt
+	make generate_requirements
 	poetry install
 	${ENV_PREFIX}pre-commit install
 ifneq ($(CI),True)
