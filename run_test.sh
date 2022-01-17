@@ -23,7 +23,6 @@ yes 'y' | cookiecutter . --no-input
 
 # Run the tests present inside generate project
 cd hello-world-backend;
-ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check
 make test ARGS="--cov"
 
 # Cleanup
