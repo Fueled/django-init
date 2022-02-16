@@ -1,0 +1,158 @@
+[tool.poetry]
+name = "{{cookiecutter.github_repository}}"
+version = "{{cookiecutter.version}}"
+description = "{{cookiecutter.project_description}}"
+authors = ["{{cookiecutter.default_from_email}}"]
+
+[tool.poetry.dependencies]
+python = "~3.9"
+Django = "~3.2.10"
+django-environ = "^0.8"
+django-sites = "^0.11"
+argon2-cffi = "^21.3"
+python-dotenv = "^0.19"
+django-cors-headers = "^3.10"
+{% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
+whitenoise = "^5.3"
+{%- endif %}
+
+# Extensions
+# -------------------------------------
+pytz = "^2021.3"
+
+# Models
+# -------------------------------------
+psycopg2-binary = "^2.9"
+Pillow = "^8.4"
+django-extensions = "^3.1"
+django-uuid-upload-path = "^1.0"
+django-versatileimagefield = "^2.2"
+
+# REST APIs
+# -------------------------------------
+djangorestframework = "^3.13"
+drf-yasg = "^1.20"
+
+# Documentation
+# -------------------------------------
+mkdocs = "^1.2"
+
+# Raven is the Sentry client
+# --------------------------
+{% if cookiecutter.add_sentry == "y" -%}
+raven = "^6.10"
+{%- endif %}
+
+# LOGGING
+# -------------------------------------
+django-log-request-id = "^1.7"
+
+# Async Tasks
+# -------------------------------------
+{%- if cookiecutter.add_celery.lower() == "y" %}
+celery = {extras = ["redis"], version = "~5.2.2"}
+{%- endif %}
+
+# Auth Stuff
+# -------------------------------------
+PyJWT = "^2.3"
+django-mail-templated = "^2.6"
+
+# Production settings
+# =====================================
+
+# Static Files and Media Storage
+# -------------------------------------
+django-storages = "^1.12"
+boto3 = "~1.20.24"
+
+# Caching
+# -------------------------------------
+django-redis = "^5.1"
+hiredis = "^2.0"
+{%- if cookiecutter.add_django_auth_wall.lower() == 'y' %}
+
+# Basic Auth Protection
+# -------------------------------------
+django-auth-wall = "^0.2"
+{%- endif %}
+{%- if cookiecutter.add_heroku.lower() == 'y' %}
+uWSGI = "^2.0"
+{% endif %}
+{% if cookiecutter.add_newrelic == 'y' %}
+
+# Logging
+# -------------------------------------
+newrelic = "~7.2.4.171"
+{% endif %}
+
+[tool.poetry.dev-dependencies]
+{%- if cookiecutter.add_pre_commit.lower() == 'y' %}
+pre-commit = "^2.16"
+{%- endif %}
+{% if cookiecutter.add_ansible.lower() == 'y' %}
+ansible = "~4.7"
+{%- endif %}
+
+# Documentation
+# -------------------------------------
+isort = "^5.10"
+black = "~21.12b0"
+flake8 = "^4.0"
+
+# Debugging
+# -------------------------------------
+django-debug-toolbar = "^3.2"
+ipdb = "^0.13"
+
+# Testing and coverage
+# -------------------------------------
+pytest = "^6.2"
+pytest-django = "^4.5"
+pytest-cov = "^3.0"
+django-dynamic-fixture = "^3.1"
+pytest-mock = "^3.6"
+mypy = "~0.910"
+django-stubs = "^1.9"
+
+# Versioning
+# -------------------------------------
+bump2version = "^1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+known_first_party = "{{ cookiecutter.main_module }}"
+default_section = "THIRDPARTY"
+import_heading_firstparty = "{{ cookiecutter.project_name }} Stuff"
+import_heading_stdlib = "Standard Library"
+import_heading_thirdparty = "Third Party Stuff"
+skip_glob = ["*/migrations/**", "*/venv/**", "*/docs/**"]
+
+[tool.black]
+target_version = [ "py38", "py39" ]
+include = "\\.pyi?$"
+exclude = """
+/(\\.git/
+  |\\.eggs
+  |\\.hg
+  |__pycache__
+  |\\.cache
+  |\\.ipynb_checkpoints
+  |\\.mypy_cache
+  |\\.pytest_cache
+  |\\.tox
+  |venv
+  |node_modules
+  |_build
+  |buck-out
+  |build
+  |dist
+  |media
+  |templates
+  |locale
+)/
+"""

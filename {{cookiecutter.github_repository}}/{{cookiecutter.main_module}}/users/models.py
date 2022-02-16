@@ -22,7 +22,7 @@ class UserManager(BaseUserManager):
         password: str,
         is_staff: bool,
         is_superuser: bool,
-        **extra_fields
+        **extra_fields,
     ):
         email = self.normalize_email(email)
         user = self.model(
@@ -30,7 +30,7 @@ class UserManager(BaseUserManager):
             is_staff=is_staff,
             is_active=True,
             is_superuser=is_superuser,
-            **extra_fields
+            **extra_fields,
         )
         user.set_password(password)
         user.save(using=self._db)

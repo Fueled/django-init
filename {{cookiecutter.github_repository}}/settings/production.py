@@ -46,7 +46,6 @@ MANAGERS = ADMINS
 # --------------------------------------------------------------------------
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
 
-
 {% if cookiecutter.add_django_auth_wall.lower() == "y" %}
 # Basic Auth Protection
 # -----------------------------------------------------------------------------

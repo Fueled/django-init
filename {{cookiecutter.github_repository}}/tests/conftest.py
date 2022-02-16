@@ -51,7 +51,7 @@ def client():
             self,
             user=None,
             backend="django.contrib.auth.backends.ModelBackend",
-            **credentials
+            **credentials,
         ):
             """Modified login method, which allows setup an authenticated session with just passing in the
             user object, if provided.
