@@ -97,7 +97,7 @@ ansible = "~4.7"
 # Documentation
 # -------------------------------------
 isort = "^5.10"
-black = "~21.12b0"
+black = "~22.3.0"
 flake8 = "^4.0"
 
 # Debugging
