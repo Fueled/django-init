@@ -18,6 +18,7 @@
     , "add_sentry": "y"
     , "add_django_auth_wall": "y"
     , "add_celery": "n"
+    , "add_graphene": "n"
     , "add_pre_commit": "y"
     , "add_docker": "y"
     , "pagination": ["LimitOffsetPagination", "CursorPagination"]
