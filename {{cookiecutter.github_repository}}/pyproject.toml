@@ -34,6 +34,13 @@ djangorestframework = "^3.13"
 drf-yasg = "^1.21"
 
 
+# Graph APIs
+{% if cookiecutter.add_graphene == "y" -%}
+graphene-django = "^2.15.0"
+django-graphql-jwt = "^0.3.4"
+{%- endif %}
+
+
 # Documentation
 # -------------------------------------
 mkdocs = "^1.2"

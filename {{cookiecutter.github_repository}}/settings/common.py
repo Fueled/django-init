@@ -29,6 +29,9 @@ INSTALLED_APPS = [
     "{{ cookiecutter.main_module }}.base",
     "{{ cookiecutter.main_module }}.users",
     "rest_framework",  # http://www.django-rest-framework.org/
+{%- if cookiecutter.add_graphene == "y" %}
+    "graphene_django",
+{%- endif %}
     "drf_yasg",
     "versatileimagefield",  # https://github.com/WGBH/django-versatileimagefield/
     "corsheaders",  # https://github.com/ottoyiu/django-cors-headers/
@@ -45,7 +48,12 @@ INSTALLED_APPS = [
 # django.contrib.auth
 # ------------------------------------------------------------------------------
 AUTH_USER_MODEL = "users.User"
-AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+AUTHENTICATION_BACKENDS = [
+{%- if cookiecutter.add_graphene == "y" %}
+    "graphql_jwt.backends.JSONWebTokenBackend",
+{%- endif %}
+    "django.contrib.auth.backends.ModelBackend",
+]
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
@@ -106,6 +114,22 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "EXCEPTION_HANDLER": "{{ cookiecutter.main_module }}.base.exceptions.exception_handler",
 }
+
+{%- if cookiecutter.add_graphene == "y" %}
+GRAPHENE = {
+    "SCHEMA": "{{ cookiecutter.main_module }}.base.api.schemas.graphene_schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
+}
+
+GRAPHQL_JWT = {
+    "JWT_PAYLOAD_GET_USERNAME_HANDLER": (
+        lambda payload: payload.get('user_authentication_id')
+    ),
+    "JWT_GET_USER_BY_NATURAL_KEY_HANDLER": "{{ cookiecutter.main_module }}.users.auth.utils.get_user_by_id",
+}
+{%- endif %}
 
 # https://django-rest-swagger.readthedocs.io/en/latest/settings/
 SWAGGER_SETTINGS = {
