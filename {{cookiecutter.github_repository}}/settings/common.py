@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     "{{ cookiecutter.main_module }}.base",
     "{{ cookiecutter.main_module }}.users",
     "rest_framework",  # http://www.django-rest-framework.org/
-{%- if cookiecutter.add_graphene == "y" %}
+{%- if cookiecutter.add_graphql == "y" %}
     "graphene_django",
 {%- endif %}
     "drf_yasg",
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
 # ------------------------------------------------------------------------------
 AUTH_USER_MODEL = "users.User"
 AUTHENTICATION_BACKENDS = [
-{%- if cookiecutter.add_graphene == "y" %}
+{%- if cookiecutter.add_graphql == "y" %}
     "graphql_jwt.backends.JSONWebTokenBackend",
 {%- endif %}
     "django.contrib.auth.backends.ModelBackend",
@@ -115,7 +115,7 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "{{ cookiecutter.main_module }}.base.exceptions.exception_handler",
 }
 
-{%- if cookiecutter.add_graphene == "y" %}
+{%- if cookiecutter.add_graphql == "y" %}
 GRAPHENE = {
     "SCHEMA": "{{ cookiecutter.main_module }}.base.api.schemas.graphene_schema",
     "MIDDLEWARE": [
@@ -127,7 +127,7 @@ GRAPHQL_JWT = {
     "JWT_PAYLOAD_GET_USERNAME_HANDLER": (
         lambda payload: payload.get('user_authentication_id')
     ),
-    "JWT_GET_USER_BY_NATURAL_KEY_HANDLER": "{{ cookiecutter.main_module }}.users.auth.utils.get_user_by_id",
+    "JWT_GET_USER_BY_NATURAL_KEY_HANDLER": "{{ cookiecutter.main_module }}.users.services.get_user_by_id",
 }
 {%- endif %}
 
