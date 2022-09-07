@@ -1,4 +1,4 @@
-{%- if cookiecutter.add_graphene == "y" %}
+{%- if cookiecutter.add_graphql == "y" %}
 from .models import User
 import graphene
 from graphene_django.types import DjangoObjectType

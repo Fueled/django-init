@@ -13,7 +13,7 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 
-{%- if cookiecutter.add_graphene == "y" %}
+{%- if cookiecutter.add_graphql == "y" %}
 from graphene_django.views import GraphQLView
 {%- endif %}
 
@@ -48,7 +48,7 @@ urlpatterns += [
     ),
     # Rest API
     path("api/", include(api_urls)),
-{%- if cookiecutter.add_graphene == "y" %}
+{%- if cookiecutter.add_graphql == "y" %}
     path("graphql/", GraphQLView.as_view(graphiql=True)),
 {%- endif %}
     # Django Admin
