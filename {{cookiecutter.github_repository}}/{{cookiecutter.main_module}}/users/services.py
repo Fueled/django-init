@@ -25,8 +25,4 @@ def get_user_by_email(email: str):
 
 
 def get_user_by_id(user_id):
-    user_model = get_user_model()
-    try:
-        return user_model.objects.get(id=user_id)
-    except user_model.DoesNotExist:
-        return None
+    return get_user_model().objects.filter(id=user_id).first()
