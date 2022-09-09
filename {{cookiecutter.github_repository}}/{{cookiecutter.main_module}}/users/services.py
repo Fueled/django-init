@@ -24,11 +24,9 @@ def get_user_by_email(email: str):
     return get_user_model().objects.filter(email__iexact=email).first()
 
 
-{%- if cookiecutter.add_graphql == "y" %}
 def get_user_by_id(user_id):
     user_model = get_user_model()
     try:
         return user_model.objects.get(id=user_id)
     except user_model.DoesNotExist:
         return None
-{%- endif %}
