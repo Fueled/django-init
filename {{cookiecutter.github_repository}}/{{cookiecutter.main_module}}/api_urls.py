@@ -1,7 +1,7 @@
 # Third Party Stuff
 from rest_framework.routers import DefaultRouter
 
-# {{ cookiecutter.project_name }} Stuff
+# {{ cookiecutter.main_module }} Stuff
 from {{cookiecutter.main_module}}.base.api.routers import SingletonRouter
 from {{cookiecutter.main_module}}.users.api import CurrentUserViewSet
 from {{cookiecutter.main_module}}.users.auth.api import AuthViewSet
@@ -13,6 +13,7 @@ singleton_router = SingletonRouter(trailing_slash=False)
 default_router.register("auth", AuthViewSet, basename="auth")
 singleton_router.register("me", CurrentUserViewSet, basename="me")
 
-# Combine urls from both default and singleton routers and expose as
+# Combine urls from both default an
+# d singleton routers and expose as
 # 'urlpatterns' which django can pick up from this module.
 urlpatterns = default_router.urls + singleton_router.urls

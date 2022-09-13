@@ -9,7 +9,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-# {{ cookiecutter.project_name }} Stuff
+# {{ cookiecutter.main_module }} Stuff
 from {{cookiecutter.main_module}}.base.models import UUIDModel
 
 

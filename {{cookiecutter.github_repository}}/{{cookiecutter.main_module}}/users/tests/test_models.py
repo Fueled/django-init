@@ -1,7 +1,7 @@
 # Third Party Stuff
 from django.test import TestCase
 
-# {{ cookiecutter.project_name }} Stuff
+# {{ cookiecutter.main_module }} Stuff
 from {{cookiecutter.main_module}}.users.models import User
 
 

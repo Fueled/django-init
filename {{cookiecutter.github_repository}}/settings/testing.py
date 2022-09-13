@@ -4,7 +4,7 @@ from dotenv import find_dotenv, load_dotenv
 
 load_dotenv(find_dotenv())
 
-from .development import *  # noqa F405
+from settings.development import *  # noqa F405
 
 MEDIA_ROOT = "/tmp"
 

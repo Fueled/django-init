@@ -9,8 +9,8 @@ Adds sensible defaults for developement of project
 - Enable livereloading
 """
 
-from .common import *  # noqa F405
-from .common import INSTALLED_APPS, TEMPLATES, env
+from settings.common import *  # noqa F405
+from settings.common import INSTALLED_APPS, TEMPLATES, env
 
 # DEBUG
 # ------------------------------------------------------------------------------

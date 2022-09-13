@@ -1,7 +1,8 @@
 # Third Party Stuff
 from django import template
 
-from ..utils.urls import resolve_frontend_url as _resolve_frontend_url
+# {{ cookiecutter.main_module }} Stuff
+from {{ cookiecutter.main_module }}.base.utils.urls import resolve_frontend_url as _resolve_frontend_url
 
 register = template.Library()
 

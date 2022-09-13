@@ -1,10 +1,9 @@
 # Third Party Stuff
 from rest_framework import viewsets
 
-# {{ cookiecutter.project_name }} Stuff
+# {{ cookiecutter.main_module }} Stuff
 from {{cookiecutter.main_module}}.base import response
-
-from . import models, serializers
+from {{cookiecutter.main_module}}.users import models, serializers
 
 
 class CurrentUserViewSet(viewsets.GenericViewSet):
@@ -13,6 +12,7 @@ class CurrentUserViewSet(viewsets.GenericViewSet):
 
     def get_object(self):
         return self.request.user
+
 
     def list(self, request):
         """Get logged in user profile"""
