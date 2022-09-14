@@ -116,8 +116,10 @@ REST_FRAMEWORK = {
 }
 
 {%- if cookiecutter.add_graphql == "y" %}
+GRAPHQL_DEBUG = env.bool("GRAPHQL_DEBUG", default=True)
+
 GRAPHENE = {
-    "SCHEMA": "{{ cookiecutter.main_module }}.base.api.schemas.graphene_schema",
+    "SCHEMA": "{{ cookiecutter.main_module }}.base.graphql.api.graphene_schema",
     "MIDDLEWARE": [
         "graphql_jwt.middleware.JSONWebTokenMiddleware",
     ],
@@ -127,7 +129,8 @@ GRAPHQL_JWT = {
     "JWT_PAYLOAD_GET_USERNAME_HANDLER": (
         lambda payload: payload.get('user_authentication_id')
     ),
-    "JWT_GET_USER_BY_NATURAL_KEY_HANDLER": "{{ cookiecutter.main_module }}.users.services.get_user_by_id",
+    "JWT_AUTH_HEADER_PREFIX": "Bearer",
+    "JWT_GET_USER_BY_NATURAL_KEY_HANDLER": "{{ cookiecutter.main_module }}.users.services.get_active_user_by_id",
 }
 {%- endif %}
 
