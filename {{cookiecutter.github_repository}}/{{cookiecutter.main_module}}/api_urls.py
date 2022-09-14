@@ -13,7 +13,6 @@ singleton_router = SingletonRouter(trailing_slash=False)
 default_router.register("auth", AuthViewSet, basename="auth")
 singleton_router.register("me", CurrentUserViewSet, basename="me")
 
-# Combine urls from both default an
-# d singleton routers and expose as
+# Combine urls from both default and singleton routers and expose as
 # 'urlpatterns' which django can pick up from this module.
 urlpatterns = default_router.urls + singleton_router.urls

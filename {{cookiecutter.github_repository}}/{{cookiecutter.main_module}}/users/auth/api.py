@@ -8,7 +8,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from {{cookiecutter.main_module}}.base import response
 from {{cookiecutter.main_module}}.base.api.mixins import MultipleSerializerMixin
 from {{cookiecutter.main_module}}.users import services as user_services
-from {{cookiecutter.main_module}}.users.auth import serializers, services, tokens
+
+from . import serializers, services, tokens
 
 
 class AuthViewSet(MultipleSerializerMixin, viewsets.GenericViewSet):

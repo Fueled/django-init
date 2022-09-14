@@ -12,8 +12,8 @@ Adds sensible default for running app in production.
 # Standard Library
 from email.utils import getaddresses
 
-from settings.common import *  # noqa F405
-from settings.common import (
+from .common import *  # noqa F405
+from .common import (
     DATABASES,
     INSTALLED_APPS,
     {% if cookiecutter.add_django_auth_wall.lower() == 'y' %}MIDDLEWARE,{%- endif %}

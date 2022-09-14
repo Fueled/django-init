@@ -22,8 +22,7 @@ import re
 # Third Party Stuff
 from rest_framework.authentication import BaseAuthentication
 
-# {{ cookiecutter.main_module }} Stuff
-from {{ cookiecutter.main_module }}.users.auth.tokens import get_user_for_token
+from .tokens import get_user_for_token
 
 
 class UserTokenAuthentication(BaseAuthentication):

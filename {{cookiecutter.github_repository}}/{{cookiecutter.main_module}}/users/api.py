@@ -3,7 +3,8 @@ from rest_framework import viewsets
 
 # {{ cookiecutter.main_module }} Stuff
 from {{cookiecutter.main_module}}.base import response
-from {{cookiecutter.main_module}}.users import models, serializers
+
+from . import models, serializers
 
 
 class CurrentUserViewSet(viewsets.GenericViewSet):

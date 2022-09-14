@@ -6,7 +6,8 @@ from rest_framework import serializers
 from {{cookiecutter.main_module}}.users import services as user_services
 from {{cookiecutter.main_module}}.users.models import UserManager
 from {{cookiecutter.main_module}}.users.serializers import UserSerializer
-from {{cookiecutter.main_module}}.users.auth import tokens
+
+from . import tokens
 
 
 class EmptySerializer(serializers.Serializer):

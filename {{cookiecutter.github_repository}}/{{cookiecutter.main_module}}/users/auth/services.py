@@ -2,8 +2,7 @@
 from django.conf import settings
 from mail_templated import send_mail
 
-# {{ cookiecutter.main_module }} Stuff
-from {{cookiecutter.main_module}}.users.auth.tokens import get_token_for_password_reset
+from .tokens import get_token_for_password_reset
 
 
 def send_password_reset_mail(user, template_name="email/password_reset_mail.tpl"):

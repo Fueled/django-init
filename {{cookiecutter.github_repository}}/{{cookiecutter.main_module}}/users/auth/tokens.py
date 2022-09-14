@@ -6,7 +6,8 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 # {{ cookiecutter.main_module }} Stuff
 from {{cookiecutter.main_module}}.base import exceptions as exc
-from {{cookiecutter.main_module}}.users.auth.utils import decode_uuid_from_base64, encode_uuid_to_base64
+
+from .utils import decode_uuid_from_base64, encode_uuid_to_base64
 
 HS256_ALGORITHM = "HS256"
 

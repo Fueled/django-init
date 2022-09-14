@@ -1,8 +1,7 @@
 # Third Party Stuff
 from rest_framework import serializers
 
-# {{ cookiecutter.main_module }} Stuff
-from {{cookiecutter.main_module}}.users import models
+from . import models
 
 
 class UserSerializer(serializers.ModelSerializer):

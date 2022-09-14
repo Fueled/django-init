@@ -8,7 +8,7 @@ from django.urls import reverse
 # {{ cookiecutter.main_module }} Stuff
 from {{cookiecutter.main_module}}.users.auth.tokens import get_token_for_password_reset
 
-from tests import factories as f
+from .. import factories as f
 
 pytestmark = pytest.mark.django_db
 

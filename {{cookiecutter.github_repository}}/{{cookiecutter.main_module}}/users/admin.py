@@ -4,8 +4,7 @@ from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.forms import UserChangeForm as DjangoUserChangeForm
 from django.contrib.auth.forms import UserCreationForm as DjangoUserCreationForm
 
-# {{ cookiecutter.main_module }} Stuff
-from {{cookiecutter.main_module}}.users.models import User
+from .models import User
 
 
 # Forms

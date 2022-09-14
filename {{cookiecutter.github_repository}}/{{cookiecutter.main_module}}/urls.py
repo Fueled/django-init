@@ -13,11 +13,9 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 
-# {{ cookiecutter.main_module }} Stuff
-from {{cookiecutter.main_module}}.base import views as base_views
-from {{cookiecutter.main_module}}.base.api import schemas as api_schemas
-from {{cookiecutter.main_module}} import api_urls
-
+from . import api_urls
+from .base import views as base_views
+from .base.api import schemas as api_schemas
 
 if TYPE_CHECKING:
     from django.urls import URLPattern, URLResolver
@@ -49,7 +47,6 @@ urlpatterns += [
     # Django Admin
     path("{}/".format(settings.DJANGO_ADMIN_URL), admin.site.urls),
 ]
-
 
 if settings.API_DEBUG:
     urlpatterns += [

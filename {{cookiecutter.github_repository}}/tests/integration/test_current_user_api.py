@@ -5,7 +5,8 @@ import json
 import pytest
 from django.urls import reverse
 
-from tests import factories as f
+# {{ cookiecutter.main_module }} Stuff
+from {{cookiecutter.main_module}}.tests import factories as f
 
 pytestmark = pytest.mark.django_db
 
