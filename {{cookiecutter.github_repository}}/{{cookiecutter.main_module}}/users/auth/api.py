@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-# {{ cookiecutter.project_name }} Stuff
+# {{ cookiecutter.main_module }} Stuff
 from {{cookiecutter.main_module}}.base import response
 from {{cookiecutter.main_module}}.base.api.mixins import MultipleSerializerMixin
 from {{cookiecutter.main_module}}.users import services as user_services

@@ -2,7 +2,7 @@
 from django.contrib.auth import password_validation
 from rest_framework import serializers
 
-# {{ cookiecutter.project_name }} Stuff
+# {{ cookiecutter.main_module }} Stuff
 from {{cookiecutter.main_module}}.users import services as user_services
 from {{cookiecutter.main_module}}.users.models import UserManager
 from {{cookiecutter.main_module}}.users.serializers import UserSerializer

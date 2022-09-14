@@ -5,10 +5,10 @@ import json
 import pytest
 from django.urls import reverse
 
-# {{ cookiecutter.project_name }} Stuff
+# {{ cookiecutter.main_module }} Stuff
 from {{cookiecutter.main_module}}.users.auth.tokens import get_token_for_password_reset
 
-from .. import factories as f
+from tests import factories as f
 
 pytestmark = pytest.mark.django_db
 
