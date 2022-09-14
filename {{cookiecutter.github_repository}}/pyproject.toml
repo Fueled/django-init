@@ -6,32 +6,33 @@ authors = ["{{cookiecutter.default_from_email}}"]
 
 [tool.poetry.dependencies]
 python = "~3.9"
-Django = "~3.2.10"
-django-environ = "^0.8"
+Django = "~3.2.15"
+django-environ = "^0.9"
 django-sites = "^0.11"
 argon2-cffi = "^21.3"
-python-dotenv = "^0.19"
-django-cors-headers = "^3.10"
+python-dotenv = "^0.21"
+django-cors-headers = "^3.13"
 {% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
-whitenoise = "^5.3"
+whitenoise = "^6.2"
 {%- endif %}
 
 # Extensions
 # -------------------------------------
-pytz = "^2021.3"
+pytz = "^2022.2"
 
 # Models
 # -------------------------------------
 psycopg2-binary = "^2.9"
-Pillow = "^8.4"
-django-extensions = "^3.1"
+Pillow = "^9.2"
+django-extensions = "^3.2"
 django-uuid-upload-path = "^1.0"
 django-versatileimagefield = "^2.2"
 
 # REST APIs
 # -------------------------------------
 djangorestframework = "^3.13"
-drf-yasg = "^1.20"
+drf-yasg = "^1.21"
+
 
 # Documentation
 # -------------------------------------
@@ -45,17 +46,17 @@ raven = "^6.10"
 
 # LOGGING
 # -------------------------------------
-django-log-request-id = "^1.7"
+django-log-request-id = "^2.0"
 
 # Async Tasks
 # -------------------------------------
 {%- if cookiecutter.add_celery.lower() == "y" %}
-celery = {extras = ["redis"], version = "~5.2.2"}
+celery = {extras = ["redis"], version = "~5.2.7"}
 {%- endif %}
 
 # Auth Stuff
 # -------------------------------------
-PyJWT = "^2.3"
+PyJWT = "^2.4"
 django-mail-templated = "^2.6"
 
 # Production settings
@@ -63,18 +64,18 @@ django-mail-templated = "^2.6"
 
 # Static Files and Media Storage
 # -------------------------------------
-django-storages = "^1.12"
-boto3 = "~1.20.24"
+django-storages = "^1.13"
+boto3 = "~1.24.67"
 
 # Caching
 # -------------------------------------
-django-redis = "^5.1"
+django-redis = "^5.2"
 hiredis = "^2.0"
 {%- if cookiecutter.add_django_auth_wall.lower() == 'y' %}
 
 # Basic Auth Protection
 # -------------------------------------
-django-auth-wall = "^0.2"
+django-auth-wall = "^0.3"
 {%- endif %}
 {%- if cookiecutter.add_heroku.lower() == 'y' %}
 uWSGI = "^2.0"
@@ -83,37 +84,37 @@ uWSGI = "^2.0"
 
 # Logging
 # -------------------------------------
-newrelic = "~7.2.4.171"
+newrelic = "~8.0.0.179"
 {% endif %}
 
 [tool.poetry.dev-dependencies]
 {%- if cookiecutter.add_pre_commit.lower() == 'y' %}
-pre-commit = "^2.16"
+pre-commit = "^2.20"
 {%- endif %}
 {% if cookiecutter.add_ansible.lower() == 'y' %}
-ansible = "~4.7"
+ansible = "~6.3"
 {%- endif %}
 
 # Documentation
 # -------------------------------------
 isort = "^5.10"
-black = "~22.3.0"
-flake8 = "^4.0"
+black = "~22.8.0"
+flake8 = "^5.0"
 
 # Debugging
 # -------------------------------------
-django-debug-toolbar = "^3.2"
+django-debug-toolbar = "^3.6"
 ipdb = "^0.13"
 
 # Testing and coverage
 # -------------------------------------
-pytest = "^6.2"
+pytest = "^7.1"
 pytest-django = "^4.5"
 pytest-cov = "^3.0"
 django-dynamic-fixture = "^3.1"
-pytest-mock = "^3.6"
-mypy = "~0.910"
-django-stubs = "^1.9"
+pytest-mock = "^3.8"
+mypy = "~0.971"
+django-stubs = "^1.12"
 
 # Versioning
 # -------------------------------------
