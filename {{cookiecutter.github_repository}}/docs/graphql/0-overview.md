@@ -2,7 +2,7 @@
 
 ## Endpoint
 ```
-/graphql
+POST /graphql
 ```
 
 
