@@ -12,11 +12,11 @@ class UserType(DjangoObjectType):
 
 
 class Query(object):
-    user = graphene.Field(
+    me = graphene.Field(
         UserType,
         description='Return Current User\'s Information'
     )
-    all_users = graphene.List(
+    users = graphene.List(
         UserType,
         description='Return List of all Users'
     )

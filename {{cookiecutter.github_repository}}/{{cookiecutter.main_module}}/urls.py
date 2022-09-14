@@ -14,6 +14,7 @@ from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 
 {%- if cookiecutter.add_graphql == "y" %}
+from django.views.decorators.csrf import csrf_exempt
 from graphene_django.views import GraphQLView
 {%- endif %}
 
@@ -49,7 +50,7 @@ urlpatterns += [
     # Rest API
     path("api/", include(api_urls)),
 {%- if cookiecutter.add_graphql == "y" %}
-    path("graphql/", GraphQLView.as_view(graphiql=True)),
+    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=settings.GRAPHQL_DEBUG))),
 {%- endif %}
     # Django Admin
     path("{}/".format(settings.DJANGO_ADMIN_URL), admin.site.urls),
