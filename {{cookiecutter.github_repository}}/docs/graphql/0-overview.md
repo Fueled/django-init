@@ -1,16 +1,18 @@
-# Graphql API
+# GraphQL
 
-## Endpoint
+## Authentication
+
+For all auth related requests (login, register etc), clients need to use REST endpoints [mentioned here](../api/1-auth.md).
+For clients to make authenticated requests, the auth_token value (received from login endpoint) should be included in the Authorization HTTP header. The value should be prefixed by the string literal `Bearer`, with whitespace separating the two strings.
+
+## API Endpoint
+
 ```
 POST /graphql
 ```
 
+All the queries and mutations will be a POST request to the above endpoint. We've documented a sample header and payload to be sent with the request.
 
-## Authentication
-For all auth related requests (login, register etc), clients need to use REST endpoints [mentioned here](../api/1-auth.md).
-For clients to make authenticated requests, the auth_token value (received from login endpoint) should be included in the Authorization HTTP header. The value should be prefixed by the string literal `Bearer`, with whitespace separating the two strings. 
-
-## Example
 __Headers__
 
 ```json
@@ -19,8 +21,8 @@ __Headers__
 }
 ```
 
-
 __Payload__
+
 ```json
 {
   "query": "query MyInfo { me { id firstName lastName email } }",
