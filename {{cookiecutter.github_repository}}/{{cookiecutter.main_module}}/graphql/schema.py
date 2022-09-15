@@ -27,6 +27,6 @@ class Query(object):
         return info.context.user
 
     @superuser_required
-    def resolve_all_users(self, info, **kwargs):
+    def resolve_users(self, info, **kwargs):
         return User.objects.all()
 {%- endif %}
