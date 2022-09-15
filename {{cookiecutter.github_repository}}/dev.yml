@@ -1,0 +1,45 @@
+volumes:
+  dev_postgres_data: {}
+  dev_postgres_data_backups: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/dev/django/Dockerfile
+    image: {{ cookiecutter.main_module }}_dev_django
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs/.dev/.env
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/dev/postgres/Dockerfile
+    image: {{ cookiecutter.main_module }}_dev_postgres
+    volumes:
+      - dev_postgres_data:/var/lib/postgresql/data:Z
+      - dev_postgres_data_backups:/backups:z
+    env_file:
+      - ./.envs/.dev/.env
+
+  redis:
+    image: redis:7.0
+
+  celeryworker:
+    <<: *django
+    image: {{ cookiecutter.main_module }}_dev_celeryworker
+    command: /start-celeryworker
+
+  celerybeat:
+    <<: *django
+    image: {{ cookiecutter.main_module }}_dev_celerybeat
+    command: /start-celerybeat
+
+  flower:
+    <<: *django
+    image: {{ cookiecutter.main_module }}_dev_flower
+    command: /start-flower

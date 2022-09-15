@@ -30,7 +30,7 @@
 ### Optional
 - Heroku Setup
 - Ubuntu 20 LTS via [Ansible]
-- Celery
+- Celery with flower integration.
 - AWS S3 media storage
 - [Letsencrypt](https://letsencrypt.org/) Support via [certbot](https://certbot.eff.org).
 - Postgis Setup
