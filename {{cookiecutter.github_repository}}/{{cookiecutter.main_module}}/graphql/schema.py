@@ -1,8 +1,9 @@
 {%- if cookiecutter.add_graphql == "y" %}
-from .models import User
 import graphene
 from graphene_django.types import DjangoObjectType
 from graphql_jwt.decorators import login_required, superuser_required
+
+from {{cookiecutter.main_module}}.users.models import User
 
 
 class UserType(DjangoObjectType):
