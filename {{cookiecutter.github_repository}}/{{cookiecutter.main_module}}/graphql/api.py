@@ -2,7 +2,8 @@
 {%- if cookiecutter.add_graphql == "y" %}
 import graphene
 from graphene_django.debug import DjangoDebug
-from {{ cookiecutter.main_module }}.users import schema as user_schema
+
+from . import schema as user_schema
 
 
 class Query(
