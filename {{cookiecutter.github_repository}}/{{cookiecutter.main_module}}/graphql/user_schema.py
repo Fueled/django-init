@@ -1,4 +1,3 @@
-{%- if cookiecutter.add_graphql == "y" %}
 import graphene
 from graphene_django.types import DjangoObjectType
 from graphql_jwt.decorators import login_required, superuser_required
@@ -12,7 +11,7 @@ class UserType(DjangoObjectType):
         fields = "__all__"
 
 
-class Query(object):
+class UserQueries(graphene.ObjectType):
     me = graphene.Field(
         UserType,
         description='Return Current User\'s Information'
@@ -29,4 +28,3 @@ class Query(object):
     @superuser_required
     def resolve_users(self, info, **kwargs):
         return User.objects.all()
-{%- endif %}

@@ -59,7 +59,7 @@ urlpatterns += [
 if settings.API_DEBUG:
     urlpatterns += [
         # Browsable API
-        path("schema/", api_schemas.schema_view, name="schema"),
+        path("api/schema/", api_schemas.schema_view, name="schema"),
         path("api-playground/", api_schemas.swagger_schema_view, name="api-playground"),
         path("api/auth-n/", include("rest_framework.urls", namespace="rest_framework")),
     ]
