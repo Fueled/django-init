@@ -2,7 +2,7 @@
 
 There are several error types in the GraphQL API, and you may come across different ones depending on the operations you are trying to perform.
 
-The GraphQL API handles the following three types of errors.
+The GraphQL API handles the following three types of errors:
 
 ## Query-level errors
 
