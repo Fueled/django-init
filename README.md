@@ -18,7 +18,7 @@
 - Support for [black](https://pypi.org/project/black/)!
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - Supports PostreSQL 13.0 (support of postgis-3.0 is available).
-- [Django Rest Framework][drf] 3.12.x.
+- [Django Rest Framework][drf] 3.13.x.
 - Uses `django_sites` instead of `django.contrib.sites`.
 - Uses [mkdocs] for project documentation. Optionally, password protect the docs when deployed via Ansible
 - Uses [pytest] as test runner.

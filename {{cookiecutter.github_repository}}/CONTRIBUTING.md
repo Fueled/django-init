@@ -23,6 +23,7 @@ Before you submit a pull request, check that it meets these guidelines:
 - Install a plugin for [EditorConfig][editorconfig] and let it handle some of the formating issues for you.
 - For the Django part, we follow standard [Django coding style][django-coding style].
 - And always remember the Zen.
+- Prefer absolute imports for outside/external modules, and relative imports within the same module.
 
 [editorconfig]: http://editorconfig.org/
 [flake8]: http://flake8.readthedocs.org/en/latest/

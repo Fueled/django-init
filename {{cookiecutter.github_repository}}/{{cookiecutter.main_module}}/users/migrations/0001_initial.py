@@ -8,7 +8,7 @@ import uuid
 import django.utils.timezone
 from django.db import migrations, models
 
-# {{ cookiecutter.project_name }} Stuff
+# {{ cookiecutter.main_module }} Stuff
 import {{cookiecutter.main_module}}.users.models
 
 

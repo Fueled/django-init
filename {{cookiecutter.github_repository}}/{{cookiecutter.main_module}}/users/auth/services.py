@@ -2,7 +2,6 @@
 from django.conf import settings
 from mail_templated import send_mail
 
-# {{ cookiecutter.project_name }} Stuff
 from .tokens import get_token_for_password_reset
 
 
