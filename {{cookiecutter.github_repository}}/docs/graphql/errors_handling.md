@@ -21,7 +21,7 @@ Below is an example of an error triggered by the wrong syntax. The following que
 
 Sending this query to the server would result in the following syntax error:
 
-```
+```json
 {
   "error": {
     "errors": [
@@ -69,7 +69,7 @@ mutation {
 
 Validation errors are returned in a dedicated error field inside mutation results:
 
-```
+```json
 {
   "data": {
     "accountRegister": {
