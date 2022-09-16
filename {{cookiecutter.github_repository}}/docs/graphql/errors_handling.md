@@ -53,7 +53,7 @@ mutation {
     input: {
       email: "customer@example.com"
       password: ""
-      redirectUrl: "http://demo.saleor.io/reset-password/"
+      redirectUrl: "http://example.com/reset-password/"
     }
   ) {
     user {
