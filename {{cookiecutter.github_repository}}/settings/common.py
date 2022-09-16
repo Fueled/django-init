@@ -116,10 +116,9 @@ REST_FRAMEWORK = {
 }
 
 {%- if cookiecutter.add_graphql == "y" %}
-GRAPHQL_DEBUG = env.bool("GRAPHQL_DEBUG", default=True)
-
 GRAPHENE = {
-    "SCHEMA": "{{ cookiecutter.main_module }}.graphql.api.graphene_schema",
+    # The location of the top-level Schema class.
+    "SCHEMA": "{{ cookiecutter.main_module }}.graphql.api.schema",
     "MIDDLEWARE": [
         "graphql_jwt.middleware.JSONWebTokenMiddleware",
     ],
