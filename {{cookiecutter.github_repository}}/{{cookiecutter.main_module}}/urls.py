@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-"""Root url routering file.
+"""Root url routing file.
 
 You should put the url config in their respective app putting only a
-refernce to them here.
+reference to them here.
 """
 from typing import TYPE_CHECKING, List, Union
 

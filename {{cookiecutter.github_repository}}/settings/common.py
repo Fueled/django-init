@@ -119,6 +119,9 @@ REST_FRAMEWORK = {
 GRAPHENE = {
     # The location of the top-level Schema class.
     "SCHEMA": "{{ cookiecutter.main_module }}.graphql.api.schema",
+
+    # The maximum size of objects that can be requested through a relay connection.
+    "RELAY_CONNECTION_MAX_LIMIT": 100,
     "MIDDLEWARE": [
         "graphql_jwt.middleware.JSONWebTokenMiddleware",
     ],
