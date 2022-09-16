@@ -12,7 +12,7 @@ Below is an example of an error triggered by the wrong syntax. The following que
 
 
 ```
-{
+query {
   me {
     fullName
   }
@@ -92,7 +92,7 @@ This error occurs when you are trying to perform a specific operation but are no
 Below is an example of an error triggered by insufficient authorization. The `users` query requires appropriate admin permissions:
 
 ```
-{
+query {
   users(first: 20) {
     edges {
       node {

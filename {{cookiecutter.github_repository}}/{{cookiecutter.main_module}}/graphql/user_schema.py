@@ -22,7 +22,7 @@ class UserQueries(graphene.ObjectType):
     )
 
     @login_required
-    def resolve_user(self, info, **kwargs):
+    def resolve_me(self, info, **kwargs):
         return info.context.user
 
     @superuser_required
