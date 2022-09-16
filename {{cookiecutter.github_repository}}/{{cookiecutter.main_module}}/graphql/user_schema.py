@@ -14,11 +14,11 @@ class UserType(DjangoObjectType):
 class UserQueries(graphene.ObjectType):
     me = graphene.Field(
         UserType,
-        description='Return Current User\'s Information'
+        description="Return the authenticated user information",
     )
     users = graphene.List(
         UserType,
-        description='Return List of all Users'
+        description="Return List of all Users",
     )
 
     @login_required
