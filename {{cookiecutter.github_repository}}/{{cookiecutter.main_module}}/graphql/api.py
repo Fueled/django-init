@@ -1,17 +1,14 @@
 # Third Party Stuff
-{%- if cookiecutter.add_graphql == "y" %}
 import graphene
 from graphene_django.debug import DjangoDebug
 
-from . import schema as user_schema
+from .user_schema import UserQueries
 
 
 class Query(
-    user_schema.Query,
-    graphene.ObjectType
+    UserQueries
 ):
     debug = graphene.Field(DjangoDebug, name="_debug")
 
 
-graphene_schema = graphene.Schema(query=Query)
-{%- endif %}
+schema = graphene.Schema(query=Query)

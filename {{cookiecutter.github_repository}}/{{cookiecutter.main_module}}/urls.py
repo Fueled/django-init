@@ -50,7 +50,7 @@ urlpatterns += [
     # Rest API
     path("api/", include(api_urls)),
 {%- if cookiecutter.add_graphql == "y" %}
-    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=settings.GRAPHQL_DEBUG))),
+    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=settings.API_DEBUG))),
 {%- endif %}
     # Django Admin
     path("{}/".format(settings.DJANGO_ADMIN_URL), admin.site.urls),
@@ -59,7 +59,7 @@ urlpatterns += [
 if settings.API_DEBUG:
     urlpatterns += [
         # Browsable API
-        path("schema/", api_schemas.schema_view, name="schema"),
+        path("api/schema/", api_schemas.schema_view, name="schema"),
         path("api-playground/", api_schemas.swagger_schema_view, name="api-playground"),
         path("api/auth-n/", include("rest_framework.urls", namespace="rest_framework")),
     ]

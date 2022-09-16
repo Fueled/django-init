@@ -41,6 +41,13 @@ django-graphql-jwt = "^0.3.4"
 {%- endif %}
 
 
+# GraphQL APIs
+{% if cookiecutter.add_graphql == "y" -%}
+graphene-django = "^2.15.0"
+django-graphql-jwt = "^0.3.4"
+{%- endif %}
+
+
 # Documentation
 # -------------------------------------
 mkdocs = "^1.2"
