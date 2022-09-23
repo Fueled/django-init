@@ -7,10 +7,19 @@ It may be also used for extending doctest's context:
 
 # Standard Library
 import functools
+{%- if cookiecutter.add_graphql == "y" %}
+import json
+{%- endif %}
 from unittest import mock
 
 # Third Party Stuff
 import pytest
+from django.core.serializers.json import DjangoJSONEncoder
+{%- if cookiecutter.add_graphql == "y" %}
+from django.urls import reverse
+
+GRAPHQL_API_PATH = reverse("graphql")
+{%- endif %}
 
 
 class PartialMethodCaller:
@@ -77,5 +86,56 @@ def client():
             return PartialMethodCaller(
                 obj=self, content_type='application/json;charset="utf-8"'
             )
+
+{%- if cookiecutter.add_graphql == "y" %}
+
+        def post_graphql(
+            self,
+            query,
+            op_name=None,
+            variables=None,
+            input_data=None,
+            graphql_url=None,
+            **extra
+        ):
+            """Dedicated helper for posting GraphQL queries.
+
+            Args:
+                query (string)              - GraphQL query to run
+                op_name (string)            - If the query is a mutation or named query, you must
+                                              supply the op_name.  For annon queries ("{ ... }"),
+                                              should be None (default).
+                variables (dict)            - If provided, the "variables" field in GraphQL will be
+                                              set to this value.
+                input_data (dict)           - If provided, the $input variable in GraphQL will be set
+                                              to this value. If both ``input_data`` and ``variables``,
+                                              are provided, the ``input`` field in the ``variables``
+                                              dict will be overwritten with this value.
+                graphql_url (string)        - URL to graphql endpoint. Defaults to "/graphql".
+
+            Sets the `application/json` content type and json dumps the variables
+            if present.
+            """
+            if not graphql_url:
+                graphql_url = GRAPHQL_API_PATH
+
+            data = {"query": query}
+
+            if op_name:
+                data["operationName"] = op_name
+            if variables is not None:
+                data["variables"] = variables
+            if input_data:
+                if "variables" in data:
+                    data["variables"]["input"] = input_data
+                else:
+                    data["variables"] = {"input": input_data}
+
+            response = super().post(graphql_url,
+                                    json.dumps(data, cls=DjangoJSONEncoder),
+                                    content_type="application/json",
+                                    **extra)
+            return response
+{%- endif %}
 
     return _Client()

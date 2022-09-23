@@ -19,7 +19,7 @@ fi
 rm -rf hello-world-backend/;
 
 # Generate new code, (it also creates db, migrate and install dependencies)
-yes 'y' | cookiecutter . --no-input
+yes 'y' | cookiecutter . --no-input --config-file cookiecutter-test-config.yaml
 
 # Run the tests present inside generate project
 cd hello-world-backend;

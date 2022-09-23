@@ -16,7 +16,7 @@ env = environ.Env()
 # ==========================================================================
 # List of strings representing installed apps.
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = [
+DJANGO_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -25,22 +25,31 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",
-    # "django.contrib.humanize",  # Useful template tags
-    "{{ cookiecutter.main_module }}.base",
-    "{{ cookiecutter.main_module }}.users",
+]
+
+THIRD_PARTY_APPS = [
+    "django_filters",
     "rest_framework",  # http://www.django-rest-framework.org/
 {%- if cookiecutter.add_graphql == "y" %}
     "graphene_django",
 {%- endif %}
+    "mail_templated",  # https://github.com/artemrizhov/django-mail-templated
+    "django_extensions",  # http://django-extensions.readthedocs.org/
     "drf_yasg",
     "versatileimagefield",  # https://github.com/WGBH/django-versatileimagefield/
     "corsheaders",  # https://github.com/ottoyiu/django-cors-headers/
 {%- if cookiecutter.add_sentry == "y" %}
     "raven.contrib.django.raven_compat",
 {%- endif %}
-    "mail_templated",  # https://github.com/artemrizhov/django-mail-templated
-    "django_extensions",  # http://django-extensions.readthedocs.org/
 ]
+
+LOCAL_APPS = [
+    "{{ cookiecutter.main_module }}.base",
+    "{{ cookiecutter.main_module }}.users",
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 
 # INSTALLED APPS CONFIGURATION
 # ==========================================================================
