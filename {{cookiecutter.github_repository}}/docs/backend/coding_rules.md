@@ -15,7 +15,7 @@
 
 ## Django models
 
-* All model names in singular and CamelCase.
+* All model names in singular and PascalCase.
 * All models have a `Meta` with at least:
     - `verbose_name` and `verbose_name_plural`: unicode strings, lowercase, with spaces.
     - `ordering`: return a consistent order, using pk if no other unique field or combination exists.
@@ -24,12 +24,12 @@
 * All fields have explicit `blank` and `null` parameters. Use only those combinations, unless there a documented need of other thing:
 
     __Normal fields__ (IntegerField, DateField, ForeignKey, FileField...)
- 
+
         - (optional) `null = True`, `blank = True`
         - (required) `null = False`, `blank = False`
 
     __Text fields__ (CharField, TextField, URLField...)
- 
+
         - (optional) `null = False`, `blank = True`
         - (required) `null = False`, `blank = False`
 
