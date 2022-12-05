@@ -41,6 +41,10 @@ if echo "{{ cookiecutter.add_pre_commit }}" | grep -iq "^n"; then
     rm .pre-commit-config.yaml
 fi
 
+if echo "{{ cookiecutter.add_docker }}" | grep -iq "^n"; then
+    rm -rf .envs compose local.yml dev.yml docs/backend/docker_setup.md
+fi
+
 if echo "$yn" | grep -iq "^y"; then
     echo "==> Checking system dependencies. You may need to enter your sudo password."
 

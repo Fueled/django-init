@@ -9,7 +9,13 @@ The steps below will get you up and running with a local development environment
 
 ## Build the Stack
 
-This can take a while, especially the first time you run this particular command on your development system:
+This can take a while, especially the first time you run this particular command on your development system. Make sure to generate a `poetry.lock` file the first time you are running the project
+
+```BASH
+$ poetry lock
+```
+
+then you can build the containers using:
 
 ```bash
 $ docker-compose -f local.yml build

@@ -7,8 +7,10 @@ __Version:__ {{ cookiecutter.version }}
 
 ## Getting up and running
 
+{% if cookiecutter.add_docker == 'y' %}
 !!! note
     For setting up locally using `Docker`, check [here](docs/backend/docker_setup.md)
+{% endif %}
 
 Minimum requirements: **pip, python3.9, poetry, redis & [PostgreSQL 11][install-postgres]{% if cookiecutter.add_postgis.lower() == "y" %} with postgis-2.4{% endif %}**, setup is tested on Mac OSX only.
 
