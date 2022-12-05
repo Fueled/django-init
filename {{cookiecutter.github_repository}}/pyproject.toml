@@ -38,6 +38,10 @@ drf-yasg = "^1.21"
 # Documentation
 # -------------------------------------
 mkdocs = "^1.2"
+pymdown-extensions = "^9.6"
+mkdocs-git-revision-date-localized-plugin = "^1.1.0"
+mkdocs-material = "^8.5.6"
+markdown-include = "^0.7.0"
 
 # Raven is the Sentry client
 # --------------------------

@@ -54,7 +54,7 @@ poetry export --without-hashes -f requirements.txt -o requirements.txt
 and
 
 ```bash
-poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --dev
+poetry export --without-hashes -f requirements.txt -o requirements_dev.txt --with dev
 ```
 
 , respectively.
