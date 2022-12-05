@@ -3,6 +3,7 @@
 You should put the url config in their respective app putting only a
 reference to them here.
 """
+# Standard Library
 from typing import TYPE_CHECKING, List, Union
 
 # Third Party Stuff
@@ -14,6 +15,7 @@ from django.views.generic import TemplateView
 
 {%- if cookiecutter.add_graphql == "y" %}
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
 from graphene_django.views import GraphQLView
 {%- endif %}
 
@@ -22,12 +24,13 @@ from .base import views as base_views
 from .base.api import schemas as api_schemas
 
 if TYPE_CHECKING:
+    # Third Party Stuff
     from django.urls import URLPattern, URLResolver
 
     URL = Union[URLPattern, URLResolver]
     URLList = List[URL]
 
-admin.site.site_title = admin.site.site_header = "{{ cookiecutter.project_name }} Administration"
+admin.site.site_title = admin.site.site_header = "bcd Administration"
 handler500 = base_views.server_error
 
 # Top Level Pages
@@ -48,9 +51,11 @@ urlpatterns += [
     ),
     # Rest API
     path("api/", include(api_urls)),
-{%- if cookiecutter.add_graphql == "y" %}
-    path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=settings.API_DEBUG)), name="graphql"),
-{%- endif %}
+    path(
+        "graphql/",
+        csrf_exempt(GraphQLView.as_view(graphiql=settings.API_DEBUG)),
+        name="graphql",
+    ),
     # Django Admin
     path("{}/".format(settings.DJANGO_ADMIN_URL), admin.site.urls),
 ]
@@ -64,6 +69,7 @@ if settings.API_DEBUG:
     ]
 
 if settings.DEBUG:
+    # Third Party Stuff
     from django.urls import get_callable
     from django.views import defaults as dj_default_views
 
@@ -91,6 +97,7 @@ if settings.DEBUG:
 
     # Django Debug Toolbar
     if "debug_toolbar" in settings.INSTALLED_APPS:
+        # Third Party Stuff
         import debug_toolbar
 
         urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]

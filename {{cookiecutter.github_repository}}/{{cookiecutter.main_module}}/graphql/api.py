@@ -7,9 +7,7 @@ from .users.schema import UserQueries
 from .users.mutations import UserMutations
 
 
-class Query(
-    UserQueries
-):
+class Query(UserQueries):
     debug = graphene.Field(DjangoDebug, name="_debug")
 
 
