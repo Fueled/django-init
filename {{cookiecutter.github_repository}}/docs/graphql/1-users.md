@@ -15,7 +15,7 @@ query {
 
 __Response__
 
-```json lines
+```json
 {
   "data": {
     "me": {
@@ -46,7 +46,7 @@ query {
 
 __Response__
 
-```json lines
+```json
 {
   "data": {
     "users": [
@@ -58,9 +58,9 @@ __Response__
       },
       {
         "id": "765217a8-7599-4e25-9c24-b7c92e878201",
-        "firstName": "",
-        "lastName": "",
-        "email": "suneet@fueled.com"
+        "firstName": "fueled",
+        "lastName": "user",
+        "email": "user@fueled.com"
       }
     ]
   }

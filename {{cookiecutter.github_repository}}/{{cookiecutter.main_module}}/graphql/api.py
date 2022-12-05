@@ -5,9 +5,7 @@ from graphene_django.debug import DjangoDebug
 from .user_schema import UserQueries
 
 
-class Query(
-    UserQueries
-):
+class Query(UserQueries):
     debug = graphene.Field(DjangoDebug, name="_debug")
 
 
