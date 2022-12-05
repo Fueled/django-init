@@ -47,6 +47,7 @@ fi
 
 if echo "{{ cookiecutter.add_graphql }}" | grep -iq "^n"; then
     rm -rf {{ cookiecutter.main_module }}/graphql
+    rm -rf {{ cookiecutter.main_module }}/tests/integration/graphql
     rm -rm {{ cookiecutter.main_module }}/docs/graphql
 fi
 
