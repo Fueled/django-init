@@ -38,7 +38,7 @@ drf-yasg = "^1.21"
 
 # GraphQL APIs
 {% if cookiecutter.add_graphql == "y" -%}
-graphene-django = "^2.15.0"
+graphene-django = "3.0.0"
 django-graphql-jwt = "^0.3.4"
 {%- endif %}
 
