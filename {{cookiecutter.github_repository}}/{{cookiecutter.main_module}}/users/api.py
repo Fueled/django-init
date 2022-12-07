@@ -14,7 +14,6 @@ class CurrentUserViewSet(viewsets.GenericViewSet):
     def get_object(self):
         return self.request.user
 
-
     def list(self, request):
         """Get logged in user profile"""
         serializer = self.get_serializer(self.get_object())
