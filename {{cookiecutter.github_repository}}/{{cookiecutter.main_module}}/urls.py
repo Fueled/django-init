@@ -31,7 +31,7 @@ if TYPE_CHECKING:
     URL = Union[URLPattern, URLResolver]
     URLList = List[URL]
 
-admin.site.site_title = admin.site.site_header = "bcd Administration"
+admin.site.site_title = admin.site.site_header = "{{ cookiecutter.project_name }} Administration"
 handler500 = base_views.server_error
 
 # Top Level Pages
