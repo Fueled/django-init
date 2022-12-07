@@ -9,6 +9,7 @@ python = "~3.9"
 Django = "~3.2.15"
 django-environ = "^0.9"
 django-sites = "^0.11"
+django-filter = "^21.1"
 argon2-cffi = "^21.3"
 python-dotenv = "^0.21"
 django-cors-headers = "^3.13"
@@ -31,15 +32,8 @@ django-versatileimagefield = "^2.2"
 
 # REST APIs
 # -------------------------------------
-djangorestframework = "^3.13"
+djangorestframework = "3.13.1"
 drf-yasg = "^1.21"
-
-
-# GraphQL APIs
-{% if cookiecutter.add_graphql == "y" -%}
-graphene-django = "^2.15.0"
-django-graphql-jwt = "^0.3.4"
-{%- endif %}
 
 
 # GraphQL APIs

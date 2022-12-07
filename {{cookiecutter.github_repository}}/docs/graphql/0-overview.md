@@ -30,3 +30,35 @@ __Payload__
   "operationName":"MyInfo"
 }
 ```
+
+## Pagination
+
+Pagination is required in most queries that return lists of items in the GraphQL API. It limits the number of results returned by the server to a more manageable size and avoids data flow disruptions.
+
+There are two types of lists in GraphQL:
+
+- `[Foo]` is a simple list. It is used to query a list containing several items. An excellent example of a simple list could be a query for product variants which returns a list with a manageable number of results.
+- `FooConnection` represents a more complex list. When queried, it will return an unknown or large number of results.
+
+Pagination is used to help you handle large amounts of items returned by the connection list type.
+
+Pagination model is based on the [GraphQL Connection Specification](https://relay.dev/graphql/connections.htm). Its schema looks like this:
+
+```
+type FooConnection {
+  pageInfo: PageInfo!
+  edges: [FooEdge!]!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type FooEdge {
+  node: Foo!
+  cursor: String!
+}
+```

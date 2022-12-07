@@ -1,12 +1,20 @@
 # Third Party Stuff
 import graphene
+import graphql_jwt
 from graphene_django.debug import DjangoDebug
 
-from .user_schema import UserQueries
+from .users.schema import UserQueries
+from .users.mutations import UserMutations
 
 
 class Query(UserQueries):
     debug = graphene.Field(DjangoDebug, name="_debug")
 
 
-schema = graphene.Schema(query=Query)
+class Mutation(
+    UserMutations
+):
+    token_auth = graphql_jwt.ObtainJSONWebToken.Field()
+
+
+schema = graphene.Schema(query=Query, mutation=Mutation)
