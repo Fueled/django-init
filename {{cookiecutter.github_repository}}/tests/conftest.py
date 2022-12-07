@@ -14,8 +14,8 @@ from unittest import mock
 
 # Third Party Stuff
 import pytest
-from django.core.serializers.json import DjangoJSONEncoder
 {%- if cookiecutter.add_graphql == "y" %}
+from django.core.serializers.json import DjangoJSONEncoder
 from django.urls import reverse
 
 GRAPHQL_API_PATH = reverse("graphql")
