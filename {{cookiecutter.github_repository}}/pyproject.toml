@@ -25,6 +25,7 @@ pytz = "^2022.2"
 psycopg2-binary = "^2.9"
 Pillow = "^9.2"
 django-extensions = "^3.2"
+Werkzeug = "~2.2.2"
 django-uuid-upload-path = "^1.0"
 django-versatileimagefield = "^2.2"
 
@@ -56,6 +57,7 @@ django-log-request-id = "^2.0"
 # -------------------------------------
 {%- if cookiecutter.add_celery.lower() == "y" %}
 celery = {extras = ["redis"], version = "~5.2.7"}
+flower = "~1.0.0"
 {%- endif %}
 
 # Auth Stuff
@@ -68,6 +70,7 @@ django-mail-templated = "^2.6"
 
 # Static Files and Media Storage
 # -------------------------------------
+gunicorn = "~20.1.0"
 django-storages = "^1.13"
 boto3 = "~1.24.67"
 
