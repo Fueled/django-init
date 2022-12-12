@@ -2,6 +2,26 @@ from graphql.error import GraphQLError
 from django.core.exceptions import ValidationError
 
 
+class CountableConnectionBase(relay.Connection):
+    """
+        Extend connection class to display
+        total count and edges count in paginated results
+    """
+    class Meta:
+        abstract = True
+
+    total_count = graphene.Int()
+    edge_count = graphene.Int()
+
+    @classmethod
+    def resolve_total_count(cls, root, info, **kwargs):
+        return root.length
+
+    @classmethod
+    def resolve_edge_count(cls, root, info, **kwargs):
+        return len(root.edges)
+
+
 def validate_one_of_args_is_in_query(*args):
     # split args into a list with 2-element tuples:
     # [(arg1_name, arg1_value), (arg2_name, arg2_value), ...]

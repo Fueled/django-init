@@ -28,7 +28,3 @@ class SignUp(relay.ClientIDMutation):
         cls.validate_email(data['email'])
         user = user_services.create_user_account(**data)
         return SignUp(user=user)
-
-
-class UserMutations(graphene.ObjectType):
-    signup = SignUp.Field()

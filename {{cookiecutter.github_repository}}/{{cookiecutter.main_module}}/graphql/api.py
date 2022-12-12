@@ -3,8 +3,7 @@ import graphene
 import graphql_jwt
 from graphene_django.debug import DjangoDebug
 
-from .users.schema import UserQueries
-from .users.mutations import UserMutations
+from .users.schema import UserQueries, UserMutations
 
 
 class Query(UserQueries):

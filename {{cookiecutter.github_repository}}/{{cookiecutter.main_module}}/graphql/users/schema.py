@@ -3,7 +3,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 from graphql_jwt.decorators import login_required, superuser_required
 
 from .types import UserConnection, CurrentUser
-from .resolvers import resolve_users
+from .resolvers import get_all_users
 
 
 class UserQueries(graphene.ObjectType):
@@ -20,6 +20,10 @@ class UserQueries(graphene.ObjectType):
 
     @superuser_required
     def resolve_users(self, info, **kwargs):
-        qs = resolve_users(info)
+        qs = get_all_users(info)
         # add filters
         return qs
+
+
+class UserMutations(graphene.ObjectType):
+    signup = SignUp.Field()
