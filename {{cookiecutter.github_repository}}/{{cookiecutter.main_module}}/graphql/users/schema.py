@@ -4,6 +4,7 @@ from graphql_jwt.decorators import login_required, superuser_required
 
 from .types import UserConnection, CurrentUser
 from .resolvers import get_all_users
+from .mutations import SignUp
 
 
 class UserQueries(graphene.ObjectType):
