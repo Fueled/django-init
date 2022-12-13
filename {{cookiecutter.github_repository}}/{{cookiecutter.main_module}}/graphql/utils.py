@@ -6,9 +6,10 @@ from django.core.exceptions import ValidationError
 
 class CountableConnectionBase(relay.Connection):
     """
-        Extend connection class to display
-        total count and edges count in paginated results
+    Extend connection class to display
+    total count and edges count in paginated results
     """
+
     class Meta:
         abstract = True
 

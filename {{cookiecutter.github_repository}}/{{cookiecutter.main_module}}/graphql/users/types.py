@@ -16,8 +16,6 @@ class UserConnection(DjangoObjectType):
     class Meta:
         model = User
         fields = ["id", "first_name", "last_name"]
-        filter_fields = {
-            'id': ['exact']
-        }
+        filter_fields = {"id": ["exact"]}
         interfaces = (relay.Node,)
         connection_class = CountableConnectionBase

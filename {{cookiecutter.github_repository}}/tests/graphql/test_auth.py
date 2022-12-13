@@ -10,7 +10,7 @@ pytestmark = pytest.mark.django_db
 
 
 def test_user_registration(client):
-    graphql_query = '''
+    graphql_query = """
             mutation {
                 signup (
                     input: {
@@ -26,7 +26,7 @@ def test_user_registration(client):
                     }
                 }
             }
-            '''
+            """
 
     response = client.post_graphql(graphql_query)
     assert response.status_code == 200
@@ -40,7 +40,7 @@ def test_user_registration(client):
 
 
 def test_user_registration_with_invalid_email(client):
-    graphql_query = '''
+    graphql_query = """
                 mutation {
                     signup (
                         input: {
@@ -56,7 +56,7 @@ def test_user_registration_with_invalid_email(client):
                         }
                     }
                 }
-                '''
+                """
 
     # create existing user with the same email address
     f.create_user(email="test@example.com")
@@ -70,7 +70,7 @@ def test_user_registration_with_invalid_email(client):
 
 
 def test_user_login(client):
-    graphql_query = '''
+    graphql_query = """
                     mutation {
                         tokenAuth (
                             email: "test@example.com",
@@ -79,7 +79,7 @@ def test_user_login(client):
                             token
                         }
                     }
-                    '''
+                    """
     f.create_user(email="test@example.com", password="password")
 
     response = client.post_graphql(graphql_query)

@@ -10,7 +10,7 @@ pytestmark = pytest.mark.django_db
 
 
 def test_get_current_user_api(client):
-    graphql_query = '''
+    graphql_query = """
         query{
             me{
                 email,
@@ -18,7 +18,7 @@ def test_get_current_user_api(client):
                 lastName
             }
         }
-        '''
+        """
 
     user = f.create_user(email="test@example.com")
 

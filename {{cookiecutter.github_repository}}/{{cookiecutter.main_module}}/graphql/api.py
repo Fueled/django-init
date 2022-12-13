@@ -10,9 +10,7 @@ class Query(UserQueries):
     debug = graphene.Field(DjangoDebug, name="_debug")
 
 
-class Mutation(
-    UserMutations
-):
+class Mutation(UserMutations):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
 
 

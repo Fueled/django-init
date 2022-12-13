@@ -10,7 +10,7 @@ pytestmark = pytest.mark.django_db
 
 
 def test_get_current_user_api(client):
-    graphql_query = '''
+    graphql_query = """
         query users($first: Int = 1, $after: String = ""){
             users(first: $first, after: $after){
                 totalCount,
@@ -31,7 +31,7 @@ def test_get_current_user_api(client):
                 }
             }
         }
-        '''
+        """
 
     user = f.create_user(email="test@example.com")
     f.create_user(email="test2@example.com")
@@ -48,7 +48,10 @@ def test_get_current_user_api(client):
     response = client.post_graphql(graphql_query)
     response_data = json.loads(response.content)
     assert "errors" in response_data.keys()
-    assert "You do not have permission to perform this action" == response_data["errors"][0]["message"]
+    assert (
+        "You do not have permission to perform this action"
+        == response_data["errors"][0]["message"]
+    )
 
     user.is_superuser = True
     user.save()

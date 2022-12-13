@@ -96,7 +96,7 @@ def client():
             variables=None,
             input_data=None,
             graphql_url=None,
-            **extra
+            **extra,
         ):
             """Dedicated helper for posting GraphQL queries.
 
@@ -131,10 +131,12 @@ def client():
                 else:
                     data["variables"] = {"input": input_data}
 
-            response = super().post(graphql_url,
-                                    json.dumps(data, cls=DjangoJSONEncoder),
-                                    content_type="application/json",
-                                    **extra)
+            response = super().post(
+                graphql_url,
+                json.dumps(data, cls=DjangoJSONEncoder),
+                content_type="application/json",
+                **extra,
+            )
             return response
 {%- endif %}
 
