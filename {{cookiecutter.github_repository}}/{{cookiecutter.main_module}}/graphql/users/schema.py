@@ -1,10 +1,10 @@
 import graphene
 from graphene_django.filter import DjangoFilterConnectionField
-from graphql_jwt.decorators import login_required, superuser_required
+from {{cookiecutter.main_module}}.graphql.decorators import login_required, superuser_required
 
 from .types import UserConnection, CurrentUser
 from .resolvers import get_all_users
-from .mutations import SignUp
+from .mutations import SignUp, Login
 
 
 class UserQueries(graphene.ObjectType):
@@ -28,3 +28,4 @@ class UserQueries(graphene.ObjectType):
 
 class UserMutations(graphene.ObjectType):
     signup = SignUp.Field()
+    login = Login.Field()

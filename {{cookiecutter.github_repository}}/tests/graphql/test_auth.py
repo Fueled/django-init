@@ -71,12 +71,19 @@ def test_user_registration_with_invalid_email(client):
 
 def test_user_login(client):
     graphql_query = """
-                    mutation {
-                        tokenAuth (
-                            email: "test@example.com",
-                            password: "password"
+                    mutation Login {
+                        login (
+                            input: {
+                                email: "test@example.com",
+                                password: "password"
+                            }
                         ) {
-                            token
+                            user {
+                                email
+                                firstName
+                                lastName
+                                authToken
+                            }
                         }
                     }
                     """
@@ -87,6 +94,7 @@ def test_user_login(client):
 
     # should return token in response
     response_data = json.loads(response.content)
-    expected_keys = ["token"]
+    expected_keys = ["authToken", "email", "firstName", "lastName"]
     assert "errors" not in response_data.keys()
-    assert set(expected_keys).issubset(response_data["data"]["tokenAuth"].keys())
+    assert set(expected_keys).issubset(response_data["data"]["login"]["user"].keys())
+

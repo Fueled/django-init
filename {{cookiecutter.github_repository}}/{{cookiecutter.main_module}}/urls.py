@@ -51,11 +51,13 @@ urlpatterns += [
     ),
     # Rest API
     path("api/", include(api_urls)),
+{%- if cookiecutter.add_graphql == "y" %}
     path(
         "graphql/",
         csrf_exempt(GraphQLView.as_view(graphiql=settings.API_DEBUG)),
         name="graphql",
     ),
+{% endif %}
     # Django Admin
     path("{}/".format(settings.DJANGO_ADMIN_URL), admin.site.urls),
 ]

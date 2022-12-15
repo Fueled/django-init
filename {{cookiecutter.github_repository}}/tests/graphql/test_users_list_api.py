@@ -49,7 +49,7 @@ def test_get_current_user_api(client):
     response_data = json.loads(response.content)
     assert "errors" in response_data.keys()
     assert (
-        "You do not have permission to perform this action"
+        "You do not have permission to perform this action."
         == response_data["errors"][0]["message"]
     )
 
