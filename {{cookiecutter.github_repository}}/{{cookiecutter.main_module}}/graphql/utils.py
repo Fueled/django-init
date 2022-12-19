@@ -48,3 +48,12 @@ def validate_one_of_args_is_in_mutation(error_class, *args):
         validate_one_of_args_is_in_query(*args)
     except GraphQLError as e:
         raise ValidationError(str(e), code=error_class.GRAPHQL_ERROR)
+
+
+def get_http_authorization(request):
+    auth = request.META.get("HTTP_AUTHORIZATION", "").split()
+    prefix = "Bearer"
+
+    if len(auth) != 2 or auth[0].lower() != prefix.lower():
+        return request.COOKIES.get("JWT")
+    return auth[1]
