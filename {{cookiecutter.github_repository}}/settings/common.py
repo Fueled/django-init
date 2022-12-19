@@ -58,9 +58,6 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # ------------------------------------------------------------------------------
 AUTH_USER_MODEL = "users.User"
 AUTHENTICATION_BACKENDS = [
-{%- if cookiecutter.add_graphql == "y" %}
-    "graphql_jwt.backends.JSONWebTokenBackend",
-{%- endif %}
     "django.contrib.auth.backends.ModelBackend",
 ]
 
@@ -132,16 +129,7 @@ GRAPHENE = {
     # The maximum size of objects that can be requested through a relay connection.
     "RELAY_CONNECTION_MAX_LIMIT": 100,
     "MIDDLEWARE": [
-        "graphql_jwt.middleware.JSONWebTokenMiddleware",
     ],
-}
-
-GRAPHQL_JWT = {
-    "JWT_PAYLOAD_GET_USERNAME_HANDLER": (
-        lambda payload: payload.get('user_authentication_id')
-    ),
-    "JWT_AUTH_HEADER_PREFIX": "Bearer",
-    "JWT_GET_USER_BY_NATURAL_KEY_HANDLER": "{{ cookiecutter.main_module }}.users.services.get_active_user_by_id",
 }
 {%- endif %}
 
