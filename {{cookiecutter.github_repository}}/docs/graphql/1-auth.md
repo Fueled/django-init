@@ -76,6 +76,34 @@ __Response__
 ```
 
 
+## Request Password Reset
+
+__Request__
+```
+mutation RequestPasswordReset {
+    passwordReset (
+        input: {
+            email: "test@example.com"
+        }
+    ) {
+        message
+    }
+}
+```
+
+__Response__
+
+```json
+{
+  "data": {
+    "passwordReset": {
+      "message": "Further instructions will be sent to the email if it exists"
+    }
+  }
+}
+```
+
+
 ## Password Change
 (requires authentication)
 
@@ -110,34 +138,6 @@ __Response__
         "lastName": "",
         "authToken": "eyJhbGciO..."
       }
-    }
-  }
-}
-```
-
-
-## Request Password Reset
-
-__Request__
-```
-mutation RequestPasswordReset {
-    passwordReset (
-        input: {
-            email: "test@example.com"
-        }
-    ) {
-        message
-    }
-}
-```
-
-__Response__
-
-```json
-{
-  "data": {
-    "passwordReset": {
-      "message": "Further instructions will be sent to the email if it exists"
     }
   }
 }
