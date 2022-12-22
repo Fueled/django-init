@@ -24,9 +24,13 @@ def decode_uuid_from_base64(uuid_value: str):
 
 
 def get_http_authorization(request):
-    auth = request.META.get("HTTP_AUTHORIZATION", "").split()
-    prefix = "Bearer"
+    auth_rx = re.compile(r"^Bearer (.+)$")
+    if request is None or "HTTP_AUTHORIZATION" not in request.META:
+        return None
 
-    if len(auth) != 2 or auth[0].lower() != prefix.lower():
-        return request.COOKIES.get("JWT")
-    return auth[1]
+    token_rx_match = auth_rx.search(request.META["HTTP_AUTHORIZATION"])
+    if not token_rx_match:
+        return None
+
+    token = token_rx_match.group(1)
+    return token

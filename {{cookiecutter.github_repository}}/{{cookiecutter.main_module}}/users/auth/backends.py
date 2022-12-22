@@ -29,6 +29,9 @@ from .utils import get_http_authorization
 class JWTAuthenticationMixin:
     def authenticate(self, request):
         token = get_http_authorization(request)
+        if not token:
+            return None
+
         user = get_user_for_token(token, "authentication")
 
         return (user, token)
