@@ -15,10 +15,6 @@ It uses django signing framework for create new
 selfcontained tokens. This trust tokes from external
 fraudulent modifications.
 """
-
-# Standard Library
-import re
-
 # Third Party Stuff
 from rest_framework.authentication import BaseAuthentication
 

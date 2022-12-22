@@ -4,7 +4,7 @@ from {{cookiecutter.main_module}}.users.auth import tokens, backends
 UserModel = get_user_model()
 
 
-class GraphJWTAuthenticationBackend(backends.JWTAuthenticationMixin):
+class GraphJWTAuthentication(backends.JWTAuthenticationMixin):
     def authenticate(self, request, **kwargs):
         auth_res = super().authenticate(request)
         try:

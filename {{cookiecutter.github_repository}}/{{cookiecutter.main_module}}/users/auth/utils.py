@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Standard Library
+import re
 from uuid import UUID
 
 # Third Party Stuff
