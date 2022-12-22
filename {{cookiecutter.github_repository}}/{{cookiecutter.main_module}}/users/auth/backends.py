@@ -45,7 +45,7 @@ class UserTokenAuthentication(BaseAuthentication):
         token = token_rx_match.group(1)
         user = get_user_for_token(token, "authentication")
 
-        return (user, token)
+        return user
 
     def authenticate_header(self, request):
         return 'Bearer realm="api"'

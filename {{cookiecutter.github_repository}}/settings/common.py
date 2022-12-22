@@ -59,7 +59,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 AUTH_USER_MODEL = "users.User"
 AUTHENTICATION_BACKENDS = [
 {%- if cookiecutter.add_graphql == "y" %}
-    "{{ cookiecutter.main_module }}.graphql.backends.JSONWebTokenBackend",
+    "{{ cookiecutter.main_module }}.users.auth.backends.UserTokenAuthentication",
 {%- endif %}
     "django.contrib.auth.backends.ModelBackend",
 ]
