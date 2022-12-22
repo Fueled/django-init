@@ -21,3 +21,12 @@ def decode_uuid_from_base64(uuid_value: str):
         return UUID(force_str(urlsafe_base64_decode(uuid_value)))
     except (ValueError, OverflowError, TypeError):
         return None
+
+
+def get_http_authorization(request):
+    auth = request.META.get("HTTP_AUTHORIZATION", "").split()
+    prefix = "Bearer"
+
+    if len(auth) != 2 or auth[0].lower() != prefix.lower():
+        return request.COOKIES.get("JWT")
+    return auth[1]

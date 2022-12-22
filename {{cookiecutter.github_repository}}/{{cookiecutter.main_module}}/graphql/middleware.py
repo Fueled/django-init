@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.middleware import get_user
 from django.contrib.auth.models import AnonymousUser
-from .utils import get_http_authorization
+from {{cookiecutter.main_module}}.users.auth.utils import get_http_authorization
 
 
 def _authenticate(request):

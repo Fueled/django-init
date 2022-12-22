@@ -59,7 +59,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 AUTH_USER_MODEL = "users.User"
 AUTHENTICATION_BACKENDS = [
 {%- if cookiecutter.add_graphql == "y" %}
-    "{{ cookiecutter.main_module }}.users.auth.backends.UserTokenAuthentication",
+    "{{ cookiecutter.main_module }}.graphql.backends.GraphJWTAuthenticationBackend",
 {%- endif %}
     "django.contrib.auth.backends.ModelBackend",
 ]
@@ -116,7 +116,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.BasicAuthentication",
         # Primary api authentication
-        "{{ cookiecutter.main_module }}.users.auth.backends.UserTokenAuthentication",
+        "{{ cookiecutter.main_module }}.users.auth.backends.RestJWTAuthentication",
         # Mainly used for api debug.
         "rest_framework.authentication.SessionAuthentication",
     ),
