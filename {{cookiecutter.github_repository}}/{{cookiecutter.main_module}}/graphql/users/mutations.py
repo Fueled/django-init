@@ -6,7 +6,7 @@ from graphql import GraphQLError
 
 from .types import CurrentUser, AuthenticatedUser
 from {{cookiecutter.main_module}}.users import services as user_services
-from {{cookiecutter.main_module}}.users.auth import services as auth_services
+from {{cookiecutter.main_module}}.users.auth import tokens, services as auth_services
 
 
 class SignUp(relay.ClientIDMutation):
@@ -101,3 +101,23 @@ class RequestPasswordReset(relay.ClientIDMutation):
         return RequestPasswordReset(
             message="Further instructions will be sent to the email if it exists"
         )
+
+
+class PasswordResetConfirm(relay.ClientIDMutation):
+    class Input:
+        token = graphene.String(required=True)
+        new_password = graphene.String(required=True)
+
+    message = graphene.String()
+
+    @classmethod
+    def mutate_and_get_payload(cls, root, info, **data):
+        new_password = data["new_password"]
+        token = data["token"]
+
+        user = tokens.get_user_for_password_reset_token(token)
+        password_validation.validate_password(new_password, user)
+
+        user.set_password(new_password)
+        user.save(update_fields=["password"])
+        return PasswordResetConfirm(message="Password reset successfully.")

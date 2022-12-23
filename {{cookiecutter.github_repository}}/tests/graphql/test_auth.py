@@ -3,7 +3,7 @@ import json
 
 # Third Party Stuff
 import pytest
-
+from django.urls import reverse
 from tests import factories as f
 
 pytestmark = pytest.mark.django_db
@@ -189,4 +189,42 @@ def test_user_request_password_reset(client):
     assert (
         "Further instructions will be sent to the email if it exists"
         == response_data["data"]["passwordReset"]["message"]
+    )
+
+
+def test_user_password_reset_confirm(client, settings, mocker):
+    url = reverse("auth-password-reset")
+    user = f.create_user(email="test@example.com", password="pass123word")
+    mock_email = mocker.patch("idk.users.auth.services.send_mail")
+
+    response = client.json.post(url, json.dumps({"email": user.email}))
+    assert response.status_code == 200
+    assert mock_email.call_count == 1
+
+    args, kwargs = mock_email.call_args
+    assert user.email in kwargs.get("recipient_list")
+
+    # get the context passed to template
+    token = kwargs["context"]["token"]
+
+
+    graphql_query = """
+                    mutation PasswordResetConfirm {{
+                        passwordResetConfirm (
+                            input: {{
+                                newPassword: "newPassword124"
+                                token: "{token}"
+                            }}
+                        ) {{
+                            message
+                        }}
+                    }}
+                    """.format(token=token)
+
+    response = client.post_graphql(graphql_query)
+    response_data = json.loads(response.content)
+    assert "errors" not in response_data.keys()
+    assert (
+        "Password reset successfully."
+        == response_data["data"]["passwordResetConfirm"]["message"]
     )

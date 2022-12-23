@@ -4,7 +4,7 @@ from {{cookiecutter.main_module}}.graphql.decorators import login_required, supe
 
 from .types import UserConnection, CurrentUser
 from .resolvers import get_all_users
-from .mutations import SignUp, Login, PasswordChange, RequestPasswordReset
+from .mutations import SignUp, Login, PasswordChange, RequestPasswordReset, PasswordResetConfirm
 
 
 class UserQueries(graphene.ObjectType):
@@ -31,3 +31,4 @@ class UserMutations(graphene.ObjectType):
     login = Login.Field()
     password_change = PasswordChange.Field()
     password_reset = RequestPasswordReset.Field()
+    password_reset_confirm = PasswordResetConfirm.Field()
