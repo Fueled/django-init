@@ -41,7 +41,7 @@ Sending this query to the server would result in the following syntax error:
 
 ## Data-level errors
 
-This error occurs when the user passes invalid data as the mutation input. For example, you provide an email address already used in another user's account while creating a new user. It is therefore not unique, and as a result, you will get a validation error.
+This error occurs when the user passes invalid data as the mutation input. For example, using an email address that is associated with a user account to create a secondary account will throw a validation error since the email should be unique within a user account.
 
 Validation errors are part of the schema, meaning we need to include them in the query to get them explicitly. In all mutations, for example, you can obtain them through the `errors` field.
 

@@ -2,8 +2,8 @@
 
 ## Authentication
 
-For all auth related requests (login, register etc), clients need to refer to [docs mentioned here](1-auth.md).
-For clients to make authenticated requests, the auth_token value (received from login endpoint) should be included in the Authorization HTTP header. The value should be prefixed by the string literal `Bearer`, with whitespace separating the two strings.
+For all auth related requests (`login`, `register` etc), clients need to refer to [docs mentioned here](1-auth.md).
+For clients to make authenticated requests, the `auth_token` value (received from the `login` endpoint) should be included in the `Authorization` HTTP header. The value should be prefixed by the string literal `Bearer`, with whitespace separating the two strings.
 
 ## API Endpoint
 
@@ -42,7 +42,7 @@ There are two types of lists in GraphQL:
 
 Pagination is used to help you handle large amounts of items returned by the connection list type.
 
-Pagination model is based on the [GraphQL Connection Specification](https://relay.dev/graphql/connections.htm). Its schema looks like this:
+The pagination model is based on the [GraphQL Connection Specification](https://relay.dev/graphql/connections.htm). Its schema looks like this:
 
 ```
 type FooConnection {

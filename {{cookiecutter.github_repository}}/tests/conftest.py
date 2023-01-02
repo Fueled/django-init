@@ -95,7 +95,7 @@ def client():
             op_name=None,
             variables=None,
             input_data=None,
-            graphql_url=None,
+            graphql_url=GRAPHQL_API_PATH,
             **extra,
         ):
             """Dedicated helper for posting GraphQL queries.
@@ -116,8 +116,6 @@ def client():
             Sets the `application/json` content type and json dumps the variables
             if present.
             """
-            if not graphql_url:
-                graphql_url = GRAPHQL_API_PATH
 
             data = {"query": query}
 

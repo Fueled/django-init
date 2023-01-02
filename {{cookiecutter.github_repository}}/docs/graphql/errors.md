@@ -3,7 +3,7 @@
 ## Generic Errors
 
 
-For /graphql requests, the API will return the error in the following format:
+For `/graphql` requests, the API will return the error in the following format:
 
 ```json
 {
