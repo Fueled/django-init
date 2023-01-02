@@ -195,7 +195,7 @@ def test_user_request_password_reset(client):
 def test_user_password_reset_confirm(client, settings, mocker):
     url = reverse("auth-password-reset")
     user = f.create_user(email="test@example.com", password="pass123word")
-    mock_email = mocker.patch("idk.users.auth.services.send_mail")
+    mock_email = mocker.patch("{{cookiecutter.main_module}}.users.auth.services.send_mail")
 
     response = client.json.post(url, json.dumps({"email": user.email}))
     assert response.status_code == 200
