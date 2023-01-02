@@ -2,7 +2,7 @@
 
 ## Authentication
 
-For all auth related requests (login, register etc), clients need to use REST endpoints [mentioned here](../api/1-auth.md).
+For all auth related requests (login, register etc), clients need to refer to [docs mentioned here](1-auth.md).
 For clients to make authenticated requests, the auth_token value (received from login endpoint) should be included in the Authorization HTTP header. The value should be prefixed by the string literal `Bearer`, with whitespace separating the two strings.
 
 ## API Endpoint

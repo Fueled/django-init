@@ -207,7 +207,7 @@ def test_user_password_reset_confirm(client, settings, mocker):
     # get the context passed to template
     token = kwargs["context"]["token"]
 
-
+    {% raw %}
     graphql_query = """
                     mutation PasswordResetConfirm {{
                         passwordResetConfirm (
@@ -220,6 +220,7 @@ def test_user_password_reset_confirm(client, settings, mocker):
                         }}
                     }}
                     """.format(token=token)
+    {% endraw %}
 
     response = client.post_graphql(graphql_query)
     response_data = json.loads(response.content)
