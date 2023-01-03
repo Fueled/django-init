@@ -28,9 +28,9 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "django_filters",
     "rest_framework",  # http://www.django-rest-framework.org/
 {%- if cookiecutter.add_graphql == "y" %}
+    "django_filters",
     "graphene_django",
 {%- endif %}
     "mail_templated",  # https://github.com/artemrizhov/django-mail-templated
