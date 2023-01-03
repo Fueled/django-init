@@ -1,24 +1,4 @@
 ---
-- hosts: vagrant
-  vars_files:
-    - vars.yml
-  gather_facts: true
-  become: true
-  become_method: sudo
-
-  roles:
-    - common
-    - nginx
-    - postgresql
-    - project_data
-{%- if cookiecutter.add_celery.lower() == 'y' %}
-    - redis
-    - celery
-{%- else %}
-    # - redis
-    # - celery
-{%- endif %}
-
 #= Dev
 #===================================================
 - hosts: dev

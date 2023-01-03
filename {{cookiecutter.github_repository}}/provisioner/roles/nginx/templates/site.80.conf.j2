@@ -2,7 +2,7 @@
 server {
     listen       80;
     listen       [::]:80;
-    server_name  {% if vm %}_{% else %}{{ domain_name }}{% endif %};
+    server_name  {{ domain_name }};
 
     {% if use_letsencrypt %}
     location /.well-known/acme-challenge/ {
@@ -11,7 +11,7 @@ server {
     }
     {% endif %}
 
-    {% if vm and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false) %}
+    {% if nginx_cert.stat.exists == false or nginx_key.stat.exists == false %}
     location / {
         uwsgi_pass unix:///tmp/uwsgi-{{ project_namespace }}.sock;
         include /etc/nginx/uwsgi_params;

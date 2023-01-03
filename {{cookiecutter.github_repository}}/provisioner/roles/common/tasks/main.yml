@@ -1,21 +1,6 @@
 {% raw %}---
-
-# Uncomment following if ipv6 is not available or not tunelled through ipv4 properly
-# Disable ipv6 when running in VM(vagrant)
-#- name: Disable ipv6 for all interfaces
-#  sysctl: name="net.ipv6.conf.all.disable_ipv6" value=1 state=present
-#  when: vm == 1
-#
-#- name: Disable ipv6 for default interface
-#  sysctl: name="net.ipv6.conf.default.disable_ipv6" value=1 state=present
-#  when: vm == 1
-#
-#- name: Disable ipv6 for local interface
-#  sysctl: name="net.ipv6.conf.lo.disable_ipv6" value=1 state=present
-#  when: vm == 1
 - name: Set hostname
   action: shell hostnamectl set-hostname {{ domain_name }}
-  when: vm == 0
 
 - name: set system locale
   command: update-locale LC_ALL={{ lc_all }} LANG={{ lc_lang }} LC_CTYPE={{ lc_ctype }} LC_COLLATE={{ lc_collate }}

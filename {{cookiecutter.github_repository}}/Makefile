@@ -4,8 +4,10 @@ SHELL := bash
 
 PROJECT_NAME={{cookiecutter.main_module}}
 DB_NAME=$(PROJECT_NAME)
+{% if cookiecutter.add_ansible.lower() == 'y' -%}
 INVENTORY=provisioner/hosts
 PLAYBOOK=provisioner/site.yml
+{%- endif %}
 ENV_PREFIX=$(shell echo 'poetry run ')
 
 
@@ -36,32 +38,14 @@ run_all:  ## Run all the servers in parallel, requires GNU Make
 	make -j django docs{% if cookiecutter.add_celery == 'y' %} celery{% endif %} redis
 .PHONY: run_all
 
-virtualenv:     ## Create a virtual environment.
-	@echo "creating virtualenv using poetry..."
-	@pip install -U pip poetry
-	@poetry env use python3
-	@echo
-	@echo "!!! Please run 'poetry shell' to enable the environment !!!"
-
-
 regenerate:  ## Delete and create new database.
 	-dropdb $(DB_NAME)
 	createdb $(DB_NAME)
 	${ENV_PREFIX}python manage.py migrate
 .PHONY: regenerate
 
-generate_requirements:
-	poetry export -f requirements.txt -o requirements_dev.txt --dev
-	poetry export -f requirements.txt -o requirements.txt
-
-update_libs:  ## update libs + generate new lockfile & requirements
-	poetry update
-	make generate_requirements
-.PHONY: update-libs
-
-install: virtualenv  ## Install and setup project dependencies
-	python3 -m pip install --upgrade pip wheel
-	make generate_requirements
+install: ## Install dependencies, create db and migrate
+	python3 -m pip install --upgrade pip wheel poetry
 	poetry install
 	${ENV_PREFIX}pre-commit install
 ifneq ($(CI),True)
@@ -99,7 +83,7 @@ djurls:  ## Displays all the django urls
 shell:  ## Enter the django shell
 	${ENV_PREFIX}python manage.py shell_plus
 
-docs: virtualenv  ## Start documentation server locally
+docs: ## Start documentation server locally
 	${ENV_PREFIX}mkdocs serve
 
 {%- if cookiecutter.add_celery == 'y' %}
@@ -110,6 +94,7 @@ celery: install  ## Start celery worker
 redis:  ## Start redis server
 	redis-server
 
+{% if cookiecutter.add_ansible.lower() == 'y' %}
 # Ansible related things
 # ------------------------------------------------------
 # Usages:
@@ -138,3 +123,4 @@ deploy_qa: deploy
 
 deploy_prod: ENV=prod  ## Deploy to production server
 deploy_prod: deploy
+{%- endif %}

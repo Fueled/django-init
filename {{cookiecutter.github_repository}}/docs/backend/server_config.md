@@ -55,6 +55,7 @@ Run these commands to deploy this project on Heroku (substitue all references of
 ```
 heroku create --ssh-git <heroku-app-name>
 
+heroku buildpacks:add https://github.com/moneymeets/python-poetry-buildpack.git --app=<heroku-app-name>
 heroku buildpacks:set heroku/python --app=<heroku-app-name>
 
 heroku addons:create heroku-postgresql{% if cookiecutter.add_postgis == 'y' %}:standard-0{% endif %} --app=<heroku-app-name>

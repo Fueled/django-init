@@ -3,15 +3,13 @@
   git: repo={{ project_repo_url }} dest={{ project_path }} version={{ repo_version }} accept_hostkey=true
   become: false
   register: gitresult
-  when: vm == 0
   tags: ['always']
 
 - debug: msg="Git SHA-1 before={{ gitresult.before }} after={{ gitresult.after }}"
-  when: vm == 0
   tags: ['always']
 
-- name: Ensure python virtualenv folder exist
-  command: python3 -m venv {{ venv_path }} creates={{ venv_path }}
+- name: Ensure poetry is installed
+  command: python3 -m pip install poetry
   become: false
   tags: ['always']
 
@@ -23,8 +21,10 @@
     cache_valid_time: 300
   when: pg_gis
 
-- name: Install python dependencies
-  pip: requirements={{ project_path }}/{{ django_requirements_file }}  executable={{ venv_path }}/bin/pip
+- name: Install python dependencies with Poetry
+  command: "poetry install"
+  args:
+    chdir: "{{ project_path }}"
   become: false
   tags: ['deploy']
 
@@ -38,20 +38,26 @@
     pkg: gettext
     state: present
 
-- name: Run collect static
-  django_manage: command=collectstatic app_path={{ project_path }} virtualenv={{ venv_path }}
+- name: Run Django collectstatic
+  command: "poetry run python manage.py collectstatic --no-input"
+  args:
+    chdir: "{{ project_path }}"
   become: false
   tags: ['deploy']
 
-- name: Run database migrations
-  django_manage: command=migrate app_path={{ project_path }} virtualenv={{ venv_path }}
+- name: Run Django database migrations
+  command: "poetry run python manage.py migrate"
+  args:
+    chdir: "{{ project_path }}"
   become: false
   tags: ['deploy']
 
 - import_tasks: uwsgi-setup.yml
 
 - name: Run compilemessages for static translations
-  django_manage: command=compilemessages app_path={{ project_path }} virtualenv={{ venv_path }}
+  command: "poetry run python manage.py compilemessages"
+  args:
+    chdir: "{{ project_path }}"
   become: false
   tags: ['deploy']
 
@@ -67,16 +73,15 @@
 {% raw %}- name: apt_get install graphviz for db schema generation
   apt: pkg=graphviz state=present
 
-- name: Generate DB Schema.
-  shell: "source {{ venv_path }}/bin/activate && python bin/generate_db_schema.py"
+- name: Generate DB Schema for documentation
+  command: "poetry run python bin/generate_db_schema.py"
   args:
     chdir: "{{ project_path }}"
-    executable: /bin/bash
   become: false
   tags: ['deploy', 'documentation']
 
 - name: Build documentation for "/docs" url.
-  command: "{{ venv_path }}/bin/mkdocs build"
+  command: "poetry run mkdocs build"
   args:
     chdir: "{{ project_path }}"
   become: false
