@@ -36,7 +36,7 @@
 - Postgis Setup
 - Newrelic
 - Sentry
-- [Graphql](https://graphql.org/) support via [Graphene-Django](https://docs.graphene-python.org/projects/django/en/latest/) and [django-graphql-jwt](https://django-graphql-jwt.domake.io/)
+- [GraphQL](https://graphql.org/) support via [Graphene-Django](https://docs.graphene-python.org/projects/django/en/latest/) (Optional)
 - pre-commit hooks
 
 
