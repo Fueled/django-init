@@ -51,7 +51,7 @@ regenerate:  ## Delete and create new database.
 .PHONY: regenerate
 
 generate_requirements:
-	poetry export -f requirements.txt -o requirements_dev.txt --dev
+	poetry export -f requirements.txt -o requirements_dev.txt --with dev
 	poetry export -f requirements.txt -o requirements.txt
 
 update_libs:  ## update libs + generate new lockfile & requirements
