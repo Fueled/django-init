@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from {{cookiecutter.main_module}}.users.auth import tokens, backends
+from {{cookiecutter.main_module}}.users.auth import backends
 
 UserModel = get_user_model()
 

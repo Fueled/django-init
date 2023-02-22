@@ -1,12 +1,10 @@
 from django.contrib.auth import authenticate
-from django.contrib.auth.middleware import get_user
-from django.contrib.auth.models import AnonymousUser
 from {{cookiecutter.main_module}}.users.auth.utils import get_http_authorization
 
 
 def _authenticate(request):
     is_anonymous = not hasattr(request, "user") or request.user.is_anonymous
-    return is_anonymous  and get_http_authorization(request) is not None
+    return is_anonymous and get_http_authorization(request) is not None
 
 
 class JSONWebTokenMiddleware:

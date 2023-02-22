@@ -1,7 +1,18 @@
 import graphene
 from graphene import relay
+from graphql_relay import from_global_id
 from graphql.error import GraphQLError
 from django.core.exceptions import ValidationError
+
+
+def filter_objects(object_name, relay_ids, otherwise=None):
+    if not isinstance(relay_ids, list):
+        relay_ids = [relay_ids]
+    try:
+        object_ids = [from_global_id(relay_id)[1] for relay_id in relay_ids]
+        return object_name.filter.with_ids(object_ids)
+    except:  # noqa
+        return otherwise
 
 
 class CountableConnectionBase(relay.Connection):

@@ -15,7 +15,6 @@ from django.views.generic import TemplateView
 
 {%- if cookiecutter.add_graphql == "y" %}
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView
 from graphene_django.views import GraphQLView
 {%- endif %}
 

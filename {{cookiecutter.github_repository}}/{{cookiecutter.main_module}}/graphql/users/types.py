@@ -11,6 +11,7 @@ class CurrentUser(DjangoObjectType):
     class Meta:
         model = User
         fields = ["id", "first_name", "last_name", "email"]
+        interfaces = [relay.Node]
 
 
 class AuthenticatedUser(DjangoObjectType):
@@ -18,7 +19,8 @@ class AuthenticatedUser(DjangoObjectType):
     class Meta:
         model = User
         fields = ["id", "first_name", "last_name", "email"]
-    
+        interfaces = [relay.Node]
+
     def resolve_auth_token(self, info):
         return tokens.get_token_for_user(self, "authentication")
 
@@ -30,4 +32,3 @@ class UserConnection(DjangoObjectType):
         filter_fields = {"id": ["exact"]}
         interfaces = (relay.Node,)
         connection_class = CountableConnectionBase
-

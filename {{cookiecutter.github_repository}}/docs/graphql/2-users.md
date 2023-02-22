@@ -19,7 +19,7 @@ __Response__
 {
   "data": {
     "me": {
-      "id": "629b1e03-53f0-43ef-9a03-17164cf782ac",
+      "id": "Q3VycmVudFVzZXI6M2MzYjVhMmUtMWM0MC00MTQzLTk1N2ItYjVlYTAzOWU0NzVi",
       "first_name": "John",
       "last_name": "Hawley",
       "email": "john@localhost.com"
@@ -36,10 +36,15 @@ __Request__
 ```
 query {
     users {
-        id
-        firstName
-        lastName
-        email
+        totalCount,
+        edgeCount, 
+        edges {
+            node {
+                id,
+                firstName,
+                lastName
+            }
+        }
     }
 }
 ```
@@ -48,21 +53,27 @@ __Response__
 
 ```json
 {
-  "data": {
-    "users": [
-      {
-        "id": "c3fd5929-65c0-4971-8323-083435cf8bba",
-        "firstName": "first name",
-        "lastName": "last name",
-        "email": "suneet@xyz.com"
-      },
-      {
-        "id": "765217a8-7599-4e25-9c24-b7c92e878201",
-        "firstName": "fueled",
-        "lastName": "user",
-        "email": "user@fueled.com"
-      }
-    ]
-  }
+    "data": {
+        "users": {
+            "totalCount": 2,
+            "edgeCount": 2,
+            "edges": [
+                {
+                    "node": {
+                        "id": "VXNlckNvbm5lY3Rpb246M2MzYjVhMmUtMWM0MC00MTQzLTk1N2ItYjVlYTAzOWU0NzVi",
+                        "firstName": "first name",
+                        "lastName": "last name"
+                    }
+                },
+                {
+                    "node": {
+                        "id": "VXNlckNvbm5lY3Rpb246ZjU4N2IyY2EtNThmMS00NTE3LTgyMTEtYzczODA3YTI1ZTU1",
+                        "firstName": "fueled",
+                        "lastName": "user"
+                    }
+                }
+            ]
+        }
+    }
 }
 ```

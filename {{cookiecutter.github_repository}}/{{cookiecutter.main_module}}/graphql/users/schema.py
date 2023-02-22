@@ -1,6 +1,9 @@
 import graphene
+from graphene import relay
 from graphene_django.filter import DjangoFilterConnectionField
 from {{cookiecutter.main_module}}.graphql.decorators import login_required, superuser_required
+from {{cookiecutter.main_module}}.graphql.utils import filter_objects
+from {{cookiecutter.main_module}}.users.models import User
 
 from .types import UserConnection, CurrentUser
 from .resolvers import get_all_users
@@ -14,6 +17,7 @@ class UserQueries(graphene.ObjectType):
     users = DjangoFilterConnectionField(
         UserConnection, description="Return list of all Users"
     )
+    user_details = relay.Node.Field(UserConnection)
 
     @login_required
     def resolve_me(self, info):
@@ -24,6 +28,12 @@ class UserQueries(graphene.ObjectType):
         qs = get_all_users(info)
         # add filters
         return qs
+
+    @superuser_required
+    def resolve_user_details(self, info, **kwargs):
+        return filter_objects(
+            User, kwargs['id']
+        ).first()
 
 
 class UserMutations(graphene.ObjectType):
