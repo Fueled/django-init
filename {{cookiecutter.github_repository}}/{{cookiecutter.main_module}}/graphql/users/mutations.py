@@ -49,8 +49,6 @@ class Login(relay.ClientIDMutation):
         user = user_services.get_and_authenticate_user(**data)
         return Login(user=user)
 
-
-
 class PasswordChange(relay.ClientIDMutation):
     class Input:
         current_password = graphene.String(required=True)
