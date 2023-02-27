@@ -82,7 +82,7 @@ For compatibility, `requirements.txt` and `requirements_dev.txt` can be updated 
 
 ```bash
 poetry export -f requirements.txt -o requirements.txt
-poetry export -f requirements.txt -o requirements_dev.txt --dev
+poetry export -f requirements.txt -o requirements_dev.txt --with dev
 ```
 
 or
