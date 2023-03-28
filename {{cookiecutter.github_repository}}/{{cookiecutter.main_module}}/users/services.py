@@ -22,3 +22,7 @@ def create_user_account(email, password, first_name="", last_name=""):
 
 def get_user_by_email(email: str):
     return get_user_model().objects.filter(email__iexact=email).first()
+
+
+def get_active_user_by_id(user_id):
+    return get_user_model().objects.filter(id=user_id, is_active=True).first()

@@ -45,6 +45,12 @@ if echo "{{ cookiecutter.add_docker }}" | grep -iq "^n"; then
     rm -rf .envs compose local.yml dev.yml docs/backend/docker_setup.md
 fi
 
+if echo "{{ cookiecutter.add_graphql }}" | grep -iq "^n"; then
+    rm -rf {{ cookiecutter.main_module }}/graphql
+    rm -rm {{ cookiecutter.main_module }}/docs/graphql
+    rm -rf tests/graphql
+fi
+
 if echo "$yn" | grep -iq "^y"; then
     echo "==> Checking system dependencies. You may need to enter your sudo password."
 

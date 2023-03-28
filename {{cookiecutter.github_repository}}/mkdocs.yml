@@ -6,7 +6,15 @@ repo_url: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.
 
 nav:
 - Introduction: index.md
-- API:
+{%- if cookiecutter.add_graphql == "y" %}
+- Graphql API:
+  - Overview: graphql/0-overview.md
+  - Authentication: graphql/1-auth.md
+  - Current User: graphql/2-users.md
+  - Errors: graphql/errors.md
+  - Error Handling: graphql/errors_handling.md
+{%- endif %}
+- REST API:
   - Overview: api/0-overview.md
   - Authentication: api/1-auth.md
   - Current User: api/2-current-user.md
