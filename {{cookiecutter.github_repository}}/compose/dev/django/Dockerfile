@@ -3,7 +3,7 @@ ARG PYTHON_VERSION=3.9-slim-buster
 # define an alias for the specfic python version used in this file.
 FROM python:${PYTHON_VERSION} as python
 
-ENV POETRY_VERSION=1.2.0
+ENV POETRY_VERSION=1.3.2
 
 ARG BUILD_ENVIRONMENT=dev
 ARG APP_HOME=/app
