@@ -6,7 +6,7 @@ authors = ["{{cookiecutter.default_from_email}}"]
 
 [tool.poetry.dependencies]
 python = "~3.9"
-Django = "4.1"
+Django = "~4.1"
 django-environ = "^0.9"
 django-sites = "^0.11"
 django-filter = "^21.1"
