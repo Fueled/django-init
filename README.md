@@ -12,7 +12,7 @@
 
 ## Features
 
-- Django 3.2.x
+- Django 4.1.x
 - Python 3.9.x
 - [Poetry][poetry] Support
 - Support for [black](https://pypi.org/project/black/)!
