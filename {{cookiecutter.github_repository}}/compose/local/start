@@ -6,5 +6,9 @@ set -o nounset
 
 
 python manage.py migrate
-#! uvicorn config.asgi:application --host 0.0.0.0 --reload
+
+{%- if cookiecutter.add_asgi.lower() == "y" %}
+uvicorn config.asgi:application --host 0.0.0.0 --reload
+{%- else %}
 python manage.py runserver_plus 0.0.0.0:8000
+{%- endif %}
