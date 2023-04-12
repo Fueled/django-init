@@ -15,7 +15,7 @@ server {
     location / {
         {%- if cookiecutter.add_asgi.lower() == 'y' %}
         proxy_pass unix://{{ asgi_socket }};
-        {$- else %}
+        {%- else %}
         uwsgi_pass unix:///tmp/uwsgi-{{ project_namespace }}.sock;
         {%- endif %}
         include /etc/nginx/uwsgi_params;

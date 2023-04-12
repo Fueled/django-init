@@ -7,6 +7,6 @@ pg_gis: {{ 'True' if cookiecutter.add_postgis.lower() == 'y' else 'False' }}
 ansible_python_interpreter: /usr/bin/python3
 django_settings: settings.production
 django_requirements_file: requirements.txt
-python_version: 3.11
+python_version: 3.9
 postgresql_version: 13
 postgis_version: 3
