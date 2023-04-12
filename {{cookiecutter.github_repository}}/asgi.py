@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 # We defer to a DJANGO_SETTINGS_MODULE already in the environment.
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings.development'
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.production")
 
 application = get_asgi_application()

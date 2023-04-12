@@ -5,6 +5,15 @@ pg_user: dev
 pg_password: password
 django_requirements_file: requirements.txt
 
+# asgi related variables
+asgi_user: www-data
+asgi_group: www-data
+asgi_workers: 2
+asgi_socket: /tmp/django-{{ domain_name }}-asgi.sock
+asgi_user: www-data
+asgi_group: www-data
+asgi_workers: 2
+
 # uwsgi related variables
 uwsgi_user: www-data
 uwsgi_group: www-data

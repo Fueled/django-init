@@ -13,7 +13,11 @@ server {
 
     {% if vm and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false) %}
     location / {
+        {%- if cookiecutter.add_asgi.lower() == 'y' %}
+        proxy_pass unix://{{ asgi_socket }};
+        {$- else %}
         uwsgi_pass unix:///tmp/uwsgi-{{ project_namespace }}.sock;
+        {%- endif %}
         include /etc/nginx/uwsgi_params;
 
         # set correct scheme

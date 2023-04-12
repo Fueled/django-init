@@ -1,0 +1,29 @@
+{% raw %}---
+- name: apt_get install uwsgi packages
+  apt: pkg={{ item }} state=present
+  with_items:
+    - uuid-dev
+    - libcap-dev
+    - libpcre3-dev
+  tags: ["configure"]
+
+- name: make sure project directory is owned by asgi group
+  file: path={{ project_path }} state=directory owner={{user}} group={{asgi_group}} recurse=yes
+  tags: ["configure"]
+
+- name: copy django-asgi logrotate
+  template: src=django.logrotate.j2
+    dest=/etc/logrotate.d/asgi-{{ deploy_environment}}-{{project_name}}-django
+    mode=644
+  tags: ["configure"]
+
+- name: make sure log directory exists
+  file: path={{ project_log_dir }} state=directory owner={{asgi_user}} group={{asgi_group}} mode=751 recurse=yes
+  tags: ["configure"]
+
+- name: copy Django asgi service to systemd
+  template: src=django.asgi.ini.j2
+    dest=/etc/systemd/system/asgi-{{ project_namespace }}.service
+    mode=644
+  tags: ["deploy"]
+{% endraw %}

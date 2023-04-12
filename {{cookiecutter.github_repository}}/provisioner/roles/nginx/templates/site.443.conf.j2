@@ -51,11 +51,23 @@ server {
 
     # Setup named location for Django requests and handle proxy details
     location / {
+        {%- if cookiecutter.add_asgi.lower() == 'y' %}
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_redirect off;
+        proxy_buffering off;
+        proxy_pass http://uvicorn;
+
+        {%- else %}
         uwsgi_pass unix:///tmp/uwsgi-{{ project_namespace }}.sock;
         include /etc/nginx/uwsgi_params;
 
         # set correct scheme
         uwsgi_param UWSGI_SCHEME $http_x_forwarded_proto;
+        {%- endif %}
     }
 {% endraw %}
     {%- if cookiecutter.enable_whitenoise.lower() == 'n' %}
@@ -68,3 +80,14 @@ server {
     }{% endraw %}
     {%- endif %}
 }
+
+{%- if cookiecutter.add_asgi.lower() == 'y' %}
+upstream uvicorn {
+    server unix://{{ asgi_socket }};
+}
+
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    '' close;
+}
+{%- endif %}
