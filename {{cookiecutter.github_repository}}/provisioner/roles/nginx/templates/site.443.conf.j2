@@ -83,7 +83,7 @@ server {
 
 {%- if cookiecutter.add_asgi.lower() == 'y' %}
 upstream uvicorn {
-    server unix://{{ asgi_socket }};
+    {% raw %}server unix://{{ asgi_socket }};{% endraw %}
 }
 
 map $http_upgrade $connection_upgrade {

@@ -1,4 +1,4 @@
-[Unit]
+{% raw %}[Unit]
 Description={{ project_namespace }} gunicorn daemon
 After=network.target
 
@@ -15,3 +15,4 @@ ExecStart={{ venv_path }}/bin/gunicorn -w {{ asgi_workers }} --bind unix://{{ as
 
 [Install]
 WantedBy=multi-user.target
+{% endraw %}

@@ -12,12 +12,13 @@ server {
     {% endif %}
 
     {% if vm and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false) %}
-    location / {
+    location / {{% endraw %}
         {%- if cookiecutter.add_asgi.lower() == 'y' %}
-        proxy_pass unix://{{ asgi_socket }};
+        {%raw%}proxy_pass unix://{{ asgi_socket }};{% endraw %}
         {%- else %}
-        uwsgi_pass unix:///tmp/uwsgi-{{ project_namespace }}.sock;
+        {%raw%}uwsgi_pass unix:///tmp/uwsgi-{{ project_namespace }}.sock;{% endraw %}
         {%- endif %}
+        {% raw %}
         include /etc/nginx/uwsgi_params;
 
         # set correct scheme
