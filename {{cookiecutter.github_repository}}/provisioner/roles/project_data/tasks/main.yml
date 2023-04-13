@@ -58,7 +58,9 @@
 - import_tasks: asgi-setup.yml
 
 - name: Reload asgi processes
+{% raw %}
   systemd: state=restarted name=asgi-{{ project_namespace }}
+{% endraw %}
 {%- else %}
 - import_tasks: uwsgi-setup.yml
 

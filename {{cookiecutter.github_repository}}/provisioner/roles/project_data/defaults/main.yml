@@ -4,7 +4,9 @@ pg_db: "{{ project_namespace }}"
 pg_user: dev
 pg_password: password
 django_requirements_file: requirements.txt
+{% endraw %}
 
+{%- if cookiecutter.add_asgi.lower() == 'y' %}
 # asgi related variables
 asgi_user: www-data
 asgi_group: www-data
@@ -13,7 +15,7 @@ asgi_socket: /tmp/django-{{ domain_name }}-asgi.sock
 asgi_user: www-data
 asgi_group: www-data
 asgi_workers: 2
-
+{% else %}
 # uwsgi related variables
 uwsgi_user: www-data
 uwsgi_group: www-data
@@ -33,4 +35,4 @@ uwsgi_pid_file: "/tmp/uwsgi-{{ project_namespace }}.pid"
 
 uwsgi_log_dir: /var/log/uwsgi
 uwsgi_log_file: "{{ uwsgi_log_dir }}/{{ project_namespace }}.log"
-{% endraw %}
+{% endif %}

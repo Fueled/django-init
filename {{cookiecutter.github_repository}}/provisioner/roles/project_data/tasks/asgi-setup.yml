@@ -1,5 +1,5 @@
 {% raw %}---
-- name: apt_get install uwsgi packages
+- name: apt_get install asgi packages
   apt: pkg={{ item }} state=present
   with_items:
     - uuid-dev
@@ -23,7 +23,7 @@
 
 - name: copy Django asgi service to systemd
   template: src=django.asgi.ini.j2
-    dest=/etc/systemd/system/asgi-{{ project_namespace }}.service
+    dest=/etc/systemd/system/asgi-{{project_namespace}}.service
     mode=644
   tags: ["deploy"]
 {% endraw %}
