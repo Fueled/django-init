@@ -10,6 +10,7 @@
     , "add_newrelic" : "y"
     , "add_postgis": "n"
     , "add_heroku": "n"
+    , "add_fly": "n"
     , "enable_whitenoise": "n"
     , "add_ansible": "y"
     , "letsencrypt": "y"

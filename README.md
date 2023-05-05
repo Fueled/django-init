@@ -29,6 +29,7 @@
 
 ### Optional
 - Heroku Setup
+- Fly Setup
 - Ubuntu 20 LTS via [Ansible]
 - Celery with flower integration.
 - AWS S3 media storage
