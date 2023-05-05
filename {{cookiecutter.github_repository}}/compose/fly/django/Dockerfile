@@ -41,15 +41,15 @@ COPY poetry.lock pyproject.toml ${APP_HOME}/
 # Project initialization:
 RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
 
-COPY --chown=django:django ./compose/fly/django/celery/worker/start /start-celeryworker
+COPY --chown=django:django ./compose/dev/django/celery/worker/start /start-celeryworker
 RUN chmod +x /start-celeryworker
 
 
-COPY --chown=django:django ./compose/fly/django/celery/beat/start /start-celerybeat
+COPY --chown=django:django ./compose/dev/django/celery/beat/start /start-celerybeat
 RUN chmod +x /start-celerybeat
 
 
-COPY ./compose/fly/django/celery/flower/start /start-flower
+COPY ./compose/dev/django/celery/flower/start /start-flower
 RUN chmod +x /start-flower
 
 COPY --chown=django:django . ${APP_HOME}
