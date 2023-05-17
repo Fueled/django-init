@@ -4,9 +4,10 @@ from django.contrib.auth import password_validation
 from graphene import relay
 from graphql import GraphQLError
 
-from .types import CurrentUser, AuthenticatedUser
 from {{cookiecutter.main_module}}.users import services as user_services
-from {{cookiecutter.main_module}}.users.auth import tokens, services as auth_services
+from {{cookiecutter.main_module}}.users.auth import tokens
+from {{cookiecutter.main_module}}.users.auth import services as auth_services
+from .types import AuthenticatedUser, CurrentUser
 
 
 class SignUp(relay.ClientIDMutation):
@@ -48,6 +49,7 @@ class Login(relay.ClientIDMutation):
         cls.validate_email(data["email"])
         user = user_services.get_and_authenticate_user(**data)
         return Login(user=user)
+
 
 class PasswordChange(relay.ClientIDMutation):
     class Input:

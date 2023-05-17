@@ -3,8 +3,8 @@ from graphene import relay
 from graphene_django.types import DjangoObjectType
 
 from {{cookiecutter.main_module}}.graphql.utils import CountableConnectionBase
-from {{cookiecutter.main_module}}.users.models import User
 from {{cookiecutter.main_module}}.users.auth import tokens
+from {{cookiecutter.main_module}}.users.models import User
 
 
 class CurrentUser(DjangoObjectType):
@@ -16,6 +16,7 @@ class CurrentUser(DjangoObjectType):
 
 class AuthenticatedUser(DjangoObjectType):
     auth_token = graphene.String()
+
     class Meta:
         model = User
         fields = ["id", "first_name", "last_name", "email"]

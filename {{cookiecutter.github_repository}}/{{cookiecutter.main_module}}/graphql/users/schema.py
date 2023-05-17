@@ -5,9 +5,15 @@ from {{cookiecutter.main_module}}.graphql.decorators import login_required, supe
 from {{cookiecutter.main_module}}.graphql.utils import filter_objects
 from {{cookiecutter.main_module}}.users.models import User
 
-from .types import UserConnection, CurrentUser
+from .mutations import (
+    Login,
+    PasswordChange,
+    PasswordResetConfirm,
+    RequestPasswordReset,
+    SignUp,
+)
 from .resolvers import get_all_users
-from .mutations import SignUp, Login, PasswordChange, RequestPasswordReset, PasswordResetConfirm
+from .types import CurrentUser, UserConnection
 
 
 class UserQueries(graphene.ObjectType):
