@@ -20,6 +20,7 @@
     , "add_django_auth_wall": "y"
     , "add_celery": "n"
     , "add_graphql": "n"
+    , "add_asgi": "n"
     , "add_pre_commit": "y"
     , "add_docker": "y"
     , "pagination": ["LimitOffsetPagination", "CursorPagination"]

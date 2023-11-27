@@ -2,7 +2,7 @@
 import graphene
 from graphene_django.debug import DjangoDebug
 
-from .users.schema import UserQueries, UserMutations
+from .users.schema import UserMutations, UserQueries
 
 
 class Query(UserQueries):

@@ -56,6 +56,12 @@ if echo "{{ cookiecutter.add_graphql }}" | grep -iq "^n"; then
     rm -rf tests/graphql
 fi
 
+if echo "{{ cookiecutter.add_asgi }}" | grep -iq "^n"; then
+    rm -rf asgi.py
+else
+    rm -rf wsgi.py
+fi
+
 if echo "$yn" | grep -iq "^y"; then
     echo "==> Checking system dependencies. You may need to enter your sudo password."
 
