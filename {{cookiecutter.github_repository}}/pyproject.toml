@@ -6,7 +6,7 @@ authors = ["{{cookiecutter.default_from_email}}"]
 
 [tool.poetry.dependencies]
 python = "~3.9"
-Django = "~3.2.15"
+Django = "~4.1"
 django-environ = "^0.9"
 django-sites = "^0.11"
 django-filter = "^21.1"
@@ -14,7 +14,7 @@ argon2-cffi = "^21.3"
 python-dotenv = "^0.21"
 django-cors-headers = "^3.13"
 {% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
-whitenoise = "^6.2"
+whitenoise = "^6.4.0"
 {%- endif %}
 
 # Extensions
@@ -32,7 +32,7 @@ django-versatileimagefield = "^2.2"
 
 # REST APIs
 # -------------------------------------
-djangorestframework = "3.13.1"
+djangorestframework = "3.14"
 drf-yasg = "^1.21"
 
 
@@ -78,6 +78,9 @@ django-mail-templated = "^2.6"
 # Static Files and Media Storage
 # -------------------------------------
 gunicorn = "~20.1.0"
+{%- if cookiecutter.add_asgi.lower() == "y" %}
+uvicorn = "^0.21.0"
+{%- endif %}
 django-storages = "^1.13"
 boto3 = "~1.26.47"
 

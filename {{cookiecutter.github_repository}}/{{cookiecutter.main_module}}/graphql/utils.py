@@ -1,8 +1,8 @@
 import graphene
-from graphene import relay
-from graphql_relay import from_global_id
-from graphql.error import GraphQLError
 from django.core.exceptions import ValidationError
+from graphene import relay
+from graphql.error import GraphQLError
+from graphql_relay import from_global_id
 
 
 def filter_objects(object_name, relay_ids, otherwise=None):
@@ -10,7 +10,7 @@ def filter_objects(object_name, relay_ids, otherwise=None):
         relay_ids = [relay_ids]
     try:
         object_ids = [from_global_id(relay_id)[1] for relay_id in relay_ids]
-        return object_name.filter.with_ids(object_ids)
+        return object_name.objects.filter(id__in=object_ids)
     except:  # noqa
         return otherwise
 

@@ -48,18 +48,30 @@
   become: false
   tags: ['deploy']
 
-- import_tasks: uwsgi-setup.yml
-
 - name: Run compilemessages for static translations
   django_manage: command=compilemessages app_path={{ project_path }} virtualenv={{ venv_path }}
   become: false
   tags: ['deploy']
 
+{% endraw %}
+{%- if cookiecutter.add_asgi.lower() == 'y' %}
+- import_tasks: asgi-setup.yml
+
+- name: Reload asgi processes
+{% raw %}
+  systemd: state=restarted name=asgi-{{ project_namespace }}
+{% endraw %}
+{%- else %}
+- import_tasks: uwsgi-setup.yml
+
+{% raw %}
 - name: Reload uwsgi processes
   command: uwsgi --reload {{ uwsgi_pid_file }}
   become: true
   when: not uwsgiconf.changed
-  tags: ['deploy']{% endraw %}
+{% endraw %}
+{%- endif %}
+  tags: ['deploy']
   {%- if cookiecutter.add_celery.lower() == 'y' %}
   notify: reload celery  # reload celery everytime uwsgi conf changes
   {%- endif %}

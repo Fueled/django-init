@@ -4,7 +4,7 @@ from {{cookiecutter.main_module}}.base import exceptions
 try:
     from graphql.execution.execute import GraphQLResolveInfo
 except ImportError:
-    from graphql.execution.base import ResolveInfo as GraphQLResolveInfo
+    from graphql.execution.base import ResolveInfo as GraphQLResolveInfo  # type: ignore
 
 
 def context(f):

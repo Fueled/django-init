@@ -2,3 +2,4 @@ default_context:
     enable_whitenoise: "y"
     add_celery: "y"
     add_graphql: "y"
+    add_asgi: "y"

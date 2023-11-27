@@ -4,9 +4,10 @@ from django.contrib.auth import password_validation
 from graphene import relay
 from graphql import GraphQLError
 
-from .types import CurrentUser, AuthenticatedUser
 from {{cookiecutter.main_module}}.users import services as user_services
-from {{cookiecutter.main_module}}.users.auth import tokens, services as auth_services
+from {{cookiecutter.main_module}}.users.auth import tokens
+from {{cookiecutter.main_module}}.users.auth import services as auth_services
+from .types import AuthenticatedUser, CurrentUser
 
 
 class SignUp(relay.ClientIDMutation):
@@ -44,10 +45,11 @@ class Login(relay.ClientIDMutation):
     user = graphene.Field(AuthenticatedUser)
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, **data):
-        cls.validate_email(data["email"])
-        user = user_services.get_and_authenticate_user(**data)
+    def mutate_and_get_payload(cls, root, info, email, password):
+        cls.validate_email(email)
+        user = user_services.get_and_authenticate_user(email, password)
         return Login(user=user)
+
 
 class PasswordChange(relay.ClientIDMutation):
     class Input:
@@ -57,10 +59,8 @@ class PasswordChange(relay.ClientIDMutation):
     user = graphene.Field(AuthenticatedUser)
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, **data):
+    def mutate_and_get_payload(cls, root, info, current_password, new_password):
         user = info.context.user
-        current_password = data["current_password"]
-        new_password = data["new_password"]
 
         if not user.check_password(current_password):
             raise GraphQLError("invalid_password")
@@ -91,8 +91,7 @@ class RequestPasswordReset(relay.ClientIDMutation):
         return user
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, **data):
-        email = data["email"]
+    def mutate_and_get_payload(cls, root, info, email):
         user = cls.clean_user(email)
 
         auth_services.send_password_reset_mail(user)
@@ -109,9 +108,7 @@ class PasswordResetConfirm(relay.ClientIDMutation):
     message = graphene.String()
 
     @classmethod
-    def mutate_and_get_payload(cls, root, info, **data):
-        new_password = data["new_password"]
-        token = data["token"]
+    def mutate_and_get_payload(cls, root, info, token, new_password):
 
         user = tokens.get_user_for_password_reset_token(token)
         password_validation.validate_password(new_password, user)
