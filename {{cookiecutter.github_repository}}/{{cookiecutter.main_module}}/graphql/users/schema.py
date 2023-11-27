@@ -1,10 +1,10 @@
 import graphene
 from graphene import relay
 from graphene_django.filter import DjangoFilterConnectionField
+
 from {{cookiecutter.main_module}}.graphql.decorators import login_required, superuser_required
 from {{cookiecutter.main_module}}.graphql.utils import filter_objects
 from {{cookiecutter.main_module}}.users.models import User
-
 from .mutations import (
     Login,
     PasswordChange,
@@ -23,7 +23,7 @@ class UserQueries(graphene.ObjectType):
     users = DjangoFilterConnectionField(
         UserConnection, description="Return list of all Users"
     )
-    user_details = relay.Node.Field(UserConnection)
+    user_details = graphene.Field(UserConnection, user_id=graphene.ID())
 
     @login_required
     def resolve_me(self, info):
@@ -36,9 +36,9 @@ class UserQueries(graphene.ObjectType):
         return qs
 
     @superuser_required
-    def resolve_user_details(self, info, **kwargs):
+    def resolve_user_details(self, info, user_id):
         return filter_objects(
-            User, kwargs['id']
+            User, user_id
         ).first()
 
 
