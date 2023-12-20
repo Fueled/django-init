@@ -29,6 +29,11 @@ if echo "{{ cookiecutter.add_heroku }}" | grep -iq "^n"; then
     rm -rf uwsgi.ini Procfile runtime.txt bin/post_compile
 fi
 
+if echo "{{ cookiecutter.add_fly }}" | grep -iq "^n"; then
+    rm .github/workflows/fly.yml
+    rm -rf compose/fly
+fi
+
 if echo "{{ cookiecutter.add_ansible }}" | grep -iq "^n"; then
     rm -rf provisioner Vagrantfile ansible.cfg
 fi
