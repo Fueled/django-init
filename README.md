@@ -14,7 +14,7 @@
 
 - Django 4.1.x
 - Python 3.9.x
-- [Poetry][poetry] Support
+- Dependency management via [Poetry][poetry]
 - Support for [black](https://pypi.org/project/black/)!
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - Supports PostreSQL 13.0 (support of postgis-3.0 is available).

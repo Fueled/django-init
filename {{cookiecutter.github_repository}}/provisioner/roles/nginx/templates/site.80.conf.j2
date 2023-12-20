@@ -2,7 +2,7 @@
 server {
     listen       80;
     listen       [::]:80;
-    server_name  {{ domain_name }};
+    server_name  {% if vm %}_{% else %}{{ domain_name }}{% endif %};
 
     {% if use_letsencrypt %}
     location /.well-known/acme-challenge/ {

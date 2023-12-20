@@ -9,7 +9,7 @@
 
 - name: make sure ssl directory exists
   file: path={{ ssl_cert_dir }} state=directory
-  when: use_letsencrypt
+  when: vm == 0 and use_letsencrypt
 
 - name: check {{ letsencrypt_ssl_cert_dir }} exists
   stat: path={{ letsencrypt_ssl_cert_dir }}
@@ -18,7 +18,7 @@
 - import_tasks: htpasswd.yml
 
 - import_tasks: letsencrypt.yml
-  when: use_letsencrypt and letsencrypt_dir.stat.exists == false
+  when: vm == 0 and use_letsencrypt and letsencrypt_dir.stat.exists == false
 
 - name: check ssl/nginx.crt exists
   stat: path={{ ssl_certificate }}
@@ -29,10 +29,11 @@
   register: nginx_key
 
 - fail: msg="Whoops! ssl certificate doesn't exist"
-  when: use_letsencrypt and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false)
+  when: (vm == 0 and use_letsencrypt) == true and (nginx_cert.stat.exists == false or nginx_key.stat.exists == false)
 
 - name: generate ssl forward secrecy key
   command: openssl dhparam -out {{ ssl_forward_secrecy_key_path }} {{ ssl_forward_secrecy_key_length }} creates={{ ssl_forward_secrecy_key_path }}
+  when: vm == 0
 
 - name: copy base nginx configuration.
   template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
