@@ -3,10 +3,8 @@ vm=0
 user=ubuntu
 project_namespace={% raw %}{{ project_name }}-{{ deploy_env }}{% endraw %}
 project_path=/home/ubuntu/{% raw %}{{ deploy_env }}{% endraw %}/{{ cookiecutter.github_repository }}
-venv_path={% raw %}{{ project_path }}/venv{% endraw %}
 use_letsencrypt={{ 'True' if cookiecutter.letsencrypt.lower() == 'y' else 'False' }}
 letsencrypt_email={{ cookiecutter.letsencrypt_email }}
-django_requirements_file=requirements.txt
 django_settings="settings.production"
 
 [vagrant]
@@ -17,8 +15,6 @@ vm=1
 deploy_env=vagrant
 user=vagrant
 project_path=/home/vagrant/{{ cookiecutter.github_repository }}
-venv_path=/home/vagrant/venv
-django_requirements_file=requirements_dev.txt
 django_settings="settings.development"
 use_letsencrypt=False
 pg_db={{ cookiecutter.main_module }}

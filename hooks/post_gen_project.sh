@@ -4,13 +4,13 @@ green=`tput setaf 2`
 reset=`tput sgr0`
 
 # Ensure newline at EOF
-find . ! -path "*/venv/*" -type f -name "*.py" -exec bash -c "tail -n1 {} | read -r _ || echo >> {}" \;
+find . ! -path "*/.venv/*" -type f -name "*.py" -exec bash -c "tail -n1 {} | read -r _ || echo >> {}" \;
 
 echo "${green}[Finished]${reset}"
 
 echo "==> Setup project dependencies? It will:"
 echo "  - Create virtualenv at './{{ cookiecutter.github_repository }}/venv/'."
-echo "  - Install development requirements inside virtualenv."
+echo "  - Install development requirements using poetry"
 echo "  - Create a postgres database named '{{ cookiecutter.main_module }}'."
 echo "  - Run './manage.py migrate'."
 echo "  - Initialize git."
@@ -26,7 +26,7 @@ else
 fi
 
 if echo "{{ cookiecutter.add_heroku }}" | grep -iq "^n"; then
-    rm -rf uwsgi.ini Procfile runtime.txt bin/post_compile
+    rm -rf uwsgi.ini Procfile bin/post_compile
 fi
 
 if echo "{{ cookiecutter.add_fly }}" | grep -iq "^n"; then
@@ -35,7 +35,7 @@ if echo "{{ cookiecutter.add_fly }}" | grep -iq "^n"; then
 fi
 
 if echo "{{ cookiecutter.add_ansible }}" | grep -iq "^n"; then
-    rm -rf provisioner Vagrantfile ansible.cfg
+    rm -rf provisioner ansible.cfg
 fi
 
 if echo "{{ cookiecutter.add_celery }}" | grep -iq "^n"; then

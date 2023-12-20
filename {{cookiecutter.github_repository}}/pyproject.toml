@@ -138,7 +138,7 @@ django-stubs = "^1.12"
 bump2version = "^1.0"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.isort]
@@ -148,7 +148,7 @@ default_section = "THIRDPARTY"
 import_heading_firstparty = "{{ cookiecutter.project_name }} Stuff"
 import_heading_stdlib = "Standard Library"
 import_heading_thirdparty = "Third Party Stuff"
-skip_glob = ["*/migrations/**", "*/venv/**", "*/docs/**"]
+skip_glob = ["*/migrations/**", "*/.venv/**", "*/docs/**"]
 
 [tool.black]
 target_version = [ "py38", "py39" ]

@@ -9,10 +9,10 @@ Group={{ celery_group }}
 Type=forking
 Restart=always
 WorkingDirectory={{ project_path }}
-ExecStart={{ venv_path }}/bin/celery -A {{ project_name }} multi start worker-{{ project_namespace }} -l {{ celery_log_level }} \
+ExecStart=poetry run celery -A {{ project_name }} multi start worker-{{ project_namespace }} -l {{ celery_log_level }} \
     --logfile={{ celery_log_file }} --pidfile={{ celery_pid_file }}  --schedule={{ celerybeat_schedule_file}}
-ExecStop={{ venv_path }}/bin/celery multi stopwait worker-{{ project_namespace }} --pidfile={{ celery_pid_file }}
-ExecReload={{ venv_path }}/bin/celery -A {{ project_name }} multi restart worker-{{ project_namespace }} -l {{ celery_log_level }} \
+ExecStop=poetry run celery multi stopwait worker-{{ project_namespace }} --pidfile={{ celery_pid_file }}
+ExecReload=poetry run celery -A {{ project_name }} multi restart worker-{{ project_namespace }} -l {{ celery_log_level }} \
     --logfile={{ celery_log_file }} --pidfile={{ celery_pid_file }}  --schedule={{ celerybeat_schedule_file}}
 
 [Install]

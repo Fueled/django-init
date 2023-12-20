@@ -14,7 +14,7 @@
 
 - Django 4.1.x
 - Python 3.9.x
-- [Poetry][poetry] Support
+- Dependency management via [Poetry][poetry]
 - Support for [black](https://pypi.org/project/black/)!
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - Supports PostreSQL 13.0 (support of postgis-3.0 is available).
@@ -55,7 +55,7 @@ If you opt to setup the project automatically, it will also:
 - initialize a git repo and bump initial tag and version.
 - create a virtualenv in the folder `venv` inside the project.
 - install all the python dependencies inside it.
-- create `poetry.lock` file after resolving dependencies and then generate `requirements.txt` and `requirements_dev.txt` for production and dev use respectively, for backward-compatibility.
+- create `poetry.lock` file after resolving dependencies.
 - create a postgres database and run the initial migration against it.
 
 then only thing you'll need to do is:
@@ -66,32 +66,6 @@ then only thing you'll need to do is:
 Don't forget to carefully look at the generated README. Awesome, right?
 
 You can also explore the [wiki] section for details on advance setup and usages.
-
-## Managing dependencies
-
-### Poetry
-
-To guarantee repeatable installations, all project dependencies are managed using [Poetry](https://python-poetry.org/). The project’s direct dependencies are listed in `pyproject.toml`.
-Running `poetry lock` generates `poetry.lock` which has all versions pinned.
-
-You can install Poetry by using `pip install --pre poetry` or by following the official installation guide [here](https://github.com/python-poetry/poetry#installation).
-
-*Tip:* We recommend that you use this workflow and keep `pyproject.toml` as well as `poetry.lock` under version control to make sure all computers and environments run exactly the same code.
-
-### Other tools
-
-For compatibility, `requirements.txt` and `requirements_dev.txt` can be updated by running
-
-```bash
-poetry export -f requirements.txt -o requirements.txt
-poetry export -f requirements.txt -o requirements_dev.txt --with dev
-```
-
-or
-
-```bash
-make generate_requirements
-```
 
 ## Articles
 

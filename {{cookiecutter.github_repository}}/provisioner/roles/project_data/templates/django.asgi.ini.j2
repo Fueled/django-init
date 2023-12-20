@@ -11,7 +11,7 @@ SyslogIdentifier=gunicorn
 User={{ asgi_user }}
 Group={{ asgi_group }}
 WorkingDirectory={{ project_path }}
-ExecStart={{ venv_path }}/bin/gunicorn -w {{ asgi_workers }} --bind unix://{{ asgi_socket }} --access-logfile {{project_log_dir}}/asgi.log --capture-output --error-logfile {{project_log_dir}}/asgi-errors.log -k uvicorn.workers.UvicornWorker asgi:application
+ExecStart=poetry run gunicorn -w {{ asgi_workers }} --bind unix://{{ asgi_socket }} --access-logfile {{project_log_dir}}/asgi.log --capture-output --error-logfile {{project_log_dir}}/asgi-errors.log -k uvicorn.workers.UvicornWorker asgi:application
 
 [Install]
 WantedBy=multi-user.target
