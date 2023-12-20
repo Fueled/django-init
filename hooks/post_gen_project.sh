@@ -4,7 +4,7 @@ green=`tput setaf 2`
 reset=`tput sgr0`
 
 # Ensure newline at EOF
-find . ! -path "*/venv/*" -type f -name "*.py" -exec bash -c "tail -n1 {} | read -r _ || echo >> {}" \;
+find . ! -path "*/.venv/*" -type f -name "*.py" -exec bash -c "tail -n1 {} | read -r _ || echo >> {}" \;
 
 echo "${green}[Finished]${reset}"
 
