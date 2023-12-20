@@ -1,7 +1,6 @@
-{{ cookiecutter.project_name }}
-==============================
+# {{ cookiecutter.project_name }}
 
-__Version:__ {{ cookiecutter.version }}
+**Version:** {{ cookiecutter.version }}
 
 {{ cookiecutter.project_description }}
 
@@ -9,7 +8,7 @@ __Version:__ {{ cookiecutter.version }}
 
 {% if cookiecutter.add_docker == 'y' %}
 !!! note
-    For setting up locally using `Docker`, check [here](docs/backend/docker_setup.md)
+For setting up locally using `Docker`, check [here](docs/backend/docker_setup.md)
 {% endif %}
 
 Minimum requirements: **pip, python3.9, poetry, redis & [PostgreSQL 11][install-postgres]{% if cookiecutter.add_postgis.lower() == "y" %} with postgis-2.4{% endif %}**, setup is tested on Mac OSX only.
@@ -43,7 +42,7 @@ Running `poetry lock` generates `poetry.lock` which has all versions pinned.
 
 You can install Poetry by using `pip install --pre poetry` or by following the official installation guide [here](https://github.com/python-poetry/poetry#installation).
 
-*Tip:* We recommend that you use this workflow and keep `pyproject.toml` as well as `poetry.lock` under version control to make sure all computers and environments run exactly the same code.
+_Tip:_ We recommend that you use this workflow and keep `pyproject.toml` as well as `poetry.lock` under version control to make sure all computers and environments run exactly the same code.
 
 
 ## Deploying Project
@@ -51,6 +50,32 @@ You can install Poetry by using `pip install --pre poetry` or by following the o
 The deployment are managed via travis, but for the first time you'll need to set the configuration values on each of the server.
 
 Check out detailed server setup instruction [here](docs/backend/server_config.md).
+
+{% if cookiecutter.add_fly == 'y' %}
+
+### Develop on Fly.io
+
+Create a [fly.io](https://fly.io) account.
+
+Install `flyctl` and run the following commands to set up the Fly.io application, it will ask a series of questions regarding deployment configuration.
+
+```
+brew install flyctl
+fly lauch
+```
+
+When ready to deploy, simply run the command using the Fly Dockerfile:
+
+```
+flyctl deploy --dockerfile ./compose/fly/django/Dockerfile
+```
+
+There is also a Github Action provided `.github/workflows/fly.yml` to deploy the application on the `master` branch. In order to deploy from CI:
+
+1. Create Fly Access Token [here](https://fly.io/user/personal_access_tokens).
+2. Add the `FLY_API_TOKEN` to the Github repo secrets [here](https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.github_repository}}/settings/secrets/actions)
+
+{% endif %}
 
 ## How to release {{ cookiecutter.project_name }}
 

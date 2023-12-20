@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
-"""Root url routering file.
+"""Root url routing file.
 
 You should put the url config in their respective app putting only a
-refernce to them here.
+reference to them here.
 """
+# Standard Library
 from typing import TYPE_CHECKING, List, Union
 
 # Third Party Stuff
@@ -13,11 +13,17 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 
+{%- if cookiecutter.add_graphql == "y" %}
+from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
+{%- endif %}
+
 from . import api_urls
 from .base import views as base_views
 from .base.api import schemas as api_schemas
 
 if TYPE_CHECKING:
+    # Third Party Stuff
     from django.urls import URLPattern, URLResolver
 
     URL = Union[URLPattern, URLResolver]
@@ -44,6 +50,13 @@ urlpatterns += [
     ),
     # Rest API
     path("api/", include(api_urls)),
+{%- if cookiecutter.add_graphql == "y" %}
+    path(
+        "graphql/",
+        csrf_exempt(GraphQLView.as_view(graphiql=settings.API_DEBUG)),
+        name="graphql",
+    ),
+{% endif %}
     # Django Admin
     path("{}/".format(settings.DJANGO_ADMIN_URL), admin.site.urls),
 ]
@@ -51,12 +64,13 @@ urlpatterns += [
 if settings.API_DEBUG:
     urlpatterns += [
         # Browsable API
-        path("schema/", api_schemas.schema_view, name="schema"),
+        path("api/schema/", api_schemas.schema_view.as_view(), name="schema"),
         path("api-playground/", api_schemas.swagger_schema_view, name="api-playground"),
         path("api/auth-n/", include("rest_framework.urls", namespace="rest_framework")),
     ]
 
 if settings.DEBUG:
+    # Third Party Stuff
     from django.urls import get_callable
     from django.views import defaults as dj_default_views
 
@@ -84,6 +98,7 @@ if settings.DEBUG:
 
     # Django Debug Toolbar
     if "debug_toolbar" in settings.INSTALLED_APPS:
+        # Third Party Stuff
         import debug_toolbar
 
         urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]

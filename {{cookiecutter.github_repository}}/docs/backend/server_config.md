@@ -4,13 +4,23 @@
 
 Our overall stack looks like this:
 
+{%- if cookiecutter.add_asgi.lower() == 'y' %}
+```
+the web client <-> the web server (nginx) <-> the socket <-> ASGI <-> Django
+```
+{%- else %}
 ```
 the web client <-> the web server (nginx) <-> the socket <-> uWSGI <-> Django
 ```
+{%- endif %}
 
 A web server faces the outside world. It can serve files (HTML, images, CSS, etc) directly from the file system. However, it can’t talk directly to Django applications; it needs something that will run the application, feed it requests from web clients (such as browsers) and return responses.
 
+{%- if cookiecutter.add_asgi.lower() == 'y' %}
+ASGI (ASGI stands for Asynchronous Server Gateway interface) which runs through Gunicorn running the actual Django instance. ASGI is an interface and sit in between the web server (NGINX) and the Django application. It creates a Unix socket, and serves responses to the web server via the asgi protocol.
+{%- else %}
 uWSGI is a [WSGI](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface) implementation, it creates a Unix socket, and serves responses to the web server via the uwsgi protocol.
+{%- endif %}
 
 ## Third Party Services
 

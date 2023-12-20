@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Standard Library
+import re
 from uuid import UUID
 
 # Third Party Stuff
@@ -21,3 +22,16 @@ def decode_uuid_from_base64(uuid_value: str):
         return UUID(force_str(urlsafe_base64_decode(uuid_value)))
     except (ValueError, OverflowError, TypeError):
         return None
+
+
+def get_http_authorization(request):
+    auth_rx = re.compile(r"^Bearer (.+)$")
+    if request is None or "HTTP_AUTHORIZATION" not in request.META:
+        return None
+
+    token_rx_match = auth_rx.search(request.META["HTTP_AUTHORIZATION"])
+    if not token_rx_match:
+        return None
+
+    token = token_rx_match.group(1)
+    return token

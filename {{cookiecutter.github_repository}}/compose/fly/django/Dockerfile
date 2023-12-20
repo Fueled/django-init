@@ -28,9 +28,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     # Versatile image field & pillow \
     libmagic1 \
     libmagic-dev \
-    {% if cookiecutter.add_postgis.lower() == "y" %}# GDAL postgres requirements
-    gdal-bin \
-    libgdal-dev \{% endif %}
+    
     # cleaning up unused files
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && rm -rf /var/lib/apt/lists/*
@@ -43,14 +41,6 @@ COPY poetry.lock pyproject.toml ${APP_HOME}/
 # Project initialization:
 RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
 
-COPY --chown=django:django ./compose/dev/django/entrypoint /entrypoint
-RUN chmod +x /entrypoint
-
-
-COPY --chown=django:django ./compose/dev/django/start /start
-RUN chmod +x /start
-
-
 COPY --chown=django:django ./compose/dev/django/celery/worker/start /start-celeryworker
 RUN chmod +x /start-celeryworker
 
@@ -61,11 +51,14 @@ RUN chmod +x /start-celerybeat
 
 COPY ./compose/dev/django/celery/flower/start /start-flower
 RUN chmod +x /start-flower
+
 COPY --chown=django:django . ${APP_HOME}
 
 # make django owner of the WORKDIR directory as well.
 RUN chown django:django ${APP_HOME}
 
-USER django
+RUN python manage.py collectstatic --noinput
 
-ENTRYPOINT ["/entrypoint"]
+EXPOSE 8000
+
+CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "wsgi:application"]

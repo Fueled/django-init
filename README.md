@@ -12,7 +12,7 @@
 
 ## Features
 
-- Django 3.2.x
+- Django 4.1.x
 - Python 3.9.x
 - [Poetry][poetry] Support
 - Support for [black](https://pypi.org/project/black/)!
@@ -29,6 +29,7 @@
 
 ### Optional
 - Heroku Setup
+- Fly Setup
 - Ubuntu 20 LTS via [Ansible]
 - Celery with flower integration.
 - AWS S3 media storage
@@ -36,6 +37,7 @@
 - Postgis Setup
 - Newrelic
 - Sentry
+- [GraphQL](https://graphql.org/) support via [Graphene-Django](https://docs.graphene-python.org/projects/django/en/latest/) (Optional)
 - pre-commit hooks
 
 

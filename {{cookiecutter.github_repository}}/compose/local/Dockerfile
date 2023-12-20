@@ -5,8 +5,7 @@ FROM python:${PYTHON_VERSION} as python
 
 ARG BUILD_ENVIRONMENT=local
 ARG APP_HOME=/app
-
-ENV POETRY_VERSION=1.3.1
+ENV POETRY_VERSION=1.3.2
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV BUILD_ENV ${BUILD_ENVIRONMENT}
@@ -27,6 +26,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     # Versatile image field & pillow \
     libmagic1 \
     libmagic-dev \
+    {% if cookiecutter.add_postgis.lower() == "y" %}# GDAL postgres requirements
+    gdal-bin \
+    libgdal-dev \{% endif %}
     # cleaning up unused files
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && rm -rf /var/lib/apt/lists/*

@@ -1,0 +1,18 @@
+{% raw %}[Unit]
+Description={{ project_namespace }} gunicorn daemon
+After=network.target
+
+[Service]
+Environment=LC_ALL=en_US.utf-8
+Environment=LANG=en_US.utf-8
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=gunicorn
+User={{ asgi_user }}
+Group={{ asgi_group }}
+WorkingDirectory={{ project_path }}
+ExecStart={{ venv_path }}/bin/gunicorn -w {{ asgi_workers }} --bind unix://{{ asgi_socket }} --access-logfile {{project_log_dir}}/asgi.log --capture-output --error-logfile {{project_log_dir}}/asgi-errors.log -k uvicorn.workers.UvicornWorker asgi:application
+
+[Install]
+WantedBy=multi-user.target
+{% endraw %}

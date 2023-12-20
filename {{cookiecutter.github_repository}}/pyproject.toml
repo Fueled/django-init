@@ -6,19 +6,20 @@ authors = ["{{cookiecutter.default_from_email}}"]
 
 [tool.poetry.dependencies]
 python = "~3.9"
-Django = "~3.2.15"
+Django = "~4.1"
 django-environ = "^0.9"
 django-sites = "^0.11"
+django-filter = "^21.1"
 argon2-cffi = "^21.3"
 python-dotenv = "^0.21"
 django-cors-headers = "^3.13"
 {% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
-whitenoise = "^6.2"
+whitenoise = "^6.4.0"
 {%- endif %}
 
 # Extensions
 # -------------------------------------
-pytz = "^2022.2"
+pytz = "^2022.7"
 
 # Models
 # -------------------------------------
@@ -31,8 +32,14 @@ django-versatileimagefield = "^2.2"
 
 # REST APIs
 # -------------------------------------
-djangorestframework = "^3.13"
+djangorestframework = "3.14"
 drf-yasg = "^1.21"
+
+
+# GraphQL APIs
+{% if cookiecutter.add_graphql == "y" -%}
+graphene-django = "3.0.0"
+{%- endif %}
 
 
 # Documentation
@@ -57,7 +64,7 @@ django-log-request-id = "^2.0"
 # -------------------------------------
 {%- if cookiecutter.add_celery.lower() == "y" %}
 celery = {extras = ["redis"], version = "~5.2.7"}
-flower = "~1.0.0"
+flower = "~1.2.0"
 {%- endif %}
 
 # Auth Stuff
@@ -71,8 +78,11 @@ django-mail-templated = "^2.6"
 # Static Files and Media Storage
 # -------------------------------------
 gunicorn = "~20.1.0"
+{%- if cookiecutter.add_asgi.lower() == "y" %}
+uvicorn = "^0.21.0"
+{%- endif %}
 django-storages = "^1.13"
-boto3 = "~1.24.67"
+boto3 = "~1.26.47"
 
 # Caching
 # -------------------------------------
@@ -91,7 +101,7 @@ uWSGI = "^2.0"
 
 # Logging
 # -------------------------------------
-newrelic = "~8.0.0.179"
+newrelic = "~8.5.0"
 {% endif %}
 
 [tool.poetry.dev-dependencies]
@@ -99,13 +109,13 @@ newrelic = "~8.0.0.179"
 pre-commit = "^2.20"
 {%- endif %}
 {% if cookiecutter.add_ansible.lower() == 'y' %}
-ansible = "~6.3"
+ansible = "~7.1.0"
 {%- endif %}
 
 # Documentation
 # -------------------------------------
 isort = "^5.10"
-black = "~22.8.0"
+black = "~22.12.0"
 flake8 = "^5.0"
 
 # Debugging
@@ -120,7 +130,7 @@ pytest-django = "^4.5"
 pytest-cov = "^3.0"
 django-dynamic-fixture = "^3.1"
 pytest-mock = "^3.8"
-mypy = "~0.971"
+mypy = "~0.991"
 django-stubs = "^1.12"
 
 # Versioning

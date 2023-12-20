@@ -29,6 +29,11 @@ if echo "{{ cookiecutter.add_heroku }}" | grep -iq "^n"; then
     rm -rf uwsgi.ini Procfile bin/post_compile
 fi
 
+if echo "{{ cookiecutter.add_fly }}" | grep -iq "^n"; then
+    rm .github/workflows/fly.yml
+    rm -rf compose/fly
+fi
+
 if echo "{{ cookiecutter.add_ansible }}" | grep -iq "^n"; then
     rm -rf provisioner ansible.cfg
 fi
@@ -43,6 +48,18 @@ fi
 
 if echo "{{ cookiecutter.add_docker }}" | grep -iq "^n"; then
     rm -rf .envs compose local.yml dev.yml docs/backend/docker_setup.md
+fi
+
+if echo "{{ cookiecutter.add_graphql }}" | grep -iq "^n"; then
+    rm -rf {{ cookiecutter.main_module }}/graphql
+    rm -rm {{ cookiecutter.main_module }}/docs/graphql
+    rm -rf tests/graphql
+fi
+
+if echo "{{ cookiecutter.add_asgi }}" | grep -iq "^n"; then
+    rm -rf asgi.py
+else
+    rm -rf wsgi.py
 fi
 
 if echo "$yn" | grep -iq "^y"; then

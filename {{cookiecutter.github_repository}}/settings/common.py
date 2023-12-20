@@ -16,7 +16,7 @@ env = environ.Env()
 # ==========================================================================
 # List of strings representing installed apps.
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = [
+DJANGO_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -25,19 +25,31 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",
-    # "django.contrib.humanize",  # Useful template tags
-    "{{ cookiecutter.main_module }}.base",
-    "{{ cookiecutter.main_module }}.users",
+]
+
+THIRD_PARTY_APPS = [
     "rest_framework",  # http://www.django-rest-framework.org/
+{%- if cookiecutter.add_graphql == "y" %}
+    "django_filters",
+    "graphene_django",
+{%- endif %}
+    "mail_templated",  # https://github.com/artemrizhov/django-mail-templated
+    "django_extensions",  # http://django-extensions.readthedocs.org/
     "drf_yasg",
     "versatileimagefield",  # https://github.com/WGBH/django-versatileimagefield/
     "corsheaders",  # https://github.com/ottoyiu/django-cors-headers/
 {%- if cookiecutter.add_sentry == "y" %}
     "raven.contrib.django.raven_compat",
 {%- endif %}
-    "mail_templated",  # https://github.com/artemrizhov/django-mail-templated
-    "django_extensions",  # http://django-extensions.readthedocs.org/
 ]
+
+LOCAL_APPS = [
+    "{{ cookiecutter.main_module }}.base",
+    "{{ cookiecutter.main_module }}.users",
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
 
 # INSTALLED APPS CONFIGURATION
 # ==========================================================================
@@ -45,7 +57,9 @@ INSTALLED_APPS = [
 # django.contrib.auth
 # ------------------------------------------------------------------------------
 AUTH_USER_MODEL = "users.User"
-AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+]
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
@@ -99,13 +113,26 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.BasicAuthentication",
         # Primary api authentication
-        "{{ cookiecutter.main_module }}.users.auth.backends.UserTokenAuthentication",
+        "{{ cookiecutter.main_module }}.users.auth.backends.RestJWTAuthentication",
         # Mainly used for api debug.
         "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
     "EXCEPTION_HANDLER": "{{ cookiecutter.main_module }}.base.exceptions.exception_handler",
 }
+
+{%- if cookiecutter.add_graphql == "y" %}
+GRAPHENE = {
+    # The location of the top-level Schema class.
+    "SCHEMA": "{{ cookiecutter.main_module }}.graphql.api.schema",
+
+    # The maximum size of objects that can be requested through a relay connection.
+    "RELAY_CONNECTION_MAX_LIMIT": 100,
+    "MIDDLEWARE": [
+        "{{ cookiecutter.main_module }}.graphql.middleware.JSONWebTokenMiddleware"
+    ],
+}
+{%- endif %}
 
 # https://django-rest-swagger.readthedocs.io/en/latest/settings/
 SWAGGER_SETTINGS = {
