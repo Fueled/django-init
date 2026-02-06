@@ -109,7 +109,7 @@ newrelic = "~8.5.0"
 pre-commit = "^2.20"
 {%- endif %}
 {% if cookiecutter.add_ansible.lower() == 'y' %}
-ansible = "~7.1.0"
+ansible = "~7.7.0"
 {%- endif %}
 
 # Documentation
