@@ -101,7 +101,7 @@ uWSGI = "^2.0"
 
 # Logging
 # -------------------------------------
-newrelic = "~8.5.0"
+newrelic = "~8.11.0"
 {% endif %}
 
 [tool.poetry.dev-dependencies]
