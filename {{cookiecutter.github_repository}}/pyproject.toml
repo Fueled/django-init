@@ -26,7 +26,7 @@ pytz = "^2022.7"
 psycopg2-binary = "^2.9"
 Pillow = "^9.2"
 django-extensions = "^3.2"
-Werkzeug = "~2.2.2"
+Werkzeug = "~2.3.0"
 django-uuid-upload-path = "^1.0"
 django-versatileimagefield = "^2.2"
 
