@@ -32,7 +32,7 @@ django-versatileimagefield = "^2.2"
 
 # REST APIs
 # -------------------------------------
-djangorestframework = "3.14"
+djangorestframework = "3.18.1"
 drf-yasg = "^1.21"
 
 
